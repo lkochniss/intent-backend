@@ -1,0 +1,22 @@
+AppBundle\Doctrine\Entity\User:
+    type: entity
+    table: user
+    repositoryClass: AppBundle\Doctrine\Repository\UserRepository
+
+    id:
+        id:
+            type: integer
+            generator: { strategy: IDENTITY }
+    fields:
+        username:
+            column: username
+            type: string
+            nullable: false
+        password:
+            column: password
+            type: string
+            nullable: false
+        email:
+            column: email
+            type: string
+            nullable: false
