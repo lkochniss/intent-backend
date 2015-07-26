@@ -27,6 +27,7 @@ CMD ["/usr/bin/supervisord"]
 
 # install part2
 RUN apt-get install -yq \
+    acl \
     curl \
     php5-intl \
     php5-mysql \
@@ -37,4 +38,7 @@ RUN apt-get install -yq \
 RUN echo "date.timezone = Europe/Paris" >> /etc/php5/cli/php.ini
 RUN echo "date.timezone = Europe/Paris" >> /etc/php5/fpm/php.ini
 
-#CMD php -S 0.0.0.0:80 -t /intent-backend
+#ADD . /intent-backend
+
+#WORKDIR /intent-backend
+#VOLUME /intent-backend
