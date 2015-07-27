@@ -38,6 +38,19 @@ RUN apt-get install -yq \
 RUN echo "date.timezone = Europe/Paris" >> /etc/php5/cli/php.ini
 RUN echo "date.timezone = Europe/Paris" >> /etc/php5/fpm/php.ini
 
+RUN mkdir /cache
+RUN mkdir /logs
+
+RUN sudo chown -R www-data:www-data /cache
+RUN sudo chown -R www-data:www-data /logs
+
+#RUN HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
+#RUN sudo setfacl -R -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX /cache /logs
+#RUN sudo setfacl -dR -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX /cache /logs
+
+RUN ls -al /cache
+RUN ls -al /logs
+
 #ADD . /intent-backend
 
 #WORKDIR /intent-backend
