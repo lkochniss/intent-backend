@@ -1,0 +1,24 @@
+AppBundle\Entity\Image:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Entity\ImageRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        altText:
+            type: string
+            length: 255
+        owner:
+            type: string
+            length: 255
+        type:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }

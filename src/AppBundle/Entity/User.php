@@ -1,22 +1,20 @@
 <?php
 
-namespace AppBundle\Doctrine\Entity;
+namespace AppBundle\Entity;
 
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * User
  */
-class User extends AbstractModel implements CrudModelInterface
+class User
 {
     /**
-     * @var int
+     * @var integer
      */
     private $id;
 
     /**
-     *
      * @var string
      */
     private $username;
@@ -31,8 +29,11 @@ class User extends AbstractModel implements CrudModelInterface
      */
     private $email;
 
+
     /**
-     * @return int
+     * Get id
+     *
+     * @return integer 
      */
     public function getId()
     {
@@ -40,7 +41,22 @@ class User extends AbstractModel implements CrudModelInterface
     }
 
     /**
-     * @return string
+     * Set username
+     *
+     * @param string $username
+     * @return User
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * Get username
+     *
+     * @return string 
      */
     public function getUsername()
     {
@@ -48,15 +64,22 @@ class User extends AbstractModel implements CrudModelInterface
     }
 
     /**
-     * @param string $username
+     * Set password
+     *
+     * @param string $password
+     * @return User
      */
-    public function setUsername($username)
+    public function setPassword($password)
     {
-        $this->username = $username;
+        $this->password = $password;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * Get password
+     *
+     * @return string 
      */
     public function getPassword()
     {
@@ -64,28 +87,25 @@ class User extends AbstractModel implements CrudModelInterface
     }
 
     /**
-     * @param string $password
+     * Set email
+     *
+     * @param string $email
+     * @return User
      */
-    public function setPassword($password)
+    public function setEmail($email)
     {
-        $this->password = $password;
+        $this->email = $email;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * Get email
+     *
+     * @return string 
      */
     public function getEmail()
     {
         return $this->email;
     }
-
-    /**
-     * @param string $email
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
-
 }

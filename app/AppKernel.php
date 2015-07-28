@@ -35,13 +35,18 @@ class AppKernel extends Kernel
         $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');
     }
 
-    public function getCacheDir()
-    {
-        return '/cache/'.$this->environment.'/cache';
+    public function init() {
+        date_default_timezone_set( 'Europe/Paris' );
+        parent::init();
     }
 
-    public function getLogDir()
-    {
-        return '/logs/'.$this->environment.'/cache';
-    }
+//    public function getCacheDir()
+//    {
+//        return '/app/cache/'.$this->environment.'/cache';
+//    }
+//
+//    public function getLogDir()
+//    {
+//        return '/app/logs/'.$this->environment.'/cache';
+//    }
 }

@@ -1,0 +1,18 @@
+AppBundle\Entity\Profile:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Entity\ProfileRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        description:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }

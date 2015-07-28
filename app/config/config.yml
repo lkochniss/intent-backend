@@ -73,7 +73,7 @@ doctrine:
         mappings:
             AppBundle:
                 type: yml
-                prefix: AppBundle\Doctrine\Entity
+                prefix: AppBundle\Entity
                 dir: "Resources/doctrine"
 
 # Swiftmailer Configuration
