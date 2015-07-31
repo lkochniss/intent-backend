@@ -40,13 +40,13 @@ class AppKernel extends Kernel
         parent::init();
     }
 
-//    public function getCacheDir()
-//    {
-//        return '/app/cache/'.$this->environment.'/cache';
-//    }
-//
-//    public function getLogDir()
-//    {
-//        return '/app/logs/'.$this->environment.'/cache';
-//    }
+    public function getCacheDir()
+    {
+        return '/app/cache/'.$this->environment.'/cache';
+    }
+
+    public function getLogDir()
+    {
+        return '/app/logs/'.$this->environment.'/cache';
+    }
 }
