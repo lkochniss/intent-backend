@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% if errors %}
+    {% if error %}
         {{ error }}
     {% endif %}
     <form action="{{ path('intent_backend_login_check') }}" method="post">
