@@ -74,7 +74,7 @@ doctrine:
             AppBundle:
                 type: yml
                 prefix: AppBundle\Entity
-                dir: "Resources/doctrine"
+                dir: "Resources/config/doctrine"
 
 # Swiftmailer Configuration
 swiftmailer:
