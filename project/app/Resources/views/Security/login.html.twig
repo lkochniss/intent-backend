@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if errors %}
+        {{ error }}
+    {% endif %}
+    <form action="{{ path('intent_backend_login_check') }}" method="post">
+        <div>
+            <label for="username">Benutzername</label>
+            <input type="text" id="username" name="_username">
+        </div>
+        <div>
+            <label for="password">Passwort</label>
+            <input type="password" id="password" name="_password">
+        </div>
+        <div>
+            <input type="submit" value="Login"/>
+        </div>
+    </form>
+{% endblock %}
