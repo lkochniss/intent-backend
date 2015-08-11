@@ -9,10 +9,14 @@ AppBundle\Entity\Role:
             generator:
                 strategy: AUTO
     fields:
-        $name:
+        name:
             type: string
             length: 255
         role:
             type: string
             length: 255
+    oneToMany:
+        users:
+            targetEntity: User
+            mappedBy: role
     lifecycleCallbacks: {  }

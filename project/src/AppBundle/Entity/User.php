@@ -3,11 +3,14 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Symfony\Component\Security\Core\User\EquatableInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * User
  */
-class User
+class User implements AdvancedUserInterface, EquatableInterface, \Serializable
 {
     /**
      * @var integer
@@ -29,11 +32,20 @@ class User
      */
     private $email;
 
+    /**
+     * @var boolean
+     */
+    private $isActive;
+
+    /**
+     * @var Role
+     */
+    private $role;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -56,7 +68,7 @@ class User
     /**
      * Get username
      *
-     * @return string 
+     * @return string
      */
     public function getUsername()
     {
@@ -79,7 +91,7 @@ class User
     /**
      * Get password
      *
-     * @return string 
+     * @return string
      */
     public function getPassword()
     {
@@ -102,10 +114,126 @@ class User
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Set isActive
+     *
+     * @param string $isActive
+     * @return User
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get isActive
+     *
+     * @return boolean
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param Role $role
+     * @return $this
+     */
+    public function setRole(Role $role)
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
+    /**
+     * @return Role
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    public function serialize()
+    {
+        return serialize(
+            array(
+                $this->id,
+                $this->username,
+                $this->password,
+                $this->isActive,
+            )
+        );
+    }
+
+    public function unserialize($serialized)
+    {
+        list(
+            $this->id,
+            $this->username,
+            $this->password,
+            $this->isActive
+            )
+            = unserialize($serialized);
+    }
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function isAccountNonexpired()
+    {
+        return true;
+    }
+
+    public function isAccountNonLocked()
+    {
+        return true;
+    }
+
+    public function isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    public function isEnabled()
+    {
+        return $this->isActive;
+    }
+
+    public function getRoles()
+    {
+        return array($this->role);
+    }
+
+    public function eraseCredentials()
+    {
+
+    }
+
+    public function isEqualTo(UserInterface $user)
+    {
+        if ($user instanceof User){
+            $isEqual = count($this->getRoles()) == count($user->getRoles());
+            if($isEqual){
+                foreach ($this->getRoles() as $role) {
+                    $isEqual = $isEqual && in_array($role, $user->getRoles());
+                }
+            }
+
+            return $isEqual;
+        }
+
+        return false;
     }
 }

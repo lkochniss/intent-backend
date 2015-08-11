@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,18 +18,28 @@ class Role
     /**
      * @var string
      */
-    private $$name;
+    private $name;
 
     /**
      * @var string
      */
     private $role;
 
+    /**
+     * @var ArrayCollection
+     */
+    private $users;
+
+    function __construct()
+    {
+        $this->users = array();
+    }
+
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -38,12 +49,12 @@ class Role
     /**
      * Set $name
      *
-     * @param string $$name
+     * @param string $name
      * @return Role
      */
-    public function set$name($$name)
+    public function setName($name)
     {
-        $this->$name = $$name;
+        $this->name = $name;
 
         return $this;
     }
@@ -51,11 +62,11 @@ class Role
     /**
      * Get $name
      *
-     * @return string 
+     * @return string
      */
-    public function get$name()
+    public function getName()
     {
-        return $this->$name;
+        return $this->name;
     }
 
     /**
@@ -74,10 +85,42 @@ class Role
     /**
      * Get role
      *
-     * @return string 
+     * @return string
      */
     public function getRole()
     {
         return $this->role;
+    }
+
+    /**
+     * @param User $user
+     * @return $this
+     */
+    public function addUser(User $user)
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param User $user
+     * @return $this
+     */
+    public function removeUser(User $user)
+    {
+        $this->users->remove($user);
+
+        return $this;
+    }
+
+    /**
+     * @return User[]
+     */
+    public function getUsers()
+    {
+        return $this->users->toArray();
     }
 }

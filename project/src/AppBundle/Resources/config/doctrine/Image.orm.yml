@@ -15,10 +15,4 @@ AppBundle\Entity\Image:
         altText:
             type: string
             length: 255
-        owner:
-            type: string
-            length: 255
-        type:
-            type: string
-            length: 255
     lifecycleCallbacks: {  }

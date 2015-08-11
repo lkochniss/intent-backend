@@ -1,12 +1,8 @@
-# To get started with security, check out the documentation:
-# http://symfony.com/doc/current/book/security.html
 security:
-
     encoders:
-        AppBundle\Enity\User:
+        AppBundle\Entity\User:
             algorithm: bcrypt
 
-    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
         secured:
             entity: { class: AppBundle:User, property: username}
@@ -23,13 +19,14 @@ security:
         backend:
             anonymous : ~
             pattern: ^/
-            logout:
-                path: /logout
-                target: /
             form_login:
                 login_path: /login
                 check_path: /login_check
+            logout:
+                path: /logout
+                target: /
 
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        - { path: ^/login_check, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
         - { path: ^/, roles: [ROLE_ADMIN, ROLE_EDITOR], requires_channel: https }

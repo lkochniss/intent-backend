@@ -4,7 +4,7 @@ namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class TagController extends Controller
+class UserController extends Controller
 {
     public function createAction()
     {

@@ -12,7 +12,7 @@ AppBundle\Entity\Page:
         title:
             type: string
             length: 255
-        text:
+        content:
             type: string
             length: 255
         slug:

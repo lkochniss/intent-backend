@@ -7,27 +7,63 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class RolesFixture extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     private $container;
 
-    private function load(ObjectManager $manager){
-
-    }
-
-    public function saveRole($roleData)
+    public function load(ObjectManager $manager)
     {
-        $role = new Role();
+        $dataDirectory = __DIR__.'/../data/roles';
+        $directory = opendir($dataDirectory);
+
+        $count = 0;
+
+        while (false !== $file = readdir($directory)) {
+            if ('.' === substr($file, 0, 1)) {
+                continue;
+            }
+
+            $count++;
+
+            $this->saveRole($manager, $dataDirectory.DIRECTORY_SEPARATOR.$file, $count);
+        }
+        $manager->flush();
     }
 
-    public function setContainer($containerInterface)
+    /**
+     * @param ObjectManager $manager
+     * @param $path
+     * @param $count
+     */
+    public function saveRole(ObjectManager $manager, $path, $count)
+    {
+        $roleData = json_decode(file_get_contents($path), true);
+
+        $role = new Role();
+        $role->setName($roleData['name']);
+        $role->setRole($roleData['role']);
+
+        $this->addReference('role-'.$role->getName(), $role);
+
+        $manager->persist($role);
+        $manager->flush();
+    }
+
+    /**
+     * @param ContainerInterface|null $containerInterface
+     */
+    public function setContainer(ContainerInterface $containerInterface = null)
     {
         $this->container = $containerInterface;
     }
 
+    /**
+     * @return int
+     */
     public function getOrder()
     {
-        return 2;
+        return 1;
     }
 }
