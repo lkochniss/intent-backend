@@ -5,6 +5,21 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 
 class AppKernel extends Kernel
 {
+    /**
+     * @var boolean
+     */
+    private $console;
+
+    /**
+     * @param string $environment
+     * @param bool $debug
+     * @param $console
+     */
+    public function __construct($environment, $debug, $console = false)
+    {
+        parent::__construct($environment, $debug);
+        $this->console = $console;
+    }
     public function registerBundles()
     {
         $bundles = array(
@@ -38,16 +53,23 @@ class AppKernel extends Kernel
 
     public function init() {
         date_default_timezone_set( 'Europe/Paris' );
-        parent::init();
     }
 
     public function getCacheDir()
     {
-        return '/app/cache/'.$this->environment.'/cache';
+        if(false === $this->console){
+            return '/app/cache/'.$this->environment;
+        }else{
+            return $this->rootDir.'/cache/'.$this->environment;
+        }
     }
 
     public function getLogDir()
     {
-        return '/app/logs/'.$this->environment.'/cache';
+        if(false === $this->console){
+            return '/app/logs/'.$this->environment;
+        }else{
+            return $this->rootDir.'/logs/'.$this->environment;
+        }
     }
 }

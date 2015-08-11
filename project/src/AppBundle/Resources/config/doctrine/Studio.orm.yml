@@ -1,0 +1,21 @@
+AppBundle\Entity\Studio:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\StudioRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        description:
+            type: string
+            length: 255
+        backgroundLink:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }

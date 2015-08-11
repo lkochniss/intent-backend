@@ -1,7 +1,7 @@
 AppBundle\Entity\ImageType:
     type: entity
     table: null
-    repositoryClass: AppBundle\Entity\ImageTypeRepository
+    repositoryClass: AppBundle\Repository\ImageTypeRepository
     id:
         id:
             type: integer

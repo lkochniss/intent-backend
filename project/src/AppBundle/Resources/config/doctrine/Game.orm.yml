@@ -1,6 +1,7 @@
 AppBundle\Entity\Game:
     type: entity
     table: null
+    repositoryClass: AppBundle\Repository\GameRepository
     id:
         id:
             type: integer

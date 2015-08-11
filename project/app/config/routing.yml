@@ -5,23 +5,42 @@ intent_backend_login:
 intent_backend_login_check:
     path:   /login_check
 
+intent_backend_user:
+    resource: routing/user.yml
+    prefix:   /user
 
-create:
-    path:     /article/create
-    defaults: { _controller: AppBundle:Article:create }
+intent_backend_page:
+    resource: routing/page.yml
+    prefix:   /page
 
-edit:
-    path:     /article/{id}/edit
-    defaults: { _controller: AppBundle:Article:edit }
+intent_backend_article:
+    resource: routing/article.yml
+    prefix:   /article
 
-show:
-    path:     /article/{id}/show
-    defaults: { _controller: AppBundle:Article:show }
+intent_backend_category:
+    resource: routing/category.yml
+    prefix:   /category
 
-delete:
-    path:     /article/{id}/delete
-    defaults: { _controller: AppBundle:Article:delete }
+intent_backend_tag:
+    resource: routing/tag.yml
+    prefix:   /tag
 
-list:
-    path:     /articles/{page}
-    defaults: { _controller: AppBundle:Article:list }
+intent_backend_published:
+    resource: routing/publisher.yml
+    prefix:   /publisher
+
+intent_backend_studio:
+    resource: routing/studio.yml
+    prefix:   /studio
+
+intent_backend_franchise:
+    resource: routing/franchise.yml
+    prefix:   /franchise
+
+intent_backend_game:
+    resource: routing/game.yml
+    prefix:   /game
+
+intent_backend_event:
+    resource: routing/event.yml
+    prefix:   /event

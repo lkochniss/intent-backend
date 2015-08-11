@@ -1,7 +1,7 @@
 AppBundle\Entity\Article:
     type: entity
     table: null
-    repositoryClass: AppBundle\Entity\ArticleRepository
+    repositoryClass: AppBundle\Repository\ArticleRepository
     id:
         id:
             type: integer

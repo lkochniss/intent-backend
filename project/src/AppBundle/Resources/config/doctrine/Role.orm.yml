@@ -1,7 +1,7 @@
 AppBundle\Entity\Role:
     type: entity
     table: null
-    repositoryClass: AppBundle\Entity\RoleRepository
+    repositoryClass: AppBundle\Repository\RoleRepository
     id:
         id:
             type: integer

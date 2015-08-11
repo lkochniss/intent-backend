@@ -30,7 +30,7 @@ class ArticleController extends Controller
                 // ...
             ));    }
 
-    public function listAction($page)
+    public function listAction($type = null, $page)
     {
         return $this->render('Article:list.html.twig', array(
                 // ...

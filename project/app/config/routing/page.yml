@@ -1,0 +1,19 @@
+intent_backend_page_create:
+    path:     /create
+    defaults: { _controller: AppBundle:Page:create }
+
+intent_backend_page_edit:
+    path:     /{id}/edit
+    defaults: { _controller: AppBundle:Page:edit }
+
+intent_backend_page_show:
+    path:     /{id}/show
+    defaults: { _controller: AppBundle:Page:show }
+
+intent_backend_page_delete:
+    path:     /{id}/delete
+    defaults: { _controller: AppBundle:Page:delete }
+
+intent_backend_page_list:
+    path:     /{page}
+    defaults: { _controller: AppBundle:Page:list }
