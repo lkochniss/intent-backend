@@ -1,7 +1,8 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}AppBundle:Studio:edit{% endblock %}
+{% block title %}{{ parent() }} {% trans from "studio" %}studio.edit{% endtrans %}{% endblock %}
 
-{% block body %}
-<h1>Welcome to the Studio:edit page</h1>
+{% block content %}
+    <h1>{% trans from "studio" %}studio.edit{% endtrans %}</h1>
+    {{ form(form) }}
 {% endblock %}

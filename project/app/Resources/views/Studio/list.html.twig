@@ -1,7 +1,31 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}AppBundle:Studio:list{% endblock %}
+{% block title %}{{ parent() }} {% trans from "studio" %}studio.list{% endtrans %}{% endblock %}
 
-{% block body %}
-<h1>Welcome to the Studio:list page</h1>
+{% block content %}
+    <h3>{% trans from "studio" %}studio.list{% endtrans %}</h3>
+    <a href="{{ path('intent_backend_studio_create') }}" class="btn btn-default pull-right">{% trans from "studio" %}studio.create{% endtrans %}</a>
+    <table class="table">
+        <thead>
+        <tr>
+            <td>{% trans from "studio" %}studio.name{% endtrans %}</td>
+            <td>{% trans from "studio" %}studio.published.by{% endtrans %}</td>
+            <td>{% trans from "studio" %}studio.published.at{% endtrans %}</td>
+            <td>{% trans from "studio" %}studio.actions{% endtrans %}</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for studio in studios %}
+            <tr>
+                <td>{{ studio.name }}</td>
+                <td></td>
+                <td></td>
+                <td>
+                    <a class="table-padding" href="{{ path('intent_backend_studio_edit',{'id' : studio.id}) }}"><span class="glyphicon glyphicon-pencil"/></a>
+                    <a class="table-padding" href="{{ path('intent_backend_studio_show',{'id' : studio.id}) }}"><span class="glyphicon glyphicon-eye-open"/></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

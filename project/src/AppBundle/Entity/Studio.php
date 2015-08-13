@@ -29,6 +29,11 @@ class Studio
      */
     private $backgroundLink;
 
+    /**
+     * @var string
+     */
+    private $slug;
+
 
     /**
      * Get id
@@ -44,7 +49,7 @@ class Studio
      * Set name
      *
      * @param string $name
-     * @return DeveloperStudio
+     * @return Studio
      */
     public function setName($name)
     {
@@ -107,5 +112,28 @@ class Studio
     public function getBackgroundLink()
     {
         return $this->backgroundLink;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Publisher
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }
