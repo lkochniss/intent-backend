@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Page;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -12,4 +13,22 @@ use Doctrine\ORM\EntityRepository;
  */
 class PageRepository extends EntityRepository
 {
+    /**
+     * @param Page $page
+     */
+    public function save(Page $page)
+    {
+        $slug = preg_replace("/[^a-z0-9]+/", "-", strtolower($page->getTitle()));
+        $page->setSlug($slug);
+        $this->getEntityManager()->persist($page);
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @param Page $page
+     */
+    public function delete(Page $page)
+    {
+        $this->getEntityManager()->remove($page);
+    }
 }

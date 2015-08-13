@@ -30,12 +30,6 @@ class Page
     private $slug;
 
     /**
-     * @var boolean
-     */
-    private $slideshow;
-
-
-    /**
      * Get id
      *
      * @return integer 
@@ -112,28 +106,5 @@ class Page
     public function getSlug()
     {
         return $this->slug;
-    }
-
-    /**
-     * Set slideshow
-     *
-     * @param boolean $slideshow
-     * @return Page
-     */
-    public function setSlideshow($slideshow)
-    {
-        $this->slideshow = $slideshow;
-
-        return $this;
-    }
-
-    /**
-     * Get slideshow
-     *
-     * @return boolean 
-     */
-    public function getSlideshow()
-    {
-        return $this->slideshow;
     }
 }
