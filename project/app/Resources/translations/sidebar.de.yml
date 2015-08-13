@@ -1,0 +1,21 @@
+sidebar:
+    admin:
+        name:       Administration
+        user:       Benutzerverwaltung
+    media:
+        image:      Bilder
+        name:       Media
+    meta:
+        category:   Kategorien
+        event:      Event
+        franchise:  Franchise
+        game:       Game
+        name:       Meta
+        publisher:  Publisher
+        studio:     Entwicklerstudio
+        tag:        Tags
+    name:           Navigation
+    writing:
+        article:    Artikel
+        name:       Beiträge
+        page:       Seiten
