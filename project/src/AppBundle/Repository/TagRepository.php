@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Tag;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -12,4 +13,22 @@ use Doctrine\ORM\EntityRepository;
  */
 class TagRepository extends EntityRepository
 {
+    /**
+     * @param Tag $tag
+     */
+    public function save(Tag $tag)
+    {
+        $slug = preg_replace("/[^a-z0-9]+/", "-", strtolower($tag->getName()));
+        $tag->setSlug($slug);
+        $this->getEntityManager()->persist($tag);
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @param Tag $tag
+     */
+    public function delete(Tag $tag)
+    {
+        $this->getEntityManager()->remove($tag);
+    }
 }

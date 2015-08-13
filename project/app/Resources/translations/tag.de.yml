@@ -1,0 +1,9 @@
+tag:
+    actions:    Aktionen
+    create:     Tag erstellen
+    delete:     Tag löschen
+    edit:       Tag bearbeiten
+    list:       Tagübersicht
+    name:       Tag
+    not_found:  Tag nicht gefunden
+    submit:     Tag speichern
