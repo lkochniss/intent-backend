@@ -16,8 +16,8 @@ intent_backend_event_delete:
 
 intent_backend_event_type_list:
     path:     /{type}/{page}
-    defaults: { _controller: AppBundle:Event:list }
+    defaults: { _controller: AppBundle:Event:list, page: 1 }
 
-intent_backend_eventlist:
+intent_backend_event_list:
     path:     /{page}
-    defaults: { _controller: AppBundle:Event:list }
+    defaults: { _controller: AppBundle:Event:list, page: 1 }

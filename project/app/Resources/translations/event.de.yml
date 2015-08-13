@@ -1,0 +1,14 @@
+event:
+    actions:        Aktionen
+    create:         Event erstellen
+    description:    Beschreibung
+    delete:         Event löschen
+    edit:           Event bearbeiten
+    list:           Eventübersicht
+    name:           Event
+    not_found:      Event nicht gefunden
+    published:
+        at:         Veröffentlicht am
+        by:         Author
+    show:           Eventvorschau
+    submit:         Event speichern

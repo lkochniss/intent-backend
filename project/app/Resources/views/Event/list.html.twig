@@ -1,7 +1,24 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}AppBundle:Tag:list{% endblock %}
+{% block title %}{{ parent() }} {% trans from "event" %}event.list{% endtrans %}{% endblock %}
 
-{% block body %}
-<h1>Welcome to the Tag:list page</h1>
+{% block content %}
+    <h3>{% trans from "event" %}event.list{% endtrans %}</h3>
+    <a href="{{ path('intent_backend_event_create') }}" class="btn btn-default pull-right">{% trans from "event" %}event.create{% endtrans %}</a>
+    <table class="table">
+        <thead>
+        <tr>
+            <td>{% trans from "event" %}event.name{% endtrans %}</td>
+            <td>{% trans from "event" %}event.actions{% endtrans %}</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for event in events %}
+            <tr>
+                <td>{{ event.name }}</td>
+                <td><a class="table-padding" href="{{ path('intent_backend_event_edit',{'id' : event.id}) }}"><span class="glyphicon glyphicon-pencil"/></a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
