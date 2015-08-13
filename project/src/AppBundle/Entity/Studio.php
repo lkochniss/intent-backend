@@ -72,7 +72,7 @@ class Studio
      * Set description
      *
      * @param string $description
-     * @return DeveloperStudio
+     * @return Studio
      */
     public function setDescription($description)
     {
@@ -95,7 +95,7 @@ class Studio
      * Set backgroundLink
      *
      * @param string $backgroundLink
-     * @return DeveloperStudio
+     * @return Studio
      */
     public function setBackgroundLink($backgroundLink)
     {
@@ -118,7 +118,7 @@ class Studio
      * Set slug
      *
      * @param string $slug
-     * @return Publisher
+     * @return Studio
      */
     public function setSlug($slug)
     {
