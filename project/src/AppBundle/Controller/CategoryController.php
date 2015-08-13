@@ -2,38 +2,94 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Category;
+use AppBundle\Form\Type\CategoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CategoryController extends Controller
 {
-    public function createAction()
+    public function createAction(Request $request)
     {
-        return $this->render('Category:create.html.twig', array(
-                // ...
-            ));    }
+        $category = new Category();
+
+        $form = $this->createForm(new CategoryType(), $category);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $category = $form->getData();
+            $this->getCategoryRepository()->save($category);
+
+            return $this->redirectToRoute(
+                'intent_backend_category_edit',
+                array(
+                    'id' => $category->getId(),
+                )
+            );
+        }
+
+        return $this->render(
+            ':Category:create.html.twig',
+            array(
+                'form' => $form->createView(),
+            )
+        );
+    }
 
     public function editAction($id)
     {
-        return $this->render('Category:edit.html.twig', array(
-                // ...
-            ));    }
+        $category = $this->getCategoryRepository()->find($id);
 
-    public function showAction($id)
-    {
-        return $this->render('Category:show.html.twig', array(
-                // ...
-            ));    }
+        if (is_null($category)) {
+            throw new NotFoundHttpException($this->get('translator')->trans('tag.not_found', array(), 'tag'));
+        }
+
+        $form = $this->createForm(new CategoryType(), $category);
+
+        if ($form->isValid()) {
+            $category = $form->getData();
+            $this->getCategoryRepository()->save($category);
+
+            return $this->redirectToRoute(
+                'intent_backend_category_edit',
+                array(
+                    'id' => $category->getId(),
+                )
+            );
+        }
+
+        return $this->render(
+            ':Category:edit.html.twig',
+            array(
+                'form' => $form->createView()
+            )
+        );
+    }
 
     public function deleteAction($id)
     {
-        return $this->render('Category:delete.html.twig', array(
-                // ...
-            ));    }
+        return $this->render(
+            ':Category:delete.html.twig',
+            array(// ...
+            )
+        );
+    }
 
-    public function listAction($page)
+    public function listAction($type = null, $page)
     {
-        return $this->render('Category:list.html.twig', array(
-                // ...
-            ));    }
+        $categories = $this->getCategoryRepository()->findAll();
 
+        return $this->render(
+            ':Category:list.html.twig',
+            array(
+                'categories' => $categories,
+            )
+        );
+    }
+
+    private function getCategoryRepository()
+    {
+        return $this->getDoctrine()->getRepository('AppBundle:Category');
+    }
 }

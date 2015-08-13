@@ -1,7 +1,24 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}AppBundle:Category:list{% endblock %}
+{% block title %}{{ parent() }} {% trans from "category" %}category.list{% endtrans %}{% endblock %}
 
-{% block body %}
-<h1>Welcome to the Category:list page</h1>
+{% block content %}
+    <h3>{% trans from "category" %}category.list{% endtrans %}</h3>
+    <a href="{{ path('intent_backend_category_create') }}" class="btn btn-default pull-right">{% trans from "category" %}category.create{% endtrans %}</a>
+    <table class="table">
+        <thead>
+        <tr>
+            <td>{% trans from "category" %}category.name{% endtrans %}</td>
+            <td>{% trans from "category" %}category.actions{% endtrans %}</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr>
+                <td>{{ category.name }}</td>
+                <td><a class="table-padding" href="{{ path('intent_backend_category_edit',{'id' : category.id}) }}"><span class="glyphicon glyphicon-pencil"/></a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

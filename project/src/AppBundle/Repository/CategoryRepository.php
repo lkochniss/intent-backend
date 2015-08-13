@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Category;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -12,4 +13,22 @@ use Doctrine\ORM\EntityRepository;
  */
 class CategoryRepository extends EntityRepository
 {
+    /**
+     * @param Category $category
+     */
+    public function save(Category $category)
+    {
+        $slug = preg_replace("/[^a-z0-9]+/", "-", strtolower($category->getName()));
+        $category->setSlug($slug);
+        $this->getEntityManager()->persist($category);
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @param Category $category
+     */
+    public function delete(Category $category)
+    {
+        $this->getEntityManager()->remove($category);
+    }
 }
