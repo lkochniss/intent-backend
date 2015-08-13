@@ -18,6 +18,9 @@ AppBundle\Entity\User:
         email:
             type: string
             length: 255
+        isActive:
+            type: integer
+            column: is_active
     manyToOne:
         role:
             targetEntity: Role

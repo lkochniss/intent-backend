@@ -45,6 +45,10 @@ intent_backend_event:
     resource: routing/event.yml
     prefix:   /event
 
+intent_backend_image:
+    resource: routing/image.yml
+    prefix:   /image
+
 intent_backend_dashboard:
     path:   /
     defaults: { _controller: AppBundle:Dashboard:index }
