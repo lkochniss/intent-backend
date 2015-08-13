@@ -16,8 +16,8 @@ intent_backend_franchise_delete:
 
 intent_backend_franchise_type_list:
     path:     /{type}/{page}
-    defaults: { _controller: AppBundle:Franchise:list }
+    defaults: { _controller: AppBundle:Franchise:list, page: 1 }
 
 intent_backend_franchise_list:
     path:     /{page}
-    defaults: { _controller: AppBundle:Franchise:list }
+    defaults: { _controller: AppBundle:Franchise:list, page: 1 }
