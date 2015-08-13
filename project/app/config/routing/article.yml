@@ -16,8 +16,8 @@ intent_backend_article_delete:
 
 intent_backend_article_type_list:
     path:     /{type}/{page}
-    defaults: { _controller: AppBundle:Article:list }
+    defaults: { _controller: AppBundle:Article:list, page: 1 }
 
 intent_backend_article_list:
     path:     /{page}
-    defaults: { _controller: AppBundle:Article:list }
+    defaults: { _controller: AppBundle:Article:list, page: 1 }
