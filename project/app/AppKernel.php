@@ -33,6 +33,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new Trsteel\CkeditorBundle\TrsteelCkeditorBundle(),
             new AppBundle\AppBundle(),
         );
 
