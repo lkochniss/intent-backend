@@ -37,7 +37,7 @@ class PublisherController extends Controller
         );
     }
 
-    public function editAction($id)
+    public function editAction($id, Request $request)
     {
         $page = $this->getPublisherRepository()->find($id);
 
@@ -46,6 +46,7 @@ class PublisherController extends Controller
         }
 
         $form = $this->createForm(new PublisherType(), $page);
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $publisher = $form->getData();

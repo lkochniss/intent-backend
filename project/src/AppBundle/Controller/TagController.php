@@ -37,7 +37,7 @@ class TagController extends Controller
         );
     }
 
-    public function editAction($id)
+    public function editAction($id, Request $request)
     {
         $tag = $this->getTagRepository()->find($id);
 
@@ -46,6 +46,7 @@ class TagController extends Controller
         }
 
         $form = $this->createForm(new TagType(), $tag);
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $tag = $form->getData();

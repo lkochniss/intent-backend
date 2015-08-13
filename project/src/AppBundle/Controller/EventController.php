@@ -37,7 +37,7 @@ class EventController extends Controller
         );
     }
 
-    public function editAction($id)
+    public function editAction($id, Request $request)
     {
         $event = $this->getEventRepository()->find($id);
 
@@ -46,6 +46,7 @@ class EventController extends Controller
         }
 
         $form = $this->createForm(new EventType(), $event);
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $franchise = $form->getData();

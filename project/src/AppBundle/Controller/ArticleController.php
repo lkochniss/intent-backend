@@ -37,7 +37,7 @@ class ArticleController extends Controller
         );
     }
 
-    public function editAction($id)
+    public function editAction($id, Request $request)
     {
         $article = $this->getArticleRepository()->find($id);
 
@@ -46,6 +46,7 @@ class ArticleController extends Controller
         }
 
         $form = $this->createForm(new ArticleType(), $article);
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $article = $form->getData();

@@ -37,7 +37,7 @@ class PageController extends Controller
         );
     }
 
-    public function editAction($id)
+    public function editAction($id, Request $request)
     {
         $page = $this->getPageRepository()->find($id);
 

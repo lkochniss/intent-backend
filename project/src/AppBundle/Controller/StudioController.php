@@ -37,7 +37,7 @@ class StudioController extends Controller
         );
     }
 
-    public function editAction($id)
+    public function editAction($id, Request $request)
     {
         $studio = $this->getStudioRepository()->find($id);
 
@@ -46,6 +46,7 @@ class StudioController extends Controller
         }
 
         $form = $this->createForm(new StudioType(), $studio);
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $studio = $form->getData();

@@ -37,7 +37,7 @@ class FranchiseController extends Controller
         );
     }
 
-    public function editAction($id)
+    public function editAction($id, Request $request)
     {
         $franchise = $this->getFranchiseRepository()->find($id);
 
@@ -46,6 +46,7 @@ class FranchiseController extends Controller
         }
 
         $form = $this->createForm(new FranchiseType(), $franchise);
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $franchise = $form->getData();

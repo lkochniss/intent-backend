@@ -37,7 +37,7 @@ class CategoryController extends Controller
         );
     }
 
-    public function editAction($id)
+    public function editAction($id, Request $request)
     {
         $category = $this->getCategoryRepository()->find($id);
 
@@ -46,6 +46,7 @@ class CategoryController extends Controller
         }
 
         $form = $this->createForm(new CategoryType(), $category);
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $category = $form->getData();

@@ -37,7 +37,7 @@ class GameController extends Controller
         );
     }
 
-    public function editAction($id)
+    public function editAction($id, Request $request)
     {
         $game = $this->getGameRepository()->find($id);
 
