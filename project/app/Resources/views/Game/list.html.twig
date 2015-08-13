@@ -1,7 +1,24 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}AppBundle:Tag:list{% endblock %}
+{% block title %}{{ parent() }} {% trans from "game" %}game.list{% endtrans %}{% endblock %}
 
-{% block body %}
-<h1>Welcome to the Tag:list page</h1>
+{% block content %}
+    <h3>{% trans from "game" %}game.list{% endtrans %}</h3>
+    <a href="{{ path('intent_backend_game_create') }}" class="btn btn-default pull-right">{% trans from "game" %}game.create{% endtrans %}</a>
+    <table class="table">
+        <thead>
+        <tr>
+            <td>{% trans from "game" %}game.name{% endtrans %}</td>
+            <td>{% trans from "game" %}game.actions{% endtrans %}</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for game in games %}
+            <tr>
+                <td>{{ game.name }}</td>
+                <td><a class="table-padding" href="{{ path('intent_backend_game_edit',{'id' : game.id}) }}"><span class="glyphicon glyphicon-pencil"/></a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

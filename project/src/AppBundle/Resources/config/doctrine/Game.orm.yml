@@ -18,4 +18,8 @@ AppBundle\Entity\Game:
         backgroundLink:
             type: string
             length: 255
+            nullable: true
+        slug:
+            type: string
+            length: 255
     lifecycleCallbacks: {  }

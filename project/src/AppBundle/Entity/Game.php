@@ -29,6 +29,11 @@ class Game
      */
     private $backgroundLink;
 
+    /**
+     * @var string
+     */
+    private $slug;
+
 
     /**
      * Get id
@@ -107,5 +112,28 @@ class Game
     public function getBackgroundLink()
     {
         return $this->backgroundLink;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Page
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

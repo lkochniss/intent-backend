@@ -1,0 +1,17 @@
+game:
+    actions:        Aktionen
+    create:         Game erstellen
+    description:    Beschreibung
+    delete:         Game löschen
+    edit:           Game bearbeiten
+    franchise:      Franchise
+    list:           Gamesübersicht
+    name:           Game
+    not_found:      Publisher nicht gefunden
+    published:
+        at:         Veröffentlicht am
+        by:         Author
+    publisher:      Publisher
+    show:           Gamevorschau
+    studio:         Entwicklerstudio
+    submit:         Game speichern

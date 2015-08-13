@@ -1,7 +1,8 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}AppBundle:Tag:edit{% endblock %}
+{% block title %}{{ parent() }} {% trans from "game" %}game.edit{% endtrans %}{% endblock %}
 
-{% block body %}
-<h1>Welcome to the Tag:edit page</h1>
+{% block content %}
+    <h1>{% trans from "game" %}game.edit{% endtrans %}</h1>
+    {{ form(form) }}
 {% endblock %}
