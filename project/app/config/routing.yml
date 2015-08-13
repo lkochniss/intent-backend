@@ -44,3 +44,11 @@ intent_backend_game:
 intent_backend_event:
     resource: routing/event.yml
     prefix:   /event
+
+intent_backend_dashboard:
+    path:   /
+    defaults: { _controller: AppBundle:Dashboard:index }
+
+intent_backend_profile:
+    path:   /
+    defaults: { _controller: AppBundle:User:profile }
