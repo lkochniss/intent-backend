@@ -34,6 +34,10 @@ class Franchise
      */
     private $slug;
 
+    /**
+     * @var Publisher
+     */
+    private $publisher;
 
     /**
      * Get id
@@ -136,4 +140,37 @@ class Franchise
     {
         return $this->slug;
     }
+
+    /**
+     * Set publisher
+     *
+     * @param string $publisher
+     * @return Franchise
+     */
+    public function setPublisher($publisher)
+    {
+        $this->publisher = $publisher;
+
+        return $this;
+    }
+
+    /**
+     * Get publisher
+     *
+     * @return string
+     */
+    public function getPublisher()
+    {
+        return $this->publisher;
+    }
+
+    /**
+     * @return string
+     */
+    function __toString()
+    {
+        return $this->name;
+    }
+
+
 }

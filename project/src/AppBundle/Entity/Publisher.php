@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -33,6 +34,19 @@ class Publisher
      * @var string
      */
     private $slug;
+
+    /**
+     * @var ArrayCollection
+     */
+    private $franchises;
+
+    /**
+     *
+     */
+    function __construct()
+    {
+       $this->franchises = array();
+    }
 
 
     /**
@@ -135,5 +149,37 @@ class Publisher
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * @param Franchise $franchise
+     * @return $this
+     */
+    public function addFranchise(Franchise $franchise)
+    {
+        if (!$this->franchises->contains($franchise)) {
+            $this->franchises->add($franchise);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Franchise $franchise
+     * @return $this
+     */
+    public function removeFranchise(Franchise $franchise)
+    {
+        $this->franchises->remove($franchise);
+
+        return $this;
+    }
+
+    /**
+     * @return Franchise[]
+     */
+    public function getFranchises()
+    {
+        return $this->franchises->toArray();
     }
 }

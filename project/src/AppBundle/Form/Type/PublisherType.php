@@ -35,6 +35,17 @@ class PublisherType extends AbstractType
                 )
             )
             ->add(
+                'franchises',
+                'entity',
+                array(
+                    'label' => 'publisher.franchise',
+                    'translation_domain' => 'publisher',
+                    'class' => 'AppBundle\Entity\Franchise',
+                    'multiple' => true,
+                    'expanded' => true
+                )
+            )
+            ->add(
                 'submit',
                 'submit',
                 array(

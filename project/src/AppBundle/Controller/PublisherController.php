@@ -39,13 +39,13 @@ class PublisherController extends Controller
 
     public function editAction($id, Request $request)
     {
-        $page = $this->getPublisherRepository()->find($id);
+        $publisher = $this->getPublisherRepository()->find($id);
 
-        if (is_null($page)) {
+        if (is_null($publisher)) {
             throw new NotFoundHttpException($this->get('translator')->trans('publisher.not_found', array(), 'publisher'));
         }
 
-        $form = $this->createForm(new PublisherType(), $page);
+        $form = $this->createForm(new PublisherType(), $publisher);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

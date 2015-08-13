@@ -22,4 +22,11 @@ AppBundle\Entity\Franchise:
         slug:
             type: string
             length: 255
+    manyToOne:
+        publisher:
+            targetEntity: Publisher
+            inversedBy: franchises
+            joinColumn:
+                name: publisher_id
+                referencedColumnName: id
     lifecycleCallbacks: {  }
