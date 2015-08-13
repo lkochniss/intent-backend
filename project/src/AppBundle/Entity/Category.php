@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -24,6 +25,15 @@ class Category
      */
     private $slug;
 
+    /**
+     * @var ArrayCollection
+     */
+    private $articles;
+
+    function __construct()
+    {
+        $this->articles = array();
+    }
 
     /**
      * Get id
@@ -80,4 +90,46 @@ class Category
     {
         return $this->slug;
     }
+
+    /**
+     * @param Article $article
+     * @return $this
+     */
+    public function addArticle(Article $article)
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles->add($article);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Article $article
+     * @return $this
+     */
+    public function removeArticle(Article $article)
+    {
+        $this->articles->remove($article);
+
+        return $this;
+    }
+
+    /**
+     * @return Article[]
+     */
+    public function getArticles()
+    {
+        return $this->articles->toArray();
+    }
+
+    /**
+     * @return string
+     */
+    function __toString()
+    {
+        return $this->name;
+    }
+
+
 }

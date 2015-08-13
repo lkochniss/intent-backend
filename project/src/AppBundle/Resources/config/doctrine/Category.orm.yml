@@ -15,4 +15,8 @@ AppBundle\Entity\Category:
         slug:
             type: string
             length: 255
+    oneToMany:
+        articles:
+            targetEntity: Article
+            mappedBy: category
     lifecycleCallbacks: {  }

@@ -44,6 +44,17 @@ class ArticleType extends AbstractType
                 )
             )
             ->add(
+                'category',
+                'entity',
+                array(
+                    'label' => 'article.category',
+                    'translation_domain' => 'article',
+                    'class' => 'AppBundle\Entity\Category',
+                    'multiple' => false,
+                    'expanded' => false
+                )
+            )
+            ->add(
                 'submit',
                 'submit',
                 array(

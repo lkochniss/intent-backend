@@ -34,6 +34,10 @@ class Article
      */
     private $slideshow;
 
+    /**
+     * @var Category
+     */
+    private $category;
 
     /**
      * Get id
@@ -130,10 +134,34 @@ class Article
     /**
      * Get slideshow
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getSlideshow()
     {
         return $this->slideshow;
     }
+    /**
+     * Set category
+     *
+     * @param Category $category
+     * @return Article
+     */
+    public function setCategory(Category $category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+
 }

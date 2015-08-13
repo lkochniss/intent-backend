@@ -20,4 +20,11 @@ AppBundle\Entity\Article:
             length: 255
         slideshow:
             type: boolean
+    manyToOne:
+        category:
+            targetEntity: Category
+            inversedBy: articles
+            joinColumn:
+                name: category_id
+                referencedColumnName: id
     lifecycleCallbacks: {  }
