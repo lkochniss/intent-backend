@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Publisher;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -12,4 +13,22 @@ use Doctrine\ORM\EntityRepository;
  */
 class PublisherRepository extends EntityRepository
 {
+    /**
+     * @param Publisher $publisher
+     */
+    public function save(Publisher $publisher)
+    {
+        $slug = preg_replace("/[^a-z0-9]+/", "-", strtolower($publisher->getName()));
+        $publisher->setSlug($slug);
+        $this->getEntityManager()->persist($publisher);
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @param Publisher $publisher
+     */
+    public function delete(Publisher $publisher)
+    {
+        $this->getEntityManager()->remove($publisher);
+    }
 }

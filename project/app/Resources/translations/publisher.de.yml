@@ -1,0 +1,16 @@
+publisher:
+    actions:        Aktionen
+    create:         Publisher erstellen
+    description:    Beschreibung
+    delete:         Publisher löschen
+    edit:           Publisher bearbeiten
+    franchise:      Franchise
+    list:           Publisherübersicht
+    name:           Publisher
+    not_found:      Publisher nicht gefunden
+    published:
+        at:         Veröffentlicht am
+        by:         Author
+    show:           Publishervorschau
+    studio:         Entwicklerstudio
+    submit:         Publisher speichern
