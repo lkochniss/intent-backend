@@ -6,16 +6,16 @@ sidebar:
         image:      Bilder
         name:       Media
     meta:
-        category:   Kategorien
+        category:   Kategorie
         event:      Event
         franchise:  Franchise
         game:       Game
         name:       Meta
         publisher:  Publisher
         studio:     Entwicklerstudio
-        tag:        Tags
+        tag:        Tag
     name:           Navigation
     writing:
         article:    Artikel
         name:       Beiträge
-        page:       Seiten
+        page:       Seite
