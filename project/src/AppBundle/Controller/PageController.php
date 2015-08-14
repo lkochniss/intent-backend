@@ -4,74 +4,59 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Page;
 use AppBundle\Form\Type\PageType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class PageController extends Controller
+class PageController extends AbstractCrudController
 {
-    public function createAction(Request $request)
+    /**
+     * @return Page
+     */
+    protected function createNewEntity()
     {
-        $page = new Page();
-
-        $form = $this->createForm(new PageType(), $page);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $page = $form->getData();
-            $this->getPageRepository()->save($page);
-
-            return $this->redirectToRoute(
-                'intent_backend_page_edit',
-                array(
-                    'id' => $page->getId(),
-                )
-            );
-        }
-
-        return $this->render(
-            ':Page:create.html.twig',
-            array(
-                'form' => $form->createView(),
-            )
-        );
+        return new Page();
     }
 
-    public function editAction($id, Request $request)
+    /**
+     * @return PageType
+     */
+    protected function getFormType()
     {
-        $page = $this->getPageRepository()->find($id);
+        return new PageType();
+    }
 
-        if (is_null($page)) {
-            throw new NotFoundHttpException($this->get('translator')->trans('page.not_found', array(), 'page'));
-        }
+    /**
+     * @return string
+     */
+    protected function getTemplateBasePath()
+    {
+        return 'Page';
+    }
 
-        $form = $this->createForm(new PageType(), $page);
+    /**
+     * @return string
+     */
+    protected function getEntityName()
+    {
+        return 'AppBundle\Entity\Page';
+    }
 
-        if ($form->isValid()) {
-            $page = $form->getData();
-            $this->getPageRepository()->save($page);
+    /**
+     * @return string
+     */
+    protected function getRoutePrefix()
+    {
+        return 'intent_backend_page';
+    }
 
-            return $this->redirectToRoute(
-                'intent_backend_page_edit',
-                array(
-                    'id' => $page->getId(),
-                )
-            );
-        }
-
-        return $this->render(
-            ':Page:edit.html.twig',
-            array(
-                'form' => $form->createView(),
-            )
-        );
+    protected function getTranslationDomain()
+    {
+        return 'page';
     }
 
     public function showAction($id)
     {
         return $this->render(
             ':Page:show.html.twig',
-            array(// ...
+            array(
             )
         );
     }
@@ -80,26 +65,8 @@ class PageController extends Controller
     {
         return $this->render(
             ':Page:delete.html.twig',
-            array(// ...
-            )
-        );
-    }
-
-    public function listAction($type = null, $page)
-    {
-        $pages = $this->getPageRepository()->findAll();
-
-        return $this->render(
-            ':Page:list.html.twig',
             array(
-                'pages' => $pages,
             )
         );
     }
-
-    private function getPageRepository()
-    {
-        return $this->getDoctrine()->getRepository('AppBundle:Page');
-    }
-
 }

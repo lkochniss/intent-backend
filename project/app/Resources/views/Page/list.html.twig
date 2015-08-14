@@ -14,7 +14,7 @@
         </tr>
         </thead>
         <tbody>
-        {% for page in pages %}
+        {% for page in entities %}
             <tr>
                 <td>{{ page.title }}</td>
                 <td></td>
@@ -26,4 +26,5 @@
         {% endfor %}
         </tbody>
     </table>
+    {% include '::pagination.html.twig' with { 'default_page': 'page' } %}
 {% endblock %}
