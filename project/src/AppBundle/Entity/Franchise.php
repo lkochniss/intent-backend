@@ -141,10 +141,10 @@ class Franchise extends AbstractModel
     /**
      * Set publisher
      *
-     * @param string $publisher
+     * @param Publisher $publisher
      * @return Franchise
      */
-    public function setPublisher($publisher)
+    public function setPublisher(Publisher $publisher)
     {
         $this->publisher = $publisher;
 
