@@ -30,9 +30,24 @@ class Article extends AbstractModel
     private $slideshow;
 
     /**
+     * @var \DateTime
+     */
+    private $publishAt;
+
+    /**
      * @var Category
      */
     private $category;
+
+    /**
+     * @var User
+     */
+    private $createdBy;
+
+    /**
+     * @var User
+     */
+    private $modifiedBy;
 
     /**
      * Set title
@@ -125,6 +140,30 @@ class Article extends AbstractModel
     {
         return $this->slideshow;
     }
+
+    /**
+     * Set publishAt
+     *
+     * @param \DateTime $publishAt
+     * @return Article
+     */
+    public function setPublishAt($publishAt)
+    {
+        $this->publishAt = $publishAt;
+
+        return $this;
+    }
+
+    /**
+     * Get publishAt
+     *
+     * @return \DateTime
+     */
+    public function getPublishAt()
+    {
+        return $this->publishAt;
+    }
+
     /**
      * Set category
      *
@@ -148,5 +187,49 @@ class Article extends AbstractModel
         return $this->category;
     }
 
+    /**
+     * Set createdBy
+     *
+     * @param User $user
+     * @return User
+     */
+    public function setCreatedBy(User $user)
+    {
+        $this->createdBy = $user;
 
+        return $this;
+    }
+
+    /**
+     * Get createdBy
+     *
+     * @return User
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+
+    /**
+     * Set modifiedBy
+     *
+     * @param User $user
+     * @return User
+     */
+    public function setModifiedBy(User $user)
+    {
+        $this->modifiedBy = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get modifiedBy
+     *
+     * @return User
+     */
+    public function getModifiedBy()
+    {
+        return $this->modifiedBy;
+    }
 }

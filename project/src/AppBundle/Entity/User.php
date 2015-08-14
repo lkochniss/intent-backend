@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
@@ -41,6 +42,16 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
      * @var Role
      */
     private $role;
+
+    /**
+     * @var ArrayCollection
+     */
+    private $articles;
+
+    function __construct()
+    {
+        $this->articles = array();
+    }
 
     /**
      * Get id
@@ -161,6 +172,39 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
     public function getRole()
     {
         return $this->role;
+    }
+
+    /**
+     * @param Article $article
+     * @return $this
+     */
+    public function addArticle(Article $article)
+    {
+        if (!$this->articles->contains($article)){
+            $this->articles->add($article);
+            $article->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Article $article
+     * @return $this
+     */
+    public function removeArticle(Article $article)
+    {
+        $this->articles->remove($article);
+
+        return $this;
+    }
+
+    /**
+     * @return Article[]
+     */
+    public function getArticles()
+    {
+        return $this->articles->toArray();
     }
 
     public function serialize()

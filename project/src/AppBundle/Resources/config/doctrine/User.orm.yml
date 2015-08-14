@@ -21,6 +21,10 @@ AppBundle\Entity\User:
         isActive:
             type: integer
             column: is_active
+    oneToMany:
+        articles:
+            targetEntity: Article
+            mappedBy: createdBy
     manyToOne:
         role:
             targetEntity: Role

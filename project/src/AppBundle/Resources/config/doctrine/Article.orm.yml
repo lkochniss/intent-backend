@@ -27,6 +27,17 @@ AppBundle\Entity\Article:
             joinColumn:
                 name: category_id
                 referencedColumnName: id
+        createdBy:
+            targetEntity: User
+            inversedBy: articles
+            joinColumn:
+                name: created_by_id
+                referencedColumnName: id
+        modifiedBy:
+            targetEntity: User
+            joinColumn:
+                name: modified_by_id
+                referencedColumnName: id
     lifecycleCallbacks:
         prePersist:
             - setModifiedAt
