@@ -3,12 +3,11 @@
 namespace AppBundle\Repository;
 
 use AppBundle\Entity\Article;
-use Doctrine\ORM\EntityRepository;
 
 /**
  * ArticleRepository
  */
-class ArticleRepository extends EntityRepository
+class ArticleRepository extends AbstractRepository
 {
     /**
      * @param Article $article
@@ -22,10 +21,12 @@ class ArticleRepository extends EntityRepository
     }
 
     /**
-     * @param Article $article
+     * @return string
      */
-    public function delete(Article $article)
+    protected function getListDQL()
     {
-        $this->getEntityManager()->remove($article);
+        return 'SELECT c
+            FROM ' . $this->getEntityName() . ' c
+            ORDER BY c.modifiedAt DESC';
     }
 }

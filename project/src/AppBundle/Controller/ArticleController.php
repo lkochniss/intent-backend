@@ -4,68 +4,52 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Article;
 use AppBundle\Form\Type\ArticleType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class ArticleController extends Controller
+class ArticleController extends AbstractCrudController
 {
-    public function createAction(Request $request)
+    /**
+     * @return Article
+     */
+    protected function createNewEntity()
     {
-        $article = new Article();
-
-        $form = $this->createForm(new ArticleType(), $article);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $article = $form->getData();
-            $this->getArticleRepository()->save($article);
-
-            return $this->redirectToRoute(
-                'intent_backend_article_edit',
-                array(
-                    'id' => $article->getId(),
-                )
-            );
-        }
-
-        return $this->render(
-            ':Article:create.html.twig',
-            array(
-                'form' => $form->createView(),
-            )
-        );
+        return new Article();
     }
 
-    public function editAction($id, Request $request)
+    /**
+     * @return ArticleType
+     */
+    protected function getFormType()
     {
-        $article = $this->getArticleRepository()->find($id);
+        return new ArticleType();
+    }
 
-        if (is_null($article)) {
-            throw new NotFoundHttpException($this->get('translator')->trans('article.not_found', array(), 'article'));
-        }
+    /**
+     * @return string
+     */
+    protected function getTemplateBasePath()
+    {
+        return 'Article';
+    }
 
-        $form = $this->createForm(new ArticleType(), $article);
-        $form->handleRequest($request);
+    /**
+     * @return string
+     */
+    protected function getEntityName()
+    {
+        return 'AppBundle\Entity\Article';
+    }
 
-        if ($form->isValid()) {
-            $article = $form->getData();
-            $this->getArticleRepository()->save($article);
+    /**
+     * @return string
+     */
+    protected function getRoutePrefix()
+    {
+        return 'intent_backend_article';
+    }
 
-            return $this->redirectToRoute(
-                'intent_backend_article_edit',
-                array(
-                    'id' => $article->getId(),
-                )
-            );
-        }
-
-        return $this->render(
-            ':Article:edit.html.twig',
-            array(
-                'form' => $form->createView()
-            )
-        );
+    protected function getTranslationDomain()
+    {
+        return 'article';
     }
 
     public function showAction($id)
@@ -84,22 +68,5 @@ class ArticleController extends Controller
             array(// ...
             )
         );
-    }
-
-    public function listAction($type = null, $page)
-    {
-        $articles = $this->getArticleRepository()->findAll();
-
-        return $this->render(
-            ':Article:list.html.twig',
-            array(
-                'articles' => $articles,
-            )
-        );
-    }
-
-    private function getArticleRepository()
-    {
-        return $this->getDoctrine()->getRepository('AppBundle:Article');
     }
 }

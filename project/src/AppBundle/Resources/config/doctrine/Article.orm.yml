@@ -27,4 +27,9 @@ AppBundle\Entity\Article:
             joinColumn:
                 name: category_id
                 referencedColumnName: id
-    lifecycleCallbacks: {  }
+    lifecycleCallbacks:
+        prePersist:
+            - setModifiedAt
+            - setCreatedAt
+        preUpdate:
+            - setModifiedAt
