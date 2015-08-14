@@ -7,13 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Franchise
  */
-class Franchise
+class Franchise extends AbstractModel
 {
-    /**
-     * @var integer
-     */
-    private $id;
-
     /**
      * @var string
      */
@@ -39,15 +34,12 @@ class Franchise
      */
     private $publisher;
 
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
+
+    function __construct()
     {
-        return $this->id;
+        $this->games = array();
     }
+
 
     /**
      * Set name
@@ -163,14 +155,4 @@ class Franchise
     {
         return $this->publisher;
     }
-
-    /**
-     * @return string
-     */
-    function __toString()
-    {
-        return $this->name;
-    }
-
-
 }

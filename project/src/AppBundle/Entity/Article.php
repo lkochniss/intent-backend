@@ -7,13 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Article
  */
-class Article
+class Article extends AbstractModel
 {
-    /**
-     * @var integer
-     */
-    private $id;
-
     /**
      * @var string
      */
@@ -38,16 +33,6 @@ class Article
      * @var Category
      */
     private $category;
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * Set title

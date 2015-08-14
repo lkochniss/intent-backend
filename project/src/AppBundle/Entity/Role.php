@@ -101,6 +101,7 @@ class Role implements RoleInterface
     {
         if (!$this->users->contains($user)) {
             $this->users->add($user);
+            $user->setRole($this);
         }
 
         return $this;

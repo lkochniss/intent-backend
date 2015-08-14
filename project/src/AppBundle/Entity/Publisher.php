@@ -8,13 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Publisher
  */
-class Publisher
+class Publisher extends AbstractModel
 {
-    /**
-     * @var integer
-     */
-    private $id;
-
     /**
      * @var string
      */
@@ -45,18 +40,7 @@ class Publisher
      */
     function __construct()
     {
-       $this->franchises = array();
-    }
-
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
+        $this->franchises = array();
     }
 
     /**
@@ -75,7 +59,7 @@ class Publisher
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -98,7 +82,7 @@ class Publisher
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -121,7 +105,7 @@ class Publisher
     /**
      * Get backgroundLink
      *
-     * @return string 
+     * @return string
      */
     public function getBackgroundLink()
     {
@@ -159,6 +143,7 @@ class Publisher
     {
         if (!$this->franchises->contains($franchise)) {
             $this->franchises->add($franchise);
+            $franchise->setPublisher($this);
         }
 
         return $this;
@@ -182,4 +167,14 @@ class Publisher
     {
         return $this->franchises->toArray();
     }
+
+    /**
+     * @return string
+     */
+    function __toString()
+    {
+        return $this->name;
+    }
+
+
 }

@@ -7,13 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Game
  */
-class Game
+class Game extends AbstractModel
 {
-    /**
-     * @var integer
-     */
-    private $id;
-
     /**
      * @var string
      */
@@ -33,17 +28,6 @@ class Game
      * @var string
      */
     private $slug;
-
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * Set name
@@ -118,7 +102,7 @@ class Game
      * Set slug
      *
      * @param string $slug
-     * @return Page
+     * @return Game
      */
     public function setSlug($slug)
     {

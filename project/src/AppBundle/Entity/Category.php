@@ -8,13 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Category
  */
-class Category
+class Category extends AbstractModel
 {
-    /**
-     * @var integer
-     */
-    private $id;
-
     /**
      * @var string
      */
@@ -33,16 +28,6 @@ class Category
     function __construct()
     {
         $this->articles = array();
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**
@@ -99,6 +84,7 @@ class Category
     {
         if (!$this->articles->contains($article)) {
             $this->articles->add($article);
+            $article->setCategory($this);
         }
 
         return $this;
