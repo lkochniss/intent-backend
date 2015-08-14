@@ -4,68 +4,52 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Event;
 use AppBundle\Form\Type\EventType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class EventController extends Controller
+class EventController extends AbstractCrudController
 {
-    public function createAction(Request $request)
+    /**
+     * @return Event
+     */
+    protected function createNewEntity()
     {
-        $event = new Event();
-
-        $form = $this->createForm(new EventType(), $event);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $event = $form->getData();
-            $this->getEventRepository()->save($event);
-
-            return $this->redirectToRoute(
-                'intent_backend_event_edit',
-                array(
-                    'id' => $event->getId(),
-                )
-            );
-        }
-
-        return $this->render(
-            ':Event:create.html.twig',
-            array(
-                'form' => $form->createView(),
-            )
-        );
+        return new Event();
     }
 
-    public function editAction($id, Request $request)
+    /**
+     * @return EventType
+     */
+    protected function getFormType()
     {
-        $event = $this->getEventRepository()->find($id);
+        return new EventType();
+    }
 
-        if (is_null($event)) {
-            throw new NotFoundHttpException($this->get('translator')->trans('event.not_found', array(), 'event'));
-        }
+    /**
+     * @return string
+     */
+    protected function getTemplateBasePath()
+    {
+        return 'Event';
+    }
 
-        $form = $this->createForm(new EventType(), $event);
-        $form->handleRequest($request);
+    /**
+     * @return string
+     */
+    protected function getEntityName()
+    {
+        return 'AppBundle\Entity\Event';
+    }
 
-        if ($form->isValid()) {
-            $franchise = $form->getData();
-            $this->getEventRepository()->save($franchise);
+    /**
+     * @return string
+     */
+    protected function getRoutePrefix()
+    {
+        return 'intent_backend_event';
+    }
 
-            return $this->redirectToRoute(
-                'intent_backend_event_edit',
-                array(
-                    'id' => $franchise->getId(),
-                )
-            );
-        }
-
-        return $this->render(
-            ':Event:edit.html.twig',
-            array(
-                'form' => $form->createView()
-            )
-        );
+    protected function getTranslationDomain()
+    {
+        return 'event';
     }
 
     public function showAction($id)
@@ -84,22 +68,5 @@ class EventController extends Controller
             array(// ...
             )
         );
-    }
-
-    public function listAction($type = null, $page)
-    {
-        $events = $this->getEventRepository()->findAll();
-
-        return $this->render(
-            ':Event:list.html.twig',
-            array(
-                'events' => $events,
-            )
-        );
-    }
-
-    private function getEventRepository()
-    {
-        return $this->getDoctrine()->getRepository('AppBundle:Event');
     }
 }

@@ -13,7 +13,7 @@
         </tr>
         </thead>
         <tbody>
-        {% for event in events %}
+        {% for event in entities %}
             <tr>
                 <td>{{ event.name }}</td>
                 <td><a class="table-padding" href="{{ path('intent_backend_event_edit',{'id' : event.id}) }}"><span class="glyphicon glyphicon-pencil"/></a></td>
@@ -21,4 +21,5 @@
         {% endfor %}
         </tbody>
     </table>
+    {% include '::pagination.html.twig' with { 'default_page': 'event' } %}
 {% endblock %}
