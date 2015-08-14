@@ -17,6 +17,7 @@ class EventType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $now = new \DateTime();
         $builder
             ->add(
                 'name',
@@ -32,6 +33,26 @@ class EventType extends AbstractType
                 array(
                     'label' => 'event.description',
                     'translation_domain' => 'event',
+                )
+            )
+            ->add(
+                'startAt',
+                'date',
+                array(
+                    'label' => 'event.startAt',
+                    'translation_domain' => 'event',
+                    'widget' => 'choice',
+                    'data' => $now,
+                )
+            )
+            ->add(
+                'endAt',
+                'date',
+                array(
+                    'label' => 'event.endAt',
+                    'translation_domain' => 'event',
+                    'widget' => 'choice',
+                    'data' => $now,
                 )
             )
             ->add(

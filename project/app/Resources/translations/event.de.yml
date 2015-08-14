@@ -4,6 +4,7 @@ event:
     description:    Beschreibung
     delete:         Event löschen
     edit:           Event bearbeiten
+    endAt:          Enddatum
     list:           Eventübersicht
     name:           Event
     not_found:      Event nicht gefunden
@@ -11,4 +12,5 @@ event:
         at:         Veröffentlicht am
         by:         Author
     show:           Eventvorschau
+    startAt:        Anfangsdatum
     submit:         Event speichern

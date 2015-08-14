@@ -19,9 +19,16 @@ AppBundle\Entity\Event:
             type: string
             length: 255
             nullable: true
+            column: background_link
         slug:
             type: string
             length: 255
+        startAt:
+            type: datetime
+            column: start_at
+        endAt:
+            type: datetime
+            column: end_at
     lifecycleCallbacks:
         prePersist:
             - setModifiedAt

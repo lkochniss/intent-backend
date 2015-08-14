@@ -30,6 +30,16 @@ class Event extends AbstractModel
     private $slug;
 
     /**
+     * @var \DateTime
+     */
+    private $startAt;
+
+    /**
+     * @var \DateTime
+     */
+    private $endAt;
+
+    /**
      * Set name
      *
      * @param string $name
@@ -119,5 +129,43 @@ class Event extends AbstractModel
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * @param \DateTime $startAt
+     * @return $this
+     */
+    public function setStartAt(\DateTime $startAt)
+    {
+        $this->startAt = $startAt;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getStartAt()
+    {
+        return $this->startAt;
+    }
+
+    /**
+     * @param \DateTime $endAt
+     * @return $this
+     */
+    public function setEndAt(\DateTime $endAt)
+    {
+        $this->endAt = $endAt;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getEndAt()
+    {
+        return $this->endAt;
     }
 }
