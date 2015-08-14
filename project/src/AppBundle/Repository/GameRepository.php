@@ -3,7 +3,7 @@
 namespace AppBundle\Repository;
 
 use AppBundle\Entity\Game;
-use Doctrine\ORM\EntityRepository;
+use AppBundle\Entity\User;
 
 /**
  * GameRepository
@@ -16,7 +16,7 @@ class GameRepository extends AbstractRepository
     /**
      * @param Game $game
      */
-    public function save(Game $game)
+    public function save(Game $game, User $user)
     {
         $slug = preg_replace("/[^a-z0-9]+/", "-", strtolower($game->getName()));
         $game->setSlug($slug);

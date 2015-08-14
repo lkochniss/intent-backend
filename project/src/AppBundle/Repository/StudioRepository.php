@@ -3,7 +3,7 @@
 namespace AppBundle\Repository;
 
 use AppBundle\Entity\Studio;
-use Doctrine\ORM\EntityRepository;
+use AppBundle\Entity\User;
 
 /**
  * GameRepository
@@ -16,7 +16,7 @@ class StudioRepository extends AbstractRepository
     /**
      * @param Studio $studio
      */
-    public function save(Studio $studio)
+    public function save(Studio $studio, User $user)
     {
         $slug = preg_replace("/[^a-z0-9]+/", "-", strtolower($studio->getName()));
         $studio->setSlug($slug);

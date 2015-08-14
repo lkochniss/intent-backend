@@ -3,8 +3,7 @@
 namespace AppBundle\Repository;
 
 use AppBundle\Entity\Franchise;
-use AppBundle\Entity\Game;
-use Doctrine\ORM\EntityRepository;
+use AppBundle\Entity\User;
 
 /**
  * FranchiseRepository
@@ -17,7 +16,7 @@ class FranchiseRepository extends AbstractRepository
     /**
      * @param Franchise $franchise
      */
-    public function save(Franchise $franchise)
+    public function save(Franchise $franchise, User $user)
     {
         $slug = preg_replace("/[^a-z0-9]+/", "-", strtolower($franchise->getName()));
         $franchise->setSlug($slug);

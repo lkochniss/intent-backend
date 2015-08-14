@@ -3,7 +3,7 @@
 namespace AppBundle\Repository;
 
 use AppBundle\Entity\Publisher;
-use Doctrine\ORM\EntityRepository;
+use AppBundle\Entity\User;
 
 /**
  * PublisherRepository
@@ -16,7 +16,7 @@ class PublisherRepository extends AbstractRepository
     /**
      * @param Publisher $publisher
      */
-    public function save(Publisher $publisher)
+    public function save(Publisher $publisher, User $user)
     {
         $slug = preg_replace("/[^a-z0-9]+/", "-", strtolower($publisher->getName()));
         $publisher->setSlug($slug);

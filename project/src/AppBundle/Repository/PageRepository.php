@@ -4,6 +4,7 @@ namespace AppBundle\Repository;
 
 use AppBundle\Entity\Page;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Security\Core\User\User;
 
 /**
  * PageRepository
@@ -16,7 +17,7 @@ class PageRepository extends AbstractRepository
     /**
      * @param Page $page
      */
-    public function save(Page $page)
+    public function save(Page $page, User $user)
     {
         $slug = preg_replace("/[^a-z0-9]+/", "-", strtolower($page->getTitle()));
         $page->setSlug($slug);

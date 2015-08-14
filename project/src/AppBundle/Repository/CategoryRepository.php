@@ -3,7 +3,7 @@
 namespace AppBundle\Repository;
 
 use AppBundle\Entity\Category;
-use Doctrine\ORM\EntityRepository;
+use AppBundle\Entity\User;
 
 /**
  * CategoryRepository
@@ -16,7 +16,7 @@ class CategoryRepository extends AbstractRepository
     /**
      * @param Category $category
      */
-    public function save(Category $category)
+    public function save(Category $category, User $user)
     {
         $slug = preg_replace("/[^a-z0-9]+/", "-", strtolower($category->getName()));
         $category->setSlug($slug);

@@ -3,7 +3,7 @@
 namespace AppBundle\Repository;
 
 use AppBundle\Entity\Event;
-use Doctrine\ORM\EntityRepository;
+use AppBundle\Entity\User;
 
 /**
  * GameRepository
@@ -16,7 +16,7 @@ class EventRepository extends AbstractRepository
     /**
      * @param Event $event
      */
-    public function save(Event $event)
+    public function save(Event $event, User $user)
     {
         $slug = preg_replace("/[^a-z0-9]+/", "-", strtolower($event->getName()));
         $event->setSlug($slug);

@@ -3,7 +3,7 @@
 namespace AppBundle\Repository;
 
 use AppBundle\Entity\Tag;
-use Doctrine\ORM\EntityRepository;
+use AppBundle\Entity\User;
 
 /**
  * TagRepository
@@ -16,7 +16,7 @@ class TagRepository extends AbstractRepository
     /**
      * @param Tag $tag
      */
-    public function save(Tag $tag)
+    public function save(Tag $tag, User $user)
     {
         $slug = preg_replace("/[^a-z0-9]+/", "-", strtolower($tag->getName()));
         $tag->setSlug($slug);

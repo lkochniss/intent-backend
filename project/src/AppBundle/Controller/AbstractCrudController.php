@@ -83,7 +83,7 @@ abstract class AbstractCrudController extends Controller
     protected function handleValidForm(AbstractModel $entity)
     {
         $repository = $this->getDoctrine()->getRepository($this->getEntityName());
-        $repository->save($entity);
+        $repository->save($entity, $this->getUser());
 
         $this->addFlash('success', "Speichern erfolgreich");
     }
