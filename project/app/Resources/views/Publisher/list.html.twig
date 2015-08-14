@@ -9,7 +9,6 @@
         <thead>
         <tr>
             <td>{% trans from "publisher" %}publisher.name{% endtrans %}</td>
-            <td>{% trans from "publisher" %}publisher.studio{% endtrans %}</td>
             <td>{% trans from "publisher" %}publisher.franchise{% endtrans %}</td>
             <td>{% trans from "publisher" %}publisher.published.by{% endtrans %}</td>
             <td>{% trans from "publisher" %}publisher.published.at{% endtrans %}</td>
@@ -17,14 +16,10 @@
         </tr>
         </thead>
         <tbody>
-        {% for publisher in publishers %}
+        {% for publisher in entities %}
             <tr>
                 <td>{{ publisher.name }}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{ publisher.franchises|length }}</td>
                 <td></td>
                 <td></td>
                 <td>
@@ -35,4 +30,5 @@
         {% endfor %}
         </tbody>
     </table>
+    {% include '::pagination.html.twig' with { 'default_page': 'publisher' } %}
 {% endblock %}

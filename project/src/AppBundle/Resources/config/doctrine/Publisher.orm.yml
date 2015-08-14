@@ -26,4 +26,9 @@ AppBundle\Entity\Publisher:
         franchises:
             targetEntity: Franchise
             mappedBy: publisher
-    lifecycleCallbacks: {  }
+    lifecycleCallbacks:
+        prePersist:
+            - setModifiedAt
+            - setCreatedAt
+        preUpdate:
+            - setModifiedAt

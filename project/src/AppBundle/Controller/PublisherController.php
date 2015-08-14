@@ -4,68 +4,52 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Publisher;
 use AppBundle\Form\Type\PublisherType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class PublisherController extends Controller
+class PublisherController extends AbstractCrudController
 {
-    public function createAction(Request $request)
+    /**
+     * @return Publisher
+     */
+    protected function createNewEntity()
     {
-        $publisher = new Publisher();
-
-        $form = $this->createForm(new PublisherType(), $publisher);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $publisher = $form->getData();
-            $this->getPublisherRepository()->save($publisher);
-
-            return $this->redirectToRoute(
-                'intent_backend_publisher_edit',
-                array(
-                    'id' => $publisher->getId(),
-                )
-            );
-        }
-
-        return $this->render(
-            ':Publisher:create.html.twig',
-            array(
-                'form' => $form->createView(),
-            )
-        );
+        return new Publisher();
     }
 
-    public function editAction($id, Request $request)
+    /**
+     * @return PublisherType
+     */
+    protected function getFormType()
     {
-        $publisher = $this->getPublisherRepository()->find($id);
+        return new PublisherType();
+    }
 
-        if (is_null($publisher)) {
-            throw new NotFoundHttpException($this->get('translator')->trans('publisher.not_found', array(), 'publisher'));
-        }
+    /**
+     * @return string
+     */
+    protected function getTemplateBasePath()
+    {
+        return 'Publisher';
+    }
 
-        $form = $this->createForm(new PublisherType(), $publisher);
-        $form->handleRequest($request);
+    /**
+     * @return string
+     */
+    protected function getEntityName()
+    {
+        return 'AppBundle\Entity\Publisher';
+    }
 
-        if ($form->isValid()) {
-            $publisher = $form->getData();
-            $this->getPublisherRepository()->save($publisher);
+    /**
+     * @return string
+     */
+    protected function getRoutePrefix()
+    {
+        return 'intent_backend_publisher';
+    }
 
-            return $this->redirectToRoute(
-                'intent_backend_publisher_edit',
-                array(
-                    'id' => $publisher->getId(),
-                )
-            );
-        }
-
-        return $this->render(
-            ':Publisher:edit.html.twig',
-            array(
-                'form' => $form->createView(),
-            )
-        );
+    protected function getTranslationDomain()
+    {
+        return 'publisher';
     }
 
     public function showAction($id)
@@ -84,23 +68,6 @@ class PublisherController extends Controller
             array(// ...
             )
         );
-    }
-
-    public function listAction($type = null, $page)
-    {
-        $publishers = $this->getPublisherRepository()->findAll();
-
-        return $this->render(
-            ':Publisher:list.html.twig',
-            array(
-                'publishers' => $publishers,
-            )
-        );
-    }
-
-    private function getPublisherRepository()
-    {
-        return $this->getDoctrine()->getRepository('AppBundle:Publisher');
     }
 
 }

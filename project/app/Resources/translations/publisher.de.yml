@@ -4,7 +4,8 @@ publisher:
     description:    Beschreibung
     delete:         Publisher löschen
     edit:           Publisher bearbeiten
-    franchise:      Franchise
+    game:           Games
+    franchise:      Franchises
     list:           Publisherübersicht
     name:           Publisher
     not_found:      Publisher nicht gefunden
@@ -12,5 +13,5 @@ publisher:
         at:         Veröffentlicht am
         by:         Author
     show:           Publishervorschau
-    studio:         Entwicklerstudio
+    studio:         Entwicklerstudios
     submit:         Publisher speichern
