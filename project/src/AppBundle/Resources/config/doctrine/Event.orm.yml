@@ -29,6 +29,10 @@ AppBundle\Entity\Event:
         endAt:
             type: datetime
             column: end_at
+    manyToMany:
+        games:
+            targetEntity: Game
+            mappedBy: events
     lifecycleCallbacks:
         prePersist:
             - setModifiedAt

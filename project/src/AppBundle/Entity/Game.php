@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -40,6 +41,16 @@ class Game extends AbstractModel
     private $franchise;
 
     /**
+     * @var ArrayCollection
+     */
+    private $events;
+
+    function __construct()
+    {
+        $this->events = array();
+    }
+
+    /**
      * Set name
      *
      * @param string $name
@@ -55,7 +66,7 @@ class Game extends AbstractModel
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -78,7 +89,7 @@ class Game extends AbstractModel
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -101,7 +112,7 @@ class Game extends AbstractModel
     /**
      * Get backgroundLink
      *
-     * @return string 
+     * @return string
      */
     public function getBackgroundLink()
     {
@@ -171,5 +182,38 @@ class Game extends AbstractModel
     public function getFranchise()
     {
         return $this->franchise;
+    }
+
+    /**
+     * @param Event $event
+     * @return $this
+     */
+    public function addEvent(Event $event)
+    {
+        if (!$this->events->contains($event)) {
+            $this->events->add($event);
+            $event->addGames($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Event $event
+     * @return $this
+     */
+    public function removeEvent(Event $event)
+    {
+        $this->events->remove($event);
+
+        return $this;
+    }
+
+    /**
+     * @return Event[]
+     */
+    public function getEvents()
+    {
+        return $this->events->toArray();
     }
 }

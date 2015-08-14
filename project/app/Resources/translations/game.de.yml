@@ -4,6 +4,7 @@ game:
     description:    Beschreibung
     delete:         Game löschen
     edit:           Game bearbeiten
+    event:          Events
     franchise:      Franchise
     list:           Gamesübersicht
     name:           Game

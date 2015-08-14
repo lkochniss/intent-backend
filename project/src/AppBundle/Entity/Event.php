@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -38,6 +39,16 @@ class Event extends AbstractModel
      * @var \DateTime
      */
     private $endAt;
+
+    /**
+     * @var ArrayCollection
+     */
+    private $games;
+
+    function __construct()
+    {
+        $this->games = array();
+    }
 
     /**
      * Set name
@@ -168,4 +179,47 @@ class Event extends AbstractModel
     {
         return $this->endAt;
     }
+
+    /**
+     * @param Game $game
+     * @return $this
+     */
+    public function addGames(Game $game)
+    {
+        if (!$this->games->contains($game)) {
+            $this->games->add($game);
+            $game->addEvent($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Game $game
+     * @return $this
+     */
+    public function removeGames(Game $game)
+    {
+        $this->games->remove($game);
+
+        return $this;
+    }
+
+    /**
+     * @return Game[]
+     */
+    public function getGames()
+    {
+        return $this->games->toArray();
+    }
+
+    /**
+     * @return string
+     */
+    function __toString()
+    {
+        return $this->name;
+    }
+
+
 }

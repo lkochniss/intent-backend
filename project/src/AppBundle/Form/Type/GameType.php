@@ -57,6 +57,17 @@ class GameType extends AbstractType
                 )
             )
             ->add(
+                'events',
+                'entity',
+                array(
+                    'label' => 'game.event',
+                    'translation_domain' => 'game',
+                    'class' => 'AppBundle\Entity\Event',
+                    'multiple' => true,
+                    'expanded' => true
+                )
+            )
+            ->add(
                 'submit',
                 'submit',
                 array(
