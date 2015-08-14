@@ -22,6 +22,10 @@ AppBundle\Entity\Franchise:
         slug:
             type: string
             length: 255
+    oneToMany:
+        games:
+            targetEntity: Game
+            mappedBy: franchise
     manyToOne:
         publisher:
             targetEntity: Publisher
