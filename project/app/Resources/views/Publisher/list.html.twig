@@ -9,7 +9,6 @@
         <thead>
         <tr>
             <td>{% trans from "publisher" %}publisher.name{% endtrans %}</td>
-            <td>{% trans from "publisher" %}publisher.franchise{% endtrans %}</td>
             <td>{% trans from "publisher" %}publisher.published.by{% endtrans %}</td>
             <td>{% trans from "publisher" %}publisher.published.at{% endtrans %}</td>
             <td>{% trans from "publisher" %}publisher.actions{% endtrans %}</td>
@@ -19,7 +18,6 @@
         {% for publisher in entities %}
             <tr>
                 <td>{{ publisher.name }}</td>
-                <td>{{ publisher.franchises|length }}</td>
                 <td></td>
                 <td></td>
                 <td>

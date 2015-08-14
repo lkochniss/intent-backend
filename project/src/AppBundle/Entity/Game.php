@@ -30,6 +30,11 @@ class Game extends AbstractModel
     private $slug;
 
     /**
+     * @var Studio
+     */
+    private $studio;
+
+    /**
      * @var Franchise
      */
     private $franchise;
@@ -124,6 +129,27 @@ class Game extends AbstractModel
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * @param Studio $studio
+     * @return $this
+     */
+    public function setStudio(Studio $studio)
+    {
+        $this->studio = $studio;
+
+        return $this;
+    }
+
+    /**
+     * Get franchise
+     *
+     * @return string
+     */
+    public function getStudio()
+    {
+        return $this->studio;
     }
 
     /**

@@ -35,6 +35,17 @@ class GameType extends AbstractType
                 )
             )
             ->add(
+                'studio',
+                'entity',
+                array(
+                    'label' => 'game.studio',
+                    'translation_domain' => 'game',
+                    'class' => 'AppBundle\Entity\Studio',
+                    'multiple' => false,
+                    'expanded' => false
+                )
+            )
+            ->add(
                 'franchise',
                 'entity',
                 array(

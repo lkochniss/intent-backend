@@ -23,6 +23,12 @@ AppBundle\Entity\Game:
             type: string
             length: 255
     manyToOne:
+        studio:
+            targetEntity: Studio
+            inversedBy: games
+            joinColumn:
+                name: studio_id
+                referencedColumnName: id
         franchise:
             targetEntity: Franchise
             inversedBy: games
