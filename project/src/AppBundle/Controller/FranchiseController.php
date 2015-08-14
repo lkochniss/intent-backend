@@ -4,68 +4,52 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Franchise;
 use AppBundle\Form\Type\FranchiseType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class FranchiseController extends Controller
+class FranchiseController extends AbstractCrudController
 {
-    public function createAction(Request $request)
+    /**
+     * @return Franchise
+     */
+    protected function createNewEntity()
     {
-        $franchise = new Franchise();
-
-        $form = $this->createForm(new FranchiseType(), $franchise);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $franchise = $form->getData();
-            $this->getFranchiseRepository()->save($franchise);
-
-            return $this->redirectToRoute(
-                'intent_backend_franchise_edit',
-                array(
-                    'id' => $franchise->getId(),
-                )
-            );
-        }
-
-        return $this->render(
-            ':Franchise:create.html.twig',
-            array(
-                'form' => $form->createView(),
-            )
-        );
+        return new Franchise();
     }
 
-    public function editAction($id, Request $request)
+    /**
+     * @return FranchiseType
+     */
+    protected function getFormType()
     {
-        $franchise = $this->getFranchiseRepository()->find($id);
+        return new FranchiseType();
+    }
 
-        if (is_null($franchise)) {
-            throw new NotFoundHttpException($this->get('translator')->trans('franchise.not_found', array(), 'franchise'));
-        }
+    /**
+     * @return string
+     */
+    protected function getTemplateBasePath()
+    {
+        return 'Franchise';
+    }
 
-        $form = $this->createForm(new FranchiseType(), $franchise);
-        $form->handleRequest($request);
+    /**
+     * @return string
+     */
+    protected function getEntityName()
+    {
+        return 'AppBundle\Entity\Franchise';
+    }
 
-        if ($form->isValid()) {
-            $franchise = $form->getData();
-            $this->getFranchiseRepository()->save($franchise);
+    /**
+     * @return string
+     */
+    protected function getRoutePrefix()
+    {
+        return 'intent_backend_franchise';
+    }
 
-            return $this->redirectToRoute(
-                'intent_backend_franchise_edit',
-                array(
-                    'id' => $franchise->getId(),
-                )
-            );
-        }
-
-        return $this->render(
-            ':Franchise:edit.html.twig',
-            array(
-                'form' => $form->createView()
-            )
-        );
+    protected function getTranslationDomain()
+    {
+        return 'franchise';
     }
 
     public function showAction($id)
@@ -84,23 +68,6 @@ class FranchiseController extends Controller
             array(// ...
             )
         );
-    }
-
-    public function listAction($type = null, $page)
-    {
-        $franchises = $this->getFranchiseRepository()->findAll();
-
-        return $this->render(
-            ':Franchise:list.html.twig',
-            array(
-                'franchises' => $franchises,
-            )
-        );
-    }
-
-    private function getFranchiseRepository()
-    {
-        return $this->getDoctrine()->getRepository('AppBundle:Franchise');
     }
 
 }

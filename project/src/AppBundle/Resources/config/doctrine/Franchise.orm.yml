@@ -29,4 +29,9 @@ AppBundle\Entity\Franchise:
             joinColumn:
                 name: publisher_id
                 referencedColumnName: id
-    lifecycleCallbacks: {  }
+    lifecycleCallbacks:
+        prePersist:
+            - setModifiedAt
+            - setCreatedAt
+        preUpdate:
+            - setModifiedAt

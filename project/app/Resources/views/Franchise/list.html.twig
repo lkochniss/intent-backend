@@ -13,7 +13,7 @@
         </tr>
         </thead>
         <tbody>
-        {% for franchise in franchises %}
+        {% for franchise in entities %}
             <tr>
                 <td>{{ franchise.name }}</td>
                 <td><a class="table-padding" href="{{ path('intent_backend_franchise_edit',{'id' : franchise.id}) }}"><span class="glyphicon glyphicon-pencil"/></a></td>
@@ -21,4 +21,5 @@
         {% endfor %}
         </tbody>
     </table>
+    {% include '::pagination.html.twig' with { 'default_page': 'franchise' } %}
 {% endblock %}
