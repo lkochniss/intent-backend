@@ -9,6 +9,9 @@
         <thead>
         <tr>
             <td>{% trans from "event" %}event.name{% endtrans %}</td>
+            <td>{% trans from "event" %}event.active{% endtrans %}</td>
+            <td>{% trans from "event" %}event.startAt{% endtrans %}</td>
+            <td>{% trans from "event" %}event.endAt{% endtrans %}</td>
             <td>{% trans from "event" %}event.actions{% endtrans %}</td>
         </tr>
         </thead>
@@ -16,6 +19,15 @@
         {% for event in entities %}
             <tr>
                 <td>{{ event.name }}</td>
+                <td>
+                    {% if "now"|date("d.m.Y") >= event.startAt|date('d.m.Y') and "now"|date("d.m.Y") < event.endAt|date('d.m.Y') %}
+                        <span class="glyphicon glyphicon-ok"/>
+                    {% else %}
+                        <span class="glyphicon glyphicon-remove"/>
+                    {% endif %}
+                </td>
+                <td>{{ event.startAt|date('d.m.Y') }}</td>
+                <td>{{ event.endAt|date('d.m.Y') }}</td>
                 <td><a class="table-padding" href="{{ path('intent_backend_event_edit',{'id' : event.id}) }}"><span class="glyphicon glyphicon-pencil"/></a></td>
             </tr>
         {% endfor %}

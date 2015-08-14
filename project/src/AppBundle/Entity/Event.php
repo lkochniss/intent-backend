@@ -47,6 +47,8 @@ class Event extends AbstractModel
 
     function __construct()
     {
+        $this->startAt = new \DateTime();
+        $this->endAt = new \DateTime();
         $this->games = array();
     }
 

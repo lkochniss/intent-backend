@@ -1,5 +1,6 @@
 event:
     actions:        Aktionen
+    active:         Event aktiv
     create:         Event erstellen
     description:    Beschreibung
     delete:         Event löschen

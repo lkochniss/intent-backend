@@ -42,7 +42,6 @@ class EventType extends AbstractType
                     'label' => 'event.startAt',
                     'translation_domain' => 'event',
                     'widget' => 'choice',
-                    'data' => $now,
                 )
             )
             ->add(
@@ -52,7 +51,6 @@ class EventType extends AbstractType
                     'label' => 'event.endAt',
                     'translation_domain' => 'event',
                     'widget' => 'choice',
-                    'data' => $now,
                 )
             )
             ->add(
