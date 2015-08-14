@@ -15,7 +15,7 @@
         </tr>
         </thead>
         <tbody>
-        {% for studio in studios %}
+        {% for studio in entities %}
             <tr>
                 <td>{{ studio.name }}</td>
                 <td></td>
@@ -28,4 +28,5 @@
         {% endfor %}
         </tbody>
     </table>
+    {% include '::pagination.html.twig' with { 'default_page': 'studio' } %}
 {% endblock %}

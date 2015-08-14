@@ -4,68 +4,52 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Studio;
 use AppBundle\Form\Type\StudioType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class StudioController extends Controller
+class StudioController extends AbstractCrudController
 {
-    public function createAction(Request $request)
+    /**
+     * @return Studio
+     */
+    protected function createNewEntity()
     {
-        $studio = new Studio();
-
-        $form = $this->createForm(new StudioType(), $studio);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $studio = $form->getData();
-            $this->getStudioRepository()->save($studio);
-
-            return $this->redirectToRoute(
-                'intent_backend_studio_edit',
-                array(
-                    'id' => $studio->getId(),
-                )
-            );
-        }
-
-        return $this->render(
-            ':Studio:create.html.twig',
-            array(
-                'form' => $form->createView(),
-            )
-        );
+        return new Studio();
     }
 
-    public function editAction($id, Request $request)
+    /**
+     * @return StudioType
+     */
+    protected function getFormType()
     {
-        $studio = $this->getStudioRepository()->find($id);
+        return new StudioType();
+    }
 
-        if (is_null($studio)) {
-            throw new NotFoundHttpException($this->get('translator')->trans('$studio.not_found', array(), '$studio'));
-        }
+    /**
+     * @return string
+     */
+    protected function getTemplateBasePath()
+    {
+        return 'Studio';
+    }
 
-        $form = $this->createForm(new StudioType(), $studio);
-        $form->handleRequest($request);
+    /**
+     * @return string
+     */
+    protected function getEntityName()
+    {
+        return 'AppBundle\Entity\Studio';
+    }
 
-        if ($form->isValid()) {
-            $studio = $form->getData();
-            $this->getStudioRepository()->save($studio);
+    /**
+     * @return string
+     */
+    protected function getRoutePrefix()
+    {
+        return 'intent_backend_studio';
+    }
 
-            return $this->redirectToRoute(
-                'intent_backend_studio_edit',
-                array(
-                    'id' => $studio->getId(),
-                )
-            );
-        }
-
-        return $this->render(
-            ':Studio:edit.html.twig',
-            array(
-                'form' => $form->createView(),
-            )
-        );
+    protected function getTranslationDomain()
+    {
+        return 'studio';
     }
 
     public function showAction($id)
@@ -84,23 +68,6 @@ class StudioController extends Controller
             array(// ...
             )
         );
-    }
-
-    public function listAction($type = null, $page)
-    {
-        $studio = $this->getStudioRepository()->findAll();
-
-        return $this->render(
-            ':Studio:list.html.twig',
-            array(
-                'studios' => $studio,
-            )
-        );
-    }
-
-    private function getStudioRepository()
-    {
-        return $this->getDoctrine()->getRepository('AppBundle:Studio');
     }
 
 }
