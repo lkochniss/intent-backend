@@ -4,68 +4,52 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Tag;
 use AppBundle\Form\Type\TagType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class TagController extends Controller
+class TagController extends AbstractCrudController
 {
-    public function createAction(Request $request)
+    /**
+     * @return Tag
+     */
+    protected function createNewEntity()
     {
-        $tag = new Tag();
-
-        $form = $this->createForm(new TagType(), $tag);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $tag = $form->getData();
-            $this->getTagRepository()->save($tag);
-
-            return $this->redirectToRoute(
-                'intent_backend_tag_edit',
-                array(
-                    'id' => $tag->getId(),
-                )
-            );
-        }
-
-        return $this->render(
-            ':Tag:create.html.twig',
-            array(
-                'form' => $form->createView(),
-            )
-        );
+        return new Tag();
     }
 
-    public function editAction($id, Request $request)
+    /**
+     * @return TagType
+     */
+    protected function getFormType()
     {
-        $tag = $this->getTagRepository()->find($id);
+        return new TagType();
+    }
 
-        if (is_null($tag)) {
-            throw new NotFoundHttpException($this->get('translator')->trans('tag.not_found', array(), 'tag'));
-        }
+    /**
+     * @return string
+     */
+    protected function getTemplateBasePath()
+    {
+        return 'Tag';
+    }
 
-        $form = $this->createForm(new TagType(), $tag);
-        $form->handleRequest($request);
+    /**
+     * @return string
+     */
+    protected function getEntityName()
+    {
+        return 'AppBundle\Entity\Tag';
+    }
 
-        if ($form->isValid()) {
-            $tag = $form->getData();
-            $this->getTagRepository()->save($tag);
+    /**
+     * @return string
+     */
+    protected function getRoutePrefix()
+    {
+        return 'intent_backend_tag';
+    }
 
-            return $this->redirectToRoute(
-                'intent_backend_tag_edit',
-                array(
-                    'id' => $tag->getId(),
-                )
-            );
-        }
-
-        return $this->render(
-            ':Tag:edit.html.twig',
-            array(
-                'form' => $form->createView()
-            )
-        );
+    protected function getTranslationDomain()
+    {
+        return 'tag';
     }
 
     public function showAction($id)
@@ -84,23 +68,6 @@ class TagController extends Controller
             array(// ...
             )
         );
-    }
-
-    public function listAction($type = null, $page)
-    {
-        $tags = $this->getTagRepository()->findAll();
-
-        return $this->render(
-            ':Tag:list.html.twig',
-            array(
-                'tags' => $tags,
-            )
-        );
-    }
-
-    private function getTagRepository()
-    {
-        return $this->getDoctrine()->getRepository('AppBundle:Tag');
     }
 
 }
