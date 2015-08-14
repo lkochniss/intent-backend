@@ -30,6 +30,11 @@ class Game extends AbstractModel
     private $slug;
 
     /**
+     * @var Franchise
+     */
+    private $franchise;
+
+    /**
      * Set name
      *
      * @param string $name
@@ -119,5 +124,26 @@ class Game extends AbstractModel
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * @param Franchise $franchise
+     * @return $this
+     */
+    public function setFranchise(Franchise $franchise)
+    {
+        $this->franchise = $franchise;
+
+        return $this;
+    }
+
+    /**
+     * Get franchise
+     *
+     * @return string
+     */
+    public function getFranchise()
+    {
+        return $this->franchise;
     }
 }

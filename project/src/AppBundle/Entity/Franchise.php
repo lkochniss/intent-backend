@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -34,6 +35,10 @@ class Franchise extends AbstractModel
      */
     private $publisher;
 
+    /**
+     * @var ArrayCollection
+     */
+    private $games;
 
     function __construct()
     {
@@ -154,5 +159,46 @@ class Franchise extends AbstractModel
     public function getPublisher()
     {
         return $this->publisher;
+    }
+
+    /**
+     * @param Game $game
+     * @return $this
+     */
+    public function addGame(Game $game)
+    {
+        if (!$this->games->contains($game)) {
+            $this->games->add($game);
+            $game->setFranchise($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Game $game
+     * @return $this
+     */
+    public function removeGame(Game $game)
+    {
+        $this->games->remove($game);
+
+        return $this;
+    }
+
+    /**
+     * @return Game[]
+     */
+    public function getGames()
+    {
+        return $this->games->toArray();
+    }
+
+    /**
+     * @return string
+     */
+    function __toString()
+    {
+        return $this->name;
     }
 }

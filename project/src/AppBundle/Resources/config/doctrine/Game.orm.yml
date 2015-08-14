@@ -22,6 +22,13 @@ AppBundle\Entity\Game:
         slug:
             type: string
             length: 255
+    manyToOne:
+        franchise:
+            targetEntity: Franchise
+            inversedBy: games
+            joinColumn:
+                name: franchise_id
+                referencedColumnName: id
     lifecycleCallbacks:
         prePersist:
             - setModifiedAt
