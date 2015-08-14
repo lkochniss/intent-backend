@@ -22,4 +22,9 @@ AppBundle\Entity\Game:
         slug:
             type: string
             length: 255
-    lifecycleCallbacks: {  }
+    lifecycleCallbacks:
+        prePersist:
+            - setModifiedAt
+            - setCreatedAt
+        preUpdate:
+            - setModifiedAt

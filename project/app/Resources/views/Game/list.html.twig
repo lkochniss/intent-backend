@@ -13,7 +13,7 @@
         </tr>
         </thead>
         <tbody>
-        {% for game in games %}
+        {% for game in entities %}
             <tr>
                 <td>{{ game.name }}</td>
                 <td><a class="table-padding" href="{{ path('intent_backend_game_edit',{'id' : game.id}) }}"><span class="glyphicon glyphicon-pencil"/></a></td>
@@ -21,4 +21,5 @@
         {% endfor %}
         </tbody>
     </table>
+    {% include '::pagination.html.twig' with { 'default_page': 'game' } %}
 {% endblock %}

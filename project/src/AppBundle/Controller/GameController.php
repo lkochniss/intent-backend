@@ -4,67 +4,52 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Game;
 use AppBundle\Form\Type\GameType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class GameController extends Controller
+class GameController extends AbstractCrudController
 {
-    public function createAction(Request $request)
+    /**
+     * @return Game
+     */
+    protected function createNewEntity()
     {
-        $game = new Game();
-
-        $form = $this->createForm(new GameType(), $game);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $game = $form->getData();
-            $this->getGameRepository()->save($game);
-
-            return $this->redirectToRoute(
-                'intent_backend_game_edit',
-                array(
-                    'id' => $game->getId(),
-                )
-            );
-        }
-
-        return $this->render(
-            ':Game:create.html.twig',
-            array(
-                'form' => $form->createView(),
-            )
-        );
+        return new Game();
     }
 
-    public function editAction($id, Request $request)
+    /**
+     * @return GameType
+     */
+    protected function getFormType()
     {
-        $game = $this->getGameRepository()->find($id);
+        return new GameType();
+    }
 
-        if (is_null($game)) {
-            throw new NotFoundHttpException($this->get('translator')->trans('game.not_found', array(), 'game'));
-        }
+    /**
+     * @return string
+     */
+    protected function getTemplateBasePath()
+    {
+        return 'Game';
+    }
 
-        $form = $this->createForm(new GameType(), $game);
+    /**
+     * @return string
+     */
+    protected function getEntityName()
+    {
+        return 'AppBundle\Entity\Game';
+    }
 
-        if ($form->isValid()) {
-            $game = $form->getData();
-            $this->getGameRepository()->save($game);
+    /**
+     * @return string
+     */
+    protected function getRoutePrefix()
+    {
+        return 'intent_backend_game';
+    }
 
-            return $this->redirectToRoute(
-                'intent_backend_game_edit',
-                array(
-                    'id' => $game->getId(),
-                )
-            );
-        }
-
-        return $this->render(
-            ':Game:edit.html.twig',
-            array(
-                'form' => $form->createView()
-            )
-        );
+    protected function getTranslationDomain()
+    {
+        return 'article';
     }
 
     public function showAction($id)
@@ -83,23 +68,6 @@ class GameController extends Controller
             array(// ...
             )
         );
-    }
-
-    public function listAction($type = null, $page)
-    {
-        $games = $this->getGameRepository()->findAll();
-
-        return $this->render(
-            ':Game:list.html.twig',
-            array(
-                'games' => $games,
-            )
-        );
-    }
-
-    private function getGameRepository()
-    {
-        return $this->getDoctrine()->getRepository('AppBundle:Game');
     }
 
 }
