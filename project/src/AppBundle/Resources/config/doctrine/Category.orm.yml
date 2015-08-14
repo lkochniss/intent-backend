@@ -19,4 +19,9 @@ AppBundle\Entity\Category:
         articles:
             targetEntity: Article
             mappedBy: category
-    lifecycleCallbacks: {  }
+    lifecycleCallbacks:
+        prePersist:
+                - setModifiedAt
+                - setCreatedAt
+            preUpdate:
+                - setModifiedAt

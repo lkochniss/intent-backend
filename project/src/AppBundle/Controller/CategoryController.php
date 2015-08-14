@@ -4,66 +4,59 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Category;
 use AppBundle\Form\Type\CategoryType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class CategoryController extends Controller
+class CategoryController extends AbstractCrudController
 {
-    public function createAction(Request $request)
+    /**
+     * @return Category
+     */
+    protected function createNewEntity()
     {
-        $category = new Category();
-
-        $form = $this->createForm(new CategoryType(), $category);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $category = $form->getData();
-            $this->getCategoryRepository()->save($category);
-
-            return $this->redirectToRoute(
-                'intent_backend_category_edit',
-                array(
-                    'id' => $category->getId(),
-                )
-            );
-        }
-
-        return $this->render(
-            ':Category:create.html.twig',
-            array(
-                'form' => $form->createView(),
-            )
-        );
+        return new Category();
     }
 
-    public function editAction($id, Request $request)
+    /**
+     * @return CategoryType
+     */
+    protected function getFormType()
     {
-        $category = $this->getCategoryRepository()->find($id);
+        return new CategoryType();
+    }
 
-        if (is_null($category)) {
-            throw new NotFoundHttpException($this->get('translator')->trans('tag.not_found', array(), 'tag'));
-        }
+    /**
+     * @return string
+     */
+    protected function getTemplateBasePath()
+    {
+        return 'Category';
+    }
 
-        $form = $this->createForm(new CategoryType(), $category);
-        $form->handleRequest($request);
+    /**
+     * @return string
+     */
+    protected function getEntityName()
+    {
+        return 'AppBundle\Entity\Category';
+    }
 
-        if ($form->isValid()) {
-            $category = $form->getData();
-            $this->getCategoryRepository()->save($category);
+    /**
+     * @return string
+     */
+    protected function getRoutePrefix()
+    {
+        return 'intent_backend_category';
+    }
 
-            return $this->redirectToRoute(
-                'intent_backend_category_edit',
-                array(
-                    'id' => $category->getId(),
-                )
-            );
-        }
+    protected function getTranslationDomain()
+    {
+        return 'category';
+    }
 
+    public function showAction($id)
+    {
         return $this->render(
-            ':Category:edit.html.twig',
-            array(
-                'form' => $form->createView()
+            ':Category:show.html.twig',
+            array(// ...
             )
         );
     }
@@ -75,22 +68,5 @@ class CategoryController extends Controller
             array(// ...
             )
         );
-    }
-
-    public function listAction($type = null, $page)
-    {
-        $categories = $this->getCategoryRepository()->findAll();
-
-        return $this->render(
-            ':Category:list.html.twig',
-            array(
-                'categories' => $categories,
-            )
-        );
-    }
-
-    private function getCategoryRepository()
-    {
-        return $this->getDoctrine()->getRepository('AppBundle:Category');
     }
 }
