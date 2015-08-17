@@ -28,10 +28,14 @@ class ArticleType extends AbstractType
             )
             ->add(
                 'content',
-                'ckeditor',
+                'textarea',
                 array(
                     'label' => 'article.content',
                     'translation_domain' => 'article',
+                    'attr' => array(
+                        'class' => 'tinymce',
+                        'data-theme' => 'advanced'
+                    )
                 )
             )
             ->add(

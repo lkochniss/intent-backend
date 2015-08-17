@@ -6,3 +6,8 @@
     <h1>{% trans from "article" %}article.edit{% endtrans %}</h1>
     {{ form(form) }}
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ tinymce_init() }}
+{% endblock %}
