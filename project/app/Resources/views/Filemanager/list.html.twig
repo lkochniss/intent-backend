@@ -3,14 +3,14 @@
 {% block title %}{{ parent() }} {% trans from "filemanager" %}filemanager.list{% endtrans %}{% endblock %}
 
 {% block content %}
-    <h3>{{ currentDirectory }}</h3>
     {#<div class="col-md-12">#}
-        {#<a href="{{ path('intent_backend_filemanager_create', {'path': currentDirectory }) }}"#}
-           {#class="btn btn-default pull-right">{% trans from "filemanager" %}filemanager.create{% endtrans %}#}
-        {#</a>#}
+    {#<a href="{{ path('intent_backend_filemanager_create', {'path': currentDirectory }) }}"#}
+    {#class="btn btn-default pull-right">{% trans from "filemanager" %}filemanager.create{% endtrans %}#}
+    {#</a>#}
     {#</div>#}
     <div class="fileexplorer col-md-9">
 
+        <h3>{{ currentDirectory }}</h3>
         {% if back is not null %}
             <figure class="directory col-md-2">
                 <a href="{{ path('intent_backend_filemanager_list', { 'path': back}) }}">
@@ -44,6 +44,21 @@
         {% endfor %}
     </div>
     <div class="filepreview col-md-3">
-
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="application/javascript">
+        $('.file img').click(function () {
+            console.log($(this).attr('src'));
+            var html = '' +
+                    '<h3>Preview</h3>' +
+                    '<img class="img-responsive" src="'+$(this).attr('src')+'"/>' +
+                    '<p>URL:'+$(this).attr('src')+'</p>';
+
+            console.log(html);
+            $('.filepreview').html(html);
+        });
+    </script>
 {% endblock %}
