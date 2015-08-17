@@ -49,6 +49,10 @@ intent_backend_image:
     resource: routing/image.yml
     prefix:   /image
 
+intent_backend_filemanager:
+    resource: routing/filemanager.yml
+    prefix:   /filemanager
+
 intent_backend_dashboard:
     path:   /
     defaults: { _controller: AppBundle:Dashboard:index }

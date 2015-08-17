@@ -1,0 +1,10 @@
+filemanager:
+    actions:    Aktionen
+    create:     Ordner erstellen
+    directory:  Ordnername
+    delete:     Ordner löschen
+    list:       Filemanager
+    name:       Filemanager
+    open:       Ordner öffnen
+    submit:     Ordner erstellen
+    up:         zurück
