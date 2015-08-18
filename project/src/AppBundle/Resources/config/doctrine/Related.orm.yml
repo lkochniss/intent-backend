@@ -17,6 +17,14 @@ AppBundle\Entity\Related:
             generator:
                 strategy: AUTO
     fields:
+        createdAt:
+            column: created_at
+            type: datetime
+            nullable: false
+        modifiedAt:
+            column: modified_at
+            type: datetime
+            nullable: false
     oneToOne:
         article:
             targetEntity: Article

@@ -5,7 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Franchise;
 use AppBundle\Form\Type\FranchiseType;
 
-class FranchiseController extends AbstractCrudController
+class FranchiseController extends RelatedController
 {
     /**
      * @return Franchise

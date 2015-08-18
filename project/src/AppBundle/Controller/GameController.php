@@ -5,7 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Game;
 use AppBundle\Form\Type\GameType;
 
-class GameController extends AbstractCrudController
+class GameController extends RelatedController
 {
     /**
      * @return Game

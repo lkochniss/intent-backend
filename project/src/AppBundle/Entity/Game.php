@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Game
  */
-class Game extends AbstractModel
+class Game extends Related
 {
     /**
      * @var string

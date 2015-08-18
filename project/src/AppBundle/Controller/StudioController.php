@@ -5,7 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Studio;
 use AppBundle\Form\Type\StudioType;
 
-class StudioController extends AbstractCrudController
+class StudioController extends RelatedController
 {
     /**
      * @return Studio

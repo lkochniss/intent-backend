@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Studio
  */
-class Studio extends AbstractModel
+class Studio extends Related
 {
     /**
      * @var string

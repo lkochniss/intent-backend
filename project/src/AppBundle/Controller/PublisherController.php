@@ -5,7 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Publisher;
 use AppBundle\Form\Type\PublisherType;
 
-class PublisherController extends AbstractCrudController
+class PublisherController extends RelatedController
 {
     /**
      * @return Publisher

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Publisher
  */
-class Publisher extends AbstractModel
+class Publisher extends Related
 {
     /**
      * @var string

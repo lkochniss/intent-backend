@@ -64,7 +64,7 @@ class ArticleType extends AbstractType
                 array(
                     'label' => 'article.related',
                     'translation_domain' => 'article',
-                    'class' => 'AppBundle\Entity\Publisher',
+                    'class' => 'AppBundle\Entity\Related',
                 )
             )
             ->add(

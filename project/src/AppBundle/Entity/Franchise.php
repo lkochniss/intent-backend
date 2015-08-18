@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Franchise
  */
-class Franchise extends AbstractModel
+class Franchise extends Related
 {
     /**
      * @var string
