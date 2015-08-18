@@ -1,0 +1,19 @@
+intent_backend_image_create:
+    path:     /create
+    defaults: { _controller: AppBundle:Image:create }
+
+intent_backend_image_edit:
+    path:     /{id}/edit
+    defaults: { _controller: AppBundle:Image:edit }
+
+intent_backend_image_show:
+    path:     /{id}/show
+    defaults: { _controller: AppBundle:Image:show }
+
+intent_backend_image_delete:
+    path:     /{id}/delete
+    defaults: { _controller: AppBundle:Image:delete }
+
+intent_backend_image_list:
+    path:     /{page}
+    defaults: { _controller: AppBundle:Image:list, page: 1 }

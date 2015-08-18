@@ -1,0 +1,23 @@
+intent_backend_franchise_create:
+    path:     /create
+    defaults: { _controller: AppBundle:Franchise:create }
+
+intent_backend_franchise_edit:
+    path:     /{id}/edit
+    defaults: { _controller: AppBundle:Franchise:edit }
+
+intent_backend_franchise_show:
+    path:     /{id}/show
+    defaults: { _controller: AppBundle:Franchise:show }
+
+intent_backend_franchise_delete:
+    path:     /{id}/delete
+    defaults: { _controller: AppBundle:Franchise:delete }
+
+intent_backend_franchise_type_list:
+    path:     /{type}/{page}
+    defaults: { _controller: AppBundle:Franchise:list, page: 1 }
+
+intent_backend_franchise_list:
+    path:     /{page}
+    defaults: { _controller: AppBundle:Franchise:list, page: 1 }

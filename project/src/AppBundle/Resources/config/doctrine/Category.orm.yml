@@ -1,7 +1,7 @@
 AppBundle\Entity\Category:
     type: entity
     table: null
-    repositoryClass: AppBundle\Entity\CategoryRepository
+    repositoryClass: AppBundle\Repository\CategoryRepository
     id:
         id:
             type: integer
@@ -15,4 +15,13 @@ AppBundle\Entity\Category:
         slug:
             type: string
             length: 255
-    lifecycleCallbacks: {  }
+    oneToMany:
+        articles:
+            targetEntity: Article
+            mappedBy: category
+    lifecycleCallbacks:
+        prePersist:
+                - setModifiedAt
+                - setCreatedAt
+        preUpdate:
+                - setModifiedAt

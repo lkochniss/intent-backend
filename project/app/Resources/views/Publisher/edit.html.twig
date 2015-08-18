@@ -1,0 +1,8 @@
+{% extends "::editor.html.twig" %}
+
+{% block title %}{{ parent() }} {% trans from "publisher" %}publisher.edit{% endtrans %}{% endblock %}
+
+{% block content %}
+    <h1>{% trans from "publisher" %}publisher.edit{% endtrans %}</h1>
+    {{ form(form) }}
+{% endblock %}

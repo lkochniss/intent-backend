@@ -7,13 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Page
  */
-class Page
+class Page extends AbstractModel
 {
-    /**
-     * @var integer
-     */
-    private $id;
-
     /**
      * @var string
      */
@@ -28,22 +23,6 @@ class Page
      * @var string
      */
     private $slug;
-
-    /**
-     * @var boolean
-     */
-    private $slideshow;
-
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * Set title
@@ -112,28 +91,5 @@ class Page
     public function getSlug()
     {
         return $this->slug;
-    }
-
-    /**
-     * Set slideshow
-     *
-     * @param boolean $slideshow
-     * @return Page
-     */
-    public function setSlideshow($slideshow)
-    {
-        $this->slideshow = $slideshow;
-
-        return $this;
-    }
-
-    /**
-     * Get slideshow
-     *
-     * @return boolean 
-     */
-    public function getSlideshow()
-    {
-        return $this->slideshow;
     }
 }

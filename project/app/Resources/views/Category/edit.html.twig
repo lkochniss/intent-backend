@@ -1,0 +1,8 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}{{ parent() }} {% trans from "category" %}category.edit{% endtrans %}{% endblock %}
+
+{% block content %}
+    <h1>{% trans from "category" %}category.edit{% endtrans %}</h1>
+    {{ form(form) }}
+{% endblock %}

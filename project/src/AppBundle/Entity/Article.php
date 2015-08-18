@@ -7,13 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Article
  */
-class Article
+class Article extends AbstractModel
 {
-    /**
-     * @var integer
-     */
-    private $id;
-
     /**
      * @var string
      */
@@ -34,16 +29,35 @@ class Article
      */
     private $slideshow;
 
+    /**
+     * @var \DateTime
+     */
+    private $publishAt;
 
     /**
-     * Get id
-     *
-     * @return integer 
+     * @var Category
      */
-    public function getId()
-    {
-        return $this->id;
-    }
+    private $category;
+
+    /**
+     * @var User
+     */
+    private $createdBy;
+
+    /**
+     * @var User
+     */
+    private $modifiedBy;
+
+    /**
+     * @var Event
+     */
+    private $event;
+
+    /**
+     * @var Related
+     */
+    private $related;
 
     /**
      * Set title
@@ -130,10 +144,141 @@ class Article
     /**
      * Get slideshow
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getSlideshow()
     {
         return $this->slideshow;
     }
+
+    /**
+     * Set publishAt
+     *
+     * @param \DateTime $publishAt
+     * @return Article
+     */
+    public function setPublishAt($publishAt)
+    {
+        $this->publishAt = $publishAt;
+
+        return $this;
+    }
+
+    /**
+     * Get publishAt
+     *
+     * @return \DateTime
+     */
+    public function getPublishAt()
+    {
+        return $this->publishAt;
+    }
+
+    /**
+     * Set category
+     *
+     * @param Category $category
+     * @return Article
+     */
+    public function setCategory(Category $category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * Set createdBy
+     *
+     * @param User $user
+     * @return User
+     */
+    public function setCreatedBy(User $user)
+    {
+        $this->createdBy = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get createdBy
+     *
+     * @return User
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+
+    /**
+     * Set modifiedBy
+     *
+     * @param User $user
+     * @return User
+     */
+    public function setModifiedBy(User $user)
+    {
+        $this->modifiedBy = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get modifiedBy
+     *
+     * @return User
+     */
+    public function getModifiedBy()
+    {
+        return $this->modifiedBy;
+    }
+
+    /**
+     * @param Event $event
+     * @return $this
+     */
+    public function setEvent(Event $event)
+    {
+        $this->event = $event;
+
+        return $this;
+    }
+
+    /**
+     * @return Event
+     */
+    public function getEvent(){
+
+        return $this->event;
+    }
+
+    /**
+     * @param Related $related
+     * @return $this
+     */
+    public function setRelated(Related $related)
+    {
+        $this->related = $related;
+
+        return $this;
+    }
+
+    /**
+     * @return Related
+     */
+    public function getRelated(){
+
+        return $this->related;
+    }
+
 }

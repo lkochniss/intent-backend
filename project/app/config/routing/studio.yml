@@ -1,0 +1,23 @@
+intent_backend_studio_create:
+    path:     /create
+    defaults: { _controller: AppBundle:Studio:create }
+
+intent_backend_studio_edit:
+    path:     /{id}/edit
+    defaults: { _controller: AppBundle:Studio:edit }
+
+intent_backend_studio_show:
+    path:     /{id}/show
+    defaults: { _controller: AppBundle:Studio:show }
+
+intent_backend_studio_delete:
+    path:     /{id}/delete
+    defaults: { _controller: AppBundle:Studio:delete }
+
+intent_backend_studio_type_list:
+    path:     /{type}/{page}
+    defaults: { _controller: AppBundle:Studio:list, page: 1 }
+
+intent_backend_studio_list:
+    path:     /{page}
+    defaults: { _controller: AppBundle:Studio:list, page: 1 }

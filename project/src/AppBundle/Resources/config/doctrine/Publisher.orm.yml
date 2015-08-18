@@ -1,13 +1,8 @@
 AppBundle\Entity\Publisher:
     type: entity
     table: null
-    repositoryClass: AppBundle\Entity\PublisherRepository
-    id:
-        id:
-            type: integer
-            id: true
-            generator:
-                strategy: AUTO
+    repositoryClass: AppBundle\Repository\PublisherRepository
+
     fields:
         name:
             type: string
@@ -18,4 +13,17 @@ AppBundle\Entity\Publisher:
         backgroundLink:
             type: string
             length: 255
-    lifecycleCallbacks: {  }
+            nullable: true
+        slug:
+            type: string
+            length: 255
+    oneToMany:
+        franchises:
+            targetEntity: Franchise
+            mappedBy: publisher
+    lifecycleCallbacks:
+        prePersist:
+            - setModifiedAt
+            - setCreatedAt
+        preUpdate:
+            - setModifiedAt

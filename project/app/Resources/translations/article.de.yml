@@ -1,0 +1,23 @@
+article:
+    actions:    Aktionen
+    category:   Kategorie
+    create:     Artikel erstellen
+    content:    Inhalt
+    delete:     Artikel löschen
+    edit:       Artikel bearbeiten
+    event:      Event
+    franchise:  Franchise
+    game:       Game
+    list:       Artikelübersicht
+    name:       Artikel
+    not_found:  Artikel nicht gefunden
+    published:
+        at:     Veröffentlicht am
+        by:     Author
+    publisher:  Publisher
+    related:    Verknüpfen mit
+    show:       Artikelvorschau
+    slideshow:  Slideshow
+    studio:     Studio
+    submit:     Artikel speichern
+    title:      Titel

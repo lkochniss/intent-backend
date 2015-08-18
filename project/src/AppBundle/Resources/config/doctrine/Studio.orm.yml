@@ -1,0 +1,29 @@
+AppBundle\Entity\Studio:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\StudioRepository
+
+    fields:
+        name:
+            type: string
+            length: 255
+        description:
+            type: string
+            length: 255
+        backgroundLink:
+            type: string
+            length: 255
+            nullable: true
+        slug:
+            type: string
+            length: 255
+    oneToMany:
+        games:
+            targetEntity: Game
+            mappedBy: studio
+    lifecycleCallbacks:
+        prePersist:
+            - setModifiedAt
+            - setCreatedAt
+        preUpdate:
+            - setModifiedAt

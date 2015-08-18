@@ -1,0 +1,20 @@
+.table-padding{
+    padding: 0 5px 0 0;
+}
+
+.directory{
+    border: 1px;
+}
+
+.directory span{
+    font-size: 50px;
+}
+
+.file{
+    border: 1px;
+}
+
+.file img{
+    height:50px;
+    width: auto;
+}

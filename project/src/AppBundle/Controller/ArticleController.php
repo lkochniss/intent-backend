@@ -2,38 +2,71 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use AppBundle\Entity\Article;
+use AppBundle\Form\Type\ArticleType;
 
-class ArticleController extends Controller
+class ArticleController extends AbstractCrudController
 {
-    public function createAction()
+    /**
+     * @return Article
+     */
+    protected function createNewEntity()
     {
-        return $this->render('Article:create.html.twig', array(
-                // ...
-            ));    }
+        return new Article();
+    }
 
-    public function editAction($id)
+    /**
+     * @return ArticleType
+     */
+    protected function getFormType()
     {
-        return $this->render('Article:edit.html.twig', array(
-                // ...
-            ));    }
+        return new ArticleType();
+    }
+
+    /**
+     * @return string
+     */
+    protected function getTemplateBasePath()
+    {
+        return 'Article';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getEntityName()
+    {
+        return 'AppBundle\Entity\Article';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getRoutePrefix()
+    {
+        return 'intent_backend_article';
+    }
+
+    protected function getTranslationDomain()
+    {
+        return 'article';
+    }
 
     public function showAction($id)
     {
-        return $this->render('Article:show.html.twig', array(
-                // ...
-            ));    }
+        return $this->render(
+            ':Article:show.html.twig',
+            array(// ...
+            )
+        );
+    }
 
     public function deleteAction($id)
     {
-        return $this->render('Article:delete.html.twig', array(
-                // ...
-            ));    }
-
-    public function listAction($page)
-    {
-        return $this->render('Article:list.html.twig', array(
-                // ...
-            ));    }
-
+        return $this->render(
+            ':Article:delete.html.twig',
+            array(// ...
+            )
+        );
+    }
 }

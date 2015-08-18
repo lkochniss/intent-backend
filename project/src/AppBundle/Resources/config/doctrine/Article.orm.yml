@@ -1,7 +1,7 @@
 AppBundle\Entity\Article:
     type: entity
     table: null
-    repositoryClass: AppBundle\Entity\ArticleRepository
+    repositoryClass: AppBundle\Repository\ArticleRepository
     id:
         id:
             type: integer
@@ -20,4 +20,39 @@ AppBundle\Entity\Article:
             length: 255
         slideshow:
             type: boolean
-    lifecycleCallbacks: {  }
+    oneToOne:
+        related:
+            targetEntity: Related
+            inversedBy: article
+            joinColumn:
+                name: related_id
+                referencedColumnName: id
+    manyToOne:
+        category:
+            targetEntity: Category
+            inversedBy: articles
+            joinColumn:
+                name: category_id
+                referencedColumnName: id
+        createdBy:
+            targetEntity: User
+            inversedBy: articles
+            joinColumn:
+                name: created_by_id
+                referencedColumnName: id
+        modifiedBy:
+            targetEntity: User
+            joinColumn:
+                name: modified_by_id
+                referencedColumnName: id
+        event:
+            targetEntity: Event
+            joinColumn:
+                name: event_id
+                referencedColumnName: id
+    lifecycleCallbacks:
+        prePersist:
+            - setModifiedAt
+            - setCreatedAt
+        preUpdate:
+            - setModifiedAt

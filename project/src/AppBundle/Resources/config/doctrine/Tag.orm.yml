@@ -1,7 +1,7 @@
 AppBundle\Entity\Tag:
     type: entity
     table: null
-    repositoryClass: AppBundle\Entity\TagRepository
+    repositoryClass: AppBundle\Repository\TagRepository
     id:
         id:
             type: integer
@@ -15,4 +15,9 @@ AppBundle\Entity\Tag:
         slug:
             type: string
             length: 255
-    lifecycleCallbacks: {  }
+    lifecycleCallbacks:
+        prePersist:
+            - setModifiedAt
+            - setCreatedAt
+        preUpdate:
+            - setModifiedAt

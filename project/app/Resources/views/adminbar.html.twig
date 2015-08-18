@@ -1,0 +1,24 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a class="navbar-brand" href="{{ path('intent_backend_dashboard') }}">{% trans from "adminbar" %}adminbar.dashboard{% endtrans %} <span class="glyphicon glyphicon-home"/></a></li>
+                <li><a class="navbar-brand" href="{{ path('intent_backend_article_create') }}">{% trans from "adminbar" %}adminbar.article{% endtrans %} <span class="glyphicon glyphicon-plus"/></a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{ path('intent_backend_profile') }}">{% trans from "adminbar" %}adminbar.profile{% endtrans %} {{ app.user.username }} <span class="glyphicon glyphicon-user"/></a></li>
+                <li><a href="/logout">{% trans from "adminbar" %}adminbar.logout{% endtrans %} <span class="glyphicon glyphicon-off"/></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

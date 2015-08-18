@@ -12,10 +12,10 @@ class SecurityController extends Controller
         $authenticationUtils = $this->get('security.authentication_utils');
 
         return $this->render(
-            'Security:login.html.twig',
+            ':Security:login.html.twig',
             array(
                 'last_username' => $authenticationUtils->getLastUsername(),
-                'error' => $authenticationUtils->getLastAuthenticationError()
+                'error' => $authenticationUtils->getLastAuthenticationError(),
             )
         );
     }

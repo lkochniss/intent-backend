@@ -2,18 +2,14 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Category
  */
-class Category
+class Category extends AbstractModel
 {
-    /**
-     * @var integer
-     */
-    private $id;
-
     /**
      * @var string
      */
@@ -24,15 +20,14 @@ class Category
      */
     private $slug;
 
-
     /**
-     * Get id
-     *
-     * @return integer 
+     * @var ArrayCollection
      */
-    public function getId()
+    private $articles;
+
+    function __construct()
     {
-        return $this->id;
+        $this->articles = array();
     }
 
     /**
@@ -80,4 +75,47 @@ class Category
     {
         return $this->slug;
     }
+
+    /**
+     * @param Article $article
+     * @return $this
+     */
+    public function addArticle(Article $article)
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles->add($article);
+            $article->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Article $article
+     * @return $this
+     */
+    public function removeArticle(Article $article)
+    {
+        $this->articles->remove($article);
+
+        return $this;
+    }
+
+    /**
+     * @return Article[]
+     */
+    public function getArticles()
+    {
+        return $this->articles->toArray();
+    }
+
+    /**
+     * @return string
+     */
+    function __toString()
+    {
+        return $this->name;
+    }
+
+
 }

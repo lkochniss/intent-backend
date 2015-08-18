@@ -7,13 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Tag
  */
-class Tag
+class Tag extends AbstractModel
 {
-    /**
-     * @var integer
-     */
-    private $id;
-
     /**
      * @var string
      */
@@ -23,17 +18,6 @@ class Tag
      * @var string
      */
     private $slug;
-
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * Set name

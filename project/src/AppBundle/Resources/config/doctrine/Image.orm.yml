@@ -1,7 +1,7 @@
 AppBundle\Entity\Image:
     type: entity
     table: null
-    repositoryClass: AppBundle\Entity\ImageRepository
+    repositoryClass: AppBundle\Repository\ImageRepository
     id:
         id:
             type: integer
@@ -13,12 +13,6 @@ AppBundle\Entity\Image:
             type: string
             length: 255
         altText:
-            type: string
-            length: 255
-        owner:
-            type: string
-            length: 255
-        type:
             type: string
             length: 255
     lifecycleCallbacks: {  }

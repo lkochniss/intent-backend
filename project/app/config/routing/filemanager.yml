@@ -1,0 +1,11 @@
+intent_backend_filemanager_create:
+    path:     /create/{path}
+    defaults: { _controller: AppBundle:Filemanager:create, path: '' }
+    requirements:
+        path: .+
+
+intent_backend_filemanager_list:
+    path:     /{path}
+    defaults: { _controller: AppBundle:Filemanager:list, path: '' }
+    requirements:
+        path: .+

@@ -1,7 +1,7 @@
 AppBundle\Entity\User:
     type: entity
     table: null
-    repositoryClass: AppBundle\Entity\UserRepository
+    repositoryClass: AppBundle\Repository\UserRepository
     id:
         id:
             type: integer
@@ -18,4 +18,18 @@ AppBundle\Entity\User:
         email:
             type: string
             length: 255
+        isActive:
+            type: integer
+            column: is_active
+    oneToMany:
+        articles:
+            targetEntity: Article
+            mappedBy: createdBy
+    manyToOne:
+        role:
+            targetEntity: Role
+            inversedBy: users
+            joinColumn:
+                name: role_id
+                referencedColumnName: id
     lifecycleCallbacks: {  }

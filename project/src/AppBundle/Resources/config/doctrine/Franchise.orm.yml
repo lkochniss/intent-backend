@@ -1,0 +1,36 @@
+AppBundle\Entity\Franchise:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\FranchiseRepository
+
+    fields:
+        name:
+            type: string
+            length: 255
+        description:
+            type: string
+            length: 255
+        backgroundLink:
+            type: string
+            length: 255
+            nullable: true
+        slug:
+            type: string
+            length: 255
+    oneToMany:
+        games:
+            targetEntity: Game
+            mappedBy: franchise
+    manyToOne:
+        publisher:
+            targetEntity: Publisher
+            inversedBy: franchises
+            joinColumn:
+                name: publisher_id
+                referencedColumnName: id
+    lifecycleCallbacks:
+        prePersist:
+            - setModifiedAt
+            - setCreatedAt
+        preUpdate:
+            - setModifiedAt

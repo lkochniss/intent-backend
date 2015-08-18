@@ -1,7 +1,7 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}AppBundle:Article:show{% endblock %}
+{% block title %}{{ parent() }} {% trans from "article" %}article.show{% endtrans %}{% endblock %}
 
-{% block body %}
+{% block content %}
 <h1>Welcome to the Article:show page</h1>
 {% endblock %}

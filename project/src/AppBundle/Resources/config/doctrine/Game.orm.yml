@@ -1,12 +1,8 @@
 AppBundle\Entity\Game:
     type: entity
     table: null
-    id:
-        id:
-            type: integer
-            id: true
-            generator:
-                strategy: AUTO
+    repositoryClass: AppBundle\Repository\GameRepository
+
     fields:
         name:
             type: string
@@ -17,4 +13,26 @@ AppBundle\Entity\Game:
         backgroundLink:
             type: string
             length: 255
-    lifecycleCallbacks: {  }
+            nullable: true
+        slug:
+            type: string
+            length: 255
+    manyToOne:
+        studio:
+            targetEntity: Studio
+            inversedBy: games
+            joinColumn:
+                name: studio_id
+                referencedColumnName: id
+        franchise:
+            targetEntity: Franchise
+            inversedBy: games
+            joinColumn:
+                name: franchise_id
+                referencedColumnName: id
+    lifecycleCallbacks:
+        prePersist:
+            - setModifiedAt
+            - setCreatedAt
+        preUpdate:
+            - setModifiedAt

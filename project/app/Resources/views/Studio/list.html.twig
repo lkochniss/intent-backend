@@ -1,0 +1,32 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}{{ parent() }} {% trans from "studio" %}studio.list{% endtrans %}{% endblock %}
+
+{% block content %}
+    <h3>{% trans from "studio" %}studio.list{% endtrans %}</h3>
+    <a href="{{ path('intent_backend_studio_create') }}" class="btn btn-default pull-right">{% trans from "studio" %}studio.create{% endtrans %}</a>
+    <table class="table">
+        <thead>
+        <tr>
+            <td>{% trans from "studio" %}studio.name{% endtrans %}</td>
+            <td>{% trans from "studio" %}studio.published.by{% endtrans %}</td>
+            <td>{% trans from "studio" %}studio.published.at{% endtrans %}</td>
+            <td>{% trans from "studio" %}studio.actions{% endtrans %}</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for studio in entities %}
+            <tr>
+                <td>{{ studio.name }}</td>
+                <td></td>
+                <td></td>
+                <td>
+                    <a class="table-padding" href="{{ path('intent_backend_studio_edit',{'id' : studio.id}) }}"><span class="glyphicon glyphicon-pencil"/></a>
+                    <a class="table-padding" href="{{ path('intent_backend_studio_show',{'id' : studio.id}) }}"><span class="glyphicon glyphicon-eye-open"/></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% include '::pagination.html.twig' with { 'default_page': 'studio' } %}
+{% endblock %}

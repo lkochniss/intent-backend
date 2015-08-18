@@ -2,18 +2,14 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Game
  */
-class Game
+class Game extends Related
 {
-    /**
-     * @var integer
-     */
-    private $id;
-
     /**
      * @var string
      */
@@ -29,15 +25,29 @@ class Game
      */
     private $backgroundLink;
 
+    /**
+     * @var string
+     */
+    private $slug;
 
     /**
-     * Get id
-     *
-     * @return integer 
+     * @var Studio
      */
-    public function getId()
+    private $studio;
+
+    /**
+     * @var Franchise
+     */
+    private $franchise;
+
+    /**
+     * @var ArrayCollection
+     */
+    private $events;
+
+    function __construct()
     {
-        return $this->id;
+        $this->events = array();
     }
 
     /**
@@ -56,7 +66,7 @@ class Game
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -79,7 +89,7 @@ class Game
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -102,10 +112,108 @@ class Game
     /**
      * Get backgroundLink
      *
-     * @return string 
+     * @return string
      */
     public function getBackgroundLink()
     {
         return $this->backgroundLink;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Game
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param Studio $studio
+     * @return $this
+     */
+    public function setStudio(Studio $studio)
+    {
+        $this->studio = $studio;
+
+        return $this;
+    }
+
+    /**
+     * Get franchise
+     *
+     * @return string
+     */
+    public function getStudio()
+    {
+        return $this->studio;
+    }
+
+    /**
+     * @param Franchise $franchise
+     * @return $this
+     */
+    public function setFranchise(Franchise $franchise)
+    {
+        $this->franchise = $franchise;
+
+        return $this;
+    }
+
+    /**
+     * Get franchise
+     *
+     * @return string
+     */
+    public function getFranchise()
+    {
+        return $this->franchise;
+    }
+
+    /**
+     * @param Event $event
+     * @return $this
+     */
+    public function addEvent(Event $event)
+    {
+        if (!$this->events->contains($event)) {
+            $this->events->add($event);
+            $event->addGames($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Event $event
+     * @return $this
+     */
+    public function removeEvent(Event $event)
+    {
+        $this->events->remove($event);
+
+        return $this;
+    }
+
+    /**
+     * @return Event[]
+     */
+    public function getEvents()
+    {
+        return $this->events->toArray();
     }
 }

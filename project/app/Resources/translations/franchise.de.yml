@@ -1,0 +1,16 @@
+franchise:
+    actions:    Aktionen
+    create:     Franchise erstellen
+    descripton: Beschreibung
+    delete:     Franchise löschen
+    edit:       Franchise bearbeiten
+    list:       Franchiseübersicht
+    name:       Franchise
+    not_found:  Franchise nicht gefunden
+    published:
+        at:     Veröffentlicht am
+        by:     Author
+    publisher:  Publisher
+    show:       Franchisevorschau
+    studio:     Entwicklerstuio
+    submit:     Franchise speichern

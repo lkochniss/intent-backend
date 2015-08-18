@@ -1,7 +1,20 @@
-{% extends "::base.html.twig" %}
+{% extends "::editor.html.twig" %}
 
-{% block title %}AppBundle:Article:edit{% endblock %}
+{% block title %}{{ parent() }} {% trans from "article" %}article.edit{% endtrans %}{% endblock %}
 
-{% block body %}
-<h1>Welcome to the Article:edit page</h1>
+{% block content %}
+    <h1>{% trans from "article" %}article.edit{% endtrans %}</h1>
+    {{ form_start(form) }}
+    <div class="col-md-10 editor">
+        {{ form_row(form.title) }}
+        {{ form_row(form.content) }}
+    </div>
+    <div class="col-md-2 neta">
+        {{ form_row(form.related) }}
+        {{ form_row(form.category) }}
+        {{ form_row(form.event) }}
+        {{ form_row(form.slideshow) }}
+        {{ form_row(form.submit) }}
+    </div>
+    {{ form_end(form) }}
 {% endblock %}

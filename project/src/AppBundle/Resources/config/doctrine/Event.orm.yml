@@ -1,0 +1,41 @@
+AppBundle\Entity\Event:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\EventRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        description:
+            type: string
+            length: 255
+        backgroundLink:
+            type: string
+            length: 255
+            nullable: true
+            column: background_link
+        slug:
+            type: string
+            length: 255
+        startAt:
+            type: datetime
+            column: start_at
+        endAt:
+            type: datetime
+            column: end_at
+    oneToMany:
+        articles:
+            targetEntity: Article
+            mappedBy: event
+    lifecycleCallbacks:
+        prePersist:
+            - setModifiedAt
+            - setCreatedAt
+        preUpdate:
+            - setModifiedAt

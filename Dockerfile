@@ -3,9 +3,9 @@ FROM ubuntu:14.04
 ENV DEBIAN_FRONTEND noninteractive
 
 # upgrade system
-RUN apt-get update && apt-get upgrade -yq
+RUN apt-get update #&& apt-get upgrade -yq
 
-# install part1
+# install
 RUN apt-get install -yq \
     nginx \
     php5-cli php5-fpm \

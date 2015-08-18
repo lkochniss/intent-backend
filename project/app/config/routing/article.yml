@@ -1,0 +1,23 @@
+intent_backend_article_create:
+    path:     /create
+    defaults: { _controller: AppBundle:Article:create }
+
+intent_backend_article_edit:
+    path:     /{id}/edit
+    defaults: { _controller: AppBundle:Article:edit }
+
+intent_backend_article_show:
+    path:     /{id}/show
+    defaults: { _controller: AppBundle:Article:show }
+
+intent_backend_article_delete:
+    path:     /{id}/delete
+    defaults: { _controller: AppBundle:Article:delete }
+
+intent_backend_article_type_list:
+    path:     /{type}/{page}
+    defaults: { _controller: AppBundle:Article:list, page: 1 }
+
+intent_backend_article_list:
+    path:     /{page}
+    defaults: { _controller: AppBundle:Article:list, page: 1 }

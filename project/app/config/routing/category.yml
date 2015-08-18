@@ -1,0 +1,15 @@
+intent_backend_category_create:
+    path:     /create
+    defaults: { _controller: AppBundle:Category:create }
+
+intent_backend_category_edit:
+    path:     /{id}/edit
+    defaults: { _controller: AppBundle:Category:edit }
+
+intent_backend_category_delete:
+    path:     /{id}/delete
+    defaults: { _controller: AppBundle:Category:delete }
+
+intent_backend_category_list:
+    path:     /{page}
+    defaults: { _controller: AppBundle:Category:list, page: 1 }

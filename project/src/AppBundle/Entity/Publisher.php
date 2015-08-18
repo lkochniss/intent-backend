@@ -2,18 +2,14 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Publisher
  */
-class Publisher
+class Publisher extends Related
 {
-    /**
-     * @var integer
-     */
-    private $id;
-
     /**
      * @var string
      */
@@ -29,15 +25,22 @@ class Publisher
      */
     private $backgroundLink;
 
+    /**
+     * @var string
+     */
+    private $slug;
 
     /**
-     * Get id
-     *
-     * @return integer 
+     * @var ArrayCollection
      */
-    public function getId()
+    private $franchises;
+
+    /**
+     *
+     */
+    function __construct()
     {
-        return $this->id;
+        $this->franchises = array();
     }
 
     /**
@@ -56,7 +59,7 @@ class Publisher
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -79,7 +82,7 @@ class Publisher
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -102,10 +105,76 @@ class Publisher
     /**
      * Get backgroundLink
      *
-     * @return string 
+     * @return string
      */
     public function getBackgroundLink()
     {
         return $this->backgroundLink;
     }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Publisher
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param Franchise $franchise
+     * @return $this
+     */
+    public function addFranchise(Franchise $franchise)
+    {
+        if (!$this->franchises->contains($franchise)) {
+            $this->franchises->add($franchise);
+            $franchise->setPublisher($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Franchise $franchise
+     * @return $this
+     */
+    public function removeFranchise(Franchise $franchise)
+    {
+        $this->franchises->remove($franchise);
+
+        return $this;
+    }
+
+    /**
+     * @return Franchise[]
+     */
+    public function getFranchises()
+    {
+        return $this->franchises->toArray();
+    }
+
+    /**
+     * @return string
+     */
+    function __toString()
+    {
+        return $this->name;
+    }
+
+
 }

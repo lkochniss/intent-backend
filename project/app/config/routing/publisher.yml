@@ -1,0 +1,23 @@
+intent_backend_publisher_create:
+    path:     /create
+    defaults: { _controller: AppBundle:Publisher:create }
+
+intent_backend_publisher_edit:
+    path:     /{id}/edit
+    defaults: { _controller: AppBundle:Publisher:edit }
+
+intent_backend_publisher_show:
+    path:     /{id}/show
+    defaults: { _controller: AppBundle:Publisher:show }
+
+intent_backend_publisher_delete:
+    path:     /{id}/delete
+    defaults: { _controller: AppBundle:Publisher:delete }
+
+intent_backend_publisher_type_list:
+    path:     /{type}/{page}
+    defaults: { _controller: AppBundle:Publisher:list, page: 1 }
+
+intent_backend_publisher_list:
+    path:     /{page}
+    defaults: { _controller: AppBundle:Publisher:list, page: 1 }

@@ -1,7 +1,7 @@
 AppBundle\Entity\Page:
     type: entity
     table: null
-    repositoryClass: AppBundle\Entity\PageRepository
+    repositoryClass: AppBundle\Repository\PageRepository
     id:
         id:
             type: integer
@@ -12,12 +12,15 @@ AppBundle\Entity\Page:
         title:
             type: string
             length: 255
-        text:
+        content:
             type: string
             length: 255
         slug:
             type: string
             length: 255
-        slideshow:
-            type: boolean
-    lifecycleCallbacks: {  }
+    lifecycleCallbacks:
+        prePersist:
+            - setModifiedAt
+            - setCreatedAt
+        preUpdate:
+            - setModifiedAt
