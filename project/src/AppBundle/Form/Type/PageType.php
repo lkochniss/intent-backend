@@ -28,10 +28,14 @@ class PageType extends AbstractType
             )
             ->add(
                 'content',
-                'ckeditor',
+                'textarea',
                 array(
                     'label' => 'page.content',
                     'translation_domain' => 'page',
+                    'attr' => array(
+                        'class' => 'tinymce',
+                        'data-theme' => 'advanced'
+                    )
                 )
             )
             ->add(

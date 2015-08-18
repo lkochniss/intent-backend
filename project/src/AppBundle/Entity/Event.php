@@ -43,13 +43,13 @@ class Event extends AbstractModel
     /**
      * @var ArrayCollection
      */
-    private $games;
+    private $articles;
 
     function __construct()
     {
         $this->startAt = new \DateTime();
         $this->endAt = new \DateTime();
-        $this->games = array();
+        $this->articles = array();
     }
 
     /**
@@ -183,36 +183,36 @@ class Event extends AbstractModel
     }
 
     /**
-     * @param Game $game
+     * @param Article $article
      * @return $this
      */
-    public function addGames(Game $game)
+    public function addArticle(Article $article)
     {
-        if (!$this->games->contains($game)) {
-            $this->games->add($game);
-            $game->addEvent($this);
+        if (!$this->articles->contains($article)) {
+            $this->articles->add($article);
+            $article->setEvent($this);
         }
 
         return $this;
     }
 
     /**
-     * @param Game $game
+     * @param Article $article
      * @return $this
      */
-    public function removeGames(Game $game)
+    public function removeArticle(Article $article)
     {
-        $this->games->remove($game);
+        $this->articles->remove($article);
 
         return $this;
     }
 
     /**
-     * @return Game[]
+     * @return Article[]
      */
-    public function getGames()
+    public function getArticles()
     {
-        return $this->games->toArray();
+        return $this->articles->toArray();
     }
 
     /**

@@ -28,10 +28,14 @@ class FranchiseType extends AbstractType
             )
             ->add(
                 'description',
-                'ckeditor',
+                'textarea',
                 array(
                     'label' => 'franchise.description',
                     'translation_domain' => 'franchise',
+                    'attr' => array(
+                        'class' => 'tinymce',
+                        'data-theme' => 'advanced'
+                    )
                 )
             )
             ->add(

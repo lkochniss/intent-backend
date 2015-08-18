@@ -28,10 +28,14 @@ class PublisherType extends AbstractType
             )
             ->add(
                 'description',
-                'ckeditor',
+                'textarea',
                 array(
                     'label' => 'publisher.description',
                     'translation_domain' => 'publisher',
+                    'attr' => array(
+                        'class' => 'tinymce',
+                        'data-theme' => 'advanced'
+                    )
                 )
             )
             ->add(

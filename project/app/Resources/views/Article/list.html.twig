@@ -23,7 +23,11 @@
         {% for article in entities %}
             <tr>
                 <td>{{ article.title }}</td>
-                <td>{{ article.category.name }}</td>
+                {% if article.category %}
+                    <td>{{ article.category.name }}</td>
+                {% else %}
+                    <td>&nbsp;</td>
+                {% endif %}
                 <td></td>
                 <td></td>
                 <td></td>

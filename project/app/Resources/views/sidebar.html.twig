@@ -29,7 +29,7 @@
                 </ul>
                 <li><span class="glyphicon glyphicon-picture"/> {% trans from "sidebar" %}sidebar.media.name{% endtrans %}</li>
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ path('intent_backend_image_list') }}">{% trans from "sidebar" %}sidebar.media.image{% endtrans %}</a></li>
+                    <li><a href="{{ path('intent_backend_filemanager_list') }}">{% trans from "sidebar" %}sidebar.media.image{% endtrans %}</a></li>
                 </ul>
                 {% if is_granted('ROLE_ADMIN') %}
                 <li><span class="glyphicon glyphicon-lock"/> {% trans from "sidebar" %}sidebar.admin.name{% endtrans %}</li>

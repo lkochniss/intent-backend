@@ -50,6 +50,16 @@ class Article extends AbstractModel
     private $modifiedBy;
 
     /**
+     * @var Event
+     */
+    private $event;
+
+    /**
+     * @var Related
+     */
+    private $related;
+
+    /**
      * Set title
      *
      * @param string $title
@@ -232,4 +242,43 @@ class Article extends AbstractModel
     {
         return $this->modifiedBy;
     }
+
+    /**
+     * @param Event $event
+     * @return $this
+     */
+    public function setEvent(Event $event)
+    {
+        $this->event = $event;
+
+        return $this;
+    }
+
+    /**
+     * @return Event
+     */
+    public function getEvent(){
+
+        return $this->event;
+    }
+
+    /**
+     * @param Related $related
+     * @return $this
+     */
+    public function setRelated(Related $related)
+    {
+        $this->related = $related;
+
+        return $this;
+    }
+
+    /**
+     * @return Related
+     */
+    public function getRelated(){
+
+        return $this->related;
+    }
+
 }

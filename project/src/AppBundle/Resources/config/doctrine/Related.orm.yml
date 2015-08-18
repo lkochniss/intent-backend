@@ -1,0 +1,24 @@
+AppBundle\Entity\Related:
+    type: entity
+    table: related
+    inheritanceType: SINGLE_TABLE
+    discriminatorColumn:
+        name: type
+        type: string
+    discriminatorMap:
+        publisher: Publisher
+        studio: Studio
+        franchise: Franchise
+        game: Game
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+    oneToOne:
+        article:
+            targetEntity: Article
+            mappedBy: related
+    lifecycleCallbacks: {  }

@@ -59,6 +59,26 @@ class ArticleType extends AbstractType
                 )
             )
             ->add(
+                'related',
+                'entity',
+                array(
+                    'label' => 'article.related',
+                    'translation_domain' => 'article',
+                    'class' => 'AppBundle\Entity\Publisher',
+                )
+            )
+            ->add(
+                'event',
+                'entity',
+                array(
+                    'label' => 'article.event',
+                    'translation_domain' => 'article',
+                    'class' => 'AppBundle\Entity\Event',
+                    'multiple' => false,
+                    'expanded' => false
+                )
+            )
+            ->add(
                 'submit',
                 'submit',
                 array(

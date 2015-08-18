@@ -29,10 +29,14 @@ class EventType extends AbstractType
             )
             ->add(
                 'description',
-                'ckeditor',
+                'textarea',
                 array(
                     'label' => 'event.description',
                     'translation_domain' => 'event',
+                    'attr' => array(
+                        'class' => 'tinymce',
+                        'data-theme' => 'advanced'
+                    )
                 )
             )
             ->add(

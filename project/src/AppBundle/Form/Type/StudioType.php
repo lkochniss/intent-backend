@@ -28,10 +28,14 @@ class StudioType extends AbstractType
             )
             ->add(
                 'description',
-                'ckeditor',
+                'textarea',
                 array(
                     'label' => 'studio.description',
                     'translation_domain' => 'studio',
+                    'attr' => array(
+                        'class' => 'tinymce',
+                        'data-theme' => 'advanced'
+                    )
                 )
             )
             ->add(

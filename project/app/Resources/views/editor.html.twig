@@ -1,0 +1,12 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}{{ parent() }}{% endblock %}
+
+{% block content %}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ tinymce_init() }}
+{% endblock %}

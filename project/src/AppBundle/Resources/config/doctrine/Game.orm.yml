@@ -35,18 +35,6 @@ AppBundle\Entity\Game:
             joinColumn:
                 name: franchise_id
                 referencedColumnName: id
-    manyToMany:
-        events:
-            targetEntity: Event
-            inversedBy: games
-            joinTable:
-                name: games_events
-                joinColumns:
-                    game_id:
-                        referencedColumnName: id
-                inverseJoinColumns:
-                    event_id:
-                        referencedColumnName: id
     lifecycleCallbacks:
         prePersist:
             - setModifiedAt

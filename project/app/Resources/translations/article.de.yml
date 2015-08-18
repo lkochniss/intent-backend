@@ -5,6 +5,7 @@ article:
     content:    Inhalt
     delete:     Artikel löschen
     edit:       Artikel bearbeiten
+    event:      Event
     franchise:  Franchise
     game:       Game
     list:       Artikelübersicht
@@ -14,6 +15,7 @@ article:
         at:     Veröffentlicht am
         by:     Author
     publisher:  Publisher
+    related:    Verknüpfen mit
     show:       Artikelvorschau
     slideshow:  Slideshow
     studio:     Studio

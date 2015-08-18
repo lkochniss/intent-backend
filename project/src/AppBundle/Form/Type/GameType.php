@@ -28,10 +28,14 @@ class GameType extends AbstractType
             )
             ->add(
                 'description',
-                'ckeditor',
+                'textarea',
                 array(
                     'label' => 'game.description',
                     'translation_domain' => 'game',
+                    'attr' => array(
+                        'class' => 'tinymce',
+                        'data-theme' => 'advanced'
+                    )
                 )
             )
             ->add(
@@ -54,17 +58,6 @@ class GameType extends AbstractType
                     'class' => 'AppBundle\Entity\Franchise',
                     'multiple' => false,
                     'expanded' => false
-                )
-            )
-            ->add(
-                'events',
-                'entity',
-                array(
-                    'label' => 'game.event',
-                    'translation_domain' => 'game',
-                    'class' => 'AppBundle\Entity\Event',
-                    'multiple' => true,
-                    'expanded' => true
                 )
             )
             ->add(
