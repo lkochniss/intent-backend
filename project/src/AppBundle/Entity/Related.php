@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -15,9 +16,9 @@ abstract class Related
     protected $id;
 
     /**
-     * @var Article
+     * @var ArrayCollection
      */
-    private $article;
+    private $articles;
 
     /**
      * @var string
@@ -34,6 +35,12 @@ abstract class Related
      */
     private $modifiedAt;
 
+    function __construct()
+    {
+        $this->articles = array();
+    }
+
+
     /**
      * @return integer
      */
@@ -46,19 +53,30 @@ abstract class Related
      * @param Article $article
      * @return $this
      */
-    public function setArticle(Article $article)
+    public function addArticle(Article $article)
     {
-        $this->article = $article;
+        if (!$this->articles->contains($article)){
+            $this->articles->add($article);
+            $article->setRelated($this);
+        }
 
         return $this;
     }
 
     /**
-     * @return Article
+     * @param Article $article
+     * @return ArrayCollection
      */
-    public function getArticle()
+    public function removeArticle(Article $article)
     {
-        return $this->article;
+        $this->articles->remove($article);
+
+        return $this;
+    }
+
+    public function getArticles()
+    {
+        return $this->articles->toArray();
     }
 
     /**

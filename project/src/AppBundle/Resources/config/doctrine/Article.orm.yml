@@ -20,13 +20,6 @@ AppBundle\Entity\Article:
             length: 255
         slideshow:
             type: boolean
-    oneToOne:
-        related:
-            targetEntity: Related
-            inversedBy: article
-            joinColumn:
-                name: related_id
-                referencedColumnName: id
     manyToOne:
         category:
             targetEntity: Category
@@ -47,8 +40,15 @@ AppBundle\Entity\Article:
                 referencedColumnName: id
         event:
             targetEntity: Event
+            inversedBy: articles
             joinColumn:
                 name: event_id
+                referencedColumnName: id
+        related:
+            targetEntity: Related
+            inversedBy: articles
+            joinColumn:
+                name: related_id
                 referencedColumnName: id
     lifecycleCallbacks:
         prePersist:

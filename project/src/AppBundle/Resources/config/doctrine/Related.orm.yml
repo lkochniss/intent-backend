@@ -25,8 +25,8 @@ AppBundle\Entity\Related:
             column: modified_at
             type: datetime
             nullable: false
-    oneToOne:
-        article:
+    oneToMany:
+        articles:
             targetEntity: Article
             mappedBy: related
     lifecycleCallbacks: {  }
