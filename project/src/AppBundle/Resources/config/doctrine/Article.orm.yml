@@ -16,10 +16,13 @@ AppBundle\Entity\Article:
             type: string
             length: 255
         content:
-            type: string
-            length: 255
+            type: text
         slideshow:
             type: boolean
+        publishAt:
+            column: publish_at
+            type: datetime
+            nullable: false
     manyToOne:
         category:
             targetEntity: Category
