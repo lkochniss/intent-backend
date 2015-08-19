@@ -8,11 +8,11 @@
     <table class="table">
         <thead>
         <tr>
-            <td>{% trans from "event" %}event.name{% endtrans %}</td>
-            <td>{% trans from "event" %}event.active{% endtrans %}</td>
-            <td>{% trans from "event" %}event.startAt{% endtrans %}</td>
-            <td>{% trans from "event" %}event.endAt{% endtrans %}</td>
-            <td>{% trans from "event" %}event.actions{% endtrans %}</td>
+            <th>{% trans from "event" %}event.name{% endtrans %}</th>
+            <th>{% trans from "event" %}event.active{% endtrans %}</th>
+            <th>{% trans from "event" %}event.startAt{% endtrans %}</th>
+            <th>{% trans from "event" %}event.endAt{% endtrans %}</th>
+            <th>{% trans from "event" %}event.actions{% endtrans %}</th>
         </tr>
         </thead>
         <tbody>
@@ -33,5 +33,5 @@
         {% endfor %}
         </tbody>
     </table>
-    {% include '::pagination.html.twig' with { 'default_page': 'event' } %}
+    {% include '::pagination.html.twig' with { 'default_page': 'intent_backend_event_list' } %}
 {% endblock %}

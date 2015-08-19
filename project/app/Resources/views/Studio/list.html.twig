@@ -8,10 +8,10 @@
     <table class="table">
         <thead>
         <tr>
-            <td>{% trans from "studio" %}studio.name{% endtrans %}</td>
-            <td>{% trans from "studio" %}studio.published.by{% endtrans %}</td>
-            <td>{% trans from "studio" %}studio.published.at{% endtrans %}</td>
-            <td>{% trans from "studio" %}studio.actions{% endtrans %}</td>
+            <th>{% trans from "studio" %}studio.name{% endtrans %}</th>
+            <th>{% trans from "studio" %}studio.published.by{% endtrans %}</th>
+            <th>{% trans from "studio" %}studio.published.at{% endtrans %}</th>
+            <th>{% trans from "studio" %}studio.actions{% endtrans %}</th>
         </tr>
         </thead>
         <tbody>
@@ -28,5 +28,5 @@
         {% endfor %}
         </tbody>
     </table>
-    {% include '::pagination.html.twig' with { 'default_page': 'studio' } %}
+    {% include '::pagination.html.twig' with { 'default_page': 'intent_backend_studio_list' } %}
 {% endblock %}

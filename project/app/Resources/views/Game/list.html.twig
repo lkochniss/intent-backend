@@ -9,12 +9,12 @@
     <table class="table">
         <thead>
         <tr>
-            <td>{% trans from "game" %}game.name{% endtrans %}</td>
-            <td>{% trans from "game" %}game.event{% endtrans %}</td>
-            <td>{% trans from "game" %}game.franchise{% endtrans %}</td>
-            <td>{% trans from "game" %}game.studio{% endtrans %}</td>
-            <td>{% trans from "game" %}game.publisher{% endtrans %}</td>
-            <td>{% trans from "game" %}game.actions{% endtrans %}</td>
+            <th>{% trans from "game" %}game.name{% endtrans %}</th>
+            <th>{% trans from "game" %}game.event{% endtrans %}</th>
+            <th>{% trans from "game" %}game.franchise{% endtrans %}</th>
+            <th>{% trans from "game" %}game.studio{% endtrans %}</th>
+            <th>{% trans from "game" %}game.publisher{% endtrans %}</th>
+            <th>{% trans from "game" %}game.actions{% endtrans %}</th>
         </tr>
         </thead>
         <tbody>
@@ -31,11 +31,14 @@
                 <td>{{ game.franchise.name }}</td>
                 <td>{{ game.studio.name }}</td>
                 <td>{{ game.franchise.publisher.name }}</td>
-                <td><a class="table-padding" href="{{ path('intent_backend_game_edit',{'id' : game.id}) }}"><span
-                                class="glyphicon glyphicon-pencil"/></a></td>
+                <td>
+                    <a class="table-padding" href="{{ path('intent_backend_game_edit',{'id' : game.id}) }}">
+                        <span class="glyphicon glyphicon-pencil"/>
+                    </a>
+                </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-    {% include '::pagination.html.twig' with { 'default_page': 'game' } %}
+    {% include '::pagination.html.twig' with { 'default_page': 'intent_backend_game_list' } %}
 {% endblock %}

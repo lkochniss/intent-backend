@@ -8,20 +8,30 @@
     <table class="table">
         <thead>
         <tr>
-            <td>{% trans from "franchise" %}franchise.name{% endtrans %}</td>
-            <td>{% trans from "franchise" %}franchise.publisher{% endtrans %}</td>
-            <td>{% trans from "franchise" %}franchise.actions{% endtrans %}</td>
+            <th>{% trans from "franchise" %}franchise.name{% endtrans %}</th>
+            <th>{% trans from "franchise" %}franchise.publisher{% endtrans %}</th>
+            <th>{% trans from "franchise" %}franchise.studio{% endtrans %}</th>
+            <th>{% trans from "franchise" %}franchise.actions{% endtrans %}</th>
         </tr>
         </thead>
         <tbody>
         {% for franchise in entities %}
             <tr>
                 <td>{{ franchise.name }}</td>
-                <td>{{ franchise.publisher.name }}</td>
+                {% if franchise.publisher %}
+                    <td>{{ franchise.publisher.name }}</td>
+                {% else %}
+                    <td>&nbsp;</td>
+                {% endif %}
+                {% if franchise.studio %}
+                    <td>{{ franchise.studio.name }}</td>
+                {% else %}
+                    <td>&nbsp;</td>
+                {% endif %}
                 <td><a class="table-padding" href="{{ path('intent_backend_franchise_edit',{'id' : franchise.id}) }}"><span class="glyphicon glyphicon-pencil"/></a></td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-    {% include '::pagination.html.twig' with { 'default_page': 'franchise' } %}
+    {% include '::pagination.html.twig' with { 'default_page': 'intent_backend_franchise_list' } %}
 {% endblock %}

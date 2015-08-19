@@ -8,15 +8,12 @@
     <table class="table">
         <thead>
         <tr>
-            <td>{% trans from "article" %}article.title{% endtrans %}</td>
-            <td>{% trans from "article" %}article.category{% endtrans %}</td>
-            <td>{% trans from "article" %}article.publisher{% endtrans %}</td>
-            <td>{% trans from "article" %}article.studio{% endtrans %}</td>
-            <td>{% trans from "article" %}article.franchise{% endtrans %}</td>
-            <td>{% trans from "article" %}article.game{% endtrans %}</td>
-            <td>{% trans from "article" %}article.published.by{% endtrans %}</td>
-            <td>{% trans from "article" %}article.published.at{% endtrans %}</td>
-            <td>{% trans from "article" %}article.actions{% endtrans %}</td>
+            <th>{% trans from "article" %}article.title{% endtrans %}</th>
+            <th>{% trans from "article" %}article.category.label{% endtrans %}</th>
+            <th>{% trans from "article" %}article.related.label{% endtrans %}</th>
+            <th>{% trans from "article" %}article.published.by{% endtrans %}</th>
+            <th>{% trans from "article" %}article.published.at{% endtrans %}</th>
+            <th>{% trans from "article" %}article.actions{% endtrans %}</th>
         </tr>
         </thead>
         <tbody>
@@ -28,12 +25,17 @@
                 {% else %}
                     <td>&nbsp;</td>
                 {% endif %}
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                {% if article.related %}
+                    <td>{{ article.related.name }}</td>
+                {% else %}
+                    <td>&nbsp;</td>
+                {% endif %}
+                {% if article.createdBy %}
+                    <td>{{ article.createdBy.name }}</td>
+                {% else %}
+                    <td>&nbsp;</td>
+                {% endif %}
+                <td>{{ article.publishAt|date('d.m.Y H:i') }}</td>
                 <td>
                     <a class="table-padding" href="{{ path('intent_backend_article_edit',{'id' : article.id}) }}"><span class="glyphicon glyphicon-pencil"/></a>
                     <a class="table-padding" href="{{ path('intent_backend_article_show',{'id' : article.id}) }}"><span class="glyphicon glyphicon-eye-open"/></a>
@@ -42,5 +44,5 @@
         {% endfor %}
         </tbody>
     </table>
-    {% include '::pagination.html.twig' with { 'default_page': 'article' } %}
+    {% include '::pagination.html.twig' with { 'default_page': 'intent_backend_article_list' } %}
 {% endblock %}

@@ -8,9 +8,9 @@
     <table class="table">
         <thead>
         <tr>
-            <td>{% trans from "page" %}page.title{% endtrans %}</td>
-            <td>{% trans from "page" %}page.published.at{% endtrans %}</td>
-            <td>{% trans from "page" %}page.actions{% endtrans %}</td>
+            <th>{% trans from "page" %}page.title{% endtrans %}</th>
+            <th>{% trans from "page" %}page.published.at{% endtrans %}</th>
+            <th>{% trans from "page" %}page.actions{% endtrans %}</th>
         </tr>
         </thead>
         <tbody>
@@ -26,5 +26,5 @@
         {% endfor %}
         </tbody>
     </table>
-    {% include '::pagination.html.twig' with { 'default_page': 'page' } %}
+    {% include '::pagination.html.twig' with { 'default_page': 'intent_backend_page_list' } %}
 {% endblock %}

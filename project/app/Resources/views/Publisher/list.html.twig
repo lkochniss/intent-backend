@@ -8,18 +8,14 @@
     <table class="table">
         <thead>
         <tr>
-            <td>{% trans from "publisher" %}publisher.name{% endtrans %}</td>
-            <td>{% trans from "publisher" %}publisher.published.by{% endtrans %}</td>
-            <td>{% trans from "publisher" %}publisher.published.at{% endtrans %}</td>
-            <td>{% trans from "publisher" %}publisher.actions{% endtrans %}</td>
+            <th>{% trans from "publisher" %}publisher.name{% endtrans %}</th>
+            <th>{% trans from "publisher" %}publisher.actions{% endtrans %}</th>
         </tr>
         </thead>
         <tbody>
         {% for publisher in entities %}
             <tr>
                 <td>{{ publisher.name }}</td>
-                <td></td>
-                <td></td>
                 <td>
                     <a class="table-padding" href="{{ path('intent_backend_publisher_edit',{'id' : publisher.id}) }}"><span class="glyphicon glyphicon-pencil"/></a>
                     <a class="table-padding" href="{{ path('intent_backend_publisher_show',{'id' : publisher.id}) }}"><span class="glyphicon glyphicon-eye-open"/></a>
@@ -28,5 +24,5 @@
         {% endfor %}
         </tbody>
     </table>
-    {% include '::pagination.html.twig' with { 'default_page': 'publisher' } %}
+    {% include '::pagination.html.twig' with { 'default_page': 'intent_backend_publisher_list' } %}
 {% endblock %}
