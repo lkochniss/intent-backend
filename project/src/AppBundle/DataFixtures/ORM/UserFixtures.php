@@ -2,20 +2,20 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
-use AppBUndle\Entity\Role;
+use AppBUndle\Entity\User;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class RolesFixture extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class UserFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     private $container;
 
     public function load(ObjectManager $manager)
     {
-        $dataDirectory = __DIR__.'/../data/roles';
+        $dataDirectory = __DIR__.'/../data/users';
         $directory = opendir($dataDirectory);
 
         $count = 0;
@@ -27,7 +27,7 @@ class RolesFixture extends AbstractFixture implements OrderedFixtureInterface, C
 
             $count++;
 
-            $this->saveRole($manager, $dataDirectory.DIRECTORY_SEPARATOR.$file, $count);
+            $this->saveUser($manager, $dataDirectory.DIRECTORY_SEPARATOR.$file, $count);
         }
         $manager->flush();
     }
@@ -37,17 +37,26 @@ class RolesFixture extends AbstractFixture implements OrderedFixtureInterface, C
      * @param $path
      * @param $count
      */
-    public function saveRole(ObjectManager $manager, $path, $count)
+    public function saveUser(ObjectManager $manager, $path, $count)
     {
-        $roleData = json_decode(file_get_contents($path), true);
+        $userData = json_decode(file_get_contents($path), true);
 
-        $role = new Role();
-        $role->setName($roleData['name']);
-        $role->setRole($roleData['role']);
+        $user = new User();
+        $user->setUsername($userData['username']);
+        $user->setEmail($userData['email']);
+        $user->setRole($this->getReference('role-'.$userData['role']));
+        $user->setIsActive($userData['isActive']);
 
-        $this->addReference('role-'.$role->getName(), $role);
+        $plainPassword = $userData['password'];
 
-        $manager->persist($role);
+        $encoder = $this->container->get('security.password_encoder');
+        $encodedPassword = $encoder->encodePassword($user,$plainPassword);
+
+        $user->setPassword($encodedPassword);
+
+        $this->addReference('user-'.$user->getUsername(), $user);
+
+        $manager->persist($user);
         $manager->flush();
     }
 
@@ -64,6 +73,6 @@ class RolesFixture extends AbstractFixture implements OrderedFixtureInterface, C
      */
     public function getOrder()
     {
-        return 1;
+        return 2;
     }
 }
