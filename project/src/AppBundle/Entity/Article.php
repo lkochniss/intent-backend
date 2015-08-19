@@ -67,6 +67,7 @@ class Article extends AbstractModel
      */
     public function setTitle($title)
     {
+        $this->slideshow = false;
         $this->title = $title;
 
         return $this;
