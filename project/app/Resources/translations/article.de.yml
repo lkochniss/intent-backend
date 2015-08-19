@@ -1,11 +1,15 @@
 article:
     actions:    Aktionen
-    category:   Kategorie
+    category:
+        label:  Kategorie
+        select: Kategorie auswählen
     create:     Artikel erstellen
     content:    Inhalt
     delete:     Artikel löschen
     edit:       Artikel bearbeiten
-    event:      Event
+    event:
+        label:  Event
+        select: Event auswählen
     franchise:  Franchise
     game:       Game
     list:       Artikelübersicht
@@ -15,7 +19,9 @@ article:
         at:     Veröffentlicht am
         by:     Author
     publisher:  Publisher
-    related:    Verknüpfen mit
+    related:
+        label:  Verknüpfen mit
+        select: Verknüpfen mit
     show:       Artikelvorschau
     slideshow:  Slideshow
     studio:     Studio
