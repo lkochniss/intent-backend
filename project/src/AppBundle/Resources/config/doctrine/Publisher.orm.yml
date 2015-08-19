@@ -4,26 +4,8 @@ AppBundle\Entity\Publisher:
     repositoryClass: AppBundle\Repository\PublisherRepository
 
     fields:
-        name:
-            type: string
-            length: 255
-        description:
-            type: string
-            length: 255
-        backgroundLink:
-            type: string
-            length: 255
-            nullable: true
-        slug:
-            type: string
-            length: 255
     oneToMany:
         franchises:
             targetEntity: Franchise
             mappedBy: publisher
-    lifecycleCallbacks:
-        prePersist:
-            - setModifiedAt
-            - setCreatedAt
-        preUpdate:
-            - setModifiedAt
+    lifecycleCallbacks: { }

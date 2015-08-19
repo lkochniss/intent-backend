@@ -4,19 +4,7 @@ AppBundle\Entity\Game:
     repositoryClass: AppBundle\Repository\GameRepository
 
     fields:
-        name:
-            type: string
-            length: 255
-        description:
-            type: string
-            length: 255
-        backgroundLink:
-            type: string
-            length: 255
-            nullable: true
-        slug:
-            type: string
-            length: 255
+    
     manyToOne:
         studio:
             targetEntity: Studio
@@ -30,9 +18,4 @@ AppBundle\Entity\Game:
             joinColumn:
                 name: franchise_id
                 referencedColumnName: id
-    lifecycleCallbacks:
-        prePersist:
-            - setModifiedAt
-            - setCreatedAt
-        preUpdate:
-            - setModifiedAt
+    lifecycleCallbacks: { }

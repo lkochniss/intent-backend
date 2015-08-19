@@ -11,29 +11,14 @@ use Doctrine\ORM\Mapping as ORM;
 class Franchise extends Related
 {
     /**
-     * @var string
-     */
-    private $name;
-
-    /**
-     * @var string
-     */
-    private $description;
-
-    /**
-     * @var string
-     */
-    private $backgroundLink;
-
-    /**
-     * @var string
-     */
-    private $slug;
-
-    /**
      * @var Publisher
      */
     private $publisher;
+
+    /**
+     * @var Studio
+     */
+    private $studio;
 
     /**
      * @var ArrayCollection
@@ -42,100 +27,8 @@ class Franchise extends Related
 
     function __construct()
     {
+        parent::__construct();
         $this->games = array();
-    }
-
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     * @return Franchise
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     * @return Franchise
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string 
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Set backgroundLink
-     *
-     * @param string $backgroundLink
-     * @return Franchise
-     */
-    public function setBackgroundLink($backgroundLink)
-    {
-        $this->backgroundLink = $backgroundLink;
-
-        return $this;
-    }
-
-    /**
-     * Get backgroundLink
-     *
-     * @return string 
-     */
-    public function getBackgroundLink()
-    {
-        return $this->backgroundLink;
-    }
-
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     * @return Franchise
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
     }
 
     /**
@@ -159,6 +52,25 @@ class Franchise extends Related
     public function getPublisher()
     {
         return $this->publisher;
+    }
+
+    /**
+     * @param Studio $studio
+     * @return $this
+     */
+    public function setStudio(Studio $studio)
+    {
+        $this->studio = $studio;
+
+        return $this;
+    }
+
+    /**
+     * @return Studio
+     */
+    public function getStudio()
+    {
+        return $this->studio;
     }
 
     /**
@@ -199,6 +111,6 @@ class Franchise extends Related
      */
     function __toString()
     {
-        return $this->name;
+        return parent::__toString().' (franchise)';
     }
 }

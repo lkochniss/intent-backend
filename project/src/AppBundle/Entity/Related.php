@@ -16,14 +16,24 @@ abstract class Related
     protected $id;
 
     /**
-     * @var ArrayCollection
+     * @var string
      */
-    private $articles;
+    private $name;
 
     /**
      * @var string
      */
-    private $type;
+    private $slug;
+
+    /**
+     * @var string
+     */
+    private $description;
+
+    /**
+     * @var string
+     */
+    private $backgroundLink;
 
     /**
      * @var \DateTime
@@ -35,11 +45,17 @@ abstract class Related
      */
     private $modifiedAt;
 
+    /**
+     * @var ArrayCollection
+     */
+    private $articles;
+
     function __construct()
     {
+        $this->createdAt = new \DateTime();
+        $this->modifiedAt = new \DateTime();
         $this->articles = array();
     }
-
 
     /**
      * @return integer
@@ -50,52 +66,95 @@ abstract class Related
     }
 
     /**
-     * @param Article $article
-     * @return $this
+     * Set name
+     *
+     * @param string $name
+     * @return Franchise
      */
-    public function addArticle(Article $article)
+    public function setName($name)
     {
-        if (!$this->articles->contains($article)){
-            $this->articles->add($article);
-            $article->setRelated($this);
-        }
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * @param Article $article
-     * @return ArrayCollection
-     */
-    public function removeArticle(Article $article)
-    {
-        $this->articles->remove($article);
-
-        return $this;
-    }
-
-    public function getArticles()
-    {
-        return $this->articles->toArray();
-    }
-
-    /**
-     * @param $type
-     * @return $this
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
+     * Get name
+     *
      * @return string
      */
-    public function getType()
+    public function getName()
     {
-        return $this->type;
+        return $this->name;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Franchise
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Franchise
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set backgroundLink
+     *
+     * @param string $backgroundLink
+     * @return Franchise
+     */
+    public function setBackgroundLink($backgroundLink)
+    {
+        $this->backgroundLink = $backgroundLink;
+
+        return $this;
+    }
+
+    /**
+     * Get backgroundLink
+     *
+     * @return string
+     */
+    public function getBackgroundLink()
+    {
+        return $this->backgroundLink;
     }
 
     /**
@@ -140,5 +199,43 @@ abstract class Related
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * @param Article $article
+     * @return $this
+     */
+    public function addArticle(Article $article)
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles->add($article);
+            $article->setRelated($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Article $article
+     * @return ArrayCollection
+     */
+    public function removeArticle(Article $article)
+    {
+        $this->articles->remove($article);
+
+        return $this;
+    }
+
+    public function getArticles()
+    {
+        return $this->articles->toArray();
+    }
+
+    /**
+     * @return string
+     */
+    function __toString()
+    {
+        return $this->name;
     }
 }

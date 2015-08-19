@@ -68,7 +68,7 @@ class Event extends AbstractModel
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -91,7 +91,7 @@ class Event extends AbstractModel
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -114,7 +114,7 @@ class Event extends AbstractModel
     /**
      * Get backgroundLink
      *
-     * @return string 
+     * @return string
      */
     public function getBackgroundLink()
     {

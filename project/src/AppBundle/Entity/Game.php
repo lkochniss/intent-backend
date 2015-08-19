@@ -11,26 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Game extends Related
 {
     /**
-     * @var string
-     */
-    private $name;
-
-    /**
-     * @var string
-     */
-    private $description;
-
-    /**
-     * @var string
-     */
-    private $backgroundLink;
-
-    /**
-     * @var string
-     */
-    private $slug;
-
-    /**
      * @var Studio
      */
     private $studio;
@@ -39,108 +19,6 @@ class Game extends Related
      * @var Franchise
      */
     private $franchise;
-
-    /**
-     * @var ArrayCollection
-     */
-    private $events;
-
-    function __construct()
-    {
-        $this->events = array();
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     * @return Game
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     * @return Game
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Set backgroundLink
-     *
-     * @param string $backgroundLink
-     * @return Game
-     */
-    public function setBackgroundLink($backgroundLink)
-    {
-        $this->backgroundLink = $backgroundLink;
-
-        return $this;
-    }
-
-    /**
-     * Get backgroundLink
-     *
-     * @return string
-     */
-    public function getBackgroundLink()
-    {
-        return $this->backgroundLink;
-    }
-
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     * @return Game
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
 
     /**
      * @param Studio $studio
@@ -185,35 +63,10 @@ class Game extends Related
     }
 
     /**
-     * @param Event $event
-     * @return $this
+     * @return string
      */
-    public function addEvent(Event $event)
+    function __toString()
     {
-        if (!$this->events->contains($event)) {
-            $this->events->add($event);
-            $event->addGames($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param Event $event
-     * @return $this
-     */
-    public function removeEvent(Event $event)
-    {
-        $this->events->remove($event);
-
-        return $this;
-    }
-
-    /**
-     * @return Event[]
-     */
-    public function getEvents()
-    {
-        return $this->events->toArray();
+        return parent::__toString().' (game)';
     }
 }
