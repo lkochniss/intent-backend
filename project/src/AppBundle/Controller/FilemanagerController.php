@@ -10,8 +10,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class FilemanagerController extends Controller
 {
-    private $path = 'upload/';
-
     public function createAction($path = '', Request $request)
     {
         $form = $this->createForm(new FilemanagerType());
@@ -20,10 +18,10 @@ class FilemanagerController extends Controller
         if ($form->isValid()) {
             $directoryName = preg_replace("/[^a-z0-9]+/", "", strtolower($form->getData()['name']));
             $filesystem = new Filesystem();
+            $dir = $this->container->getParameter('uploaddir').$path.'/'.$directoryName;
+            $filesystem->mkdir($dir);
 
-            $filesystem->mkdir($path.$directoryName);
-
-            return $this->redirect('filemanager_list', array('path' => $path));
+            return $this->redirect($this->generateUrl('intent_backend_filemanager_list', array('path' => $path)));
         }
         return $this->render(
             ':Filemanager:create.html.twig',
@@ -36,7 +34,7 @@ class FilemanagerController extends Controller
     public function listAction($path = '')
     {
         $currentDirectory = $path;
-        $path = $this->path.$path;
+        $path = $this->container->getParameter('uploaddir').$path;
         $finder = new Finder();
         $finder->directories()->in($path);
         $finder->depth(0);
@@ -57,9 +55,9 @@ class FilemanagerController extends Controller
             $files[$file->getRelativePathname()] = $path;
         }
 
-        if ($this->path != $path) {
+        if ($this->container->getParameter('uploaddir') != $path) {
             $back = substr($currentDirectory, 0, strripos($currentDirectory, '/'));
-            $currentDirectory .= '/';
+//            $currentDirectory .= '/';
         } else {
             $back = null;
         }

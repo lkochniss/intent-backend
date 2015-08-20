@@ -3,14 +3,14 @@
 {% block title %}{{ parent() }} {% trans from "filemanager" %}filemanager.list{% endtrans %}{% endblock %}
 
 {% block content %}
-    {#<div class="col-md-12">#}
-    {#<a href="{{ path('intent_backend_filemanager_create', {'path': currentDirectory }) }}"#}
-    {#class="btn btn-default pull-right">{% trans from "filemanager" %}filemanager.create{% endtrans %}#}
-    {#</a>#}
-    {#</div>#}
+    <div class="col-md-12">
+        <h3>{{ currentDirectory }}</h3>
+        <a href="{{ path('intent_backend_filemanager_create', {'path': currentDirectory }) }}"
+            class="btn btn-default pull-right">{% trans from "filemanager" %}filemanager.create{% endtrans %}
+        </a>
+    </div>
     <div class="fileexplorer col-md-9">
 
-        <h3>{{ currentDirectory }}</h3>
         {% if back is not null %}
             <figure class="directory col-md-2">
                 <a href="{{ path('intent_backend_filemanager_list', { 'path': back}) }}">
@@ -26,11 +26,11 @@
 
         {% for key, directory in directories %}
             <figure class="directory directory col-md-2">
-                <a href="{{ path('intent_backend_filemanager_list', { 'path': currentDirectory ~ key }) }}">
+                <a href="{{ path('intent_backend_filemanager_list', { 'path': currentDirectory  ~ '/' ~ key }) }}">
                     <span class="glyphicon glyphicon-folder-open"/>
                 </a>
                 <figcaption>
-                    <a href="{{ path('intent_backend_filemanager_list', { 'path': currentDirectory ~ key }) }}">
+                    <a href="{{ path('intent_backend_filemanager_list', { 'path': currentDirectory  ~ '/' ~ key }) }}">
                         {{ key }}
                     </a>
                 </figcaption>

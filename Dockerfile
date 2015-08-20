@@ -31,12 +31,15 @@ RUN echo "date.timezone = Europe/Paris" >> /etc/php5/fpm/php.ini
 RUN mkdir /app
 RUN mkdir /app/cache
 RUN mkdir /app/logs
+RUN mkdir /upload
 
 RUN chown -R www-data:www-data /app
+RUN chown -R www-data:www-data /upload
 
 RUN ls -al /
 RUN ls -al /app/cache
 RUN ls -al /app/logs
+RUN ls -al /upload
 
 # Expose ports
 EXPOSE 80
