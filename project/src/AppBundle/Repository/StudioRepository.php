@@ -18,7 +18,7 @@ class StudioRepository extends AbstractRepository
      */
     public function save(Studio $studio, User $user)
     {
-        $slug = preg_replace("/[^a-z0-9]+/", "-", strtolower($studio->getName()));
+        $slug = $this->slugify($studio->getName());
         $studio->setSlug($slug);
         $this->getEntityManager()->persist($studio);
         $this->getEntityManager()->flush();

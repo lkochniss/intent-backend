@@ -19,7 +19,7 @@ class PageRepository extends AbstractRepository
      */
     public function save(Page $page, User $user)
     {
-        $slug = preg_replace("/[^a-z0-9]+/", "-", strtolower($page->getTitle()));
+        $slug = $this->slugify($page->getTitle());
         $page->setSlug($slug);
         $this->getEntityManager()->persist($page);
         $this->getEntityManager()->flush();

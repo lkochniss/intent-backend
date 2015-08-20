@@ -18,7 +18,7 @@ class EventRepository extends AbstractRepository
      */
     public function save(Event $event, User $user)
     {
-        $slug = preg_replace("/[^a-z0-9]+/", "-", strtolower($event->getName()));
+        $slug = $this->slugify($event->getName());
         $event->setSlug($slug);
         $this->getEntityManager()->persist($event);
         $this->getEntityManager()->flush();

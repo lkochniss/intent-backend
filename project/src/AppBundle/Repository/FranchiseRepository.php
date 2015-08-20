@@ -18,7 +18,7 @@ class FranchiseRepository extends AbstractRepository
      */
     public function save(Franchise $franchise, User $user)
     {
-        $slug = preg_replace("/[^a-z0-9]+/", "-", strtolower($franchise->getName()));
+        $slug = $this->slugify($franchise->getName());
         $franchise->setSlug($slug);
         $this->getEntityManager()->persist($franchise);
         $this->getEntityManager()->flush();

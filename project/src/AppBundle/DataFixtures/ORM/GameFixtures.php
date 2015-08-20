@@ -55,8 +55,7 @@ class GameFixtures extends AbstractFixture implements OrderedFixtureInterface, C
 
         $this->addReference('game-'.$game->getName(), $game);
 
-        $manager->persist($game);
-        $manager->flush();
+        $manager->getRepository('AppBundle:Game')->save($game,$this->getReference('user-Admin'));
     }
 
     /**

@@ -51,8 +51,7 @@ class EventFixtures extends AbstractFixture implements OrderedFixtureInterface, 
 
         $this->addReference('article-'.$event->getName(), $event);
 
-        $manager->persist($event);
-        $manager->flush();
+        $manager->getRepository('AppBundle:Event')->save($event,$this->getReference('user-Admin'));
     }
 
     /**

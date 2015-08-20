@@ -48,8 +48,7 @@ class CategoryFixtures extends AbstractFixture implements OrderedFixtureInterfac
 
         $this->addReference('category-'.$category->getName(), $category);
 
-        $manager->persist($category);
-        $manager->flush();
+        $manager->getRepository('AppBundle:Category')->save($category,$this->getReference('user-Admin'));
     }
 
     /**

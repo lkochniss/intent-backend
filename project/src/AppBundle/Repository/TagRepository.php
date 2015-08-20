@@ -18,7 +18,7 @@ class TagRepository extends AbstractRepository
      */
     public function save(Tag $tag, User $user)
     {
-        $slug = preg_replace("/[^a-z0-9]+/", "-", strtolower($tag->getName()));
+        $slug = $this->slugify($tag->getName());
         $tag->setSlug($slug);
         $this->getEntityManager()->persist($tag);
         $this->getEntityManager()->flush();

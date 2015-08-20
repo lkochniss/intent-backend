@@ -18,7 +18,7 @@ class GameRepository extends AbstractRepository
      */
     public function save(Game $game, User $user)
     {
-        $slug = preg_replace("/[^a-z0-9]+/", "-", strtolower($game->getName()));
+        $slug = $this->slugify($game->getName());
         $game->setSlug($slug);
         $this->getEntityManager()->persist($game);
         $this->getEntityManager()->flush();

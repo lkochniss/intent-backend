@@ -18,7 +18,7 @@ class PublisherRepository extends AbstractRepository
      */
     public function save(Publisher $publisher, User $user)
     {
-        $slug = preg_replace("/[^a-z0-9]+/", "-", strtolower($publisher->getName()));
+        $slug = $this->slugify($publisher->getName());
         $publisher->setSlug($slug);
         $this->getEntityManager()->persist($publisher);
         $this->getEntityManager()->flush();

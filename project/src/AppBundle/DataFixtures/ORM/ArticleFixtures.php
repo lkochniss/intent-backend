@@ -46,10 +46,6 @@ class ArticleFixtures extends AbstractFixture implements OrderedFixtureInterface
         $article->setContent($articleData['content']);
         $article->setPublishAt(new \DateTime($articleData['publishAt']));
 
-
-        $slug = preg_replace("/[^a-z0-9]+/", "-", strtolower($article->getTitle()));
-        $article->setSlug($slug);
-
         $article->setCategory($this->getReference('category-'.$articleData['category']));
         $article->setRelated($this->getReference($articleData['type'].'-'.$articleData['related']));
 
@@ -60,8 +56,7 @@ class ArticleFixtures extends AbstractFixture implements OrderedFixtureInterface
 
         $this->addReference('article-'.$article->getTitle(), $article);
 
-        $manager->persist($article);
-        $manager->flush();
+        $manager->getRepository('AppBundle:Article')->save($article,$this->getReference('user-Admin'));
     }
 
     /**

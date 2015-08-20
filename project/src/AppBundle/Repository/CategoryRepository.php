@@ -18,7 +18,7 @@ class CategoryRepository extends AbstractRepository
      */
     public function save(Category $category, User $user)
     {
-        $slug = preg_replace("/[^a-z0-9]+/", "-", strtolower($category->getName()));
+        $slug = $this->slugify($category->getName());
         $category->setSlug($slug);
         $this->getEntityManager()->persist($category);
         $this->getEntityManager()->flush();

@@ -49,8 +49,7 @@ class StudioFixtures extends AbstractFixture implements OrderedFixtureInterface,
 
         $this->addReference('studio-'.$studio->getName(), $studio);
 
-        $manager->persist($studio);
-        $manager->flush();
+        $manager->getRepository('AppBundle:Studio')->save($studio,$this->getReference('user-Admin'));
     }
 
     /**
