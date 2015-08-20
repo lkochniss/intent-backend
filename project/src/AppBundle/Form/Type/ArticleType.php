@@ -67,7 +67,7 @@ class ArticleType extends AbstractType
                     'label' => 'article.related.label',
                     'translation_domain' => 'article',
                     'class' => 'AppBundle\Entity\Related',
-                    'placeholder' => 'article.label.select',
+                    'placeholder' => 'article.related.select',
                     'empty_data' => null
                 )
             )

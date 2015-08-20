@@ -15,6 +15,10 @@ AppBundle\Entity\Tag:
         slug:
             type: string
             length: 255
+    manyToMany:
+        articles:
+            targetEntity: Article
+            mappedBy: tags
     lifecycleCallbacks:
         prePersist:
             - setModifiedAt

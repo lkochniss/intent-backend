@@ -20,7 +20,7 @@ article:
         by:     Author
     publisher:  Publisher
     related:
-        label:  Verknüpfen mit
+        label:  Verknüpft mit
         select: Verknüpfen mit
     show:       Artikelvorschau
     slideshow:  Slideshow

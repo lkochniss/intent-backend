@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -60,6 +61,18 @@ class Article extends AbstractModel
     private $related;
 
     /**
+     * @var ArrayCollection
+     */
+    private $tags;
+
+    function __construct()
+    {
+        $this->slideshow = false;
+        $this->tags = array();
+    }
+
+
+    /**
      * Set title
      *
      * @param string $title
@@ -67,7 +80,6 @@ class Article extends AbstractModel
      */
     public function setTitle($title)
     {
-        $this->slideshow = false;
         $this->title = $title;
 
         return $this;
@@ -280,6 +292,39 @@ class Article extends AbstractModel
     public function getRelated(){
 
         return $this->related;
+    }
+
+    /**
+     * @param Tag $tag
+     * @return $this
+     */
+    public function addTag(Tag $tag)
+    {
+        if (!$this->tags->contains($tag)){
+            $this->tags->add($tag);
+            $tag->addArticle($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Tag $tag
+     * @return $this
+     */
+    public function removeTag(Tag $tag)
+    {
+        $this->tags->remove($tag);
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTags()
+    {
+        return $this->tags->toArray();
     }
 
 }
