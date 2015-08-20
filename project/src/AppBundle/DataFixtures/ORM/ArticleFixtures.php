@@ -56,7 +56,11 @@ class ArticleFixtures extends AbstractFixture implements OrderedFixtureInterface
 
         $this->addReference('article-'.$article->getTitle(), $article);
 
-        $manager->getRepository('AppBundle:Article')->save($article,$this->getReference('user-Admin'));
+        if ($articleData['author']) {
+            $manager->getRepository('AppBundle:Article')->save($article,$this->getReference('user-'.$articleData['author']));
+        }else{
+            $manager->getRepository('AppBundle:Article')->save($article,$this->getReference('user-Admin'));
+        }
     }
 
     /**

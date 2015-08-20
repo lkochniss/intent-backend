@@ -1,0 +1,7 @@
+{
+    "username": "Lukas",
+    "password": "admin",
+    "email": "admin@int-ent.de",
+    "role": "Admin",
+    "isActive" : "1"
+}
