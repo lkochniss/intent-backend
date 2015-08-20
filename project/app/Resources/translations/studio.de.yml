@@ -1,14 +1,14 @@
 studio:
-    actions:    Aktionen
-    create:     Entwicklerstudio erstellen
-    descripton: Beschreibung
-    delete:     Entwicklerstudio löschen
-    edit:       Entwicklerstudio bearbeiten
-    list:       Entwicklerstudioübersicht
-    name:       Entwicklerstudio
-    not_found:  Entwicklerstudio nicht gefunden
+    actions:        Aktionen
+    create:         Entwicklerstudio erstellen
+    description:    Beschreibung
+    delete:         Entwicklerstudio löschen
+    edit:           Entwicklerstudio bearbeiten
+    list:           Entwicklerstudioübersicht
+    name:           Entwicklerstudio
+    not_found:      Entwicklerstudio nicht gefunden
     published:
-        at:     Veröffentlicht am
-        by:     Author
-    show:       Entwicklerstudiovorschau
-    submit:     Entwicklerstudio speichern
+        at:         Veröffentlicht am
+        by:         Author
+    show:           Entwicklerstudiovorschau
+    submit:         Entwicklerstudio speichern
