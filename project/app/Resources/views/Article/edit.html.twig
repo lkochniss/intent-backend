@@ -18,3 +18,17 @@
     </div>
     {{ form_end(form) }}
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $('#article_related').select2({
+        });
+
+        $('#article_category').select2({
+        });
+
+        $('#article_event').select2({
+        });
+    </script>
+{% endblock %}
