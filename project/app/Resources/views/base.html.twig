@@ -6,14 +6,10 @@
     {% block stylesheets %}
         {% stylesheets
             'css/bootstrap.css'
-            'css/bootstrap.css.map'
-            'css/bootstrap-theme.css'
-            'css/bootstrap-theme.css.map'
-            'css/bootstrap-theme.min.css'
             'css/content.css'
             'css/sidebar.css'
         filter='cssrewrite' %}
-        <link rel="stylesheet" href="{{ asset_url }}"/>
+            <link rel="stylesheet" href="{{ asset_url }}"/>
         {% endstylesheets %}
     {% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
@@ -37,11 +33,11 @@
 {% endblock %}
 {% block javascripts %}
     {% javascripts
-    'js/jquery-2.1.4.min.js'
-    'js/bootstrap.js'
-    'js/bootstrap.min.js'
+        'js/jquery-2.1.4.min.js'
+        'js/bootstrap.min.js'
     %}
-    <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}{% endblock %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
 </body>
 </html>
