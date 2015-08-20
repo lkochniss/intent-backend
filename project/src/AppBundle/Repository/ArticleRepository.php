@@ -37,15 +37,18 @@ class ArticleRepository extends AbstractRepository
 
     /**
      * @param Article $article
-     * @param Related $related
-     * @param Event|null $event
      */
-    protected function saveTags(Article $article, Related $related, Event $event = null)
+    protected function saveTags(Article $article)
     {
+        $related = $article->getRelated();
+        $event = $article->getEvent();
+
         $publisher = null;
         $franchise = null;
         $studio = null;
         $game = null;
+
+        $article->resetTags();
 
         if ($related instanceof Publisher) {
             $publisher = $related;
@@ -86,6 +89,7 @@ class ArticleRepository extends AbstractRepository
 
     /**
      * @param Article $article
+     * @param User $user
      */
     public function save(Article $article, User $user)
     {
@@ -101,7 +105,7 @@ class ArticleRepository extends AbstractRepository
         $this->getEntityManager()->persist($article);
         $this->getEntityManager()->flush();
 
-        $this->saveTags($article, $article->getRelated(), $article->getEvent());
+        $this->saveTags($article);
 
     }
 

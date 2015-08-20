@@ -327,4 +327,14 @@ class Article extends AbstractModel
         return $this->tags->toArray();
     }
 
+    /**
+     * @return $this
+     */
+    public function resetTags()
+    {
+        $this->tags = array();
+
+        return $this;
+    }
+
 }
