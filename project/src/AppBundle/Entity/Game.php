@@ -34,7 +34,7 @@ class Game extends Related
     /**
      * Get franchise
      *
-     * @return string
+     * @return Studio
      */
     public function getStudio()
     {
@@ -55,7 +55,7 @@ class Game extends Related
     /**
      * Get franchise
      *
-     * @return string
+     * @return Franchise
      */
     public function getFranchise()
     {

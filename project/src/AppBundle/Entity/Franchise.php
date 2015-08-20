@@ -47,7 +47,7 @@ class Franchise extends Related
     /**
      * Get publisher
      *
-     * @return string
+     * @return Publisher
      */
     public function getPublisher()
     {
