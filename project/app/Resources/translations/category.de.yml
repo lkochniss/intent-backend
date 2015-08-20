@@ -1,6 +1,7 @@
 category:
     actions:    Aktionen
     create:     Kategorie erstellen
+    count:      Anzahl der Artikel
     delete:     Kategorie löschen
     edit:       Kategorie bearbeiten
     list:       Kategorieübersicht
