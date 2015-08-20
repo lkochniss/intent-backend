@@ -50,6 +50,17 @@ class FranchiseType extends AbstractType
                 )
             )
             ->add(
+                'studio',
+                'entity',
+                array(
+                    'label' => 'franchise.studio',
+                    'translation_domain' => 'franchise',
+                    'class' => 'AppBundle\Entity\Studio',
+                    'multiple' => false,
+                    'expanded' => false
+                )
+            )
+            ->add(
                 'submit',
                 'submit',
                 array(

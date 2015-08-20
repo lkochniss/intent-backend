@@ -4,5 +4,11 @@
 
 {% block content %}
     <h1>{% trans from "page" %}page.edit{% endtrans %}</h1>
-    {{ form(form) }}
+    <div class="col-md-9 editor">
+        {{ form_row(form.title) }}
+        {{ form_row(form.content) }}
+    </div>
+    <div class="col-md-3 meta">
+        {{ form_row(form.submit) }}
+    </div>
 {% endblock %}
