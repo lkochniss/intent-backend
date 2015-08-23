@@ -1,0 +1,15 @@
+user:
+    actions:    Aktionen
+    active:     Login aktiv
+    create:     Benutzer erstellen
+    delete:     Benutzer löschen
+    edit:       Benutzer bearbeiten
+    email:      Email
+    list:       Benutzerübersicht
+    name:       Benutzername
+    not_found:  Benutzer nicht gefunden
+    password:
+        first:  Passwort eingeben
+        second: Passwort wiederholen
+    role:       Berechtigung
+    submit:     Benutzer speichern

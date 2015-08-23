@@ -125,4 +125,14 @@ class Role implements RoleInterface
     {
         return $this->users->toArray();
     }
+
+    /**
+     * @return string
+     */
+    function __toString()
+    {
+        return $this->name;
+    }
+
+
 }
