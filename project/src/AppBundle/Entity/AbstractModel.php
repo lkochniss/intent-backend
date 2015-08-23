@@ -5,7 +5,7 @@ namespace AppBundle\Entity;
 /**
  * Class AbstractModel
  */
-abstract class  AbstractModel
+abstract class AbstractModel
 {
     protected $id;
 
