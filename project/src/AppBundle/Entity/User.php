@@ -11,13 +11,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * User
  */
-class User implements AdvancedUserInterface, EquatableInterface, \Serializable
+class User extends AbstractModel implements AdvancedUserInterface, EquatableInterface, \Serializable
 {
-    /**
-     * @var integer
-     */
-    private $id;
-
     /**
      * @var string
      */
@@ -44,23 +39,19 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
     private $role;
 
     /**
+     * @var Profile
+     */
+    private $profile;
+
+    /**
      * @var ArrayCollection
      */
     private $articles;
 
     function __construct()
     {
+        $this->isActive = true;
         $this->articles = array();
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**
@@ -172,6 +163,25 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
     public function getRole()
     {
         return $this->role;
+    }
+
+    /**
+     * @param Profile $profile
+     * @return $this
+     */
+    public function setProfile(Profile $profile)
+    {
+        $this->profile = $profile;
+
+        return $this;
+    }
+
+    /**
+     * @return Profile
+     */
+    public function getProfile()
+    {
+        return $this->profile;
     }
 
     /**

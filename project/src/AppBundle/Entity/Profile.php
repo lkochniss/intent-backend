@@ -7,13 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Profile
  */
-class Profile
+class Profile extends AbstractModel
 {
-    /**
-     * @var integer
-     */
-    private $id;
-
     /**
      * @var string
      */
@@ -24,16 +19,10 @@ class Profile
      */
     private $description;
 
-
     /**
-     * Get id
-     *
-     * @return integer 
+     * @var User
      */
-    public function getId()
-    {
-        return $this->id;
-    }
+    private $user;
 
     /**
      * Set name
@@ -79,5 +68,24 @@ class Profile
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * @param User $user
+     * @return $this
+     */
+    public function setUser(User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

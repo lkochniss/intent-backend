@@ -1,0 +1,30 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}{{ parent() }} {% trans from "profile" %}profile.list{% endtrans %}{% endblock %}
+
+{% block content %}
+    <h3>{% trans from "profile" %}profile.list{% endtrans %}</h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>{% trans from "profile" %}profile.name{% endtrans %}</th>
+            <th>{% trans from "profile" %}profile.user{% endtrans %}</th>
+            <th>{% trans from "profile" %}profile.actions{% endtrans %}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for profile in entities %}
+            <tr>
+                <td>{{ profile.name }}</td>
+                <td>{{ profile.user.username }}</td>
+                <td>{{ article.publishAt|date('d.m.Y H:i') }}</td>
+                <td>
+                    <a class="table-padding" href="{{ path('intent_backend_profile_edit',{'id' : article.id}) }}"><span class="glyphicon glyphicon-pencil"/></a>
+                    <a class="table-padding" href="{{ path('intent_backend_profile_show',{'id' : article.id}) }}"><span class="glyphicon glyphicon-eye-open"/></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% include '::pagination.html.twig' with { 'default_page': 'intent_backend_profile_list' } %}
+{% endblock %}

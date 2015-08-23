@@ -53,10 +53,10 @@ intent_backend_filemanager:
     resource: routing/filemanager.yml
     prefix:   /filemanager
 
+intent_backend_profile:
+    resource: routing/profile.yml
+    prefix:   /profile
+
 intent_backend_dashboard:
     path:   /
     defaults: { _controller: AppBundle:Dashboard:index }
-
-intent_backend_profile:
-    path:   /
-    defaults: { _controller: AppBundle:User:profile }

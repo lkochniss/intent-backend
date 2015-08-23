@@ -16,7 +16,7 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{ path('intent_backend_profile') }}">{% trans from "adminbar" %}adminbar.profile{% endtrans %} {{ app.user.username }} <span class="glyphicon glyphicon-user"/></a></li>
+                {#<li><a href="{{ path('intent_backend_profile_edit',{'id': app.user.profile.id}) }}">{% trans from "adminbar" %}adminbar.profile{% endtrans %} {{ app.user.username }} <span class="glyphicon glyphicon-user"/></a></li>#}
                 <li><a href="/logout">{% trans from "adminbar" %}adminbar.logout{% endtrans %} <span class="glyphicon glyphicon-off"/></a></li>
             </ul>
         </div>
