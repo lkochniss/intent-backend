@@ -1,8 +1,21 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}{{ parent() }} {% trans from "category" %}category.edit{% endtrans %}{% endblock %}
+{% block title %}
+    {{ parent() }}
+    {% if  app.request.get('_route') ends with '_create' %}
+        {% trans from "category" %}category.create{% endtrans %}
+    {% else %}
+        {% trans from "category" %}category.edit{% endtrans %}
+    {% endif %}
+{% endblock %}
 
 {% block content %}
-    <h1>{% trans from "category" %}category.edit{% endtrans %}</h1>
+    <h1>
+        {% if  app.request.get('_route') ends with '_create' %}
+            {% trans from "category" %}category.create{% endtrans %}
+        {% else %}
+            {% trans from "category" %}category.edit{% endtrans %}
+        {% endif %}
+    </h1>
     {{ form(form) }}
 {% endblock %}
