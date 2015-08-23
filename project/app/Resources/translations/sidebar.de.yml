@@ -1,6 +1,7 @@
 sidebar:
     admin:
         name:       Administration
+        profile:    Autoren
         user:       Benutzerverwaltung
     media:
         image:      Bilder
