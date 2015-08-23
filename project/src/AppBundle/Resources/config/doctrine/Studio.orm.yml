@@ -7,7 +7,7 @@ AppBundle\Entity\Studio:
     oneToMany:
         franchises:
             targetEntity: Franchise
-            mappedBy: publisher
+            mappedBy: studio
         games:
             targetEntity: Game
             mappedBy: studio
