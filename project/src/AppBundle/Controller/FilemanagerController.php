@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class FilemanagerController extends Controller
 {
-    public function createAction($path = '', Request $request)
+    public function createAction($popup = 0,$path = '', Request $request)
     {
         $form = $this->createForm(new FilemanagerType());
         $form->handleRequest($request);
@@ -23,15 +23,24 @@ class FilemanagerController extends Controller
 
             return $this->redirect($this->generateUrl('intent_backend_filemanager_list', array('path' => $path)));
         }
-        return $this->render(
-            ':Filemanager:create.html.twig',
-            array(
-                'form' => $form->createView()
-            )
-        );
+        if ($popup == 0) {
+            return $this->render(
+                ':Filemanager:default/create.html.twig',
+                array(
+                    'form' => $form->createView(),
+                )
+            );
+        }else{
+            return $this->render(
+                ':Filemanager:popup/create.html.twig',
+                array(
+                    'form' => $form->createView(),
+                )
+            );
+        }
     }
 
-    public function listAction($path = '')
+    public function listAction($popup = 0, $path = '')
     {
         $currentDirectory = $path;
         $path = $this->container->getParameter('uploaddir').$path;
@@ -60,17 +69,30 @@ class FilemanagerController extends Controller
 //            $currentDirectory .= '/';
         } else {
             $back = null;
+            $currentDirectory = '';
         }
 
-        return $this->render(
-            ':Filemanager:list.html.twig',
-            array(
-                'directories' => $directories,
-                'files' => $files,
-                'back' => $back,
-                'currentDirectory' => $currentDirectory
-            )
-        );
+        if ($popup == 0) {
+            return $this->render(
+                ':Filemanager:default/list.html.twig',
+                array(
+                    'directories' => $directories,
+                    'files' => $files,
+                    'back' => $back,
+                    'currentDirectory' => $currentDirectory,
+                )
+            );
+        } else {
+            return $this->render(
+                ':Filemanager:popup/list.html.twig',
+                array(
+                    'directories' => $directories,
+                    'files' => $files,
+                    'back' => $back,
+                    'currentDirectory' => $currentDirectory,
+                )
+            );
+        }
     }
 
 }
