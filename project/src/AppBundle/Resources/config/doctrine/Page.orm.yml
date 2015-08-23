@@ -18,9 +18,4 @@ AppBundle\Entity\Page:
         slug:
             type: string
             length: 255
-    lifecycleCallbacks:
-        prePersist:
-            - setModifiedAt
-            - setCreatedAt
-        preUpdate:
-            - setModifiedAt
+    lifecycleCallbacks: { }
