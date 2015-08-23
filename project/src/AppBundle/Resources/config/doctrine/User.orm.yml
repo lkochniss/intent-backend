@@ -19,8 +19,15 @@ AppBundle\Entity\User:
             type: string
             length: 255
         isActive:
-            type: integer
+            type: boolean
             column: is_active
+    onetToOne:
+        profile:
+            targetEntity: Profile
+            inversedBy: user
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
     oneToMany:
         articles:
             targetEntity: Article

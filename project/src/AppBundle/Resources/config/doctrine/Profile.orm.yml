@@ -15,4 +15,9 @@ AppBundle\Entity\Profile:
         description:
             type: string
             length: 255
+
+    oneToOne:
+        user:
+            targetEntity: User
+            mappedBy: User
     lifecycleCallbacks: {  }
