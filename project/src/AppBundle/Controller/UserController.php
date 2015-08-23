@@ -56,7 +56,7 @@ class UserController extends AbstractCrudController
     /**
      * @param AbstractModel $entity
      */
-    protected function handleValidForm^(AbstractModel $entity)
+    protected function handleValidForm(AbstractModel $entity)
     {
         $plainPassword = $entity->getPassword();
 
