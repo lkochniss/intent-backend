@@ -2,33 +2,79 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Entity\AbstractModel;
+use AppBundle\Entity\User;
+use AppBundle\Form\Type\UserType;
 
-class UserController extends Controller
+class UserController extends AbstractCrudController
 {
-    public function createAction()
+    /**
+     * @return User
+     */
+    protected function createNewEntity()
     {
-        return $this->render(
-            'Tag:create.html.twig',
-            array(// ...
-            )
-        );
+        return new User();
     }
 
-    public function editAction($id, Request $request)
+    /**
+     * @return UserType
+     */
+    protected function getFormType()
     {
-        return $this->render(
-            'Tag:edit.html.twig',
-            array(// ...
-            )
-        );
+        return new UserType();
+    }
+
+    /**
+     * @return string
+     */
+    protected function getTemplateBasePath()
+    {
+        return 'User';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getEntityName()
+    {
+        return 'AppBundle\Entity\User';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getRoutePrefix()
+    {
+        return 'intent_backend_user';
+    }
+
+    protected function getTranslationDomain()
+    {
+        return 'user';
+    }
+
+    /**
+     * @param AbstractModel $entity
+     */
+    protected function handleValidForm^(AbstractModel $entity)
+    {
+        $plainPassword = $entity->getPassword();
+
+        $encoder = $this->container->get('security.password_encoder');
+        $encodedPassword = $encoder->encodePassword($entity,$plainPassword);
+
+        $entity->setPassword($encodedPassword);
+
+        $repository = $this->getDoctrine()->getRepository($this->getEntityName());
+        $repository->save($entity, $this->getUser());
+
+        $this->addFlash('success', "Speichern erfolgreich");
     }
 
     public function showAction($id)
     {
         return $this->render(
-            'Tag:show.html.twig',
+            ':User:show.html.twig',
             array(// ...
             )
         );
@@ -37,16 +83,7 @@ class UserController extends Controller
     public function deleteAction($id)
     {
         return $this->render(
-            'Tag:delete.html.twig',
-            array(// ...
-            )
-        );
-    }
-
-    public function listAction($type = null, $page)
-    {
-        return $this->render(
-            'Tag:list.html.twig',
+            ':User:delete.html.twig',
             array(// ...
             )
         );

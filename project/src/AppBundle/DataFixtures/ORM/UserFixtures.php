@@ -56,8 +56,7 @@ class UserFixtures extends AbstractFixture implements OrderedFixtureInterface, C
 
         $this->addReference('user-'.$user->getUsername(), $user);
 
-        $manager->persist($user);
-        $manager->flush();
+        $manager->getRepository('AppBundle:User')->save($user,$this->getReference('user-Admin'));
     }
 
     /**
