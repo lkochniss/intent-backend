@@ -7,6 +7,7 @@ studio:
     list:           Entwicklerstudioübersicht
     name:           Entwicklerstudio
     not_found:      Entwicklerstudio nicht gefunden
+    publish:        Entwicklerstudio veröffentlichen
     published:
         at:         Veröffentlicht am
         by:         Author

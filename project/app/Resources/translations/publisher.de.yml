@@ -9,6 +9,7 @@ publisher:
     list:           Publisherübersicht
     name:           Publisher
     not_found:      Publisher nicht gefunden
+    publish:        Publisher veröffentlichen
     published:
         at:         Veröffentlicht am
         by:         Author

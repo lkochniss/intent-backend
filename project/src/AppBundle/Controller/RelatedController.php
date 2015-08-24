@@ -14,6 +14,10 @@ abstract class RelatedController extends Controller
 {
     const PAGING_LIMIT = 25;
 
+    /**
+     * @param Request $request
+     * @return RedirectResponse|Response
+     */
     public function createAction(Request $request)
     {
         $entity = $this->createNewEntity();
@@ -21,6 +25,11 @@ abstract class RelatedController extends Controller
         return $this->createAndHandleForm($entity, $request, 'create');
     }
 
+    /**
+     * @param $id
+     * @param Request $request
+     * @return RedirectResponse|Response
+     */
     public function editAction($id, Request $request)
     {
         $entity = $this->getDoctrine()->getRepository($this->getEntityName())->find($id);
@@ -38,15 +47,36 @@ abstract class RelatedController extends Controller
         return $this->createAndHandleForm($entity, $request, 'edit', array('id' => $entity->getId()));
     }
 
-    public function deleteAction($id)
+    /**
+     * @param $id
+     * @return Response
+     */
+    public function showAction($id)
     {
+        $entity = $this->getDoctrine()->getRepository($this->getEntityName())->find($id);
+
+        if (is_null($entity)) {
+            throw new NotFoundHttpException(
+                $this->get('translator')->trans(
+                    $this->getTranslationDomain().'.not_found',
+                    array(),
+                    $this->getTranslationDomain()
+                )
+            );
+        }
         return $this->render(
-            ':Article:delete.html.twig',
-            array(// ...
+            sprintf('%s/show.html.twig', $this->getTemplateBasePath()),
+            array(
+                'entity' => $entity
             )
         );
     }
 
+    /**
+     * @param null $type
+     * @param int $page
+     * @return Response
+     */
     public function listAction($type = null, $page = 1)
     {
         $repository = $this->getDoctrine()->getRepository($this->getEntityName());

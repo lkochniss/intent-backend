@@ -1,7 +1,21 @@
-{% extends "::base.html.twig" %}
+{% extends "::editor.html.twig" %}
 
-{% block title %}{{ parent() }} {% trans from "article" %}article.show{% endtrans %}{% endblock %}
+{% block title %}
+    {{ parent() }}
+    {% trans from "article" %}article.create{% endtrans %}
+{% endblock %}
 
 {% block content %}
-<h1>Welcome to the Article:show page</h1>
+    <div class="col-md-9 meta">
+        <div class="content">
+            <h2>{{ entity.title }}</h2>
+            {{ entity.content|raw }}
+        </div>
+        <div class="meta">
+            {% trans from "article" %}article.published.at{% endtrans %} {{ entity.publishAt|date('d.m.Y') }}
+        </div>
+    </div>
+    <div class="col-md-3 meta">
+        {% trans from "article" %}article.publish{% endtrans %}
+    </div>
 {% endblock %}

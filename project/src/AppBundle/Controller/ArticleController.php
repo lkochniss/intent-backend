@@ -52,15 +52,6 @@ class ArticleController extends AbstractCrudController
         return 'article';
     }
 
-    public function showAction($id)
-    {
-        return $this->render(
-            ':Article:show.html.twig',
-            array(// ...
-            )
-        );
-    }
-
     public function deleteAction($id)
     {
         return $this->render(

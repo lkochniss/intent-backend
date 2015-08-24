@@ -7,6 +7,7 @@ franchise:
     list:       Franchiseübersicht
     name:       Franchise
     not_found:  Franchise nicht gefunden
+    publish:    Franchise veröffentlichen
     published:
         at:     Veröffentlicht am
         by:     Author

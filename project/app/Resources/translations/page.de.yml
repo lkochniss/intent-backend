@@ -7,6 +7,7 @@ page:
     list:       Seitenübersicht
     name:       Seite
     not_found:  Seite nicht gefunden
+    publish:    Seite veröffentlichen
     published:
         at:     Veröffentlicht am
         by:     Veröffentlicht von

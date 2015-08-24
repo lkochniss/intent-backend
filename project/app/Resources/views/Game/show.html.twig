@@ -1,7 +1,20 @@
-{% extends "::base.html.twig" %}
+{% extends "::editor.html.twig" %}
 
-{% block title %}AppBundle:Tag:show{% endblock %}
+{% block title %}
+    {{ parent() }}
+    {% trans from "game" %}game.show{% endtrans %}
+{% endblock %}
 
-{% block body %}
-<h1>Welcome to the Tag:show page</h1>
+{% block content %}
+    <div class="col-md-9 meta">
+        <div class="content">
+            <h2>{{ entity.name }}</h2>
+            {{ entity.description|raw }}
+        </div>
+        <div class="meta">
+        </div>
+    </div>
+    <div class="col-md-3 meta">
+        {% trans from "game" %}game.publish{% endtrans %}
+    </div>
 {% endblock %}

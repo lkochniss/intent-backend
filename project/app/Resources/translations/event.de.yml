@@ -9,6 +9,7 @@ event:
     list:           Eventübersicht
     name:           Event
     not_found:      Event nicht gefunden
+    publish:        Event veröffentlichen
     published:
         at:         Veröffentlicht am
         by:         Author
