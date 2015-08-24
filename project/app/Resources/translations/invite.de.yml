@@ -1,0 +1,8 @@
+invite:
+    mail:
+        from: system@int-ent.de
+        hello: Hallo
+        invite: Du wurdest eingeladen einen Account auf int-ent.de anzulegen.
+        role: Dir wurden folgende Rechte zugeteilt:
+        subject: Einladung zu int.ent news
+        url: Bitte schließe die Aktivierung hinter dem Link ab.

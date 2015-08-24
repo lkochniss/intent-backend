@@ -5,11 +5,12 @@ user:
     delete:     Benutzer löschen
     edit:       Benutzer bearbeiten
     email:      Email
+    invite:     Benutzer einladen
     list:       Benutzerübersicht
     name:       Benutzername
     not_found:  Benutzer nicht gefunden
     password:
         first:  Passwort eingeben
         second: Passwort wiederholen
-    role:       Berechtigung
+    role:       Berechtigungen
     submit:     Benutzer speichern

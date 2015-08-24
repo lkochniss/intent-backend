@@ -1,0 +1,27 @@
+{% extends "::editor.html.twig" %}
+
+{% block title %}
+    {{ parent() }}
+    {% trans from "user" %}user.invite{% endtrans %}
+{% endblock %}
+
+{% block content %}
+    <h1>{% trans from "user" %}user.invite{% endtrans %}</h1>
+    {{ form_start(form) }}
+    <div class="col-md-9 editor">
+        {{ form_row(form.username) }}
+        {{ form_row(form.email) }}
+    </div>
+    <div class="col-md-3 meta">
+        {{ form_row(form.roles) }}
+        {{ form_row(form.submit) }}
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $('#invite_roles').select2();
+    </script>
+{% endblock %}

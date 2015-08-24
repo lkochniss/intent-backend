@@ -25,9 +25,7 @@ abstract class AbstractModel
     }
 
     /**
-     * Set modifiedAt
-     *
-     * @return \DateTime
+     * @return $this
      */
     public function setModifiedAt()
     {

@@ -1,7 +1,9 @@
 {
     "username": "Chris",
     "password": "admin",
-    "email": "admin@int-ent.de",
-    "role": "Admin",
+    "email": "chris@int-ent.de",
+    "roles": {
+        "Admin" : "Admin"
+    },
     "isActive" : "1"
 }

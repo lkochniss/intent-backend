@@ -1,7 +1,7 @@
-AppBundle\Entity\User:
+AppBundle\Entity\Invite:
     type: entity
     table: null
-    repositoryClass: AppBundle\Repository\UserRepository
+    repositoryClass: AppBundle\Repository\InviteRepository
     id:
         id:
             type: integer
@@ -12,36 +12,27 @@ AppBundle\Entity\User:
         username:
             type: string
             length: 255
-        password:
-            type: string
-            length: 255
         email:
             type: string
             length: 255
-        isActive:
-            type: boolean
-            column: is_active
-    onetToOne:
-        profile:
-            targetEntity: Profile
-            inversedBy: user
-            joinColumn:
-                name: user_id
-                referencedColumnName: id
-    oneToMany:
-        articles:
-            targetEntity: Article
-            mappedBy: createdBy
+        token:
+            type: string
+            length: 255
+        createdAt:
+            column: created_at
+            type: datetime
+            nullable: false
     manyToMany:
         roles:
             targetEntity: Role
-            inversedBy: users
             joinTable:
-                name: users_roles
+                name: invites_roles
                 joinColumns:
-                    user_id:
+                    invite_id:
                         referencedColumnName: id
                 inverseJoinColumns:
                     role_id:
                         referencedColumnName: id
-    lifecycleCallbacks: {  }
+    lifecycleCallbacks:
+        prePersist:
+            - setCreatedAt

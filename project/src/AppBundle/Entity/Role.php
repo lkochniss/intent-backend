@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\Role\RoleInterface;
 /**
  * Role
  */
-class Role implements RoleInterface
+class Role implements RoleInterface, \Serializable
 {
     /**
      * @var integer
@@ -101,7 +101,7 @@ class Role implements RoleInterface
     {
         if (!$this->users->contains($user)) {
             $this->users->add($user);
-            $user->setRole($this);
+            $user->addRole($this);
         }
 
         return $this;
@@ -129,10 +129,30 @@ class Role implements RoleInterface
     /**
      * @return string
      */
+    public function serialize()
+    {
+        return \serialize(array(
+            $this->id,
+            $this->role
+        ));
+    }
+
+    /**
+     * @param string $serialized
+     */
+    public function unserialize($serialized)
+    {
+        list(
+            $this->id,
+            $this->role
+            ) = \unserialize($serialized);
+    }
+
+    /**
+     * @return string
+     */
     function __toString()
     {
         return $this->name;
     }
-
-
 }

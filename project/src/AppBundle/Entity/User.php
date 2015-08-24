@@ -34,9 +34,9 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
     private $isActive;
 
     /**
-     * @var Role
+     * @var ArrayCollection
      */
-    private $role;
+    private $roles;
 
     /**
      * @var Profile
@@ -51,6 +51,7 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
     function __construct()
     {
         $this->isActive = true;
+        $this->roles = new ArrayCollection();
         $this->articles = array();
     }
 
@@ -150,19 +151,33 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
      * @param Role $role
      * @return $this
      */
-    public function setRole(Role $role)
+    public function addRole(Role $role)
     {
-        $this->role = $role;
+        if (!$this->roles->contains($role)) {
+            $this->roles->add($role);
+            $role->addUser($this);
+        }
 
         return $this;
     }
 
     /**
-     * @return Role
+     * @param Role $role
+     * @return $this
      */
-    public function getRole()
+    public function removeRole(Role $role)
     {
-        return $this->role;
+        $this->roles->remove($role);
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRoles()
+    {
+        return $this->roles->toArray();
     }
 
     /**
@@ -190,7 +205,7 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
      */
     public function addArticle(Article $article)
     {
-        if (!$this->articles->contains($article)){
+        if (!$this->articles->contains($article)) {
             $this->articles->add($article);
             $article->setCreatedBy($this);
         }
@@ -214,7 +229,7 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
      */
     public function getArticles()
     {
-        return $this->articles->toArray();
+        return $this->articles;
     }
 
     public function serialize()
@@ -225,6 +240,7 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
                 $this->username,
                 $this->password,
                 $this->isActive,
+                $this->roles,
             )
         );
     }
@@ -235,7 +251,8 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
             $this->id,
             $this->username,
             $this->password,
-            $this->isActive
+            $this->isActive,
+            $this->roles,
             )
             = unserialize($serialized);
     }
@@ -265,11 +282,6 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
         return $this->isActive;
     }
 
-    public function getRoles()
-    {
-        return array($this->role);
-    }
-
     public function eraseCredentials()
     {
 
@@ -277,9 +289,9 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
 
     public function isEqualTo(UserInterface $user)
     {
-        if ($user instanceof User){
+        if ($user instanceof User) {
             $isEqual = count($this->getRoles()) == count($user->getRoles());
-            if($isEqual){
+            if ($isEqual) {
                 foreach ($this->getRoles() as $role) {
                     $isEqual = $isEqual && in_array($role, $user->getRoles());
                 }

@@ -9,7 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * Class TagType
  */
-class UserType extends AbstractType
+class InviteType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -27,22 +27,6 @@ class UserType extends AbstractType
                 )
             )
             ->add(
-                'password',
-                'repeated',
-                array(
-                    'type' => 'password',
-                    'required' => true,
-                    'first_options' => array(
-                        'label' => 'user.password.first',
-                        'translation_domain' => 'user'
-                    ),
-                    'second_options' => array(
-                        'label' => 'user.password.second',
-                        'translation_domain' => 'user'
-                    ),
-                )
-            )
-            ->add(
                 'email',
                 'email',
                 array(
@@ -52,20 +36,14 @@ class UserType extends AbstractType
                 )
             )
             ->add(
-                'role',
+                'roles',
                 'entity',
                 array(
+                    'label' => 'user.role',
+                    'translation_domain' => 'user',
                     'class' => 'AppBundle\Entity\Role',
                     'required' => true,
                     'multiple' => true,
-                )
-            )
-            ->add(
-                'isActive',
-                'checkbox',
-                array(
-                    'label' => 'user.active',
-                    'translation_domain' => 'user'
                 )
             )
             ->add(
@@ -78,23 +56,12 @@ class UserType extends AbstractType
             );
     }
 
-    /**
-     * @param OptionsResolver $resolver
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults(
-            array(
-                'data_class' => 'AppBundle\Entity\User',
-            )
-        );
-    }
 
     /**
      * @return string
      */
     public function getName()
     {
-        return 'user';
+        return 'invite';
     }
 }

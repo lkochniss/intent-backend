@@ -2,6 +2,8 @@
     "username": "Admin",
     "password": "admin",
     "email": "admin@int-ent.de",
-    "role": "Admin",
+    "roles": {
+        "Admin" : "Admin"
+    },
     "isActive" : "1"
 }

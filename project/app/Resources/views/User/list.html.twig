@@ -4,7 +4,7 @@
 
 {% block content %}
     <h3>{% trans from "user" %}user.list{% endtrans %}</h3>
-    <a href="{{ path('intent_backend_user_create') }}" class="btn btn-default pull-right">{% trans from "user" %}user.create{% endtrans %}</a>
+    <a href="{{ path('intent_backend_user_invite') }}" class="btn btn-default pull-right">{% trans from "user" %}user.invite{% endtrans %}</a>
     <table class="table">
         <thead>
         <tr>
@@ -18,7 +18,15 @@
         {% for user in entities %}
             <tr>
                 <td>{{ user.username }}</td>
-                <td>{{ user.role.name }}</td>
+                <td>
+                    {% for role in user.roles %}
+                        {% if loop.last %}
+                            {{ role.name }}
+                        {% else %}
+                            {{ role.name }} ~,
+                        {% endif %}
+                    {% endfor %}
+                </td>
                 <td>{{ user.email }}</td>
                 <td>
                     <a class="table-padding" href="{{ path('intent_backend_user_edit',{'id' : user.id}) }}"><span class="glyphicon glyphicon-pencil"/></a>
