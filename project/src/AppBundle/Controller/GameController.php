@@ -51,23 +51,4 @@ class GameController extends RelatedController
     {
         return 'article';
     }
-
-    public function showAction($id)
-    {
-        return $this->render(
-            ':Game:show.html.twig',
-            array(// ...
-            )
-        );
-    }
-
-    public function deleteAction($id)
-    {
-        return $this->render(
-            ':Game:delete.html.twig',
-            array(// ...
-            )
-        );
-    }
-
 }

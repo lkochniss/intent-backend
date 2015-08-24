@@ -51,22 +51,4 @@ class EventController extends AbstractCrudController
     {
         return 'event';
     }
-
-    public function showAction($id)
-    {
-        return $this->render(
-            ':Event:show.html.twig',
-            array(// ...
-            )
-        );
-    }
-
-    public function deleteAction($id)
-    {
-        return $this->render(
-            ':Event:delete.html.twig',
-            array(// ...
-            )
-        );
-    }
 }

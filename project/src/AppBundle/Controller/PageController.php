@@ -51,22 +51,4 @@ class PageController extends AbstractCrudController
     {
         return 'page';
     }
-
-    public function showAction($id)
-    {
-        return $this->render(
-            ':Page:show.html.twig',
-            array(
-            )
-        );
-    }
-
-    public function deleteAction($id)
-    {
-        return $this->render(
-            ':Page:delete.html.twig',
-            array(
-            )
-        );
-    }
 }

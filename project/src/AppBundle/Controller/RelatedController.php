@@ -64,6 +64,7 @@ abstract class RelatedController extends Controller
                 )
             );
         }
+
         return $this->render(
             sprintf('%s/show.html.twig', $this->getTemplateBasePath()),
             array(

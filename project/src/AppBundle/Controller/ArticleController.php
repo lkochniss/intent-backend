@@ -52,12 +52,4 @@ class ArticleController extends AbstractCrudController
         return 'article';
     }
 
-    public function deleteAction($id)
-    {
-        return $this->render(
-            ':Article:delete.html.twig',
-            array(// ...
-            )
-        );
-    }
 }

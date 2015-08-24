@@ -52,22 +52,4 @@ class FranchiseController extends RelatedController
         return 'franchise';
     }
 
-    public function showAction($id)
-    {
-        return $this->render(
-            ':Franchise:show.html.twig',
-            array(// ...
-            )
-        );
-    }
-
-    public function deleteAction($id)
-    {
-        return $this->render(
-            ':Franchise:delete.html.twig',
-            array(// ...
-            )
-        );
-    }
-
 }

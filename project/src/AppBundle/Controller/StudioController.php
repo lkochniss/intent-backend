@@ -51,23 +51,4 @@ class StudioController extends RelatedController
     {
         return 'studio';
     }
-
-    public function showAction($id)
-    {
-        return $this->render(
-            ':Studio:show.html.twig',
-            array(// ...
-            )
-        );
-    }
-
-    public function deleteAction($id)
-    {
-        return $this->render(
-            ':Studio:delete.html.twig',
-            array(// ...
-            )
-        );
-    }
-
 }

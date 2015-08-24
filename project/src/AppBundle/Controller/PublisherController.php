@@ -52,22 +52,4 @@ class PublisherController extends RelatedController
         return 'publisher';
     }
 
-    public function showAction($id)
-    {
-        return $this->render(
-            ':Publisher:show.html.twig',
-            array(// ...
-            )
-        );
-    }
-
-    public function deleteAction($id)
-    {
-        return $this->render(
-            ':Publisher:delete.html.twig',
-            array(// ...
-            )
-        );
-    }
-
 }
