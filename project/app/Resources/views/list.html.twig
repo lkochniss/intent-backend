@@ -1,0 +1,24 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}{{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ asset('css/datatables.min.css') }}"/>
+{% endblock %}
+
+{% block content %}{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/datatables.min.js') }}"></script>
+    <script type="application/javascript">
+        $(document).ready(function () {
+            $('.table').DataTable({
+                "language": {
+                    "url": "/js/datatable_de.json"
+                }
+            });
+        });
+    </script>
+{% endblock %}

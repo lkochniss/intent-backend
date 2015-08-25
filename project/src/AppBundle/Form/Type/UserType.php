@@ -52,7 +52,7 @@ class UserType extends AbstractType
                 )
             )
             ->add(
-                'role',
+                'roles',
                 'entity',
                 array(
                     'class' => 'AppBundle\Entity\Role',
