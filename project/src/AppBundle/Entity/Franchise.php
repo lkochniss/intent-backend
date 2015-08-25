@@ -109,8 +109,8 @@ class Franchise extends Related
     /**
      * @return string
      */
-    function __toString()
+    public function getType()
     {
-        return parent::__toString().' (franchise)';
+        return 'franchise';
     }
 }

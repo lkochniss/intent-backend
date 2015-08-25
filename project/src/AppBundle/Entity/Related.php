@@ -234,8 +234,13 @@ abstract class Related
     /**
      * @return string
      */
+    abstract public function getType();
+
+    /**
+     * @return string
+     */
     function __toString()
     {
-        return $this->name;
+        return $this->name.' ('.$this->getType().')';
     }
 }
