@@ -7,11 +7,28 @@
 
 {% block content %}
     <div class="col-md-9 meta">
-        <div class="content">
+        <div class="publisher">
             <h2>{{ entity.name }}</h2>
             {{ entity.description|raw }}
         </div>
-        <div class="meta">
+        <div class="category col-md-12">
+            <h4>{% trans from "publisher" %}publisher.categories{% endtrans %}</h4>
+            {% for name, category in categories %}
+                <div class="col-md-4">
+                    <h4>{{ name }}</h4>
+                    {% for article in category %}
+                        <a href="{{ path('intent_backend_article_show',{'id': article.id }) }}">{{ article.title }}</a>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="franchise col-md-12">
+            <h4>{% trans from "publisher" %}publisher.franchise{% endtrans %}</h4>
+            {% for franchise in entity.franchises %}
+                <div class="col-md-4">
+                    <a href="{{ path('intent_backend_franchise_show',{'id': franchise.id }) }}">{{ franchise.name }}</a>
+                </div>
+            {% endfor %}
         </div>
     </div>
     <div class="col-md-3 meta">

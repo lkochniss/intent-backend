@@ -24,7 +24,7 @@
         {{ form_row(form.email) }}
     </div>
     <div class="col-md-3 meta">
-        {{ form_row(form.role) }}
+        {{ form_row(form.roles) }}
         {{ form_row(form.isActive) }}
         {{ form_row(form.submit) }}
     </div>
@@ -34,6 +34,6 @@
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript">
-        $('#user_role').select2();
+        $('#user_roles').select2();
     </script>
 {% endblock %}

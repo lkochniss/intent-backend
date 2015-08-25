@@ -1,5 +1,6 @@
 publisher:
     actions:        Aktionen
+    categories:     Artikel nach Kategorie
     create:         Publisher erstellen
     description:    Beschreibung
     delete:         Publisher löschen

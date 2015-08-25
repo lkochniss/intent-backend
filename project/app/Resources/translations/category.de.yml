@@ -7,4 +7,5 @@ category:
     list:       Kategorieübersicht
     name:       Kategorie
     not_found:  Kategorie nicht gefunden
+    priority:   Priorität
     submit:     Kategorie speichern
