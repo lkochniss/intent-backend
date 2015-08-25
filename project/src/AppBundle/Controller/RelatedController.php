@@ -109,7 +109,7 @@ abstract class RelatedController extends Controller
             }
         }
 
-        $categories = $this->getDoctrine()->getRepository('AppBundle:Category')->findAll();
+        $categories = $this->getDoctrine()->getRepository('AppBundle:Category')->findBy(array(),array('priority' => 'ASC'));
 
         $articlesInCategory = array();
         foreach ( $categories as $category ) {
