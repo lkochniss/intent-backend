@@ -1,10 +1,10 @@
-{% extends "::base.html.twig" %}
+{% extends "::list.html.twig" %}
 
 {% block title %}{{ parent() }} {% trans from "user" %}user.list{% endtrans %}{% endblock %}
 
 {% block content %}
-    <h3>{% trans from "user" %}user.list{% endtrans %}</h3>
     <a href="{{ path('intent_backend_user_invite') }}" class="btn btn-default pull-right">{% trans from "user" %}user.invite{% endtrans %}</a>
+    <h3>{% trans from "user" %}user.list{% endtrans %}</h3>
     <table class="table">
         <thead>
         <tr>
@@ -36,5 +36,4 @@
         {% endfor %}
         </tbody>
     </table>
-    {% include '::pagination.html.twig' with { 'default_page': 'intent_backend_page_list' } %}
 {% endblock %}

@@ -3,9 +3,8 @@
 {% block title %}{{ parent() }} {% trans from "game" %}game.list{% endtrans %}{% endblock %}
 
 {% block content %}
+    <a href="{{ path('intent_backend_game_create') }}" class="btn btn-default pull-right">{% trans from "game" %}game.create{% endtrans %}</a>
     <h3>{% trans from "game" %}game.list{% endtrans %}</h3>
-    <a href="{{ path('intent_backend_game_create') }}" class="btn btn-default pull-right">{% trans from "game" %}
-        game.create{% endtrans %}</a>
     <table class="table">
         <thead>
         <tr>
@@ -40,5 +39,4 @@
         {% endfor %}
         </tbody>
     </table>
-    {% include '::pagination.html.twig' with { 'default_page': 'intent_backend_game_list' } %}
 {% endblock %}

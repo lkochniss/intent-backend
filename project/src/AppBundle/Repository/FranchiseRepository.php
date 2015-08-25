@@ -23,14 +23,4 @@ class FranchiseRepository extends AbstractRepository
         $this->getEntityManager()->persist($franchise);
         $this->getEntityManager()->flush();
     }
-
-    /**
-     * @return string
-     */
-    protected function getListDQL()
-    {
-        return 'SELECT c
-            FROM ' . $this->getEntityName() . ' c
-            ORDER BY c.modifiedAt DESC';
-    }
 }

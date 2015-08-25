@@ -23,14 +23,4 @@ class CategoryRepository extends AbstractRepository
         $this->getEntityManager()->persist($category);
         $this->getEntityManager()->flush();
     }
-
-    /**
-     * @return string
-     */
-    protected function getListDQL()
-    {
-        return 'SELECT c
-            FROM ' . $this->getEntityName() . ' c
-            ORDER BY c.modifiedAt DESC';
-    }
 }

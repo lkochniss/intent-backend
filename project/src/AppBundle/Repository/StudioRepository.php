@@ -23,14 +23,4 @@ class StudioRepository extends AbstractRepository
         $this->getEntityManager()->persist($studio);
         $this->getEntityManager()->flush();
     }
-
-    /**
-     * @return string
-     */
-    protected function getListDQL()
-    {
-        return 'SELECT c
-            FROM ' . $this->getEntityName() . ' c
-            ORDER BY c.modifiedAt DESC';
-    }
 }

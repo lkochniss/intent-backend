@@ -1,11 +1,11 @@
-{% extends "::base.html.twig" %}
+{% extends "::list.html.twig" %}
 
 {% block title %}{{ parent() }} {% trans from "publisher" %}publisher.list{% endtrans %}{% endblock %}
 
 {% block content %}
-    <h3>{% trans from "publisher" %}publisher.list{% endtrans %}</h3>
     <a href="{{ path('intent_backend_publisher_create') }}" class="btn btn-default pull-right">{% trans from "publisher" %}publisher.create{% endtrans %}</a>
     <table class="table">
+    <h3>{% trans from "publisher" %}publisher.list{% endtrans %}</h3>
         <thead>
         <tr>
             <th>{% trans from "publisher" %}publisher.name{% endtrans %}</th>
@@ -24,5 +24,4 @@
         {% endfor %}
         </tbody>
     </table>
-    {% include '::pagination.html.twig' with { 'default_page': 'intent_backend_publisher_list' } %}
 {% endblock %}

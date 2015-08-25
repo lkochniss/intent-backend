@@ -12,8 +12,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 abstract class AbstractCrudController extends Controller
 {
-    const PAGING_LIMIT = 25;
-
     /**
      * @param Request $request
      * @return RedirectResponse|Response
@@ -73,23 +71,16 @@ abstract class AbstractCrudController extends Controller
     }
 
     /**
-     * @param null $type
-     * @param int $page
      * @return Response
      */
-    public function listAction($type = null, $page = 1)
+    public function listAction()
     {
-        $repository = $this->getDoctrine()->getRepository($this->getEntityName());
-
-        $entities = $repository->findPaginated($page, self::PAGING_LIMIT);
-        $totalPages = ceil(count($entities) / self::PAGING_LIMIT);
+        $entities = $this->getDoctrine()->getRepository($this->getEntityName())->findAll();
 
         return $this->render(
             sprintf('%s/list.html.twig', $this->getTemplateBasePath()),
             array(
                 'entities' => $entities,
-                'page' => $page,
-                'totalPages' => $totalPages,
             )
         );
     }

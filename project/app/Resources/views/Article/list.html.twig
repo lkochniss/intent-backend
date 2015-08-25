@@ -1,10 +1,10 @@
-{% extends "::base.html.twig" %}
+{% extends "::list.html.twig" %}
 
 {% block title %}{{ parent() }} {% trans from "article" %}article.list{% endtrans %}{% endblock %}
 
 {% block content %}
-    <h3>{% trans from "article" %}article.list{% endtrans %}</h3>
     <a href="{{ path('intent_backend_article_create') }}" class="btn btn-default pull-right">{% trans from "article" %}article.create{% endtrans %}</a>
+    <h3>{% trans from "article" %}article.list{% endtrans %}</h3>
     <table class="table">
         <thead>
         <tr>
@@ -19,30 +19,33 @@
         <tbody>
         {% for article in entities %}
             <tr>
-                <td>{{ article.title }}</td>
+                <td class="title">{{ article.title }}</td>
                 {% if article.category %}
-                    <td>{{ article.category.name }}</td>
+                    <td class="category">{{ article.category.name }}</td>
                 {% else %}
-                    <td>&nbsp;</td>
+                    <td class="category">&nbsp;</td>
                 {% endif %}
                 {% if article.related %}
-                    <td>{{ article.related.name }}</td>
+                    <td class="related">{{ article.related.name }}</td>
                 {% else %}
                     <td>&nbsp;</td>
                 {% endif %}
                 {% if article.createdBy %}
-                    <td>{{ article.createdBy.username }}</td>
+                    <td class="createdBy">{{ article.createdBy.username }}</td>
                 {% else %}
-                    <td>&nbsp;</td>
+                    <td class="createdBy">&nbsp;</td>
                 {% endif %}
-                <td>{{ article.publishAt|date('d.m.Y H:i') }}</td>
+                <td class="publishAt">{{ article.publishAt|date('d.m.Y H:i') }}</td>
                 <td>
-                    <a class="table-padding" href="{{ path('intent_backend_article_edit',{'id' : article.id}) }}"><span class="glyphicon glyphicon-pencil"/></a>
-                    <a class="table-padding" href="{{ path('intent_backend_article_show',{'id' : article.id}) }}"><span class="glyphicon glyphicon-eye-open"/></a>
+                    <a class="table-padding"
+                       href="{{ path('intent_backend_article_edit',{'id' : article.id}) }}"><span
+                                class="glyphicon glyphicon-pencil"/></a>
+                    <a class="table-padding"
+                       href="{{ path('intent_backend_article_show',{'id' : article.id}) }}"><span
+                                class="glyphicon glyphicon-eye-open"/></a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-    {% include '::pagination.html.twig' with { 'default_page': 'intent_backend_article_list' } %}
 {% endblock %}

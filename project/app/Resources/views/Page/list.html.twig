@@ -3,8 +3,8 @@
 {% block title %}{{ parent() }} {% trans from "page" %}page.list{% endtrans %}{% endblock %}
 
 {% block content %}
-    <h3>{% trans from "page" %}page.list{% endtrans %}</h3>
     <a href="{{ path('intent_backend_page_create') }}" class="btn btn-default pull-right">{% trans from "page" %}page.create{% endtrans %}</a>
+    <h3>{% trans from "page" %}page.list{% endtrans %}</h3>
     <table class="table">
         <thead>
         <tr>
@@ -26,5 +26,4 @@
         {% endfor %}
         </tbody>
     </table>
-    {% include '::pagination.html.twig' with { 'default_page': 'intent_backend_page_list' } %}
 {% endblock %}

@@ -106,16 +106,5 @@ class ArticleRepository extends AbstractRepository
         $this->getEntityManager()->flush();
 
         $this->saveTags($article);
-
-    }
-
-    /**
-     * @return string
-     */
-    protected function getListDQL()
-    {
-        return 'SELECT c
-            FROM '.$this->getEntityName().' c
-            ORDER BY c.modifiedAt DESC';
     }
 }

@@ -1,10 +1,10 @@
-{% extends "::base.html.twig" %}
+{% extends "::list.html.twig" %}
 
 {% block title %}{{ parent() }} {% trans from "event" %}event.list{% endtrans %}{% endblock %}
 
 {% block content %}
-    <h3>{% trans from "event" %}event.list{% endtrans %}</h3>
     <a href="{{ path('intent_backend_event_create') }}" class="btn btn-default pull-right">{% trans from "event" %}event.create{% endtrans %}</a>
+    <h3>{% trans from "event" %}event.list{% endtrans %}</h3>
     <table class="table">
         <thead>
         <tr>
@@ -33,5 +33,4 @@
         {% endfor %}
         </tbody>
     </table>
-    {% include '::pagination.html.twig' with { 'default_page': 'intent_backend_event_list' } %}
 {% endblock %}

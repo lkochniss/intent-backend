@@ -22,14 +22,4 @@ class InviteRepository extends AbstractRepository
         $this->getEntityManager()->persist($invite);
         $this->getEntityManager()->flush();
     }
-
-    /**
-     * @return string
-     */
-    protected function getListDQL()
-    {
-        return 'SELECT c
-            FROM ' . $this->getEntityName() . ' c
-            ORDER BY c.username ASC';
-    }
 }

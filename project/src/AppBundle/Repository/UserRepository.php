@@ -21,14 +21,4 @@ class UserRepository extends AbstractRepository
         $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush();
     }
-
-    /**
-     * @return string
-     */
-    protected function getListDQL()
-    {
-        return 'SELECT c
-            FROM ' . $this->getEntityName() . ' c
-            ORDER BY c.username ASC';
-    }
 }

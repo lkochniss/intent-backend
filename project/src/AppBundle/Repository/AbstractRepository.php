@@ -24,22 +24,4 @@ abstract class AbstractRepository extends EntityRepository
     {
         $this->getEntityManager()->remove($entity);
     }
-
-    public function findPaginated($page, $size)
-    {
-        $offset = ($page * $size) - $size;
-
-        /** @var \Doctrine\ORM\Query $query */
-        $query = $this->getEntityManager()
-            ->createQuery($this->getListDQL())
-            ->setFirstResult($offset)
-            ->setMaxResults($size);
-
-        return new Paginator($query, false);
-    }
-
-    /**
-     * @return string
-     */
-    abstract protected function getListDQL();
 }

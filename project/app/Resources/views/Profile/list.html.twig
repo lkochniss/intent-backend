@@ -1,4 +1,4 @@
-{% extends "::base.html.twig" %}
+{% extends "::list.html.twig" %}
 
 {% block title %}{{ parent() }} {% trans from "profile" %}profile.list{% endtrans %}{% endblock %}
 
@@ -26,5 +26,4 @@
         {% endfor %}
         </tbody>
     </table>
-    {% include '::pagination.html.twig' with { 'default_page': 'intent_backend_profile_list' } %}
 {% endblock %}
