@@ -21,6 +21,11 @@ class Category extends AbstractModel
     private $slug;
 
     /**
+     * @var integer
+     */
+    private $priority;
+
+    /**
      * @var ArrayCollection
      */
     private $articles;
@@ -74,6 +79,25 @@ class Category extends AbstractModel
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * @param $priority
+     * @return $this
+     */
+    public function setPriority($priority)
+    {
+        $this->priority = $priority;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPriority()
+    {
+        return $this->priority;
     }
 
     /**

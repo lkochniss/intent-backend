@@ -45,6 +45,7 @@ class CategoryFixtures extends AbstractFixture implements OrderedFixtureInterfac
         $category->setName($categoryData['name']);
         $slug = preg_replace("/[^a-z0-9]+/", "-", strtolower($category->getName()));
         $category->setSlug($slug);
+        $category->setPriority($categoryData['order']);
 
         $this->addReference('category-'.$category->getName(), $category);
 
