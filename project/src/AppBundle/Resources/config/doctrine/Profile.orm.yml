@@ -19,5 +19,5 @@ AppBundle\Entity\Profile:
     oneToOne:
         user:
             targetEntity: User
-            mappedBy: User
+            mappedBy: profile
     lifecycleCallbacks: {  }

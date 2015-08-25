@@ -21,7 +21,7 @@ AppBundle\Entity\User:
         isActive:
             type: boolean
             column: is_active
-    onetToOne:
+    oneToOne:
         profile:
             targetEntity: Profile
             inversedBy: user
