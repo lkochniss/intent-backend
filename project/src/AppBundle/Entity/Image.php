@@ -3,80 +3,73 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Image
  */
-class Image
+class Image extends AbstractModel
 {
     /**
-     * @var integer
+     * @var string
      */
-    private $id;
+    private $fileName;
 
     /**
      * @var string
      */
-    private $name;
+    private $fileExtension;
 
     /**
-     * @var string
+     * @var UploadedFile
      */
-    private $altText;
+    private $uploadedFile;
 
     /**
-     * Get id
-     *
-     * @return integer 
+     * @return string
      */
-    public function getId()
+    public function getFileName()
     {
-        return $this->id;
+        return $this->fileName;
     }
 
     /**
-     * Set name
-     *
-     * @param string $name
-     * @return Image
+     * @param string $fileName
      */
-    public function setName($name)
+    public function setFileName($fileName)
     {
-        $this->name = $name;
-
-        return $this;
+        $this->fileName = $fileName;
     }
 
     /**
-     * Get name
-     *
-     * @return string 
+     * @return string
      */
-    public function getName()
+    public function getFileExtension()
     {
-        return $this->name;
+        return $this->fileExtension;
     }
 
     /**
-     * Set altText
-     *
-     * @param string $altText
-     * @return Image
+     * @param string $fileExtension
      */
-    public function setAltText($altText)
+    public function setFileExtension($fileExtension)
     {
-        $this->altText = $altText;
-
-        return $this;
+        $this->fileExtension = $fileExtension;
     }
 
     /**
-     * Get altText
-     *
-     * @return string 
+     * @return UploadedFile
      */
-    public function getAltText()
+    public function getUploadedFile()
     {
-        return $this->altText;
+        return $this->uploadedFile;
+    }
+
+    /**
+     * @param UploadedFile|null $uploadedFile
+     */
+    public function setUploadedFile($uploadedFile = null)
+    {
+        $this->uploadedFile = $uploadedFile;
     }
 }

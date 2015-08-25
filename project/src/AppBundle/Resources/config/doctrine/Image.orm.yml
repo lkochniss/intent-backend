@@ -9,10 +9,13 @@ AppBundle\Entity\Image:
             generator:
                 strategy: AUTO
     fields:
-        name:
+        fileName:
             type: string
             length: 255
-        altText:
+            column: file_name
+        fileExtension:
             type: string
             length: 255
+            column: file_extension
+
     lifecycleCallbacks: {  }
