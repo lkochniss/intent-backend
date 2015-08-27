@@ -2,15 +2,18 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Image;
 use AppBundle\Form\Type\FilemanagerType;
+use AppBundle\Form\Type\UploadType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 
 class FilemanagerController extends Controller
 {
-    public function createAction($popup = 0,$path = '', Request $request)
+    public function createAction($popup = 0, $path = '', Request $request)
     {
         $form = $this->createForm(new FilemanagerType());
         $form->handleRequest($request);
@@ -30,9 +33,37 @@ class FilemanagerController extends Controller
                     'form' => $form->createView(),
                 )
             );
-        }else{
+        } else {
             return $this->render(
                 ':Filemanager:popup/create.html.twig',
+                array(
+                    'form' => $form->createView(),
+                )
+            );
+        }
+    }
+
+    public function uploadAction($popup = 0, $path = '', Request $request)
+    {
+        $form = $this->createForm(new UploadType());
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+
+
+            return $this->redirect($this->generateUrl('intent_backend_filemanager_list', array('path' => $path)));
+        }
+
+        if ($popup == 0) {
+            return $this->render(
+                ':Filemanager:default/upload.html.twig',
+                array(
+                    'form' => $form->createView(),
+                )
+            );
+        } else {
+            return $this->render(
+                ':Filemanager:popup/upload.html.twig',
                 array(
                     'form' => $form->createView(),
                 )
@@ -94,5 +125,4 @@ class FilemanagerController extends Controller
             );
         }
     }
-
 }

@@ -1,3 +1,9 @@
+intent_backend_filemanager_upload:
+    path:     /{popup}/upload/{path}
+    defaults: { _controller: AppBundle:Filemanager:upload, popup: 0, path: '' }
+    requirements:
+        path: .+
+
 intent_backend_filemanager_create:
     path:     /{popup}/create/{path}
     defaults: { _controller: AppBundle:Filemanager:create, popup: 0, path: '' }

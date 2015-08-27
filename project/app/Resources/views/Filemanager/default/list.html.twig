@@ -8,6 +8,9 @@
         <a href="{{ path('intent_backend_filemanager_create', {'path': currentDirectory }) }}"
             class="btn btn-default pull-right">{% trans from "filemanager" %}filemanager.create{% endtrans %}
         </a>
+        <a href="{{ path('intent_backend_filemanager_upload', {'path': currentDirectory }) }}"
+           class="btn btn-default pull-right">{% trans from "filemanager" %}filemanager.upload{% endtrans %}
+        </a>
     </div>
     <div class="fileexplorer col-md-9">
 

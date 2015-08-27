@@ -6,5 +6,7 @@ filemanager:
     list:       Filemanager
     name:       Filemanager
     open:       Ordner öffnen
+    select:     Bilder auswählen
     submit:     Ordner erstellen
     up:         zurück
+    upload:     Bilder hochladen

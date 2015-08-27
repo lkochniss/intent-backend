@@ -11,12 +11,12 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class Image extends AbstractModel
 {
     /**
-     * @var string
+     * @var String
      */
     private $fileName;
 
     /**
-     * @var string
+     * @var String
      */
     private $fileExtension;
 
@@ -26,7 +26,18 @@ class Image extends AbstractModel
     private $uploadedFile;
 
     /**
-     * @return string
+     * @param $fileName
+     * @return $this
+     */
+    public function setFileName($fileName)
+    {
+        $this->fileName = $fileName;
+
+        return $this;
+    }
+
+    /**
+     * @return String
      */
     public function getFileName()
     {
@@ -34,11 +45,14 @@ class Image extends AbstractModel
     }
 
     /**
-     * @param string $fileName
+     * @param $fileExtension
+     * @return $this
      */
-    public function setFileName($fileName)
+    public function setFileExtension($fileExtension)
     {
-        $this->fileName = $fileName;
+        $this->fileExtension = $fileExtension;
+
+        return $this;
     }
 
     /**
@@ -47,14 +61,6 @@ class Image extends AbstractModel
     public function getFileExtension()
     {
         return $this->fileExtension;
-    }
-
-    /**
-     * @param string $fileExtension
-     */
-    public function setFileExtension($fileExtension)
-    {
-        $this->fileExtension = $fileExtension;
     }
 
     /**
