@@ -5,7 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Publisher;
 use AppBundle\Form\Type\PublisherType;
 
-class PublisherController extends RelatedController
+class PublisherController extends AbstractRelatedController
 {
     /**
      * @return Publisher
@@ -50,6 +50,21 @@ class PublisherController extends RelatedController
     protected function getTranslationDomain()
     {
         return 'publisher';
+    }
+
+    protected function getReadAccessLevel()
+    {
+        return 'ROLE_READ_META';
+    }
+
+    protected function getWriteAccessLevel()
+    {
+        return 'ROLE_WRITE_META';
+    }
+
+    protected function getPublishAccessLevel()
+    {
+        return 'ROLE_PUBLISH_META';
     }
 
 }

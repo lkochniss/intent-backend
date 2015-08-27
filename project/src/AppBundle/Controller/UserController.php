@@ -15,6 +15,12 @@ class UserController extends AbstractCrudController
 
     public function inviteAction(Request $request)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, $this->get('translator')->trans(
+            'user.access_denied',
+            array(),
+            'user')
+        );
+
         $invite = new Invite();
         $form = $this->createForm(
             new InviteType(),
@@ -134,23 +140,4 @@ class UserController extends AbstractCrudController
 
         $this->addFlash('success', "Speichern erfolgreich");
     }
-
-    public function showAction($id)
-    {
-        return $this->render(
-            ':User:show.html.twig',
-            array(// ...
-            )
-        );
-    }
-
-    public function deleteAction($id)
-    {
-        return $this->render(
-            ':User:delete.html.twig',
-            array(// ...
-            )
-        );
-    }
-
 }

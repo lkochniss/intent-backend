@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-abstract class AbstractCrudController extends Controller
+abstract class AbstractMetaController extends AbstractCrudController
 {
     /**
      * @param Request $request
@@ -18,6 +18,7 @@ abstract class AbstractCrudController extends Controller
      */
     public function createAction(Request $request)
     {
+        $this->denyAccessUnlessGranted($this->getWriteAccessLevel(), null, $this->getAccessDeniedMessage());
         $entity = $this->createNewEntity();
 
         return $this->createAndHandleForm($entity, $request, 'create');
@@ -30,6 +31,7 @@ abstract class AbstractCrudController extends Controller
      */
     public function editAction($id, Request $request)
     {
+        $this->denyAccessUnlessGranted($this->getWriteAccessLevel(), null, $this->getAccessDeniedMessage());
         $entity = $this->getDoctrine()->getRepository($this->getEntityName())->find($id);
 
         if (is_null($entity)) {
@@ -51,6 +53,7 @@ abstract class AbstractCrudController extends Controller
      */
     public function showAction($id)
     {
+        $this->denyAccessUnlessGranted($this->getReadAccessLevel(), null, $this->getAccessDeniedMessage());
         $entity = $this->getDoctrine()->getRepository($this->getEntityName())->find($id);
 
         if (is_null($entity)) {
@@ -76,6 +79,7 @@ abstract class AbstractCrudController extends Controller
      */
     public function listAction()
     {
+        $this->denyAccessUnlessGranted($this->getReadAccessLevel(), null, $this->getAccessDeniedMessage());
         $entities = $this->getDoctrine()->getRepository($this->getEntityName())->findAll();
 
         return $this->render(
@@ -87,91 +91,28 @@ abstract class AbstractCrudController extends Controller
     }
 
     /**
-     * @param $action
-     * @param array $options
-     * @return string
+     * @return String
      */
-    protected function generateUrlForAction($action, $options = array())
-    {
-        return $this->generateUrl(
-            sprintf('%s_%s', $this->getRoutePrefix(), $action),
-            $options
-        );
-    }
+    abstract protected function getReadAccessLevel();
 
     /**
-     * @param AbstractModel $entity
+     * @return String
      */
-    protected function handleValidForm(AbstractModel $entity)
-    {
-        $repository = $this->getDoctrine()->getRepository($this->getEntityName());
-        $repository->save($entity, $this->getUser());
-
-        $this->addFlash('success', "Speichern erfolgreich");
-    }
+    abstract protected function getWriteAccessLevel();
 
     /**
-     * @return AbstractModel
+     * @return String
      */
-    abstract protected function createNewEntity();
+    abstract protected function getPublishAccessLevel();
 
     /**
-     * @return AbstractType
+     * @return String
      */
-    abstract protected function getFormType();
-
-    /**
-     * @return string
-     */
-    abstract protected function getTemplateBasePath();
-
-    /**
-     * @return string
-     */
-    abstract protected function getEntityName();
-
-    /**
-     * @return string
-     */
-    abstract protected function getRoutePrefix();
-
-    /**
-     * @return string
-     */
-    abstract protected function getTranslationDomain();
-
-    /**
-     * @param AbstractModel $entity
-     * @param $request
-     * @return RedirectResponse|Response
-     */
-    protected function createAndHandleForm(AbstractModel $entity, $request, $action, $options = array())
-    {
-        $form = $this->createForm(
-            $this->getFormType(),
-            $entity,
-            array(
-                'action' => $this->generateUrlForAction($action, $options),
-                'method' => 'POST',
-            )
-        );
-
-        if (in_array($request->getMethod(), ['POST'])) {
-            $form->handleRequest($request);
-
-            if ($form->isValid()) {
-                $this->handleValidForm($entity);
-
-                return $this->redirect($this->generateUrlForAction('edit', array('id' => $entity->getId())));
-            }
-        }
-
-        return $this->render(
-            sprintf('%s/edit.html.twig', $this->getTemplateBasePath()),
-            array(
-                'entity' => $entity,
-                'form' => $form->createView(),
-            )
+    protected function getAccessDeniedMessage(){
+        return $this->get('translator')->trans(
+            $this->getTranslationDomain().'.access_denied',
+            array(),
+            $this->getTranslationDomain()
         );
     }
 }

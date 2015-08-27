@@ -5,7 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Studio;
 use AppBundle\Form\Type\StudioType;
 
-class StudioController extends RelatedController
+class StudioController extends AbstractRelatedController
 {
     /**
      * @return Studio
@@ -50,5 +50,20 @@ class StudioController extends RelatedController
     protected function getTranslationDomain()
     {
         return 'studio';
+    }
+
+    protected function getReadAccessLevel()
+    {
+        return 'ROLE_READ_META';
+    }
+
+    protected function getWriteAccessLevel()
+    {
+        return 'ROLE_WRITE_META';
+    }
+
+    protected function getPublishAccessLevel()
+    {
+        return 'ROLE_PUBLISH_META';
     }
 }

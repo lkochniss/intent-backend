@@ -5,7 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Tag;
 use AppBundle\Form\Type\TagType;
 
-class TagController extends AbstractCrudController
+class TagController extends AbstractMetaController
 {
     /**
      * @return Tag
@@ -52,22 +52,18 @@ class TagController extends AbstractCrudController
         return 'tag';
     }
 
-    public function showAction($id)
+    protected function getReadAccessLevel()
     {
-        return $this->render(
-            ':Tag:show.html.twig',
-            array(// ...
-            )
-        );
+        return 'ROLE_READ_META';
     }
 
-    public function deleteAction($id)
+    protected function getWriteAccessLevel()
     {
-        return $this->render(
-            ':Tag:delete.html.twig',
-            array(// ...
-            )
-        );
+        return 'ROLE_WRITE_META';
     }
 
+    protected function getPublishAccessLevel()
+    {
+        return 'ROLE_PUBLISH_META';
+    }
 }

@@ -5,7 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Article;
 use AppBundle\Form\Type\ArticleType;
 
-class ArticleController extends AbstractCrudController
+class ArticleController extends AbstractArticleController
 {
     /**
      * @return Article
@@ -52,4 +52,18 @@ class ArticleController extends AbstractCrudController
         return 'article';
     }
 
+    protected function getReadAccessLevel()
+    {
+        return 'ROLE_READ_ARTICLE';
+    }
+
+    protected function getWriteAccessLevel()
+    {
+        return 'ROLE_WRITE_ARTICLE';
+    }
+
+    protected function getPublishAccessLevel()
+    {
+        return 'ROLE_PUBLISH_ARTICLE';
+    }
 }

@@ -5,7 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Event;
 use AppBundle\Form\Type\EventType;
 
-class EventController extends AbstractCrudController
+class EventController extends AbstractRelatedController
 {
     /**
      * @return Event
@@ -50,5 +50,20 @@ class EventController extends AbstractCrudController
     protected function getTranslationDomain()
     {
         return 'event';
+    }
+
+    protected function getReadAccessLevel()
+    {
+        return 'ROLE_READ_META';
+    }
+
+    protected function getWriteAccessLevel()
+    {
+        return 'ROLE_WRITE_META';
+    }
+
+    protected function getPublishAccessLevel()
+    {
+        return 'ROLE_PUBLISH_META';
     }
 }

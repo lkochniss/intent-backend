@@ -51,4 +51,19 @@ class PageController extends AbstractCrudController
     {
         return 'page';
     }
+
+    protected function getReadAccessLevel()
+    {
+        return 'ROLE_ADMIN';
+    }
+
+    protected function getWriteAccessLevel()
+    {
+        return 'ROLE_ADMIN';
+    }
+
+    protected function getPublishAccessLevel()
+    {
+        return 'ROLE_ADMIN';
+    }
 }

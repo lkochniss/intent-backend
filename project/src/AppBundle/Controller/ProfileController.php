@@ -51,13 +51,4 @@ class ProfileController extends AbstractCrudController
     {
         return 'profile';
     }
-
-    public function showAction($id)
-    {
-        return $this->render(
-            ':Profile:show.html.twig',
-            array(// ...
-            )
-        );
-    }
 }

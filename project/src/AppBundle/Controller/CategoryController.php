@@ -5,7 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Category;
 use AppBundle\Form\Type\CategoryType;
 
-class CategoryController extends AbstractCrudController
+class CategoryController extends AbstractMetaController
 {
     /**
      * @return Category
@@ -52,21 +52,18 @@ class CategoryController extends AbstractCrudController
         return 'category';
     }
 
-    public function showAction($id)
+    protected function getReadAccessLevel()
     {
-        return $this->render(
-            ':Category:show.html.twig',
-            array(// ...
-            )
-        );
+        return 'ROLE_READ_META';
     }
 
-    public function deleteAction($id)
+    protected function getWriteAccessLevel()
     {
-        return $this->render(
-            ':Category:delete.html.twig',
-            array(// ...
-            )
-        );
+        return 'ROLE_WRITE_META';
+    }
+
+    protected function getPublishAccessLevel()
+    {
+        return 'ROLE_PUBLISH_META';
     }
 }

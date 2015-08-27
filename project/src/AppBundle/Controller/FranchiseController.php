@@ -5,7 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Franchise;
 use AppBundle\Form\Type\FranchiseType;
 
-class FranchiseController extends RelatedController
+class FranchiseController extends AbstractRelatedController
 {
     /**
      * @return Franchise
@@ -50,6 +50,21 @@ class FranchiseController extends RelatedController
     protected function getTranslationDomain()
     {
         return 'franchise';
+    }
+
+    protected function getReadAccessLevel()
+    {
+        return 'ROLE_READ_META';
+    }
+
+    protected function getWriteAccessLevel()
+    {
+        return 'ROLE_WRITE_META';
+    }
+
+    protected function getPublishAccessLevel()
+    {
+        return 'ROLE_PUBLISH_META';
     }
 
 }

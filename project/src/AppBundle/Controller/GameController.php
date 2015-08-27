@@ -5,7 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Game;
 use AppBundle\Form\Type\GameType;
 
-class GameController extends RelatedController
+class GameController extends AbstractRelatedController
 {
     /**
      * @return Game
@@ -50,5 +50,20 @@ class GameController extends RelatedController
     protected function getTranslationDomain()
     {
         return 'article';
+    }
+
+    protected function getReadAccessLevel()
+    {
+        return 'ROLE_READ_META';
+    }
+
+    protected function getWriteAccessLevel()
+    {
+        return 'ROLE_WRITE_META';
+    }
+
+    protected function getPublishAccessLevel()
+    {
+        return 'ROLE_PUBLISH_META';
     }
 }
