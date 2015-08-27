@@ -27,6 +27,14 @@ class CategoryType extends AbstractType
                 )
             )
             ->add(
+                'priority',
+                'number',
+                array(
+                    'label' => 'category.priority',
+                    'translation_domain' => 'category',
+                )
+            )
+            ->add(
                 'submit',
                 'submit',
                 array(

@@ -81,7 +81,8 @@ class ArticleType extends AbstractType
                     'multiple' => false,
                     'expanded' => false,
                     'placeholder' => 'article.event.select',
-                    'empty_data' => null
+                    'empty_data' => null,
+                    'required' => false,
                 )
             )
             ->add(

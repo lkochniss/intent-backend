@@ -22,7 +22,9 @@ AppBundle\Entity\Article:
         publishAt:
             column: publish_at
             type: datetime
-            nullable: false
+            nullable: true
+        published:
+            type: boolean
     manyToOne:
         category:
             targetEntity: Category
