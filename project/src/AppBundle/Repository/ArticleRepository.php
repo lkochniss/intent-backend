@@ -3,11 +3,9 @@
 namespace AppBundle\Repository;
 
 use AppBundle\Entity\Article;
-use AppBundle\Entity\Event;
 use AppBundle\Entity\Franchise;
 use AppBundle\Entity\Game;
 use AppBundle\Entity\Publisher;
-use AppBundle\Entity\Related;
 use AppBundle\Entity\Studio;
 use AppBundle\Entity\Tag;
 use AppBundle\Entity\User;

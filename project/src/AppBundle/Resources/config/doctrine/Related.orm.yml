@@ -30,21 +30,8 @@ AppBundle\Entity\Related:
             type: string
             length: 255
             nullable: true
-        createdAt:
-            column: created_at
-            type: datetime
-            nullable: false
-        modifiedAt:
-            column: modified_at
-            type: datetime
-            nullable: false
     oneToMany:
         articles:
             targetEntity: Article
             mappedBy: related
-    lifecycleCallbacks:
-        prePersist:
-            - setModifiedAt
-            - setCreatedAt
-        preUpdate:
-            - setModifiedAt
+    lifecycleCallbacks: { }
