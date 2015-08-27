@@ -11,12 +11,12 @@ use Doctrine\ORM\Mapping as ORM;
 class Tag extends AbstractModel
 {
     /**
-     * @var string
+     * @var String
      */
     private $name;
 
     /**
-     * @var string
+     * @var String
      */
     private $slug;
 
@@ -30,12 +30,9 @@ class Tag extends AbstractModel
         $this->articles = array();
     }
 
-
     /**
-     * Set name
-     *
-     * @param string $name
-     * @return Tag
+     * @param $name
+     * @return $this
      */
     public function setName($name)
     {
@@ -45,9 +42,7 @@ class Tag extends AbstractModel
     }
 
     /**
-     * Get name
-     *
-     * @return string 
+     * @return String
      */
     public function getName()
     {
@@ -55,10 +50,8 @@ class Tag extends AbstractModel
     }
 
     /**
-     * Set slug
-     *
-     * @param string $slug
-     * @return Tag
+     * @param $slug
+     * @return $this
      */
     public function setSlug($slug)
     {
@@ -68,9 +61,7 @@ class Tag extends AbstractModel
     }
 
     /**
-     * Get slug
-     *
-     * @return string 
+     * @return String
      */
     public function getSlug()
     {

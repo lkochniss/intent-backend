@@ -11,22 +11,22 @@ use Doctrine\ORM\Mapping as ORM;
 class Invite
 {
     /**
-     * @var integer
+     * @var Integer
      */
     private $id;
 
     /**
-     * @var string
+     * @var String
      */
     private $username;
 
     /**
-     * @var string
+     * @var String
      */
     private $email;
 
     /**
-     * @var string
+     * @var String
      */
     private $token;
 
@@ -46,9 +46,7 @@ class Invite
     }
 
     /**
-     * Get id
-     *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -56,10 +54,8 @@ class Invite
     }
 
     /**
-     * Set username
-     *
-     * @param string $username
-     * @return User
+     * @param $username
+     * @return $this
      */
     public function setUsername($username)
     {
@@ -69,9 +65,7 @@ class Invite
     }
 
     /**
-     * Get username
-     *
-     * @return string
+     * @return String
      */
     public function getUsername()
     {
@@ -79,10 +73,8 @@ class Invite
     }
 
     /**
-     * Set email
-     *
-     * @param string $email
-     * @return User
+     * @param $email
+     * @return $this
      */
     public function setEmail($email)
     {
@@ -92,9 +84,7 @@ class Invite
     }
 
     /**
-     * Get email
-     *
-     * @return string
+     * @return String
      */
     public function getEmail()
     {
@@ -169,5 +159,4 @@ class Invite
     {
         return $this->roles->toArray();
     }
-
 }

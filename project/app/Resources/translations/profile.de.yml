@@ -1,5 +1,6 @@
 profile:
     actions:    Aktionen
+    list:       Profilübersicht
     name:       Autor
     not_found:  Autor nicht gefunden
     submit:     Autor speichern

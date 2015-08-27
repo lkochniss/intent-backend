@@ -53,7 +53,7 @@ class Studio extends Related
     }
 
     /**
-     * @return Franchise[]
+     * @return array
      */
     public function getFranchises()
     {
@@ -86,7 +86,7 @@ class Studio extends Related
     }
 
     /**
-     * @return Game[]
+     * @return array
      */
     public function getGames()
     {
@@ -94,7 +94,7 @@ class Studio extends Related
     }
 
     /**
-     * @return string
+     * @return String
      */
     public function getType()
     {

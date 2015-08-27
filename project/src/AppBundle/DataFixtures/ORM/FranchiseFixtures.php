@@ -57,7 +57,7 @@ class FranchiseFixtures extends AbstractFixture implements OrderedFixtureInterfa
 
         $this->addReference('franchise-'.$franchise->getName(), $franchise);
 
-        $manager->getRepository('AppBundle:Franchise')->save($franchise,$this->getReference('user-Admin'));
+        $manager->getRepository('AppBundle:Franchise')->save($franchise);
     }
 
     /**

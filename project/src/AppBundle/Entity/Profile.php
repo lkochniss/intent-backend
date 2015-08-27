@@ -10,12 +10,12 @@ use Doctrine\ORM\Mapping as ORM;
 class Profile extends AbstractModel
 {
     /**
-     * @var string
+     * @var String
      */
     private $name;
 
     /**
-     * @var string
+     * @var String
      */
     private $description;
 
@@ -25,10 +25,8 @@ class Profile extends AbstractModel
     private $user;
 
     /**
-     * Set name
-     *
-     * @param string $name
-     * @return Profile
+     * @param $name
+     * @return $this
      */
     public function setName($name)
     {
@@ -38,9 +36,7 @@ class Profile extends AbstractModel
     }
 
     /**
-     * Get name
-     *
-     * @return string 
+     * @return String
      */
     public function getName()
     {
@@ -48,10 +44,8 @@ class Profile extends AbstractModel
     }
 
     /**
-     * Set description
-     *
-     * @param string $description
-     * @return Profile
+     * @param $description
+     * @return $this
      */
     public function setDescription($description)
     {
@@ -61,9 +55,7 @@ class Profile extends AbstractModel
     }
 
     /**
-     * Get description
-     *
-     * @return string 
+     * @return String
      */
     public function getDescription()
     {

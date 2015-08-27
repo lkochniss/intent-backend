@@ -7,6 +7,9 @@ namespace AppBundle\Entity;
  */
 abstract class AbstractModel
 {
+    /**
+     * @var Integer
+     */
     protected $id;
 
     /**
@@ -19,6 +22,9 @@ abstract class AbstractModel
      */
     private $modifiedAt;
 
+    /**
+     * @return int
+     */
     public function getId()
     {
         return $this->id;
@@ -35,8 +41,6 @@ abstract class AbstractModel
     }
 
     /**
-     * Get modifiedAt
-     *
      * @return \DateTime
      */
     public function getModifiedAt()
@@ -45,9 +49,7 @@ abstract class AbstractModel
     }
 
     /**
-     * Set createdAt
-     *
-     * @return \DateTime
+     * @return $this
      */
     public function setCreatedAt()
     {
@@ -57,8 +59,6 @@ abstract class AbstractModel
     }
 
     /**
-     * Get createdAt
-     *
      * @return \DateTime
      */
     public function getCreatedAt()

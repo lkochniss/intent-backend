@@ -32,10 +32,8 @@ class Franchise extends Related
     }
 
     /**
-     * Set publisher
-     *
      * @param Publisher $publisher
-     * @return Franchise
+     * @return $this
      */
     public function setPublisher(Publisher $publisher)
     {
@@ -45,8 +43,6 @@ class Franchise extends Related
     }
 
     /**
-     * Get publisher
-     *
      * @return Publisher
      */
     public function getPublisher()
@@ -99,7 +95,7 @@ class Franchise extends Related
     }
 
     /**
-     * @return Game[]
+     * @return array
      */
     public function getGames()
     {

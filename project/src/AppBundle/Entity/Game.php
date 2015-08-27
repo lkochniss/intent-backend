@@ -2,7 +2,6 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -32,8 +31,6 @@ class Game extends Related
     }
 
     /**
-     * Get franchise
-     *
      * @return Studio
      */
     public function getStudio()
@@ -53,8 +50,6 @@ class Game extends Related
     }
 
     /**
-     * Get franchise
-     *
      * @return Franchise
      */
     public function getFranchise()

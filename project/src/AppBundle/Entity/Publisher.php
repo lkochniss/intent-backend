@@ -15,9 +15,6 @@ class Publisher extends Related
      */
     private $franchises;
 
-    /**
-     *
-     */
     function __construct()
     {
         parent::__construct();
@@ -50,7 +47,7 @@ class Publisher extends Related
     }
 
     /**
-     * @return Franchise[]
+     * @return array
      */
     public function getFranchises()
     {
@@ -58,7 +55,7 @@ class Publisher extends Related
     }
 
     /**
-     * @return string
+     * @return String
      */
     public function getType()
     {

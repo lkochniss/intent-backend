@@ -10,25 +10,23 @@ use Doctrine\ORM\Mapping as ORM;
 class Page extends AbstractModel
 {
     /**
-     * @var string
+     * @var String
      */
     private $title;
 
     /**
-     * @var string
+     * @var String
      */
     private $content;
 
     /**
-     * @var string
+     * @var String
      */
     private $slug;
 
     /**
-     * Set title
-     *
-     * @param string $title
-     * @return Page
+     * @param $title
+     * @return $this
      */
     public function setTitle($title)
     {
@@ -38,9 +36,7 @@ class Page extends AbstractModel
     }
 
     /**
-     * Get title
-     *
-     * @return string 
+     * @return String
      */
     public function getTitle()
     {
@@ -48,10 +44,8 @@ class Page extends AbstractModel
     }
 
     /**
-     * Set content
-     *
-     * @param string $content
-     * @return Page
+     * @param $content
+     * @return $this
      */
     public function setContent($content)
     {
@@ -61,9 +55,7 @@ class Page extends AbstractModel
     }
 
     /**
-     * Get content
-     *
-     * @return string 
+     * @return String
      */
     public function getContent()
     {
@@ -71,10 +63,8 @@ class Page extends AbstractModel
     }
 
     /**
-     * Set slug
-     *
-     * @param string $slug
-     * @return Page
+     * @param $slug
+     * @return $this
      */
     public function setSlug($slug)
     {
@@ -84,9 +74,7 @@ class Page extends AbstractModel
     }
 
     /**
-     * Get slug
-     *
-     * @return string 
+     * @return String
      */
     public function getSlug()
     {

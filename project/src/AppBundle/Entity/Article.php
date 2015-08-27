@@ -11,22 +11,22 @@ use Doctrine\ORM\Mapping as ORM;
 class Article extends AbstractModel
 {
     /**
-     * @var string
+     * @var String
      */
     private $title;
 
     /**
-     * @var string
+     * @var String
      */
     private $slug;
 
     /**
-     * @var string
+     * @var String
      */
     private $content;
 
     /**
-     * @var boolean
+     * @var Boolean
      */
     private $slideshow;
 
@@ -34,6 +34,11 @@ class Article extends AbstractModel
      * @var \DateTime
      */
     private $publishAt;
+
+    /**
+     * @var Boolean
+     */
+    private $published;
 
     /**
      * @var Category
@@ -68,15 +73,13 @@ class Article extends AbstractModel
     function __construct()
     {
         $this->slideshow = false;
+        $this->published = false;
         $this->tags = array();
     }
 
-
     /**
-     * Set title
-     *
-     * @param string $title
-     * @return Article
+     * @param $title
+     * @return $this
      */
     public function setTitle($title)
     {
@@ -86,9 +89,7 @@ class Article extends AbstractModel
     }
 
     /**
-     * Get title
-     *
-     * @return string 
+     * @return String
      */
     public function getTitle()
     {
@@ -96,10 +97,8 @@ class Article extends AbstractModel
     }
 
     /**
-     * Set slug
-     *
-     * @param string $slug
-     * @return Article
+     * @param $slug
+     * @return $this
      */
     public function setSlug($slug)
     {
@@ -109,9 +108,7 @@ class Article extends AbstractModel
     }
 
     /**
-     * Get slug
-     *
-     * @return string 
+     * @return String
      */
     public function getSlug()
     {
@@ -119,10 +116,8 @@ class Article extends AbstractModel
     }
 
     /**
-     * Set content
-     *
-     * @param string $content
-     * @return Article
+     * @param $content
+     * @return $this
      */
     public function setContent($content)
     {
@@ -132,9 +127,7 @@ class Article extends AbstractModel
     }
 
     /**
-     * Get content
-     *
-     * @return string 
+     * @return String
      */
     public function getContent()
     {
@@ -142,10 +135,8 @@ class Article extends AbstractModel
     }
 
     /**
-     * Set slideshow
-     *
-     * @param boolean $slideshow
-     * @return Article
+     * @param $slideshow
+     * @return $this
      */
     public function setSlideshow($slideshow)
     {
@@ -155,20 +146,16 @@ class Article extends AbstractModel
     }
 
     /**
-     * Get slideshow
-     *
-     * @return boolean
+     * @return bool
      */
-    public function getSlideshow()
+    public function isSlideshow()
     {
         return $this->slideshow;
     }
 
     /**
-     * Set publishAt
-     *
-     * @param \DateTime $publishAt
-     * @return Article
+     * @param $publishAt
+     * @return $this
      */
     public function setPublishAt($publishAt)
     {
@@ -178,8 +165,6 @@ class Article extends AbstractModel
     }
 
     /**
-     * Get publishAt
-     *
      * @return \DateTime
      */
     public function getPublishAt()
@@ -188,10 +173,27 @@ class Article extends AbstractModel
     }
 
     /**
-     * Set category
-     *
+     * @param $published
+     * @return $this
+     */
+    public function setPublished($published)
+    {
+        $this->published = $published;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPublished()
+    {
+        return $this->published;
+    }
+
+    /**
      * @param Category $category
-     * @return Article
+     * @return $this
      */
     public function setCategory(Category $category)
     {
@@ -201,8 +203,6 @@ class Article extends AbstractModel
     }
 
     /**
-     * Get category
-     *
      * @return Category
      */
     public function getCategory()
@@ -211,10 +211,8 @@ class Article extends AbstractModel
     }
 
     /**
-     * Set createdBy
-     *
      * @param User $user
-     * @return User
+     * @return $this
      */
     public function setCreatedBy(User $user)
     {
@@ -224,8 +222,6 @@ class Article extends AbstractModel
     }
 
     /**
-     * Get createdBy
-     *
      * @return User
      */
     public function getCreatedBy()
@@ -234,10 +230,8 @@ class Article extends AbstractModel
     }
 
     /**
-     * Set modifiedBy
-     *
      * @param User $user
-     * @return User
+     * @return $this
      */
     public function setModifiedBy(User $user)
     {
@@ -247,8 +241,6 @@ class Article extends AbstractModel
     }
 
     /**
-     * Get modifiedBy
-     *
      * @return User
      */
     public function getModifiedBy()
@@ -332,9 +324,8 @@ class Article extends AbstractModel
      */
     public function resetTags()
     {
-        $this->tags = array();
+        $this->tags->clear();
 
         return $this;
     }
-
 }

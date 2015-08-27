@@ -8,42 +8,27 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Related
  */
-abstract class Related
+abstract class Related extends AbstractModel
 {
     /**
-     * @var integer
-     */
-    protected $id;
-
-    /**
-     * @var string
+     * @var String
      */
     private $name;
 
     /**
-     * @var string
+     * @var String
      */
     private $slug;
 
     /**
-     * @var string
+     * @var String
      */
     private $description;
 
     /**
-     * @var string
+     * @var String
      */
     private $backgroundLink;
-
-    /**
-     * @var \DateTime
-     */
-    private $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    private $modifiedAt;
 
     /**
      * @var ArrayCollection
@@ -52,24 +37,13 @@ abstract class Related
 
     function __construct()
     {
-        $this->createdAt = new \DateTime();
-        $this->modifiedAt = new \DateTime();
+        parent::setCreatedAt();
         $this->articles = array();
     }
 
     /**
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     * @return Franchise
+     * @param $name
+     * @return $this
      */
     public function setName($name)
     {
@@ -79,9 +53,7 @@ abstract class Related
     }
 
     /**
-     * Get name
-     *
-     * @return string
+     * @return String
      */
     public function getName()
     {
@@ -89,10 +61,8 @@ abstract class Related
     }
 
     /**
-     * Set slug
-     *
-     * @param string $slug
-     * @return Franchise
+     * @param $slug
+     * @return $this
      */
     public function setSlug($slug)
     {
@@ -102,9 +72,7 @@ abstract class Related
     }
 
     /**
-     * Get slug
-     *
-     * @return string
+     * @return String
      */
     public function getSlug()
     {
@@ -112,10 +80,8 @@ abstract class Related
     }
 
     /**
-     * Set description
-     *
-     * @param string $description
-     * @return Franchise
+     * @param $description
+     * @return $this
      */
     public function setDescription($description)
     {
@@ -125,9 +91,7 @@ abstract class Related
     }
 
     /**
-     * Get description
-     *
-     * @return string
+     * @return String
      */
     public function getDescription()
     {
@@ -135,10 +99,8 @@ abstract class Related
     }
 
     /**
-     * Set backgroundLink
-     *
-     * @param string $backgroundLink
-     * @return Franchise
+     * @param $backgroundLink
+     * @return $this
      */
     public function setBackgroundLink($backgroundLink)
     {
@@ -148,57 +110,11 @@ abstract class Related
     }
 
     /**
-     * Get backgroundLink
-     *
-     * @return string
+     * @return String
      */
     public function getBackgroundLink()
     {
         return $this->backgroundLink;
-    }
-
-    /**
-     * Set modifiedAt
-     *
-     * @return \DateTime
-     */
-    public function setModifiedAt()
-    {
-        $this->modifiedAt = new \DateTime();
-
-        return $this;
-    }
-
-    /**
-     * Get modifiedAt
-     *
-     * @return \DateTime
-     */
-    public function getModifiedAt()
-    {
-        return $this->modifiedAt;
-    }
-
-    /**
-     * Set createdAt
-     *
-     * @return \DateTime
-     */
-    public function setCreatedAt()
-    {
-        $this->createdAt = new \DateTime();
-
-        return $this;
-    }
-
-    /**
-     * Get createdAt
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
     }
 
     /**
@@ -226,18 +142,21 @@ abstract class Related
         return $this;
     }
 
+    /**
+     * @return array
+     */
     public function getArticles()
     {
         return $this->articles->toArray();
     }
 
     /**
-     * @return string
+     * @return String
      */
     abstract public function getType();
 
     /**
-     * @return string
+     * @return String
      */
     function __toString()
     {

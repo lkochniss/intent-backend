@@ -11,22 +11,22 @@ use Doctrine\ORM\Mapping as ORM;
 class Event extends AbstractModel
 {
     /**
-     * @var string
+     * @var String
      */
     private $name;
 
     /**
-     * @var string
+     * @var String
      */
     private $description;
 
     /**
-     * @var string
+     * @var String
      */
     private $backgroundLink;
 
     /**
-     * @var string
+     * @var String
      */
     private $slug;
 
@@ -53,10 +53,8 @@ class Event extends AbstractModel
     }
 
     /**
-     * Set name
-     *
-     * @param string $name
-     * @return Event
+     * @param $name
+     * @return $this
      */
     public function setName($name)
     {
@@ -66,9 +64,7 @@ class Event extends AbstractModel
     }
 
     /**
-     * Get name
-     *
-     * @return string
+     * @return String
      */
     public function getName()
     {
@@ -76,10 +72,8 @@ class Event extends AbstractModel
     }
 
     /**
-     * Set description
-     *
-     * @param string $description
-     * @return Event
+     * @param $description
+     * @return $this
      */
     public function setDescription($description)
     {
@@ -89,9 +83,7 @@ class Event extends AbstractModel
     }
 
     /**
-     * Get description
-     *
-     * @return string
+     * @return String
      */
     public function getDescription()
     {
@@ -99,10 +91,8 @@ class Event extends AbstractModel
     }
 
     /**
-     * Set backgroundLink
-     *
-     * @param string $backgroundLink
-     * @return Event
+     * @param $backgroundLink
+     * @return $this
      */
     public function setBackgroundLink($backgroundLink)
     {
@@ -112,9 +102,7 @@ class Event extends AbstractModel
     }
 
     /**
-     * Get backgroundLink
-     *
-     * @return string
+     * @return String
      */
     public function getBackgroundLink()
     {
@@ -122,10 +110,8 @@ class Event extends AbstractModel
     }
 
     /**
-     * Set slug
-     *
-     * @param string $slug
-     * @return Event
+     * @param $slug
+     * @return $this
      */
     public function setSlug($slug)
     {
@@ -135,9 +121,7 @@ class Event extends AbstractModel
     }
 
     /**
-     * Get slug
-     *
-     * @return string
+     * @return String
      */
     public function getSlug()
     {
@@ -208,7 +192,7 @@ class Event extends AbstractModel
     }
 
     /**
-     * @return Article[]
+     * @return array
      */
     public function getArticles()
     {

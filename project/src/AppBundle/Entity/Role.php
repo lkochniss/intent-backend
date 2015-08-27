@@ -12,17 +12,17 @@ use Symfony\Component\Security\Core\Role\RoleInterface;
 class Role implements RoleInterface, \Serializable
 {
     /**
-     * @var integer
+     * @var Integer
      */
     private $id;
 
     /**
-     * @var string
+     * @var String
      */
     private $name;
 
     /**
-     * @var string
+     * @var String
      */
     private $role;
 
@@ -36,11 +36,8 @@ class Role implements RoleInterface, \Serializable
         $this->users = array();
     }
 
-
     /**
-     * Get id
-     *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -48,10 +45,8 @@ class Role implements RoleInterface, \Serializable
     }
 
     /**
-     * Set $name
-     *
-     * @param string $name
-     * @return Role
+     * @param $name
+     * @return $this
      */
     public function setName($name)
     {
@@ -61,9 +56,7 @@ class Role implements RoleInterface, \Serializable
     }
 
     /**
-     * Get $name
-     *
-     * @return string
+     * @return String
      */
     public function getName()
     {
@@ -71,10 +64,8 @@ class Role implements RoleInterface, \Serializable
     }
 
     /**
-     * Set role
-     *
-     * @param string $role
-     * @return Role
+     * @param $role
+     * @return $this
      */
     public function setRole($role)
     {
@@ -84,9 +75,7 @@ class Role implements RoleInterface, \Serializable
     }
 
     /**
-     * Get role
-     *
-     * @return string
+     * @return String
      */
     public function getRole()
     {
@@ -119,7 +108,7 @@ class Role implements RoleInterface, \Serializable
     }
 
     /**
-     * @return User[]
+     * @return array
      */
     public function getUsers()
     {

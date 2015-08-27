@@ -14,22 +14,22 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User extends AbstractModel implements AdvancedUserInterface, EquatableInterface, \Serializable
 {
     /**
-     * @var string
+     * @var String
      */
     private $username;
 
     /**
-     * @var string
+     * @var String
      */
     private $password;
 
     /**
-     * @var string
+     * @var String
      */
     private $email;
 
     /**
-     * @var boolean
+     * @var Boolean
      */
     private $isActive;
 
@@ -56,10 +56,8 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
     }
 
     /**
-     * Set username
-     *
-     * @param string $username
-     * @return User
+     * @param $username
+     * @return $this
      */
     public function setUsername($username)
     {
@@ -69,9 +67,7 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
     }
 
     /**
-     * Get username
-     *
-     * @return string
+     * @return String
      */
     public function getUsername()
     {
@@ -79,10 +75,8 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
     }
 
     /**
-     * Set password
-     *
-     * @param string $password
-     * @return User
+     * @param $password
+     * @return $this
      */
     public function setPassword($password)
     {
@@ -92,9 +86,7 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
     }
 
     /**
-     * Get password
-     *
-     * @return string
+     * @return String
      */
     public function getPassword()
     {
@@ -102,10 +94,8 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
     }
 
     /**
-     * Set email
-     *
-     * @param string $email
-     * @return User
+     * @param $email
+     * @return $this
      */
     public function setEmail($email)
     {
@@ -115,9 +105,7 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
     }
 
     /**
-     * Get email
-     *
-     * @return string
+     * @return String
      */
     public function getEmail()
     {
@@ -125,10 +113,8 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
     }
 
     /**
-     * Set isActive
-     *
-     * @param string $isActive
-     * @return User
+     * @param $isActive
+     * @return $this
      */
     public function setIsActive($isActive)
     {
@@ -138,9 +124,7 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
     }
 
     /**
-     * Get isActive
-     *
-     * @return boolean
+     * @return bool
      */
     public function getIsActive()
     {
@@ -225,13 +209,16 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
     }
 
     /**
-     * @return Article[]
+     * @return array
      */
     public function getArticles()
     {
-        return $this->articles;
+        return $this->articles->toArray();
     }
 
+    /**
+     * @return string
+     */
     public function serialize()
     {
         return serialize(
@@ -245,6 +232,9 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
         );
     }
 
+    /**
+     * @param string $serialized
+     */
     public function unserialize($serialized)
     {
         list(
@@ -257,26 +247,41 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
             = unserialize($serialized);
     }
 
+    /**
+     * @return null
+     */
     public function getSalt()
     {
         return null;
     }
 
+    /**
+     * @return bool
+     */
     public function isAccountNonexpired()
     {
         return true;
     }
 
+    /**
+     * @return bool
+     */
     public function isAccountNonLocked()
     {
         return true;
     }
 
+    /**
+     * @return bool
+     */
     public function isCredentialsNonExpired()
     {
         return true;
     }
 
+    /**
+     * @return bool
+     */
     public function isEnabled()
     {
         return $this->isActive;
@@ -287,6 +292,10 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
 
     }
 
+    /**
+     * @param UserInterface $user
+     * @return bool
+     */
     public function isEqualTo(UserInterface $user)
     {
         if ($user instanceof User) {

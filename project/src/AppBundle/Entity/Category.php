@@ -36,10 +36,8 @@ class Category extends AbstractModel
     }
 
     /**
-     * Set name
-     *
-     * @param string $name
-     * @return Category
+     * @param $name
+     * @return $this
      */
     public function setName($name)
     {
@@ -49,9 +47,7 @@ class Category extends AbstractModel
     }
 
     /**
-     * Get name
-     *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -59,10 +55,8 @@ class Category extends AbstractModel
     }
 
     /**
-     * Set slug
-     *
-     * @param string $slug
-     * @return Category
+     * @param $slug
+     * @return $this
      */
     public function setSlug($slug)
     {
@@ -72,9 +66,7 @@ class Category extends AbstractModel
     }
 
     /**
-     * Get slug
-     *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -140,6 +132,4 @@ class Category extends AbstractModel
     {
         return $this->name;
     }
-
-
 }

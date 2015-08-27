@@ -49,7 +49,7 @@ class PublisherFixtures extends AbstractFixture implements OrderedFixtureInterfa
 
         $this->addReference('publisher-'.$publisher->getName(), $publisher);
 
-        $manager->getRepository('AppBundle:Publisher')->save($publisher,$this->getReference('user-Admin'));
+        $manager->getRepository('AppBundle:Publisher')->save($publisher);
     }
 
     /**
