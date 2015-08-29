@@ -7,9 +7,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class ArticlePublishType
+ * Class PagePublishType
  */
-class ArticlePublishType extends AbstractType
+class PagePublishType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -22,16 +22,16 @@ class ArticlePublishType extends AbstractType
                 'publishAt',
                 'datetime',
                 array(
-                    'label' => 'article.published.at',
-                    'translation_domain' => 'article',
+                    'label' => 'page.published.at',
+                    'translation_domain' => 'page',
                 )
             )
             ->add(
                 'submit',
                 'submit',
                 array(
-                    'label' => 'article.publish',
-                    'translation_domain' => 'article',
+                    'label' => 'page.publish',
+                    'translation_domain' => 'page',
                 )
             );
     }
@@ -43,7 +43,7 @@ class ArticlePublishType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'AppBundle\Entity\Article',
+                'data_class' => 'AppBundle\Entity\Page',
             )
         );
     }
@@ -53,6 +53,6 @@ class ArticlePublishType extends AbstractType
      */
     public function getName()
     {
-        return 'article_publish';
+        return 'page_publish';
     }
 }

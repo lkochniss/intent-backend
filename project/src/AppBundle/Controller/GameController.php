@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Game;
+use AppBundle\Form\Type\GamePublishType;
 use AppBundle\Form\Type\GameType;
 
 class GameController extends AbstractRelatedController
@@ -21,6 +22,14 @@ class GameController extends AbstractRelatedController
     protected function getFormType()
     {
         return new GameType();
+    }
+
+    /**
+     * @return GamePublishType
+     */
+    protected function getPublishType()
+    {
+        return new GamePublishType();
     }
 
     /**

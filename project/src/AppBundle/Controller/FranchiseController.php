@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Franchise;
+use AppBundle\Form\Type\FranchisePublishType;
 use AppBundle\Form\Type\FranchiseType;
 
 class FranchiseController extends AbstractRelatedController
@@ -21,6 +22,14 @@ class FranchiseController extends AbstractRelatedController
     protected function getFormType()
     {
         return new FranchiseType();
+    }
+
+    /**
+     * @return FranchisePublishType
+     */
+    protected function getPublishType()
+    {
+        return new FranchisePublishType();
     }
 
     /**

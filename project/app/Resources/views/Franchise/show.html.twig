@@ -32,7 +32,12 @@
         </div>
     </div>
     <div class="col-md-3 meta">
-        {% trans from "franchise" %}franchise.publish{% endtrans %}
+        {% if is_granted('ROLE_PUBLISH_META') %}
+            <div class="col-md-3 meta">
+                {{ form_start(form) }}
+                {{ form_end(form) }}
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
 

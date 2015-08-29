@@ -8,13 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Event
  */
-class Event extends AbstractModel
+class Event extends AbstractMetaModel
 {
-    /**
-     * @var String
-     */
-    private $name;
-
     /**
      * @var String
      */
@@ -24,11 +19,6 @@ class Event extends AbstractModel
      * @var String
      */
     private $backgroundLink;
-
-    /**
-     * @var String
-     */
-    private $slug;
 
     /**
      * @var \DateTime
@@ -47,28 +37,10 @@ class Event extends AbstractModel
 
     function __construct()
     {
+        parent::__construct();
         $this->startAt = new \DateTime();
         $this->endAt = new \DateTime();
         $this->articles = array();
-    }
-
-    /**
-     * @param $name
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @return String
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 
     /**
@@ -107,25 +79,6 @@ class Event extends AbstractModel
     public function getBackgroundLink()
     {
         return $this->backgroundLink;
-    }
-
-    /**
-     * @param $slug
-     * @return $this
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * @return String
-     */
-    public function getSlug()
-    {
-        return $this->slug;
     }
 
     /**
@@ -204,7 +157,7 @@ class Event extends AbstractModel
      */
     function __toString()
     {
-        return $this->name;
+        return $this->getName();
     }
 
 

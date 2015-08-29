@@ -8,18 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Tag
  */
-class Tag extends AbstractModel
+class Tag extends AbstractMetaModel
 {
-    /**
-     * @var String
-     */
-    private $name;
-
-    /**
-     * @var String
-     */
-    private $slug;
-
     /**
      * @var ArrayCollection
      */
@@ -27,45 +17,8 @@ class Tag extends AbstractModel
 
     function __construct()
     {
+        parent::__construct();
         $this->articles = array();
-    }
-
-    /**
-     * @param $name
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @return String
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param $slug
-     * @return $this
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * @return String
-     */
-    public function getSlug()
-    {
-        return $this->slug;
     }
 
     /**

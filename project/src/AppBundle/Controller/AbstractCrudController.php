@@ -47,9 +47,10 @@ abstract class AbstractCrudController extends Controller
 
     /**
      * @param $id
+     * @param Request $request
      * @return Response
      */
-    public function showAction($id)
+    public function showAction($id, Request $request)
     {
         $entity = $this->getDoctrine()->getRepository($this->getEntityName())->find($id);
 

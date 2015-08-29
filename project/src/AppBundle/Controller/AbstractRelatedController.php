@@ -2,49 +2,32 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Related;
+use AppBundle\Entity\AbstractModel;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 abstract class AbstractRelatedController extends AbstractMetaController
 {
     /**
      * @param $id
-     * @return Response
+     * @param Request $request
+     * @return RedirectResponse|Response
      */
-    public function showAction($id)
+    public function showAction($id, Request $request)
     {
         $this->denyAccessUnlessGranted($this->getReadAccessLevel(), null, $this->getAccessDeniedMessage());
         $entity = $this->getDoctrine()->getRepository($this->getEntityName())->find($id);
 
-        $categories = $this->loopRelated($entity);
-
-
-        if (is_null($entity)) {
-            throw new NotFoundHttpException(
-                $this->get('translator')->trans(
-                    $this->getTranslationDomain().'.not_found',
-                    array(),
-                    $this->getTranslationDomain()
-                )
-            );
-        }
-
-        return $this->render(
-            sprintf('%s/show.html.twig', $this->getTemplateBasePath()),
-            array(
-                'entity' => $entity,
-                'categories' => $categories,
-            )
-        );
+        return $this->createAndHandlePublishForm($entity, $request, 'show', array('id' => $entity->getId()));
     }
 
     /**
-     * @param Related $entity
+     * @param $entity
      * @return array
      */
-    private function loopRelated(Related $entity)
+    private function loopRelated($entity)
     {
         $resultList = new ArrayCollection();
         $franchises = null;
@@ -100,7 +83,7 @@ abstract class AbstractRelatedController extends AbstractMetaController
      * @param ArrayCollection $resultList
      * @return ArrayCollection
      */
-    private function getArticlesByRelated(Related $related, ArrayCollection $resultList)
+    private function getArticlesByRelated($related, ArrayCollection $resultList)
     {
         $articles = $this->getDoctrine()->getRepository('AppBundle:Article')->findAll();
         foreach ($articles as $article) {
@@ -109,5 +92,44 @@ abstract class AbstractRelatedController extends AbstractMetaController
             }
         }
         return $resultList;
+    }
+
+    /**
+     * @param AbstractModel $entity
+     * @param $request
+     * @return RedirectResponse|Response
+     */
+    protected function createAndHandlePublishForm(AbstractModel $entity, $request, $action, $options = array())
+    {
+        $form = $this->createForm(
+            $this->getPublishType(),
+            $entity,
+            array(
+                'action' => $this->generateUrlForAction($action, $options),
+                'method' => 'POST',
+            )
+        );
+
+        if (in_array($request->getMethod(), ['POST'])) {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $this->handleValidForm($entity);
+                $entity->setPublished(true);
+
+                return $this->redirect($this->generateUrlForAction('edit', array('id' => $entity->getId())));
+            }
+        }
+
+        $categories = $this->loopRelated($entity);
+
+        return $this->render(
+            sprintf('%s/show.html.twig', $this->getTemplateBasePath()),
+            array(
+                'entity' => $entity,
+                'categories' => $categories,
+                'form' => $form->createView(),
+            )
+        );
     }
 }

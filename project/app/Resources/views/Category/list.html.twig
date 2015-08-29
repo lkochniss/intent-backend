@@ -20,7 +20,14 @@
                 <td>{{ category.name }}</td>
                 <td>{{ category.priority }}</td>
                 <td>{{ category.articles|length }}</td>
-                <td><a class="table-padding" href="{{ path('intent_backend_category_edit',{'id' : category.id}) }}"><span class="glyphicon glyphicon-pencil"/></a></td>
+                <td>
+                    <a class="table-padding" href="{{ path('intent_backend_category_edit',{'id' : category.id}) }}">
+                        <span class="glyphicon glyphicon-pencil"/>
+                    </a>
+                    <a class="table-padding" href="{{ path('intent_backend_category_show',{'id' : category.id}) }}">
+                        <span class="glyphicon glyphicon-eye-open"/>
+                    </a>
+                </td>
             </tr>
         {% endfor %}
         </tbody>

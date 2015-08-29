@@ -28,7 +28,14 @@
                 {% else %}
                     <td>&nbsp;</td>
                 {% endif %}
-                <td><a class="table-padding" href="{{ path('intent_backend_franchise_edit',{'id' : franchise.id}) }}"><span class="glyphicon glyphicon-pencil"/></a></td>
+                <td>
+                    <a class="table-padding" href="{{ path('intent_backend_franchise_edit',{'id' : franchise.id}) }}">
+                        <span class="glyphicon glyphicon-pencil"/>
+                    </a>
+                    <a class="table-padding" href="{{ path('intent_backend_franchise_show',{'id' : franchise.id}) }}">
+                        <span class="glyphicon glyphicon-eye-open"/>
+                    </a>
+                </td>
             </tr>
         {% endfor %}
         </tbody>

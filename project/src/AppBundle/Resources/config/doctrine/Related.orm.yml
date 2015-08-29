@@ -17,12 +17,6 @@ AppBundle\Entity\Related:
             generator:
                 strategy: AUTO
     fields:
-        name:
-            type: string
-            length: 255
-        slug:
-            type: string
-            length: 255
         description:
             type: text
             nullable: true

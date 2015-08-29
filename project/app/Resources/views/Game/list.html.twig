@@ -3,7 +3,8 @@
 {% block title %}{{ parent() }} {% trans from "game" %}game.list{% endtrans %}{% endblock %}
 
 {% block content %}
-    <a href="{{ path('intent_backend_game_create') }}" class="btn btn-default pull-right">{% trans from "game" %}game.create{% endtrans %}</a>
+    <a href="{{ path('intent_backend_game_create') }}" class="btn btn-default pull-right">{% trans from "game" %}
+        game.create{% endtrans %}</a>
     <h3>{% trans from "game" %}game.list{% endtrans %}</h3>
     <table class="table">
         <thead>
@@ -32,6 +33,9 @@
                 <td>{{ game.franchise.publisher.name }}</td>
                 <td>
                     <a class="table-padding" href="{{ path('intent_backend_game_edit',{'id' : game.id}) }}">
+                        <span class="glyphicon glyphicon-pencil"/>
+                    </a>
+                    <a class="table-padding" href="{{ path('intent_backend_game_show',{'id' : game.id}) }}">
                         <span class="glyphicon glyphicon-pencil"/>
                     </a>
                 </td>

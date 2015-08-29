@@ -49,29 +49,15 @@ abstract class AbstractMetaController extends AbstractCrudController
 
     /**
      * @param $id
-     * @return Response
+     * @param Request $request
+     * @return RedirectResponse|Response
      */
-    public function showAction($id)
+    public function showAction($id, Request $request)
     {
         $this->denyAccessUnlessGranted($this->getReadAccessLevel(), null, $this->getAccessDeniedMessage());
         $entity = $this->getDoctrine()->getRepository($this->getEntityName())->find($id);
 
-        if (is_null($entity)) {
-            throw new NotFoundHttpException(
-                $this->get('translator')->trans(
-                    $this->getTranslationDomain().'.not_found',
-                    array(),
-                    $this->getTranslationDomain()
-                )
-            );
-        }
-
-        return $this->render(
-            sprintf('%s/show.html.twig', $this->getTemplateBasePath()),
-            array(
-                'entity' => $entity,
-            )
-        );
+        return $this->createAndHandlePublishForm($entity, $request, 'show', array('id' => $entity->getId()));
     }
 
     /**
@@ -89,6 +75,11 @@ abstract class AbstractMetaController extends AbstractCrudController
             )
         );
     }
+
+    /**
+     * @return String
+     */
+    abstract protected function getPublishType();
 
     /**
      * @return String
@@ -113,6 +104,42 @@ abstract class AbstractMetaController extends AbstractCrudController
             $this->getTranslationDomain().'.access_denied',
             array(),
             $this->getTranslationDomain()
+        );
+    }
+
+    /**
+     * @param AbstractModel $entity
+     * @param $request
+     * @return RedirectResponse|Response
+     */
+    protected function createAndHandlePublishForm(AbstractModel $entity, $request, $action, $options = array())
+    {
+        $form = $this->createForm(
+            $this->getPublishType(),
+            $entity,
+            array(
+                'action' => $this->generateUrlForAction($action, $options),
+                'method' => 'POST',
+            )
+        );
+
+        if (in_array($request->getMethod(), ['POST'])) {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $this->handleValidForm($entity);
+                $entity->setPublished(true);
+
+                return $this->redirect($this->generateUrlForAction('edit', array('id' => $entity->getId())));
+            }
+        }
+
+        return $this->render(
+            sprintf('%s/show.html.twig', $this->getTemplateBasePath()),
+            array(
+                'entity' => $entity,
+                'form' => $form->createView(),
+            )
         );
     }
 }

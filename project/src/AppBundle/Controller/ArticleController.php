@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Article;
+use AppBundle\Form\Type\ArticlePublishType;
 use AppBundle\Form\Type\ArticleType;
 
 class ArticleController extends AbstractArticleController
@@ -21,6 +22,14 @@ class ArticleController extends AbstractArticleController
     protected function getFormType()
     {
         return new ArticleType();
+    }
+
+    /**
+     * @return ArticlePublishType
+     */
+    protected function getPublishType()
+    {
+        return new ArticlePublishType();
     }
 
     /**

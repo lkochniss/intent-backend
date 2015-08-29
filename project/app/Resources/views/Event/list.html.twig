@@ -28,7 +28,14 @@
                 </td>
                 <td>{{ event.startAt|date('d.m.Y') }}</td>
                 <td>{{ event.endAt|date('d.m.Y') }}</td>
-                <td><a class="table-padding" href="{{ path('intent_backend_event_edit',{'id' : event.id}) }}"><span class="glyphicon glyphicon-pencil"/></a></td>
+                <td>
+                    <a class="table-padding" href="{{ path('intent_backend_event_edit',{'id' : event.id}) }}">
+                        <span class="glyphicon glyphicon-pencil"/>
+                    </a>
+                    <a class="table-padding" href="{{ path('intent_backend_event_show',{'id' : event.id}) }}">
+                        <span class="glyphicon glyphicon-eye-open"/>
+                    </a>
+                </td>
             </tr>
         {% endfor %}
         </tbody>

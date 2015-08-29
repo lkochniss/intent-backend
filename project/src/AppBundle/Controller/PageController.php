@@ -3,9 +3,10 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Page;
+use AppBundle\Form\Type\PagePublishType;
 use AppBundle\Form\Type\PageType;
 
-class PageController extends AbstractCrudController
+class PageController extends AbstractArticleController
 {
     /**
      * @return Page
@@ -21,6 +22,14 @@ class PageController extends AbstractCrudController
     protected function getFormType()
     {
         return new PageType();
+    }
+
+    /**
+     * @return PagePublishType
+     */
+    protected function getPublishType()
+    {
+        return new PagePublishType();
     }
 
     /**

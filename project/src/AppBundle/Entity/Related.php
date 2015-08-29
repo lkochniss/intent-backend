@@ -8,18 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Related
  */
-abstract class Related extends AbstractModel
+abstract class Related extends AbstractMetaModel
 {
-    /**
-     * @var String
-     */
-    private $name;
-
-    /**
-     * @var String
-     */
-    private $slug;
-
     /**
      * @var String
      */
@@ -37,46 +27,8 @@ abstract class Related extends AbstractModel
 
     function __construct()
     {
-        parent::setCreatedAt();
+        parent::__construct();
         $this->articles = array();
-    }
-
-    /**
-     * @param $name
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @return String
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param $slug
-     * @return $this
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * @return String
-     */
-    public function getSlug()
-    {
-        return $this->slug;
     }
 
     /**
@@ -160,6 +112,6 @@ abstract class Related extends AbstractModel
      */
     function __toString()
     {
-        return $this->name.' ('.$this->getType().')';
+        return $this->getName().' ('.$this->getType().')';
     }
 }

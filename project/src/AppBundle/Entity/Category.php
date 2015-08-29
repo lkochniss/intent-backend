@@ -8,18 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Category
  */
-class Category extends AbstractModel
+class Category extends AbstractMetaModel
 {
-    /**
-     * @var string
-     */
-    private $name;
-
-    /**
-     * @var string
-     */
-    private $slug;
-
     /**
      * @var integer
      */
@@ -32,45 +22,8 @@ class Category extends AbstractModel
 
     function __construct()
     {
+        parent::__construct();
         $this->articles = array();
-    }
-
-    /**
-     * @param $name
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param $slug
-     * @return $this
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
     }
 
     /**
@@ -118,7 +71,7 @@ class Category extends AbstractModel
     }
 
     /**
-     * @return Article[]
+     * @return array
      */
     public function getArticles()
     {
@@ -130,6 +83,6 @@ class Category extends AbstractModel
      */
     function __toString()
     {
-        return $this->name;
+        return $this->getName();
     }
 }

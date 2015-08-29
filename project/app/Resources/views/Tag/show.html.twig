@@ -2,14 +2,13 @@
 
 {% block title %}
     {{ parent() }}
-    {% trans from "studio" %}studio.show{% endtrans %}
+    {% trans from "tag" %}tag.show{% endtrans %}
 {% endblock %}
 
 {% block content %}
     <div class="col-md-9 meta">
         <div class="content">
             <h2>{{ entity.name }}</h2>
-            {{ entity.description|raw }}
         </div>
         <div class="meta">
         </div>
