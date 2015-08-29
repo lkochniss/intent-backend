@@ -91,6 +91,9 @@ stfalcon_tinymce:
     tinymce_jquery: true
     selector: ".tinymce"
     language: %locale%
+    external_plugins:
+        filemanager:
+            url: "asset[js/tinymce/plugins/filemanager/plugin.js]"
     theme:
         advanced:
              plugins:
@@ -98,5 +101,6 @@ stfalcon_tinymce:
                  - "searchreplace wordcount visualblocks visualchars code fullscreen"
                  - "insertdatetime media nonbreaking save table contextmenu directionality"
                  - "emoticons template paste textcolor"
-             toolbar1: "insertfile undo redo | styleselect forecolor| bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+                 - "filemanager"
+             toolbar1: "filemanager insertfile undo redo | styleselect forecolor| bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
              image_advtab: true

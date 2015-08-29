@@ -1,7 +1,7 @@
-AppBundle\Entity\Image:
+AppBundle\Entity\Directory:
     type: entity
     table: null
-    repositoryClass: AppBundle\Repository\ImageRepository
+    repositoryClass: AppBundle\Repository\DirectoryRepository
     id:
         id:
             type: integer
@@ -12,8 +12,6 @@ AppBundle\Entity\Image:
         name:
             type: string
             length: 255
-        description:
-            type: text
         path:
             type: string
             length: 255
@@ -21,9 +19,19 @@ AppBundle\Entity\Image:
             type: string
             length: 255
             column: full_path
+
+    oneToMany:
+        childDirectories:
+            targetEntity: Directory
+            mappedBy: parentDirectory
+            column: child_directories
+        images:
+            targetEntity: Image
+            mappedBy: parentDirectory
     manyToOne:
         parentDirectory:
             targetEntity: Directory
-            inversedBy: images
+            inversedBy: childDirectories
             column: parent_directory
+            nullable: true
     lifecycleCallbacks: {  }

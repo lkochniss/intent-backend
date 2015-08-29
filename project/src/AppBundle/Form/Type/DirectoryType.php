@@ -9,7 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * Class FilemanagerType
  */
-class FilemanagerType extends AbstractType
+class DirectoryType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -43,7 +43,7 @@ class FilemanagerType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-
+                'data_class' => 'AppBundle\Entity\Directory',
             )
         );
     }
@@ -53,6 +53,6 @@ class FilemanagerType extends AbstractType
      */
     public function getName()
     {
-        return 'filemanager';
+        return 'directory';
     }
 }

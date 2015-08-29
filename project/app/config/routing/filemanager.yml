@@ -1,17 +1,11 @@
 intent_backend_filemanager_upload:
-    path:     /{popup}/upload/{path}
-    defaults: { _controller: AppBundle:Filemanager:upload, popup: 0, path: '' }
-    requirements:
-        path: .+
+    path:     /{popup}/upload/{id}
+    defaults: { _controller: AppBundle:Filemanager:upload, popup: 0, id: 0 }
 
 intent_backend_filemanager_create:
-    path:     /{popup}/create/{path}
-    defaults: { _controller: AppBundle:Filemanager:create, popup: 0, path: '' }
-    requirements:
-        path: .+
+    path:     /{popup}/create/{id}
+    defaults: { _controller: AppBundle:Filemanager:create, popup: 0, id: 0 }
 
 intent_backend_filemanager_list:
-    path:     /{popup}/{path}
-    defaults: { _controller: AppBundle:Filemanager:list, popup: 0, path: '' }
-    requirements:
-        path: .+
+    path:     /{popup}/{id}
+    defaults: { _controller: AppBundle:Filemanager:list, popup: 0, id: 0 }

@@ -1,45 +1,48 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}{{ parent() }}{% trans from "filemanager" %}filemanager.list{% endtrans %}{% endblock %}
+{% block title %}{{ parent() }} {% trans from "filemanager" %}filemanager.list{% endtrans %}{% endblock %}
 
 {% block body %}
     <div class="col-md-12">
-        <h3>{{ currentDirectory }}</h3>
-        <a href="{{ path('intent_backend_filemanager_create', {'path': currentDirectory }) }}"
-            class="btn btn-default pull-right">{% trans from "filemanager" %}filemanager.create{% endtrans %}
+        <h3 class="col-md-3">{{ currentDirectory }}</h3>
+        <a href="{{ path('intent_backend_filemanager_create', {'popup': 1, 'id': currentDirectory.id }) }}"
+           class="btn btn-default pull-right">{% trans from "filemanager" %}filemanager.create{% endtrans %}
+        </a>
+        <a href="{{ path('intent_backend_filemanager_upload', {'popup': 1, 'id': currentDirectory.id }) }}"
+           class="btn btn-default pull-right">{% trans from "filemanager" %}filemanager.upload{% endtrans %}
         </a>
     </div>
     <div class="fileexplorer col-md-9">
 
-        {% if back is not null %}
+        {% if back == false %}
             <figure class="directory col-md-2">
-                <a href="{{ path('intent_backend_filemanager_list', { 'path': back}) }}">
+                <a href="{{ path('intent_backend_filemanager_list', { 'popup': 1, 'id': currentDirectory.parentDirectory.id}) }}">
                     <span class="glyphicon glyphicon-arrow-up"/>
                 </a>
                 <figcaption>
-                    <a href="{{ path('intent_backend_filemanager_list', { 'path': back}) }}">
+                    <a href="{{ path('intent_backend_filemanager_list', { 'popup': 1, 'id': currentDirectory.parentDirectory.id}) }}">
                         {% trans from "filemanager" %} filemanager.up {% endtrans %}
                     </a>
                 </figcaption>
             </figure>
         {% endif %}
 
-        {% for key, directory in directories %}
+        {% for directory in currentDirectory.childDirectories %}
             <figure class="directory directory col-md-2">
-                <a href="{{ path('intent_backend_filemanager_list', { 'path': currentDirectory  ~ '/' ~ key }) }}">
+                <a href="{{ path('intent_backend_filemanager_list', { 'popup': 1, 'id': directory.id}) }}">
                     <span class="glyphicon glyphicon-folder-open"/>
                 </a>
                 <figcaption>
-                    <a href="{{ path('intent_backend_filemanager_list', { 'path': currentDirectory  ~ '/' ~ key }) }}">
-                        {{ key }}
+                    <a href="{{ path('intent_backend_filemanager_list', {'popup': 1, 'id': directory.id }) }}">
+                        {{ directory.name }}
                     </a>
                 </figcaption>
             </figure>
         {% endfor %}
-        {% for key, file in files %}
+        {% for image in currentDirectory.images %}
             <figure class="file directory col-md-2">
-                <img class="img-responsive " src="{{ asset( file ~ '/' ~ key ) }}"/>
-                <figcaption>{{ key }}</figcaption>
+                <img class="img-responsive " src="{{ asset( image.fullPath ) }}"/>
+                <figcaption>{{ image.name }}</figcaption>
             </figure>
         {% endfor %}
     </div>
@@ -48,13 +51,14 @@
 {% endblock %}
 
 {% block javascripts %}
+    {{ parent() }}
     <script type="application/javascript">
         $('.file img').click(function () {
             console.log($(this).attr('src'));
             var html = '' +
-                    '<h3>Preview</h3>' +
-                    '<img class="img-responsive" src="'+$(this).attr('src')+'"/>' +
-                    '<p>URL:'+$(this).attr('src')+'</p>';
+                    '<figure>' +
+                    '<img class="img-responsive" src="' + $(this).attr('src') + '"/>' +
+                    '<figcaption>' + $(this).attr('src') + '<figcaption>';
 
             console.log(html);
             $('.filepreview').html(html);

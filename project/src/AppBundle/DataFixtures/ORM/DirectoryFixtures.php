@@ -3,19 +3,20 @@
 namespace AppBundle\DataFixtures\ORM;
 
 use AppBUndle\Entity\Category;
+use AppBundle\Entity\Directory;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class CategoryFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class DirectoryFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     private $container;
 
     public function load(ObjectManager $manager)
     {
-        $dataDirectory = __DIR__.'/../data/categories';
+        $dataDirectory = __DIR__.'/../data/directories';
         $directory = opendir($dataDirectory);
 
         $count = 0;
@@ -27,7 +28,7 @@ class CategoryFixtures extends AbstractFixture implements OrderedFixtureInterfac
 
             $count++;
 
-            $this->saveCategory($manager, $dataDirectory.DIRECTORY_SEPARATOR.$file, $count);
+            $this->SaveDirectory($manager, $dataDirectory.DIRECTORY_SEPARATOR.$file, $count);
         }
         $manager->flush();
     }
@@ -37,20 +38,16 @@ class CategoryFixtures extends AbstractFixture implements OrderedFixtureInterfac
      * @param $path
      * @param $count
      */
-    public function saveCategory(ObjectManager $manager, $path, $count)
+    public function SaveDirectory(ObjectManager $manager, $path, $count)
     {
-        $categoryData = json_decode(file_get_contents($path), true);
+        $directoryData = json_decode(file_get_contents($path), true);
 
-        $category = new Category();
-        $category->setName($categoryData['name']);
-        $slug = preg_replace("/[^a-z0-9]+/", "-", strtolower($category->getName()));
-        $category->setSlug($slug);
-        $category->setPriority($categoryData['order']);
-        $category->setPublished(true);
+        $directory = new Directory();
+        $directory->setName($directoryData['name']);
 
-        $this->addReference('category-'.$category->getName(), $category);
+        $this->addReference('directory-'.$directory->getName(), $directory);
 
-        $manager->getRepository('AppBundle:Category')->save($category);
+        $manager->getRepository('AppBundle:Directory')->save($directory);
     }
 
     /**
@@ -66,6 +63,6 @@ class CategoryFixtures extends AbstractFixture implements OrderedFixtureInterfac
      */
     public function getOrder()
     {
-        return 9;
+        return 3;
     }
 }

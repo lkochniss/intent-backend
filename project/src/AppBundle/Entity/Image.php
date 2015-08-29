@@ -13,25 +13,40 @@ class Image extends AbstractModel
     /**
      * @var String
      */
-    private $fileName;
+    private $name;
 
     /**
      * @var String
      */
-    private $fileExtension;
+    private $description;
+
+    /**
+     * @var String
+     */
+    private $path;
+
+    /**
+     * @var String
+     */
+    private $fullPath;
+
+    /**
+     * @var Directory
+     */
+    private $parentDirectory;
 
     /**
      * @var UploadedFile
      */
-    private $uploadedFile;
+    private $file;
 
     /**
-     * @param $fileName
+     * @param $name
      * @return $this
      */
-    public function setFileName($fileName)
+    public function setName($name)
     {
-        $this->fileName = $fileName;
+        $this->name = $name;
 
         return $this;
     }
@@ -39,43 +54,113 @@ class Image extends AbstractModel
     /**
      * @return String
      */
-    public function getFileName()
+    public function getName()
     {
-        return $this->fileName;
+        return $this->name;
     }
 
     /**
-     * @param $fileExtension
+     * @param String $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return String
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param $path
      * @return $this
      */
-    public function setFileExtension($fileExtension)
+    public function setPath($path)
     {
-        $this->fileExtension = $fileExtension;
+        $this->path = $path;
+        $this->resetFullPath();
 
         return $this;
     }
 
     /**
-     * @return string
+     * @return String
      */
-    public function getFileExtension()
+    public function getPath()
     {
-        return $this->fileExtension;
+        return $this->path;
+    }
+
+    /**
+     * @return Directory
+     */
+    public function getParentDirectory()
+    {
+        return $this->parentDirectory;
+    }
+
+    /**
+     * @return String
+     */
+    public function getFullPath()
+    {
+        return $this->fullPath;
+    }
+
+    /**
+     * @return String
+     */
+    public function resetFullPath()
+    {
+        if (is_null($this->parentDirectory)) {
+            $this->fullPath = $this->path;
+        } else {
+            $this->fullPath = $this->parentDirectory->getFullPath().'/'.$this->path;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Directory $parentDirectory
+     */
+    public function setParentDirectory(Directory $parentDirectory)
+    {
+        $this->parentDirectory = $parentDirectory;
+    }
+
+    /**
+     * @param UploadedFile|null $file
+     */
+    public function setFile(UploadedFile $file = null)
+    {
+        $this->file = $file;
     }
 
     /**
      * @return UploadedFile
      */
-    public function getUploadedFile()
+    public function getFile()
     {
-        return $this->uploadedFile;
+        return $this->file;
     }
 
-    /**
-     * @param UploadedFile|null $uploadedFile
-     */
-    public function setUploadedFile($uploadedFile = null)
+    public function upload()
     {
-        $this->uploadedFile = $uploadedFile;
+        $this->setPath($this->path.'.'.$this->getFile()->guessExtension());
+        if (null === $this->getFile()) {
+            return;
+        }
+
+        $this->getFile()->move(
+            $this->parentDirectory->getFullPath(),
+            $this->path
+        );
+
+        $this->file = null;
     }
 }
