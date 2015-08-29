@@ -8,6 +8,7 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Filesystem\Filesystem;
 
 class ArticleFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
@@ -39,43 +40,53 @@ class ArticleFixtures extends AbstractFixture implements OrderedFixtureInterface
      */
     public function saveArticle(ObjectManager $manager, $path, $count)
     {
-        $articleData = json_decode(file_get_contents($path), true);
+        $xml = new \SimpleXMLElement(file_get_contents($path));
+        foreach ($xml->channel->item as $item) {
 
-        $article = new Article();
-        $article->setTitle($articleData['title']);
-        $article->setContent($articleData['content']);
-        $article->setPublishAt(new \DateTime($articleData['publishAt']));
+            $namespaces = $item->getNameSpaces(true);
+            $dc = $item->children($namespaces['dc']);
+            $content = $item->children($namespaces['content']);
+            $wp = $item->children($namespaces['wp']);
 
-        $article->setCategory($this->getReference('category-'.$articleData['category']));
-        $article->setRelated($this->getReference($articleData['type'].'-'.$articleData['related']));
+            //<category domain="category" nicename="featured"><![CDATA[Featured]]></category>
 
 
-        if ($articleData['event']) {
-            $article->setEvent($this->getReference('event-'.$articleData['event']));
-        }
+            $article = new Article();
+            $article->setTitle("$item->title");
+            $article->setPublishAt(new \DateTime("$wp->post_date"));
+            $article->setPublished(true);
+            $article->setContent("$content->encoded");
+            foreach ($item->category as $category) {
+                foreach ($category->attributes() as $a => $b) {
+                    if ($b == 'category') {
+                        $article->setCategory($this->getReference('category-'."$category"));
+                    }
+                }
+            }
 
-        $this->addReference('article-'.$article->getTitle(), $article);
-
-        if ($articleData['author']) {
-            $manager->getRepository('AppBundle:Article')->save($article,$this->getReference('user-'.$articleData['author']));
-        }else{
-            $manager->getRepository('AppBundle:Article')->save($article,$this->getReference('user-Admin'));
+            $manager->getRepository('AppBundle:Article')->save(
+                $article,
+                $this->getReference('user-'."$dc->creator")
+            );
         }
     }
 
     /**
      * @param ContainerInterface|null $containerInterface
      */
-    public function setContainer(ContainerInterface $containerInterface = null)
-    {
+    public
+    function setContainer(
+        ContainerInterface $containerInterface = null
+    ) {
         $this->container = $containerInterface;
     }
 
     /**
      * @return int
      */
-    public function getOrder()
+    public
+    function getOrder()
     {
-        return 9;
+        return 10;
     }
 }

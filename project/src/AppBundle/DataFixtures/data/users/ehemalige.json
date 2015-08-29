@@ -1,0 +1,9 @@
+{
+    "username": "Ehemalige",
+    "password": "admin",
+    "email": "redaktion@int-ent.de",
+    "roles": {
+        "Admin" : "Admin"
+    },
+    "isActive" : "1"
+}
