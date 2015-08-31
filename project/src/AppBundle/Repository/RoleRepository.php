@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Role;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -9,4 +10,9 @@ use Doctrine\ORM\EntityRepository;
  */
 class RoleRepository extends EntityRepository
 {
+    public function save(Role $role)
+    {
+        $this->getEntityManager()->persist($role);
+        $this->getEntityManager()->flush();
+    }
 }
