@@ -3,6 +3,7 @@
 namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Franchise;
+use AppBundle\SimpleXMLExtended;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -15,49 +16,29 @@ class FranchiseFixtures extends AbstractFixture implements OrderedFixtureInterfa
 
     public function load(ObjectManager $manager)
     {
-        $dataDirectory = __DIR__.'/../data/franchises';
-        $directory = opendir($dataDirectory);
+        $xml = new SimpleXMLExtended(file_get_contents('web/export/franchise.xml'));
 
-        $count = 0;
+        foreach ($xml->item as $item) {
+            $franchise = new Franchise();
+            $franchise->setName("$item->name");
+            $franchise->setDescription("$item->description");
+            $franchise->setPublished(intval("$item->published"));
+            $franchise->setBackgroundLink("$item->backgroundLink");
 
-        while (false !== $file = readdir($directory)) {
-            if ('.' === substr($file, 0, 1)) {
-                continue;
+            if("$item->publisher" != ""){
+                $franchise->setPublisher($this->getReference("$item->publisher"));
             }
 
-            $count++;
+            if("$item->studio" != ""){
+                $franchise->setStudio($this->getReference("$item->studio"));
+            }
 
-            $this->saveFranchise($manager, $dataDirectory.DIRECTORY_SEPARATOR.$file, $count);
+            $manager->getRepository('AppBundle:Franchise')->save(
+                $franchise
+            );
+
+            $this->addReference('franchise-'.$franchise->getSlug(), $franchise);
         }
-        $manager->flush();
-    }
-
-    /**
-     * @param ObjectManager $manager
-     * @param $path
-     * @param $count
-     */
-    public function saveFranchise(ObjectManager $manager, $path, $count)
-    {
-        $franchiseData = json_decode(file_get_contents($path), true);
-
-        $franchise = new Franchise();
-        $franchise->setName($franchiseData['name']);
-        $franchise->setDescription($franchiseData['description']);
-        $slug = preg_replace("/[^a-z0-9]+/", "-", strtolower($franchise->getName()));
-        $franchise->setSlug($slug);
-
-        if($franchiseData['publisher']){
-            $franchise->setPublisher($this->getReference('publisher-'.$franchiseData['publisher']));
-        }
-
-        if($franchiseData['studio']){
-            $franchise->setStudio($this->getReference('studio-'.$franchiseData['studio']));
-        }
-
-        $this->addReference('franchise-'.$franchise->getName(), $franchise);
-
-        $manager->getRepository('AppBundle:Franchise')->save($franchise);
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Game;
+use AppBundle\SimpleXMLExtended;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -15,47 +16,29 @@ class GameFixtures extends AbstractFixture implements OrderedFixtureInterface, C
 
     public function load(ObjectManager $manager)
     {
-        $dataDirectory = __DIR__.'/../data/games';
-        $directory = opendir($dataDirectory);
+        $xml = new SimpleXMLExtended(file_get_contents('web/export/game.xml'));
 
-        $count = 0;
+        foreach ($xml->item as $item) {
+            $game = new Game();
+            $game->setName("$item->name");
+            $game->setDescription("$item->description");
+            $game->setPublished(intval("$item->published"));
+            $game->setBackgroundLink("$item->backgroundLink");
 
-        while (false !== $file = readdir($directory)) {
-            if ('.' === substr($file, 0, 1)) {
-                continue;
+            if ("$item->franchise" != "") {
+                $game->setFranchise($this->getReference("$item->franchise"));
             }
 
-            $count++;
+            if ("$item->studio" != "") {
+                $game->setStudio($this->getReference("$item->studio"));
+            }
 
-            $this->saveGame($manager, $dataDirectory.DIRECTORY_SEPARATOR.$file, $count);
+            $manager->getRepository('AppBundle:Game')->save(
+                $game
+            );
+
+            $this->addReference('game-'.$game->getSlug(), $game);
         }
-        $manager->flush();
-    }
-
-    /**
-     * @param ObjectManager $manager
-     * @param $path
-     * @param $count
-     */
-    public function saveGame(ObjectManager $manager, $path, $count)
-    {
-        $gameData = json_decode(file_get_contents($path), true);
-
-        $game = new Game();
-        $game->setName($gameData['name']);
-        $game->setDescription($gameData['description']);
-        $slug = preg_replace("/[^a-z0-9]+/", "-", strtolower($game->getName()));
-        $game->setSlug($slug);
-        if (($gameData['studio'])){
-            $game->setStudio($this->getReference('studio-'.$gameData['studio']));
-        }
-        if (($gameData['franchise'])){
-            $game->setFranchise($this->getReference('franchise-'.$gameData['franchise']));
-        }
-
-        $this->addReference('game-'.$game->getName(), $game);
-
-        $manager->getRepository('AppBundle:Game')->save($game);
     }
 
     /**

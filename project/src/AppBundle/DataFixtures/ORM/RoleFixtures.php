@@ -2,7 +2,8 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
-use AppBUndle\Entity\Role;
+use AppBundle\Entity\Role;
+use AppBundle\SimpleXMLExtended;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -15,21 +16,19 @@ class RoleFixtures extends AbstractFixture implements OrderedFixtureInterface, C
 
     public function load(ObjectManager $manager)
     {
-        $dataDirectory = __DIR__.'/../data/roles';
-        $directory = opendir($dataDirectory);
+        $xml = new SimpleXMLExtended(file_get_contents('web/export/role.xml'));
 
-        $count = 0;
+        foreach ($xml->item as $item) {
+            $role = new Role();
+            $role->setName("$item->name");
+            $role->setRole("$item->role");
 
-        while (false !== $file = readdir($directory)) {
-            if ('.' === substr($file, 0, 1)) {
-                continue;
-            }
+            $manager->getRepository('AppBundle:Role')->save(
+                $role
+            );
 
-            $count++;
-
-            $this->saveRole($manager, $dataDirectory.DIRECTORY_SEPARATOR.$file, $count);
+            $this->addReference('role-'.$role->getName(), $role);
         }
-        $manager->flush();
     }
 
     /**

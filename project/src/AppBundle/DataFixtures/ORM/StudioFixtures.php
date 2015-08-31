@@ -3,6 +3,7 @@
 namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Studio;
+use AppBundle\SimpleXMLExtended;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -15,41 +16,21 @@ class StudioFixtures extends AbstractFixture implements OrderedFixtureInterface,
 
     public function load(ObjectManager $manager)
     {
-        $dataDirectory = __DIR__.'/../data/studios';
-        $directory = opendir($dataDirectory);
+        $xml = new SimpleXMLExtended(file_get_contents('web/export/studio.xml'));
 
-        $count = 0;
+        foreach ($xml->item as $item) {
+            $studio = new Studio();
+            $studio->setName("$item->name");
+            $studio->setDescription("$item->description");
+            $studio->setPublished(intval("$item->published"));
+            $studio->setBackgroundLink("$item->backgroundLink");
 
-        while (false !== $file = readdir($directory)) {
-            if ('.' === substr($file, 0, 1)) {
-                continue;
-            }
+            $manager->getRepository('AppBundle:Studio')->save(
+                $studio
+            );
 
-            $count++;
-
-            $this->saveStudio($manager, $dataDirectory.DIRECTORY_SEPARATOR.$file, $count);
+            $this->addReference('studio-'.$studio->getSlug(), $studio);
         }
-        $manager->flush();
-    }
-
-    /**
-     * @param ObjectManager $manager
-     * @param $path
-     * @param $count
-     */
-    public function saveStudio(ObjectManager $manager, $path, $count)
-    {
-        $studioData = json_decode(file_get_contents($path), true);
-
-        $studio = new Studio();
-        $studio->setName($studioData['name']);
-        $studio->setDescription($studioData['description']);
-        $slug = preg_replace("/[^a-z0-9]+/", "-", strtolower($studio->getName()));
-        $studio->setSlug($slug);
-
-        $this->addReference('studio-'.$studio->getName(), $studio);
-
-        $manager->getRepository('AppBundle:Studio')->save($studio);
     }
 
     /**

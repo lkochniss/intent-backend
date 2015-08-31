@@ -2,7 +2,8 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
-use AppBUndle\Entity\Category;
+use AppBundle\Entity\Category;
+use AppBundle\SimpleXMLExtended;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -15,42 +16,19 @@ class CategoryFixtures extends AbstractFixture implements OrderedFixtureInterfac
 
     public function load(ObjectManager $manager)
     {
-        $dataDirectory = __DIR__.'/../data/categories';
-        $directory = opendir($dataDirectory);
+        $xml = new SimpleXMLExtended(file_get_contents('web/export/category.xml'));
 
-        $count = 0;
+        foreach ($xml->item as $item) {
+            $category = new Category();
+            $category->setName("$item->name");
+            $category->setPublished(intval("$item->published"));
+            $category->setPriority(intval("$item->priority"));
 
-        while (false !== $file = readdir($directory)) {
-            if ('.' === substr($file, 0, 1)) {
-                continue;
-            }
-
-            $count++;
-
-            $this->saveCategory($manager, $dataDirectory.DIRECTORY_SEPARATOR.$file, $count);
+            $manager->getRepository('AppBundle:Category')->save(
+                $category
+            );
+            $this->addReference('category-'.$category->getSlug(), $category);
         }
-        $manager->flush();
-    }
-
-    /**
-     * @param ObjectManager $manager
-     * @param $path
-     * @param $count
-     */
-    public function saveCategory(ObjectManager $manager, $path, $count)
-    {
-        $categoryData = json_decode(file_get_contents($path), true);
-
-        $category = new Category();
-        $category->setName($categoryData['name']);
-        $slug = preg_replace("/[^a-z0-9]+/", "-", strtolower($category->getName()));
-        $category->setSlug($slug);
-        $category->setPriority($categoryData['order']);
-        $category->setPublished(true);
-
-        $this->addReference('category-'.$category->getName(), $category);
-
-        $manager->getRepository('AppBundle:Category')->save($category);
     }
 
     /**

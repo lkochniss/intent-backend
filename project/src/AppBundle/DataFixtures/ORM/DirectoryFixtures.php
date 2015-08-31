@@ -2,8 +2,8 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
-use AppBUndle\Entity\Category;
 use AppBundle\Entity\Directory;
+use AppBundle\SimpleXMLExtended;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -16,38 +16,22 @@ class DirectoryFixtures extends AbstractFixture implements OrderedFixtureInterfa
 
     public function load(ObjectManager $manager)
     {
-        $dataDirectory = __DIR__.'/../data/directories';
-        $directory = opendir($dataDirectory);
+        $xml = new SimpleXMLExtended(file_get_contents('web/export/directory.xml'));
 
-        $count = 0;
+        foreach ($xml->item as $item) {
+            $directory = new Directory();
+            $directory->setName("$item->name");
+            $directory->setPath("$item->path");
 
-        while (false !== $file = readdir($directory)) {
-            if ('.' === substr($file, 0, 1)) {
-                continue;
+            if("$item->parent" != ""){
+                $directory->setParentDirectory($this->getReference('directory-'."$item->parent"));
             }
 
-            $count++;
-
-            $this->SaveDirectory($manager, $dataDirectory.DIRECTORY_SEPARATOR.$file, $count);
+            $manager->getRepository('AppBundle:Directory')->save(
+                $directory
+            );
+            $this->addReference('directory-'.$directory->getName(), $directory);
         }
-        $manager->flush();
-    }
-
-    /**
-     * @param ObjectManager $manager
-     * @param $path
-     * @param $count
-     */
-    public function SaveDirectory(ObjectManager $manager, $path, $count)
-    {
-        $directoryData = json_decode(file_get_contents($path), true);
-
-        $directory = new Directory();
-        $directory->setName($directoryData['name']);
-
-        $this->addReference('directory-'.$directory->getName(), $directory);
-
-        $manager->getRepository('AppBundle:Directory')->save($directory);
     }
 
     /**

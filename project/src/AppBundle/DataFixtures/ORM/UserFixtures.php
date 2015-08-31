@@ -2,7 +2,8 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
-use AppBUndle\Entity\User;
+use AppBundle\Entity\User;
+use AppBundle\SimpleXMLExtended;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -15,52 +16,25 @@ class UserFixtures extends AbstractFixture implements OrderedFixtureInterface, C
 
     public function load(ObjectManager $manager)
     {
-        $dataDirectory = __DIR__.'/../data/users';
-        $directory = opendir($dataDirectory);
+        $xml = new SimpleXMLExtended(file_get_contents('web/export/user.xml'));
 
-        $count = 0;
+        foreach ($xml->item as $item) {
+            $user = new User();
+            $user->setUsername("$item->username");
+            $user->setEmail("$item->email");
+            $user->setIsActive("$item->active");
+            $user->setPassword("$item->password");
 
-        while (false !== $file = readdir($directory)) {
-            if ('.' === substr($file, 0, 1)) {
-                continue;
-            }
+            foreach ($item->role as $role) {
+                $user->addRole($this->getReference("$role"));
+            }#46
 
-            $count++;
+            $manager->getRepository('AppBundle:User')->save(
+                $user
+            );
 
-            $this->saveUser($manager, $dataDirectory.DIRECTORY_SEPARATOR.$file, $count);
+            $this->addReference('user-'.$user->getUsername(), $user);
         }
-        $manager->flush();
-    }
-
-    /**
-     * @param ObjectManager $manager
-     * @param $path
-     * @param $count
-     */
-    public function saveUser(ObjectManager $manager, $path, $count)
-    {
-        $userData = json_decode(file_get_contents($path), true);
-
-        $user = new User();
-        $user->setUsername($userData['username']);
-        $user->setEmail($userData['email']);
-
-        $user->setIsActive($userData['isActive']);
-
-        $plainPassword = $userData['password'];
-
-        $encoder = $this->container->get('security.password_encoder');
-        $encodedPassword = $encoder->encodePassword($user,$plainPassword);
-
-        $user->setPassword($encodedPassword);
-
-        $this->addReference('user-'.$user->getUsername(), $user);
-
-        foreach ($userData['roles'] as $role) {
-            $user->addRole($this->getReference('role-'.$role));
-        }
-
-        $manager->getRepository('AppBundle:User')->save($user);
     }
 
     /**

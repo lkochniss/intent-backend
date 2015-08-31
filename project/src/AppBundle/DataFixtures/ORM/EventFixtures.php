@@ -3,6 +3,7 @@
 namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Event;
+use AppBundle\SimpleXMLExtended;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -15,43 +16,21 @@ class EventFixtures extends AbstractFixture implements OrderedFixtureInterface, 
 
     public function load(ObjectManager $manager)
     {
-        $dataDirectory = __DIR__.'/../data/events';
-        $directory = opendir($dataDirectory);
+        $xml = new SimpleXMLExtended(file_get_contents('web/export/event.xml'));
 
-        $count = 0;
+        foreach ($xml->item as $item) {
+            $event = new Event();
+            $event->setName("$item->name");
+            $event->setPublished(intval("$item->published"));
+            $event->setDescription("$item->description");
+            $event->setStartAt(new \DateTime("$item->startAt"));
+            $event->setEndAt(new \DateTime("$item->endAt"));
 
-        while (false !== $file = readdir($directory)) {
-            if ('.' === substr($file, 0, 1)) {
-                continue;
-            }
-
-            $count++;
-
-            $this->saveEvent($manager, $dataDirectory.DIRECTORY_SEPARATOR.$file, $count);
+            $manager->getRepository('AppBundle:Event')->save(
+                $event
+            );
+            $this->addReference('event-'.$event->getSlug(), $event);
         }
-        $manager->flush();
-    }
-
-    /**
-     * @param ObjectManager $manager
-     * @param $path
-     * @param $count
-     */
-    public function saveEvent(ObjectManager $manager, $path, $count)
-    {
-        $eventData = json_decode(file_get_contents($path), true);
-
-        $event = new Event();
-        $event->setName($eventData['name']);
-        $event->setDescription($eventData['description']);
-
-
-        $slug = preg_replace("/[^a-z0-9]+/", "-", strtolower($event->getName()));
-        $event->setSlug($slug);
-
-        $this->addReference('article-'.$event->getName(), $event);
-
-        $manager->getRepository('AppBundle:Event')->save($event);
     }
 
     /**
