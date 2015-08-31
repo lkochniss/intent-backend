@@ -5,6 +5,9 @@ intent_backend_login:
 intent_backend_login_check:
     path:   /login_check
 
+intent_backend_logout:
+    path:   /logout
+
 intent_backend_user:
     resource: routing/user.yml
     prefix:   /user
