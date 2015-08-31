@@ -54,6 +54,6 @@ class GameFixtures extends AbstractFixture implements OrderedFixtureInterface, C
      */
     public function getOrder()
     {
-        return 7;
+        return 9;
     }
 }

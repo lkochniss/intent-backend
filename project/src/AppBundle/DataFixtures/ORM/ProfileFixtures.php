@@ -2,7 +2,8 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
-use AppBundle\Entity\Publisher;
+use AppBundle\Entity\Directory;
+use AppBundle\Entity\Profile;
 use AppBundle\SimpleXMLExtended;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -10,26 +11,27 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class PublisherFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class ProfileFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     private $container;
 
     public function load(ObjectManager $manager)
     {
-        $xml = new SimpleXMLExtended(file_get_contents('web/export/publisher.xml'));
+        $xml = new SimpleXMLExtended(file_get_contents('web/export/profile.xml'));
 
         foreach ($xml->item as $item) {
-            $publisher = new Publisher();
-            $publisher->setName("$item->name");
-            $publisher->setDescription("$item->description");
-            $publisher->setPublished(intval("$item->published"));
-            $publisher->setBackgroundLink("$item->backgroundLink");
+            $profile = new Profile();
+            $profile->setName("$item->name");
+            $profile->setDescription("$item->description");
 
-            $manager->getRepository('AppBundle:Publisher')->save(
-                $publisher
+            if("$item->user" != ""){
+                $profile->setUser($this->getReference('user-'."$item->user"));
+            }
+
+            $manager->getRepository('AppBundle:Profile')->save(
+                $profile
             );
-
-            $this->addReference('publisher-'.$publisher->getSlug(), $publisher);
+            $this->addReference('profile-'.$profile->getName(), $profile);
         }
     }
 
@@ -46,6 +48,6 @@ class PublisherFixtures extends AbstractFixture implements OrderedFixtureInterfa
      */
     public function getOrder()
     {
-        return 6;
+        return 3;
     }
 }

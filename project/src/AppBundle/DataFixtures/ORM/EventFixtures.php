@@ -46,6 +46,6 @@ class EventFixtures extends AbstractFixture implements OrderedFixtureInterface, 
      */
     public function getOrder()
     {
-        return 8;
+        return 10;
     }
 }

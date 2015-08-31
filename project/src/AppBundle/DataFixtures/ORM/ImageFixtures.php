@@ -2,7 +2,8 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
-use AppBundle\Entity\Publisher;
+use AppBundle\Entity\Directory;
+use AppBundle\Entity\Image;
 use AppBundle\SimpleXMLExtended;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -10,26 +11,28 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class PublisherFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class ImageFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     private $container;
 
     public function load(ObjectManager $manager)
     {
-        $xml = new SimpleXMLExtended(file_get_contents('web/export/publisher.xml'));
+        $xml = new SimpleXMLExtended(file_get_contents('web/export/image.xml'));
 
         foreach ($xml->item as $item) {
-            $publisher = new Publisher();
-            $publisher->setName("$item->name");
-            $publisher->setDescription("$item->description");
-            $publisher->setPublished(intval("$item->published"));
-            $publisher->setBackgroundLink("$item->backgroundLink");
+            $image = new Image();
+            $image->setName("$item->name");
+            $image->setDescription("$item->description");
+            $image->setPath("$item->path");
 
-            $manager->getRepository('AppBundle:Publisher')->save(
-                $publisher
+            if("$item->parent" != ""){
+                $image->setParentDirectory($this->getReference('directory-'."$item->parent"));
+            }
+
+            $manager->getRepository('AppBundle:Image')->save(
+                $image
             );
-
-            $this->addReference('publisher-'.$publisher->getSlug(), $publisher);
+            $this->addReference('image-'.$image->getName(), $image);
         }
     }
 
@@ -46,6 +49,6 @@ class PublisherFixtures extends AbstractFixture implements OrderedFixtureInterfa
      */
     public function getOrder()
     {
-        return 6;
+        return 5;
     }
 }

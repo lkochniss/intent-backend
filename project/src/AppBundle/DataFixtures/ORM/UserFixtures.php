@@ -27,7 +27,7 @@ class UserFixtures extends AbstractFixture implements OrderedFixtureInterface, C
 
             foreach ($item->role as $role) {
                 $user->addRole($this->getReference("$role"));
-            }#46
+            }
 
             $manager->getRepository('AppBundle:User')->save(
                 $user
