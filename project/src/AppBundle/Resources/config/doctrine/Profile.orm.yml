@@ -19,5 +19,8 @@ AppBundle\Entity\Profile:
     oneToOne:
         user:
             targetEntity: User
-            mappedBy: profile
+            inversedBy: profile
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
     lifecycleCallbacks: {  }

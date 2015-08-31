@@ -24,10 +24,7 @@ AppBundle\Entity\User:
     oneToOne:
         profile:
             targetEntity: Profile
-            inversedBy: user
-            joinColumn:
-                name: user_id
-                referencedColumnName: id
+            mappedBy: user
     oneToMany:
         articles:
             targetEntity: Article
