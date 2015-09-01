@@ -5,7 +5,9 @@ game:
     delete:         Game löschen
     edit:           Game bearbeiten
     event:          aktive Events
-    franchise:      Franchise
+    franchise:
+        name:       Franchise
+        select:     Franchise auswählen
     list:           Gamesübersicht
     name:           Game
     not_found:      Game nicht gefunden
@@ -15,5 +17,7 @@ game:
         by:         Author
     publisher:      Publisher
     show:           Gamevorschau
-    studio:         Entwicklerstudio
+    studio:
+        name:       Entwicklerstudio
+        select:     Entwicklerstudio auswählen
     submit:         Game speichern

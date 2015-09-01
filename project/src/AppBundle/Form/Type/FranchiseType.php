@@ -42,22 +42,28 @@ class FranchiseType extends AbstractType
                 'publisher',
                 'entity',
                 array(
-                    'label' => 'franchise.publisher',
+                    'label' => 'franchise.publisher.name',
                     'translation_domain' => 'franchise',
                     'class' => 'AppBundle\Entity\Publisher',
                     'multiple' => false,
-                    'expanded' => false
+                    'expanded' => false,
+                    'placeholder' => 'franchise.publisher.select',
+                    'empty_data' => null,
+                    'required' => false,
                 )
             )
             ->add(
                 'studio',
                 'entity',
                 array(
-                    'label' => 'franchise.studio',
+                    'label' => 'franchise.studio.name',
                     'translation_domain' => 'franchise',
                     'class' => 'AppBundle\Entity\Studio',
                     'multiple' => false,
-                    'expanded' => false
+                    'expanded' => false,
+                    'placeholder' => 'franchise.studio.select',
+                    'empty_data' => null,
+                    'required' => false,
                 )
             )
             ->add(

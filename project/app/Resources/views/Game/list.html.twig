@@ -1,4 +1,4 @@
-{% extends "::base.html.twig" %}
+{% extends "::list.html.twig" %}
 
 {% block title %}{{ parent() }} {% trans from "game" %}game.list{% endtrans %}{% endblock %}
 
@@ -10,9 +10,8 @@
         <thead>
         <tr>
             <th>{% trans from "game" %}game.name{% endtrans %}</th>
-            <th>{% trans from "game" %}game.event{% endtrans %}</th>
-            <th>{% trans from "game" %}game.franchise{% endtrans %}</th>
-            <th>{% trans from "game" %}game.studio{% endtrans %}</th>
+            <th>{% trans from "game" %}game.franchise.name{% endtrans %}</th>
+            <th>{% trans from "game" %}game.studio.name{% endtrans %}</th>
             <th>{% trans from "game" %}game.publisher{% endtrans %}</th>
             <th>{% trans from "game" %}game.actions{% endtrans %}</th>
         </tr>
@@ -21,22 +20,31 @@
         {% for game in entities %}
             <tr>
                 <td>{{ game.name }}</td>
-                <td>
-                    {% for event in game.events %}
-                        {% if "now"|date("d.m.Y") >= event.startAt|date('d.m.Y') and "now"|date("d.m.Y") < event.endAt|date('d.m.Y') %}
-                            {{ event.name }}
-                        {% endif %}
-                    {% endfor %}
-                </td>
-                <td>{{ game.franchise.name }}</td>
-                <td>{{ game.studio.name }}</td>
-                <td>{{ game.franchise.publisher.name }}</td>
+                {% if game.franchise %}
+                    <td>{{ game.franchise.name }}</td>
+                {% else %}
+                    <td>&nbsp;</td>
+                {% endif %}
+                {% if game.studio %}
+                    <td>{{ game.studio.name }}</td>
+                {% else %}
+                    <td>&nbsp;</td>
+                {% endif %}
+                {% if game.franchise %}
+                    {% if game.franchise.publisher %}
+                        <td>{{ game.franchise.publisher.name }}</td>
+                    {% else %}
+                        <td>&nbsp;</td>
+                    {% endif %}
+                {% else %}
+                    <td>&nbsp;</td>
+                {% endif %}
                 <td>
                     <a class="table-padding" href="{{ path('intent_backend_game_edit',{'id' : game.id}) }}">
                         <span class="glyphicon glyphicon-pencil"/>
                     </a>
                     <a class="table-padding" href="{{ path('intent_backend_game_show',{'id' : game.id}) }}">
-                        <span class="glyphicon glyphicon-pencil"/>
+                        <span class="glyphicon glyphicon-eye-open"/>
                     </a>
                 </td>
             </tr>

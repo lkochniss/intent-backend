@@ -17,6 +17,7 @@
             {% trans from "franchise" %}franchise.edit{% endtrans %}
         {% endif %}
     </h1>
+    {{ form_start(form) }}
     <div class="col-md-9 editor">
         {{ form_row(form.name) }}
         {{ form_row(form.description) }}

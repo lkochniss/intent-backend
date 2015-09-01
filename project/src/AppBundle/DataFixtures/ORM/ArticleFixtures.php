@@ -26,16 +26,16 @@ class ArticleFixtures extends AbstractFixture implements OrderedFixtureInterface
             $article->setSlideshow(intval("$item->slideshow"));
             $article->setPublished(intval("$item->published"));
             $article->setPublishAt(new \DateTime("$item->publisehdAt"));
-            if("$item->referenceType" != ""){
-                $article->setRelated($this->getReference("$item->referenceType"."$item->reference"));
+            if("$item->relatedType" != ""){
+                $article->setRelated($this->getReference("$item->relatedType".'-'."$item->related"));
             }
 
             if("$item->category" != ""){
-                $article->setCategory($this->getReference("category-"."$item->category"));
+                $article->setCategory($this->getReference("$item->category"));
             }
 
             if("$item->event" != ""){
-                $article->setEvent($this->getReference("event-"."$item->event"));
+                $article->setEvent($this->getReference("$item->event"));
             }
             $manager->getRepository('AppBundle:Article')->save(
                 $article,

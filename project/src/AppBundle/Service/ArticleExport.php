@@ -62,12 +62,12 @@ class ArticleExport
 
             $item->category = null;
             if ($article->getCategory()) {
-                $item->category->addCData('category', $article->getCategory()->getSlug());
+                $item->category->addCData('category-'. $article->getCategory()->getSlug());
             }
 
             $item->event = null;
             if ($article->getEvent()) {
-                $item->event->addCData('event', $article->getEvent()->getSlug());
+                $item->event->addCData('event-'. $article->getEvent()->getSlug());
             }
         }
 
