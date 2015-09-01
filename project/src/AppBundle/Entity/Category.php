@@ -12,6 +12,10 @@ class Category extends AbstractMetaModel
 {
     /**
      * @var integer
+     *
+     * @Assert\Type(
+     *     type="integer"
+     * )
      */
     private $priority;
 

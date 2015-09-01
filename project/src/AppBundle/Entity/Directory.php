@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Directory
@@ -12,16 +13,22 @@ class Directory extends AbstractModel
 {
     /**
      * @var String
+     *
+     * @Assert\NotBlank()
      */
     private $name;
 
     /**
      * @var String
+     *
+     * @Assert\NotBlank()
      */
     private $path;
 
     /**
      * @var String
+     *
+     * @Assert\NotBlank()
      */
     private $fullPath;
 
@@ -31,7 +38,7 @@ class Directory extends AbstractModel
     private $parentDirectory;
 
     /**
-     * @var  ArrayCollection
+     * @var ArrayCollection
      */
     private $images;
 

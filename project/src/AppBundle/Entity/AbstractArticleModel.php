@@ -2,16 +2,19 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Article
+ * Class AbstractArticleModel
+ * @package AppBundle\Entity
  */
 abstract class AbstractArticleModel extends AbstractModel
 {
     /**
      * @var String
+     *
+     * @Assert\NotBlank()
      */
     private $title;
 
@@ -22,16 +25,24 @@ abstract class AbstractArticleModel extends AbstractModel
 
     /**
      * @var String
+     *
+     * @Assert\NotBlank()
      */
     private $content;
 
     /**
      * @var \DateTime
+     *
+     * @Assert\DateTime()
      */
     private $publishAt;
 
     /**
      * @var Boolean
+     *
+     * @Assert\Type(
+     *     type="bool"
+     * )
      */
     private $published;
 

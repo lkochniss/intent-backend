@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -15,21 +16,32 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
 {
     /**
      * @var String
+     *
+     * @Assert\NotBlank()
      */
     private $username;
 
     /**
      * @var String
+     *
+     * @Assert\NotBlank()
      */
     private $password;
 
     /**
      * @var String
+     *
+     * @Assert\NotBlank()
+     * @Assert\Email()
      */
     private $email;
 
     /**
      * @var Boolean
+     *
+     * @Assert\Type(
+     *     type="bool"
+     * )
      */
     private $isActive;
 

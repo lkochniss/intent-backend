@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Image
@@ -12,6 +13,8 @@ class Image extends AbstractModel
 {
     /**
      * @var String
+     *
+     * @Assert\NotBlank()
      */
     private $name;
 
@@ -22,11 +25,15 @@ class Image extends AbstractModel
 
     /**
      * @var String
+     *
+     * @Assert\NotBlank()
      */
     private $path;
 
     /**
      * @var String
+     *
+     * @Assert\NotBlank()
      */
     private $fullPath;
 
@@ -37,6 +44,11 @@ class Image extends AbstractModel
 
     /**
      * @var UploadedFile
+     *
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"image/jpeg", "image/png", "image/gif"},
+     * )
      */
     private $file;
 

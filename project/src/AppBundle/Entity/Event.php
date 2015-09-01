@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Event
@@ -12,6 +13,8 @@ class Event extends AbstractMetaModel
 {
     /**
      * @var String
+     *
+     * @Assert\NotBlank()
      */
     private $description;
 
@@ -22,11 +25,18 @@ class Event extends AbstractMetaModel
 
     /**
      * @var \DateTime
+     *
+     * @Assert\DateTime()
      */
     private $startAt;
 
     /**
      * @var \DateTime
+     *
+     * @Assert\DateTime()
+     * @Assert\Expression(
+     *     "value > this.getStartAt()"
+     * )
      */
     private $endAt;
 

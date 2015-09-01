@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -17,21 +18,30 @@ class Invite
 
     /**
      * @var String
+     *
+     * @Assert\NotBlank()
      */
     private $username;
 
     /**
      * @var String
+     *
+     * @Assert\NotBlank()
+     * @Assert\Email()
      */
     private $email;
 
     /**
      * @var String
+     *
+     * @Assert\NotBlank()
      */
     private $token;
 
     /**
      * @var \DateTime
+     *
+     * @Assert\DateTime()
      */
     private $createdAt;
 

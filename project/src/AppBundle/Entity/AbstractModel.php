@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Class AbstractModel
  */
@@ -14,11 +16,15 @@ abstract class AbstractModel
 
     /**
      * @var \DateTime
+     *
+     * @Assert\DateTime()
      */
     private $createdAt;
 
     /**
      * @var \DateTime
+     *
+     * @Assert\DateTime()
      */
     private $modifiedAt;
 
