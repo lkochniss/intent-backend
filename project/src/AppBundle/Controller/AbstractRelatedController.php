@@ -29,69 +29,79 @@ abstract class AbstractRelatedController extends AbstractMetaController
      */
     private function loopRelated($entity)
     {
-        $resultList = new ArrayCollection();
         $franchises = null;
         $games = null;
 
-        $type = $entity->getType();
-        $resultList = $this->getArticlesByRelated($entity, $resultList);
+        $resultList = $related = $this->getRelatedArticles($entity);
 
-        if ($type == 'publisher') {
+        if ($entity->getType() == 'publisher') {
             $franchises = $entity->getFranchises();
-        } elseif ($type == 'franchise') {
+        } elseif ($entity->getType() == 'franchise') {
             $games = $entity->getGames();
-        } elseif ($type == 'studio') {
+        } elseif ($entity->getType() == 'studio') {
             $franchises = $entity->getFranchises();
             $games = $entity->getGames();
         }
 
-        if (!is_null($franchises)){
+        if (!is_null($franchises)) {
             foreach ($franchises as $franchise) {
-                $resultList = $this->getArticlesByRelated($franchise, $resultList);
+                $resultList = array_merge($resultList, $this->getRelatedArticles($franchise));
+
                 foreach ($franchise->getGames() as $game) {
-                    $resultList = $this->getArticlesByRelated($game, $resultList);
+                    $resultList = array_merge($resultList, $this->getRelatedArticles($game));
                 }
             }
         }
 
-        if(!is_null($games)){
+        if (!is_null($games)) {
             foreach ($games as $game) {
-                $resultList = $this->getArticlesByRelated($game, $resultList);
+                $resultList = array_merge($resultList, $this->getRelatedArticles($game));
             }
         }
 
-        $categories = $this->getDoctrine()->getRepository('AppBundle:Category')->findBy(array(),array('priority' => 'ASC'));
+        return $this->mapArticlesToCategories($resultList);
+    }
+
+    /**
+     * @param $entity
+     * @return \AppBundle\Entity\Article[]|array
+     */
+    private function getRelatedArticles($entity)
+    {
+        return $related = $this->getDoctrine()->getRepository('AppBundle:Article')->findBy(
+            array('related' => $entity),
+            array('publishAt' => 'DESC')
+        );
+    }
+
+    /**
+     * @param $articles
+     * @return array
+     */
+    private function mapArticlesToCategories($articles)
+    {
+        $categories = $this->getDoctrine()->getRepository('AppBundle:Category')->findBy(
+            array(),
+            array('priority' => 'ASC')
+        );
 
         $articlesInCategory = array();
-        foreach ( $categories as $category ) {
+        foreach ($categories as $category) {
             $result = new ArrayCollection();
-            foreach ($resultList as $article) {
-                if ($article->getCategory() == $category){
+            foreach ($articles as $article) {
+                if ($article->getCategory() == $category) {
                     $result->add($article);
                 }
+                if ($result->count() == 5) {
+                    break;
+                }
             }
-            if ($result->count() > 0){
+            if ($result->count() > 0) {
                 $articlesInCategory[$category->getName()] = $result->toArray();
             }
         }
 
         return $articlesInCategory;
-    }
-
-    /**
-     * @param $related
-     * @param ArrayCollection $resultList
-     * @return ArrayCollection
-     */
-    private function getArticlesByRelated($related, ArrayCollection $resultList)
-    {
-        $articles = $this->getDoctrine()->getRepository('AppBundle:Article')->findAll();
-        foreach ($articles as $article) {
-            if ($article->getRelated() == $related) {
-                $resultList->add($article);
-            }
-        }
-        return $resultList;
     }
 
     /**
