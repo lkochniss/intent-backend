@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\AbstractModel;
 use AppBundle\Entity\Profile;
 use AppBundle\Form\Type\ProfileType;
 
@@ -50,5 +51,19 @@ class ProfileController extends AbstractCrudController
     protected function getTranslationDomain()
     {
         return 'profile';
+    }
+
+    /**
+     * @param AbstractModel $entity
+     */
+    protected function handleValidForm(AbstractModel $entity)
+    {
+        $repository = $this->getDoctrine()->getRepository($this->getEntityName());
+
+        $entity->setUser($this->getUser());
+
+        $repository->save($entity);
+
+        $this->addFlash('success', "Speichern erfolgreich");
     }
 }

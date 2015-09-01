@@ -1,5 +1,7 @@
 adminbar:
     article:    Neuer Artikel
     dashboard:  Dashboard
-    logout:    Logout
-    profile:    Profil von
+    logout:     Logout
+    profile:
+        create: Profil erstellen
+        edit:   Profil von

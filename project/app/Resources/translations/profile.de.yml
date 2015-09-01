@@ -1,7 +1,10 @@
 profile:
-    actions:    Aktionen
-    list:       Profilübersicht
-    name:       Autor
-    not_found:  Autor nicht gefunden
-    submit:     Autor speichern
-    user:       Benutzer
+    actions:        Aktionen
+    create:         Profil erstellen
+    description:    Vorstellung
+    edit:           Profil bearbeiten
+    list:           Profilübersicht
+    name:           Autor
+    not_found:      Autor nicht gefunden
+    submit:         Autor speichern
+    user:           Benutzer
