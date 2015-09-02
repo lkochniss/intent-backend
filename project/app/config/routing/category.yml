@@ -6,6 +6,10 @@ intent_backend_category_edit:
     path:     /{id}/edit
     defaults: { _controller: AppBundle:Category:edit }
 
+intent_backend_category_show:
+    path:     /{id}/show
+    defaults: { _controller: AppBundle:Category:show }
+
 intent_backend_category_delete:
     path:     /{id}/delete
     defaults: { _controller: AppBundle:Category:delete }

@@ -1,7 +1,38 @@
-{% extends "::base.html.twig" %}
+{% extends "::editor.html.twig" %}
 
-{% block title %}AppBundle:Tag:edit{% endblock %}
+{% block title %}
+    {{ parent() }}
+    {% if  app.request.get('_route') ends with '_create' %}
+        {% trans from "user" %}user.create{% endtrans %}
+    {% else %}
+        {% trans from "user" %}user.edit{% endtrans %}
+    {% endif %}
+{% endblock %}
 
-{% block body %}
-<h1>Welcome to the Tag:edit page</h1>
+{% block content %}
+    <h1>
+        {% if  app.request.get('_route') ends with '_create' %}
+            {% trans from "user" %}user.create{% endtrans %}
+        {% else %}
+            {% trans from "user" %}user.edit{% endtrans %}
+        {% endif %}
+    </h1>
+    {{ form_start(form) }}
+    <div class="col-md-9 editor">
+        {{ form_row(form.username) }}
+        {{ form_row(form.email) }}
+    </div>
+    <div class="col-md-3 meta">
+        {{ form_row(form.roles) }}
+        {{ form_row(form.isActive) }}
+        {{ form_row(form.submit) }}
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $('#user_roles').select2();
+    </script>
 {% endblock %}

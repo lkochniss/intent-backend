@@ -3,9 +3,10 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Franchise;
+use AppBundle\Form\Type\FranchisePublishType;
 use AppBundle\Form\Type\FranchiseType;
 
-class FranchiseController extends RelatedController
+class FranchiseController extends AbstractRelatedController
 {
     /**
      * @return Franchise
@@ -21,6 +22,14 @@ class FranchiseController extends RelatedController
     protected function getFormType()
     {
         return new FranchiseType();
+    }
+
+    /**
+     * @return FranchisePublishType
+     */
+    protected function getPublishType()
+    {
+        return new FranchisePublishType();
     }
 
     /**
@@ -52,22 +61,19 @@ class FranchiseController extends RelatedController
         return 'franchise';
     }
 
-    public function showAction($id)
+    protected function getReadAccessLevel()
     {
-        return $this->render(
-            ':Franchise:show.html.twig',
-            array(// ...
-            )
-        );
+        return 'ROLE_READ_META';
     }
 
-    public function deleteAction($id)
+    protected function getWriteAccessLevel()
     {
-        return $this->render(
-            ':Franchise:delete.html.twig',
-            array(// ...
-            )
-        );
+        return 'ROLE_WRITE_META';
+    }
+
+    protected function getPublishAccessLevel()
+    {
+        return 'ROLE_PUBLISH_META';
     }
 
 }

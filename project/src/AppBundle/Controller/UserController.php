@@ -2,54 +2,159 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use AppBundle\Entity\User;
+use AppBundle\Form\Type\UserPasswordType;
+use AppBundle\Form\Type\UserType;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Util\SecureRandom;
 
-class UserController extends Controller
+class UserController extends AbstractCrudController
 {
-    public function createAction()
+    /**
+     * @param Request $request
+     * @return RedirectResponse|Response
+     */
+    public function createAction(Request $request)
     {
+        $this->denyAccessUnlessGranted(
+            'ROLE_ADMIN',
+            null,
+            $this->get('translator')->trans(
+                'user.access_denied',
+                array(),
+                'user'
+            )
+        );
+
+        $user = new User();
+        $form = $this->createForm(new UserType(), $user);
+
+        if (in_array($request->getMethod(), ['POST'])) {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $generator = new SecureRandom();
+                $password = $generator->nextBytes(8);
+
+                $encoder = $this->container->get('security.password_encoder');
+                $encodedPassword = $encoder->encodePassword($user, $password);
+                $user->setPassword($encodedPassword);
+
+                $user->setValidUntil(new \DateTime('+1 day'));
+
+                $this->getDoctrine()->getRepository('AppBundle:User')->save($user);
+
+                $translator = $this->get('translator');
+
+                $mailer = $this->get('mailer');
+
+                $message = $mailer->createMessage()
+                    ->setSubject($translator->trans('invite.mail.subject', array(), 'invite'))
+                    ->setFrom($translator->trans('invite.mail.from', array(), 'invite'))
+                    ->setTo($user->getEmail())
+                    ->setBody(
+                        $this->renderView(
+                            'Mail/new_user.html.twig',
+                            array(
+                                'user' => $user,
+                                'password' => $password,
+                            )
+                        ),
+                        'text/html'
+                    );
+
+                $mailer->send($message);
+
+                return $this->redirectToRoute('intent_backend_user_list');
+            }
+        }
+
         return $this->render(
-            'Tag:create.html.twig',
-            array(// ...
+            'User/edit.html.twig',
+            array(
+                'form' => $form->createView(),
             )
         );
     }
 
-    public function editAction($id, Request $request)
+    /**
+     * @param $id
+     * @param Request $request
+     * @return RedirectResponse|Response
+     */
+    public function passwordAction($id, Request $request)
     {
+        $user = $this->getDoctrine()->getRepository('AppBundle:User')->find($id);
+        $form = $this->createForm(new UserPasswordType(), $user);
+
+        if (in_array($request->getMethod(), ['POST'])) {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $encoder = $this->container->get('security.password_encoder');
+                $encodedPassword = $encoder->encodePassword($user, $user->getPassword());
+                $user->setPassword($encodedPassword);
+
+                $user->setValidUntil(null);
+
+                $this->getDoctrine()->getRepository('AppBundle:User')->save($user);
+
+                return $this->redirectToRoute('intent_backend_dashboard');
+            }
+        }
+
         return $this->render(
-            'Tag:edit.html.twig',
-            array(// ...
+            'User/password.html.twig',
+            array(
+                'form' => $form->createView(),
             )
         );
     }
 
-    public function showAction($id)
+    /**
+     * @return User
+     */
+    protected function createNewEntity()
     {
-        return $this->render(
-            'Tag:show.html.twig',
-            array(// ...
-            )
-        );
+        return new User();
     }
 
-    public function deleteAction($id)
+    /**
+     * @return UserType
+     */
+    protected function getFormType()
     {
-        return $this->render(
-            'Tag:delete.html.twig',
-            array(// ...
-            )
-        );
+        return new UserType();
     }
 
-    public function listAction($type = null, $page)
+    /**
+     * @return string
+     */
+    protected function getTemplateBasePath()
     {
-        return $this->render(
-            'Tag:list.html.twig',
-            array(// ...
-            )
-        );
+        return 'User';
     }
 
+    /**
+     * @return string
+     */
+    protected function getEntityName()
+    {
+        return 'AppBundle\Entity\User';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getRoutePrefix()
+    {
+        return 'intent_backend_user';
+    }
+
+    protected function getTranslationDomain()
+    {
+        return 'user';
+    }
 }

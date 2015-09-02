@@ -11,26 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Game extends Related
 {
     /**
-     * @var string
-     */
-    private $name;
-
-    /**
-     * @var string
-     */
-    private $description;
-
-    /**
-     * @var string
-     */
-    private $backgroundLink;
-
-    /**
-     * @var string
-     */
-    private $slug;
-
-    /**
      * @var Studio
      */
     private $studio;
@@ -43,104 +23,14 @@ class Game extends Related
     /**
      * @var ArrayCollection
      */
-    private $events;
+    private $expansions;
 
-    function __construct()
+    public function __construct()
     {
-        $this->events = array();
+        parent::__construct();
+        $this->expansions = array();
     }
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     * @return Game
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     * @return Game
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Set backgroundLink
-     *
-     * @param string $backgroundLink
-     * @return Game
-     */
-    public function setBackgroundLink($backgroundLink)
-    {
-        $this->backgroundLink = $backgroundLink;
-
-        return $this;
-    }
-
-    /**
-     * Get backgroundLink
-     *
-     * @return string
-     */
-    public function getBackgroundLink()
-    {
-        return $this->backgroundLink;
-    }
-
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     * @return Game
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
 
     /**
      * @param Studio $studio
@@ -154,9 +44,7 @@ class Game extends Related
     }
 
     /**
-     * Get franchise
-     *
-     * @return string
+     * @return Studio
      */
     public function getStudio()
     {
@@ -175,9 +63,7 @@ class Game extends Related
     }
 
     /**
-     * Get franchise
-     *
-     * @return string
+     * @return Franchise
      */
     public function getFranchise()
     {
@@ -185,35 +71,43 @@ class Game extends Related
     }
 
     /**
-     * @param Event $event
+     * @param Expansion $expansion
      * @return $this
      */
-    public function addEvent(Event $event)
+    public function addExpansion(Expansion $expansion)
     {
-        if (!$this->events->contains($event)) {
-            $this->events->add($event);
-            $event->addGames($this);
+        if (!$this->expansions->contains($expansion)){
+            $this->expansions->add($expansion);
+            $expansion->setGame($this);
         }
 
         return $this;
     }
 
     /**
-     * @param Event $event
+     * @param Expansion $expansion
      * @return $this
      */
-    public function removeEvent(Event $event)
+    public function removeExpansion(Expansion $expansion)
     {
-        $this->events->remove($event);
+        $this->expansions->remove($expansion);
 
         return $this;
     }
 
     /**
-     * @return Event[]
+     * @return array
      */
-    public function getEvents()
+    public function getExpansions()
     {
-        return $this->events->toArray();
+        return $this->expansions->toArray();
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return 'game';
     }
 }

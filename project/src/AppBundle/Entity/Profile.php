@@ -3,43 +3,33 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Profile
  */
-class Profile
+class Profile extends AbstractModel
 {
     /**
-     * @var integer
-     */
-    private $id;
-
-    /**
-     * @var string
+     * @var String
+     *
+     * @Assert\NotBlank()
      */
     private $name;
 
     /**
-     * @var string
+     * @var String
      */
     private $description;
 
-
     /**
-     * Get id
-     *
-     * @return integer 
+     * @var User
      */
-    public function getId()
-    {
-        return $this->id;
-    }
+    private $user;
 
     /**
-     * Set name
-     *
-     * @param string $name
-     * @return Profile
+     * @param $name
+     * @return $this
      */
     public function setName($name)
     {
@@ -49,9 +39,7 @@ class Profile
     }
 
     /**
-     * Get name
-     *
-     * @return string 
+     * @return String
      */
     public function getName()
     {
@@ -59,10 +47,8 @@ class Profile
     }
 
     /**
-     * Set description
-     *
-     * @param string $description
-     * @return Profile
+     * @param $description
+     * @return $this
      */
     public function setDescription($description)
     {
@@ -72,12 +58,29 @@ class Profile
     }
 
     /**
-     * Get description
-     *
-     * @return string 
+     * @return String
      */
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * @param User $user
+     * @return $this
+     */
+    public function setUser(User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

@@ -3,9 +3,10 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Game;
+use AppBundle\Form\Type\GamePublishType;
 use AppBundle\Form\Type\GameType;
 
-class GameController extends RelatedController
+class GameController extends AbstractRelatedController
 {
     /**
      * @return Game
@@ -21,6 +22,14 @@ class GameController extends RelatedController
     protected function getFormType()
     {
         return new GameType();
+    }
+
+    /**
+     * @return GamePublishType
+     */
+    protected function getPublishType()
+    {
+        return new GamePublishType();
     }
 
     /**
@@ -49,25 +58,21 @@ class GameController extends RelatedController
 
     protected function getTranslationDomain()
     {
-        return 'article';
+        return 'game';
     }
 
-    public function showAction($id)
+    protected function getReadAccessLevel()
     {
-        return $this->render(
-            ':Game:show.html.twig',
-            array(// ...
-            )
-        );
+        return 'ROLE_READ_META';
     }
 
-    public function deleteAction($id)
+    protected function getWriteAccessLevel()
     {
-        return $this->render(
-            ':Game:delete.html.twig',
-            array(// ...
-            )
-        );
+        return 'ROLE_WRITE_META';
     }
 
+    protected function getPublishAccessLevel()
+    {
+        return 'ROLE_PUBLISH_META';
+    }
 }

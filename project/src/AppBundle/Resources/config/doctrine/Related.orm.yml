@@ -10,6 +10,7 @@ AppBundle\Entity\Related:
         studio: Studio
         franchise: Franchise
         game: Game
+        expansion: Expansion
     id:
         id:
             type: integer
@@ -17,16 +18,15 @@ AppBundle\Entity\Related:
             generator:
                 strategy: AUTO
     fields:
-        createdAt:
-            column: created_at
-            type: datetime
-            nullable: false
-        modifiedAt:
-            column: modified_at
-            type: datetime
-            nullable: false
-    oneToOne:
-        article:
+        description:
+            type: text
+            nullable: true
+        backgroundLink:
+            type: string
+            length: 255
+            nullable: true
+    oneToMany:
+        articles:
             targetEntity: Article
             mappedBy: related
-    lifecycleCallbacks: {  }
+    lifecycleCallbacks: { }

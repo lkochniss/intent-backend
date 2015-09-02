@@ -9,19 +9,10 @@ AppBundle\Entity\Category:
             generator:
                 strategy: AUTO
     fields:
-        name:
-            type: string
-            length: 255
-        slug:
-            type: string
-            length: 255
+        priority:
+            type: integer
     oneToMany:
         articles:
             targetEntity: Article
             mappedBy: category
-    lifecycleCallbacks:
-        prePersist:
-                - setModifiedAt
-                - setCreatedAt
-        preUpdate:
-                - setModifiedAt
+    lifecycleCallbacks: { }

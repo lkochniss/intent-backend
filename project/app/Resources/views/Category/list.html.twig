@@ -1,25 +1,35 @@
-{% extends "::base.html.twig" %}
+{% extends "::list.html.twig" %}
 
 {% block title %}{{ parent() }} {% trans from "category" %}category.list{% endtrans %}{% endblock %}
 
 {% block content %}
-    <h3>{% trans from "category" %}category.list{% endtrans %}</h3>
     <a href="{{ path('intent_backend_category_create') }}" class="btn btn-default pull-right">{% trans from "category" %}category.create{% endtrans %}</a>
+    <h3>{% trans from "category" %}category.list{% endtrans %}</h3>
     <table class="table">
         <thead>
         <tr>
-            <td>{% trans from "category" %}category.name{% endtrans %}</td>
-            <td>{% trans from "category" %}category.actions{% endtrans %}</td>
+            <th>{% trans from "category" %}category.name{% endtrans %}</th>
+            <th>{% trans from "category" %}category.priority{% endtrans %}</th>
+            <th>{% trans from "category" %}category.count{% endtrans %}</th>
+            <th>{% trans from "category" %}category.actions{% endtrans %}</th>
         </tr>
         </thead>
         <tbody>
         {% for category in entities %}
             <tr>
                 <td>{{ category.name }}</td>
-                <td><a class="table-padding" href="{{ path('intent_backend_category_edit',{'id' : category.id}) }}"><span class="glyphicon glyphicon-pencil"/></a></td>
+                <td>{{ category.priority }}</td>
+                <td>{{ category.articles|length }}</td>
+                <td>
+                    <a class="table-padding" href="{{ path('intent_backend_category_edit',{'id' : category.id}) }}">
+                        <span class="glyphicon glyphicon-pencil"/>
+                    </a>
+                    <a class="table-padding" href="{{ path('intent_backend_category_show',{'id' : category.id}) }}">
+                        <span class="glyphicon glyphicon-eye-open"/>
+                    </a>
+                </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-    {% include '::pagination.html.twig' with { 'default_page': 'category' } %}
 {% endblock %}

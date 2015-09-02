@@ -1,0 +1,67 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}{{ parent() }} {% trans from "filemanager" %}filemanager.list{% endtrans %}{% endblock %}
+
+{% block content %}
+    <div class="col-md-12">
+        <h3 class="col-md-3">{{ currentDirectory }}</h3>
+        <a href="{{ path('intent_backend_filemanager_create', {'id': currentDirectory.id }) }}"
+            class="btn btn-default pull-right">{% trans from "filemanager" %}filemanager.create{% endtrans %}
+        </a>
+        <a href="{{ path('intent_backend_filemanager_upload', {'path': currentDirectory }) }}"
+           class="btn btn-default pull-right">{% trans from "filemanager" %}filemanager.upload{% endtrans %}
+        </a>
+    </div>
+    <div class="fileexplorer col-md-9">
+
+        {% if back == false %}
+            <figure class="directory col-md-2">
+                <a href="{{ path('intent_backend_filemanager_list', { 'id': currentDirectory.parentDirectory.id}) }}">
+                    <span class="glyphicon glyphicon-arrow-up"/>
+                </a>
+                <figcaption>
+                    <a href="{{ path('intent_backend_filemanager_list', { 'id': currentDirectory.parentDirectory.id}) }}">
+                        {% trans from "filemanager" %} filemanager.up {% endtrans %}
+                    </a>
+                </figcaption>
+            </figure>
+        {% endif %}
+
+        {% for directory in currentDirectory.childDirectories %}
+            <figure class="directory directory col-md-2">
+                <a href="{{ path('intent_backend_filemanager_list', { 'id': directory.id}) }}">
+                    <span class="glyphicon glyphicon-folder-open"/>
+                </a>
+                <figcaption>
+                    <a href="{{ path('intent_backend_filemanager_list', { 'id': directory.id }) }}">
+                        {{ directory.name }}
+                    </a>
+                </figcaption>
+            </figure>
+        {% endfor %}
+        {% for image in currentDirectory.images %}
+            <figure class="file directory col-md-2">
+                <img class="img-responsive " src="{{ asset( image.fullPath ) }}"/>
+                <figcaption>{{ image.name }}</figcaption>
+            </figure>
+        {% endfor %}
+    </div>
+    <div class="filepreview col-md-3">
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="application/javascript">
+        $('.file img').click(function () {
+            console.log($(this).attr('src'));
+            var html = '' +
+                    '<h3>Preview</h3>' +
+                    '<img class="img-responsive" src="'+$(this).attr('src')+'"/>' +
+                    '<p>URL:'+$(this).attr('src')+'</p>';
+
+            console.log(html);
+            $('.filepreview').html(html);
+        });
+    </script>
+{% endblock %}

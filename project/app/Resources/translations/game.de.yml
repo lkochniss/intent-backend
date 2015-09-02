@@ -1,18 +1,24 @@
 game:
     actions:        Aktionen
+    categories:     Artikel zu
     create:         Game erstellen
     description:    Beschreibung
     delete:         Game löschen
     edit:           Game bearbeiten
     event:          aktive Events
-    franchise:      Franchise
+    franchise:
+        name:       Franchise
+        select:     Franchise auswählen
     list:           Gamesübersicht
     name:           Game
-    not_found:      Publisher nicht gefunden
+    not_found:      Game nicht gefunden
+    publish:        Game veröffentlichen
     published:
         at:         Veröffentlicht am
         by:         Author
     publisher:      Publisher
     show:           Gamevorschau
-    studio:         Entwicklerstudio
+    studio:
+        name:       Entwicklerstudio
+        select:     Entwicklerstudio auswählen
     submit:         Game speichern

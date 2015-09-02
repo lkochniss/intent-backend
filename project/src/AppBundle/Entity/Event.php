@@ -4,39 +4,39 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Event
  */
-class Event extends AbstractModel
+class Event extends AbstractMetaModel
 {
     /**
-     * @var string
-     */
-    private $name;
-
-    /**
-     * @var string
+     * @var String
+     *
+     * @Assert\NotBlank()
      */
     private $description;
 
     /**
-     * @var string
+     * @var String
      */
     private $backgroundLink;
 
     /**
-     * @var string
-     */
-    private $slug;
-
-    /**
      * @var \DateTime
+     *
+     * @Assert\Date()
      */
     private $startAt;
 
     /**
      * @var \DateTime
+     *
+     * @Assert\Date()
+     * @Assert\Expression(
+     *     "value > this.getStartAt()"
+     * )
      */
     private $endAt;
 
@@ -47,39 +47,15 @@ class Event extends AbstractModel
 
     function __construct()
     {
+        parent::__construct();
         $this->startAt = new \DateTime();
         $this->endAt = new \DateTime();
         $this->articles = array();
     }
 
     /**
-     * Set name
-     *
-     * @param string $name
-     * @return Event
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     * @return Event
+     * @param $description
+     * @return $this
      */
     public function setDescription($description)
     {
@@ -89,9 +65,7 @@ class Event extends AbstractModel
     }
 
     /**
-     * Get description
-     *
-     * @return string 
+     * @return String
      */
     public function getDescription()
     {
@@ -99,10 +73,8 @@ class Event extends AbstractModel
     }
 
     /**
-     * Set backgroundLink
-     *
-     * @param string $backgroundLink
-     * @return Event
+     * @param $backgroundLink
+     * @return $this
      */
     public function setBackgroundLink($backgroundLink)
     {
@@ -112,36 +84,11 @@ class Event extends AbstractModel
     }
 
     /**
-     * Get backgroundLink
-     *
-     * @return string 
+     * @return String
      */
     public function getBackgroundLink()
     {
         return $this->backgroundLink;
-    }
-
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     * @return Event
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
     }
 
     /**
@@ -208,7 +155,7 @@ class Event extends AbstractModel
     }
 
     /**
-     * @return Article[]
+     * @return array
      */
     public function getArticles()
     {
@@ -220,7 +167,7 @@ class Event extends AbstractModel
      */
     function __toString()
     {
-        return $this->name;
+        return $this->getName();
     }
 
 

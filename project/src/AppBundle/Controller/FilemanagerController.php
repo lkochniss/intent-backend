@@ -2,77 +2,111 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Form\Type\FilemanagerType;
+use AppBundle\Entity\Directory;
+use AppBundle\Entity\Image;
+use AppBundle\Form\Type\DirectoryType;
+use AppBundle\Form\Type\UploadType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\Request;
 
 class FilemanagerController extends Controller
 {
-    private $path = 'upload/';
-
-    public function createAction($path = '', Request $request)
+    public function createAction($popup = 0, $id = 0, Request $request)
     {
-        $form = $this->createForm(new FilemanagerType());
+        $directory = new Directory();
+        $parentDirectory = $this->getDoctrine()->getRepository('AppBundle:Directory')->find($id);
+        $form = $this->createForm(new DirectoryType(), $directory);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $directoryName = preg_replace("/[^a-z0-9]+/", "", strtolower($form->getData()['name']));
+            $directory->setParentDirectory($parentDirectory);
+            $this->getDoctrine()->getRepository('AppBundle:Directory')->save($directory);
             $filesystem = new Filesystem();
+            $filesystem->mkdir($directory->getFullPath());
 
-            $filesystem->mkdir($path.$directoryName);
-
-            return $this->redirect('filemanager_list', array('path' => $path));
-        }
-        return $this->render(
-            ':Filemanager:create.html.twig',
-            array(
-                'form' => $form->createView()
-            )
-        );
-    }
-
-    public function listAction($path = '')
-    {
-        $currentDirectory = $path;
-        $path = $this->path.$path;
-        $finder = new Finder();
-        $finder->directories()->in($path);
-        $finder->depth(0);
-
-        $directories = array();
-
-        foreach ($finder as $directory) {
-            $directories[$directory->getRelativePathname()] = $path;
+            return $this->redirect($this->generateUrl('intent_backend_filemanager_list', array('id' => $id)));
         }
 
-        $finder = new Finder();
-        $finder->files()->in($path);
-        $finder->depth(0);
-
-        $files = array();
-
-        foreach ($finder as $file) {
-            $files[$file->getRelativePathname()] = $path;
-        }
-
-        if ($this->path != $path) {
-            $back = substr($currentDirectory, 0, strripos($currentDirectory, '/'));
-            $currentDirectory .= '/';
+        if ($popup == 0) {
+            return $this->render(
+                ':Filemanager:default/create.html.twig',
+                array(
+                    'form' => $form->createView(),
+                )
+            );
         } else {
-            $back = null;
+            return $this->render(
+                ':Filemanager:popup/create.html.twig',
+                array(
+                    'form' => $form->createView(),
+                )
+            );
         }
-
-        return $this->render(
-            ':Filemanager:list.html.twig',
-            array(
-                'directories' => $directories,
-                'files' => $files,
-                'back' => $back,
-                'currentDirectory' => $currentDirectory
-            )
-        );
     }
 
+    public function uploadAction($popup = 0, $id = 0, Request $request)
+    {
+        $image = new Image();
+        $form = $this->createForm(new UploadType(), $image);
+        $form->handleRequest($request);
+
+        $directory = $this->getDoctrine()->getRepository('AppBundle:Directory')->find($id);
+        if (is_null($directory)) {
+            $directory = $this->getDoctrine()->getRepository('AppBundle:Directory')->findOneBy(
+                array('parentDirectory' => null)
+            );
+        }
+
+        if ($form->isValid()) {
+            $image->setParentDirectory($directory);
+            $this->getDoctrine()->getRepository('AppBundle:Image')->save($image);
+            return $this->redirect($this->generateUrl('intent_backend_filemanager_list', array('id' => $id)));
+        }
+
+        if ($popup == 0) {
+            return $this->render(
+                ':Filemanager:default/upload.html.twig',
+                array(
+                    'form' => $form->createView(),
+                )
+            );
+        } else {
+            return $this->render(
+                ':Filemanager:popup/upload.html.twig',
+                array(
+                    'form' => $form->createView(),
+                )
+            );
+        }
+    }
+
+    public function listAction($popup = 0, $id = 0)
+    {
+        $directory = $this->getDoctrine()->getRepository('AppBundle:Directory')->find($id);
+
+        if (is_null($directory)) {
+            $directory = $this->getDoctrine()->getRepository('AppBundle:Directory')->findOneBy(
+                array('parentDirectory' => null)
+            );
+        }
+
+        if ($popup == 0) {
+            return $this->render(
+                ':Filemanager:default/list.html.twig',
+                array(
+                    'back' => $directory->isRootNode(),
+                    'currentDirectory' => $directory,
+                )
+            );
+        } else {
+            return $this->render(
+                ':Filemanager:popup/list.html.twig',
+                array(
+                    'back' => $directory->isRootNode(),
+                    'currentDirectory' => $directory,
+                )
+            );
+        }
+    }
 }

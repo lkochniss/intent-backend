@@ -5,24 +5,29 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\Role\RoleInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Role
  */
-class Role implements RoleInterface
+class Role implements RoleInterface, \Serializable
 {
     /**
-     * @var integer
+     * @var Integer
      */
     private $id;
 
     /**
-     * @var string
+     * @var String
+     *
+     * @Assert\NotBlank()
      */
     private $name;
 
     /**
-     * @var string
+     * @var String
+     *
+     * @Assert\NotBlank()
      */
     private $role;
 
@@ -36,11 +41,8 @@ class Role implements RoleInterface
         $this->users = array();
     }
 
-
     /**
-     * Get id
-     *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -48,10 +50,8 @@ class Role implements RoleInterface
     }
 
     /**
-     * Set $name
-     *
-     * @param string $name
-     * @return Role
+     * @param $name
+     * @return $this
      */
     public function setName($name)
     {
@@ -61,9 +61,7 @@ class Role implements RoleInterface
     }
 
     /**
-     * Get $name
-     *
-     * @return string
+     * @return String
      */
     public function getName()
     {
@@ -71,10 +69,8 @@ class Role implements RoleInterface
     }
 
     /**
-     * Set role
-     *
-     * @param string $role
-     * @return Role
+     * @param $role
+     * @return $this
      */
     public function setRole($role)
     {
@@ -84,9 +80,7 @@ class Role implements RoleInterface
     }
 
     /**
-     * Get role
-     *
-     * @return string
+     * @return String
      */
     public function getRole()
     {
@@ -101,7 +95,7 @@ class Role implements RoleInterface
     {
         if (!$this->users->contains($user)) {
             $this->users->add($user);
-            $user->setRole($this);
+            $user->addRole($this);
         }
 
         return $this;
@@ -119,10 +113,40 @@ class Role implements RoleInterface
     }
 
     /**
-     * @return User[]
+     * @return array
      */
     public function getUsers()
     {
         return $this->users->toArray();
+    }
+
+    /**
+     * @return string
+     */
+    public function serialize()
+    {
+        return \serialize(array(
+            $this->id,
+            $this->role
+        ));
+    }
+
+    /**
+     * @param string $serialized
+     */
+    public function unserialize($serialized)
+    {
+        list(
+            $this->id,
+            $this->role
+            ) = \unserialize($serialized);
+    }
+
+    /**
+     * @return string
+     */
+    function __toString()
+    {
+        return $this->name;
     }
 }

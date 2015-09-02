@@ -3,9 +3,10 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Studio;
+use AppBundle\Form\Type\StudioPublishType;
 use AppBundle\Form\Type\StudioType;
 
-class StudioController extends RelatedController
+class StudioController extends AbstractRelatedController
 {
     /**
      * @return Studio
@@ -21,6 +22,14 @@ class StudioController extends RelatedController
     protected function getFormType()
     {
         return new StudioType();
+    }
+
+    /**
+     * @return StudioPublishType
+     */
+    protected function getPublishType()
+    {
+        return new StudioPublishType();
     }
 
     /**
@@ -52,22 +61,18 @@ class StudioController extends RelatedController
         return 'studio';
     }
 
-    public function showAction($id)
+    protected function getReadAccessLevel()
     {
-        return $this->render(
-            ':Studio:show.html.twig',
-            array(// ...
-            )
-        );
+        return 'ROLE_READ_META';
     }
 
-    public function deleteAction($id)
+    protected function getWriteAccessLevel()
     {
-        return $this->render(
-            ':Studio:delete.html.twig',
-            array(// ...
-            )
-        );
+        return 'ROLE_WRITE_META';
     }
 
+    protected function getPublishAccessLevel()
+    {
+        return 'ROLE_PUBLISH_META';
+    }
 }

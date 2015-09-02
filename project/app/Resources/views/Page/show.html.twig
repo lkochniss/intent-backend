@@ -1,7 +1,25 @@
-{% extends "::base.html.twig" %}
+{% extends "::editor.html.twig" %}
 
-{% block title %}AppBundle:Tag:show{% endblock %}
+{% block title %}
+    {{ parent() }}
+    {% trans from "page" %}page.show{% endtrans %}
+{% endblock %}
 
-{% block body %}
-<h1>Welcome to the Tag:show page</h1>
+{% block content %}
+    <div class="col-md-9 meta">
+        <div class="content">
+            <h2>{{ entity.title }}</h2>
+            {{ entity.content|raw }}
+        </div>
+        <div class="meta">
+        </div>
+    </div>
+    <div class="col-md-3 meta">
+        {% if is_granted('ROLE_PUBLISH_ARTICLE') %}
+            <div class="col-md-3 meta">
+                {{ form_start(form) }}
+                {{ form_end(form) }}
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}

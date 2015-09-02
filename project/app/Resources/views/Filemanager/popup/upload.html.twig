@@ -1,0 +1,10 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}{{ parent() }} {% trans from "filemanager" %}filemanager.upload{% endtrans %}{% endblock %}
+
+{% block body %}
+    <div class="col-md-12">
+        <h1>{% trans from "filemanager" %}filemanager.upload{% endtrans %}</h1>
+        {{ form(form) }}
+    </div>
+{% endblock %}

@@ -1,8 +1,29 @@
 {% extends "::editor.html.twig" %}
 
-{% block title %}{{ parent() }} {% trans from "publisher" %}publisher.edit{% endtrans %}{% endblock %}
+{% block title %}
+    {{ parent() }}
+    {% if app.request.get('_route') ends with '_create' %}
+        {% trans from "publisher" %}publisher.create{% endtrans %}
+    {% else %}
+        {% trans from "publisher" %}publisher.edit{% endtrans %}
+    {% endif %}
+{% endblock %}
 
 {% block content %}
-    <h1>{% trans from "publisher" %}publisher.edit{% endtrans %}</h1>
-    {{ form(form) }}
+    <h1>
+        {% if app.request.get('_route') ends with '_create' %}
+            {% trans from "publisher" %}publisher.create{% endtrans %}
+        {% else %}
+            {% trans from "publisher" %}publisher.edit{% endtrans %}
+        {% endif %}
+    </h1>
+    {{ form_start(form) }}
+    <div class="col-md-9 editor">
+        {{ form_row(form.name) }}
+        {{ form_row(form.description) }}
+    </div>
+    <div class="col-md-3 meta">
+        {{ form_row(form.submit) }}
+    </div>
+    {{ form_end(form) }}
 {% endblock %}

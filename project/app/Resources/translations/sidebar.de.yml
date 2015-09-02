@@ -1,6 +1,7 @@
 sidebar:
     admin:
         name:       Administration
+        profile:    Autoren
         user:       Benutzerverwaltung
     media:
         image:      Bilder
@@ -8,6 +9,7 @@ sidebar:
     meta:
         category:   Kategorie
         event:      Event
+        expansion:  Expansion/DLC
         franchise:  Franchise
         game:       Game
         name:       Meta

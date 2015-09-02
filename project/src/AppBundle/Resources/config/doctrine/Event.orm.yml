@@ -9,9 +9,6 @@ AppBundle\Entity\Event:
             generator:
                 strategy: AUTO
     fields:
-        name:
-            type: string
-            length: 255
         description:
             type: string
             length: 255
@@ -20,14 +17,11 @@ AppBundle\Entity\Event:
             length: 255
             nullable: true
             column: background_link
-        slug:
-            type: string
-            length: 255
         startAt:
-            type: datetime
+            type: date
             column: start_at
         endAt:
-            type: datetime
+            type: date
             column: end_at
     oneToMany:
         articles:

@@ -1,0 +1,6 @@
+security:
+    login:          int.ent Login
+    password:       Passwort
+    reset:          Passwort zurücksetzten
+    submit:         Login
+    username:       Benutzer

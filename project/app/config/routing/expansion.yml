@@ -1,0 +1,19 @@
+intent_backend_expansion_create:
+    path:     /create
+    defaults: { _controller: AppBundle:Expansion:create }
+
+intent_backend_expansion_edit:
+    path:     /{id}/edit
+    defaults: { _controller: AppBundle:Expansion:edit }
+
+intent_backend_expansion_show:
+    path:     /{id}/show
+    defaults: { _controller: AppBundle:Expansion:show }
+
+intent_backend_expansion_delete:
+    path:     /{id}/delete
+    defaults: { _controller: AppBundle:Expansion:delete }
+
+intent_backend_expansion_list:
+    path:     /
+    defaults: { _controller: AppBundle:Expansion:list }

@@ -1,16 +1,23 @@
 franchise:
     actions:    Aktionen
+    categories: Artikel zu
     create:     Franchise erstellen
     descripton: Beschreibung
     delete:     Franchise löschen
     edit:       Franchise bearbeiten
+    games:      Games zu
     list:       Franchiseübersicht
     name:       Franchise
     not_found:  Franchise nicht gefunden
+    publish:    Franchise veröffentlichen
     published:
         at:     Veröffentlicht am
         by:     Author
-    publisher:  Publisher
+    publisher:
+        name:   Publisher
+        select: Publisher auswählen
     show:       Franchisevorschau
-    studio:     Entwicklerstuio
+    studio:
+        name:   Entwicklerstudio
+        select: Entwicklerstudio auswählen
     submit:     Franchise speichern

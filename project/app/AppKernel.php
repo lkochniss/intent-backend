@@ -6,19 +6,13 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 class AppKernel extends Kernel
 {
     /**
-     * @var boolean
-     */
-    private $console;
-
-    /**
      * @param string $environment
      * @param bool $debug
-     * @param $console
      */
-    public function __construct($environment, $debug, $console = false)
+    public function __construct($environment, $debug)
     {
         parent::__construct($environment, $debug);
-        $this->console = $console;
+        date_default_timezone_set( 'Europe/Paris' );
     }
     public function registerBundles()
     {
@@ -50,27 +44,5 @@ class AppKernel extends Kernel
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
         $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');
-    }
-
-    public function init() {
-        date_default_timezone_set( 'Europe/Paris' );
-    }
-
-    public function getCacheDir()
-    {
-        if(false === $this->console){
-            return '/app/cache/'.$this->environment;
-        }else{
-            return $this->rootDir.'/cache/'.$this->environment;
-        }
-    }
-
-    public function getLogDir()
-    {
-        if(false === $this->console){
-            return '/app/logs/'.$this->environment;
-        }else{
-            return $this->rootDir.'/logs/'.$this->environment;
-        }
     }
 }

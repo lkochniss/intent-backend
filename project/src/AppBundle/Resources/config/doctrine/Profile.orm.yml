@@ -15,4 +15,12 @@ AppBundle\Entity\Profile:
         description:
             type: string
             length: 255
+
+    oneToOne:
+        user:
+            targetEntity: User
+            inversedBy: profile
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
     lifecycleCallbacks: {  }

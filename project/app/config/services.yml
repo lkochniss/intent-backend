@@ -1,9 +1,159 @@
-# Learn more about services, parameters and containers at
-# http://symfony.com/doc/current/book/service_container.html
-parameters:
-#    parameter_name: value
-
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    app.article.service:
+        class: AppBundle\Service\ArticleExport
+        arguments:
+            - @app.repository.article
+
+    app.category.service:
+        class: AppBundle\Service\CategoryExport
+        arguments:
+            - @app.repository.category
+
+    app.directory.service:
+        class: AppBundle\Service\DirectoryExport
+        arguments:
+            - @app.repository.directory
+
+    app.event.service:
+        class: AppBundle\Service\EventExport
+        arguments:
+            - @app.repository.event
+
+    app.expansion.service:
+        class: AppBundle\Service\ExpansionExport
+        arguments:
+            - @app.repository.expansion
+
+    app.franchise.service:
+        class: AppBundle\Service\FranchiseExport
+        arguments:
+            - @app.repository.franchise
+
+    app.game.service:
+        class: AppBundle\Service\GameExport
+        arguments:
+            - @app.repository.game
+
+    app.image.service:
+        class: AppBundle\Service\ImageExport
+        arguments:
+            - @app.repository.image
+
+    app.page.service:
+        class: AppBundle\Service\PageExport
+        arguments:
+            - @app.repository.page
+
+    app.profile.service:
+        class: AppBundle\Service\ProfileExport
+        arguments:
+            - @app.repository.profile
+
+    app.publisher.service:
+        class: AppBundle\Service\PublisherExport
+        arguments:
+            - @app.repository.publisher
+
+    app.role.service:
+        class: AppBundle\Service\RoleExport
+        arguments:
+            - @app.repository.role
+
+    app.studio.service:
+        class: AppBundle\Service\StudioExport
+        arguments:
+            - @app.repository.studio
+
+    app.user.service:
+        class: AppBundle\Service\UserExport
+        arguments:
+            - @app.repository.user
+
+    app.repository.article:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - AppBundle\Entity\Article
+
+    app.repository.category:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - AppBundle\Entity\Category
+
+    app.repository.directory:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - AppBundle\Entity\Directory
+
+    app.repository.event:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - AppBundle\Entity\Event
+
+    app.repository.expansion:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - AppBundle\Entity\Expansion
+
+    app.repository.franchise:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - AppBundle\Entity\Franchise
+
+    app.repository.game:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - AppBundle\Entity\Game
+
+    app.repository.image:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - AppBundle\Entity\Image
+
+    app.repository.invite:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - AppBundle\Entity\Invite
+
+    app.repository.page:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - AppBundle\Entity\Page
+
+    app.repository.profile:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - AppBundle\Entity\Profile
+
+    app.repository.publisher:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - AppBundle\Entity\Publisher
+
+    app.repository.role:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - AppBundle\Entity\Role
+
+    app.repository.studio:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - AppBundle\Entity\Studio
+    app.repository.user:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - AppBundle\Entity\User

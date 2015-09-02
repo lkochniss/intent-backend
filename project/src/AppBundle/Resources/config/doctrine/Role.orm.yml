@@ -15,8 +15,8 @@ AppBundle\Entity\Role:
         role:
             type: string
             length: 255
-    oneToMany:
+    manyToMany:
         users:
             targetEntity: User
-            mappedBy: role
+            mappedBy: roles
     lifecycleCallbacks: {  }

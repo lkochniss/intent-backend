@@ -10,3 +10,9 @@ AppBundle\Entity\AbstractModel:
             column: modified_at
             type: datetime
             nullable: false
+    lifecycleCallbacks:
+        prePersist:
+                - setModifiedAt
+                - setCreatedAt
+        preUpdate:
+                - setModifiedAt

@@ -12,8 +12,10 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 abstract class AbstractCrudController extends Controller
 {
-    const PAGING_LIMIT = 25;
-
+    /**
+     * @param Request $request
+     * @return RedirectResponse|Response
+     */
     public function createAction(Request $request)
     {
         $entity = $this->createNewEntity();
@@ -21,6 +23,11 @@ abstract class AbstractCrudController extends Controller
         return $this->createAndHandleForm($entity, $request, 'create');
     }
 
+    /**
+     * @param $id
+     * @param Request $request
+     * @return RedirectResponse|Response
+     */
     public function editAction($id, Request $request)
     {
         $entity = $this->getDoctrine()->getRepository($this->getEntityName())->find($id);
@@ -38,28 +45,44 @@ abstract class AbstractCrudController extends Controller
         return $this->createAndHandleForm($entity, $request, 'edit', array('id' => $entity->getId()));
     }
 
-    public function deleteAction($id)
+    /**
+     * @param $id
+     * @param Request $request
+     * @return Response
+     */
+    public function showAction($id, Request $request)
     {
+        $entity = $this->getDoctrine()->getRepository($this->getEntityName())->find($id);
+
+        if (is_null($entity)) {
+            throw new NotFoundHttpException(
+                $this->get('translator')->trans(
+                    $this->getTranslationDomain().'.not_found',
+                    array(),
+                    $this->getTranslationDomain()
+                )
+            );
+        }
+
         return $this->render(
-            ':Article:delete.html.twig',
-            array(// ...
+            sprintf('%s/show.html.twig', $this->getTemplateBasePath()),
+            array(
+                'entity' => $entity,
             )
         );
     }
 
-    public function listAction($type = null, $page = 1)
+    /**
+     * @return Response
+     */
+    public function listAction()
     {
-        $repository = $this->getDoctrine()->getRepository($this->getEntityName());
-
-        $entities = $repository->findPaginated($page, self::PAGING_LIMIT);
-        $totalPages = ceil(count($entities) / self::PAGING_LIMIT);
+        $entities = $this->getDoctrine()->getRepository($this->getEntityName())->findAll();
 
         return $this->render(
             sprintf('%s/list.html.twig', $this->getTemplateBasePath()),
             array(
                 'entities' => $entities,
-                'page' => $page,
-                'totalPages' => $totalPages,
             )
         );
     }
@@ -123,7 +146,7 @@ abstract class AbstractCrudController extends Controller
      * @param $request
      * @return RedirectResponse|Response
      */
-    private function createAndHandleForm(AbstractModel $entity, $request, $action, $options = array())
+    protected function createAndHandleForm(AbstractModel $entity, $request, $action, $options = array())
     {
         $form = $this->createForm(
             $this->getFormType(),

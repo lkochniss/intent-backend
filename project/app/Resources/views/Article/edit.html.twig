@@ -1,15 +1,28 @@
 {% extends "::editor.html.twig" %}
 
-{% block title %}{{ parent() }} {% trans from "article" %}article.edit{% endtrans %}{% endblock %}
+{% block title %}
+    {{ parent() }}
+    {% if  app.request.get('_route') ends with '_create' %}
+        {% trans from "article" %}article.create{% endtrans %}
+    {% else %}
+        {% trans from "article" %}article.edit{% endtrans %}
+    {% endif %}
+{% endblock %}
 
 {% block content %}
-    <h1>{% trans from "article" %}article.edit{% endtrans %}</h1>
+    <h1>
+        {% if  app.request.get('_route') ends with '_create' %}
+            {% trans from "article" %}article.create{% endtrans %}
+        {% else %}
+            {% trans from "article" %}article.edit{% endtrans %}
+        {% endif %}
+    </h1>
     {{ form_start(form) }}
-    <div class="col-md-10 editor">
+    <div class="col-md-9 editor">
         {{ form_row(form.title) }}
         {{ form_row(form.content) }}
     </div>
-    <div class="col-md-2 neta">
+    <div class="col-md-3 meta">
         {{ form_row(form.related) }}
         {{ form_row(form.category) }}
         {{ form_row(form.event) }}
@@ -17,4 +30,15 @@
         {{ form_row(form.submit) }}
     </div>
     {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $('#article_related').select2();
+
+        $('#article_category').select2();
+
+        $('#article_event').select2();
+    </script>
 {% endblock %}

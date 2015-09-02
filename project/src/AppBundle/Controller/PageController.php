@@ -3,9 +3,10 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Page;
+use AppBundle\Form\Type\PagePublishType;
 use AppBundle\Form\Type\PageType;
 
-class PageController extends AbstractCrudController
+class PageController extends AbstractArticleController
 {
     /**
      * @return Page
@@ -21,6 +22,14 @@ class PageController extends AbstractCrudController
     protected function getFormType()
     {
         return new PageType();
+    }
+
+    /**
+     * @return PagePublishType
+     */
+    protected function getPublishType()
+    {
+        return new PagePublishType();
     }
 
     /**
@@ -52,21 +61,18 @@ class PageController extends AbstractCrudController
         return 'page';
     }
 
-    public function showAction($id)
+    protected function getReadAccessLevel()
     {
-        return $this->render(
-            ':Page:show.html.twig',
-            array(
-            )
-        );
+        return 'ROLE_ADMIN';
     }
 
-    public function deleteAction($id)
+    protected function getWriteAccessLevel()
     {
-        return $this->render(
-            ':Page:delete.html.twig',
-            array(
-            )
-        );
+        return 'ROLE_ADMIN';
+    }
+
+    protected function getPublishAccessLevel()
+    {
+        return 'ROLE_ADMIN';
     }
 }

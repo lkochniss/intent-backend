@@ -3,9 +3,10 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Publisher;
+use AppBundle\Form\Type\PublisherPublishType;
 use AppBundle\Form\Type\PublisherType;
 
-class PublisherController extends RelatedController
+class PublisherController extends AbstractRelatedController
 {
     /**
      * @return Publisher
@@ -21,6 +22,14 @@ class PublisherController extends RelatedController
     protected function getFormType()
     {
         return new PublisherType();
+    }
+
+    /**
+     * @return PublisherPublishType
+     */
+    protected function getPublishType()
+    {
+        return new PublisherPublishType();
     }
 
     /**
@@ -52,22 +61,19 @@ class PublisherController extends RelatedController
         return 'publisher';
     }
 
-    public function showAction($id)
+    protected function getReadAccessLevel()
     {
-        return $this->render(
-            ':Publisher:show.html.twig',
-            array(// ...
-            )
-        );
+        return 'ROLE_READ_META';
     }
 
-    public function deleteAction($id)
+    protected function getWriteAccessLevel()
     {
-        return $this->render(
-            ':Publisher:delete.html.twig',
-            array(// ...
-            )
-        );
+        return 'ROLE_WRITE_META';
+    }
+
+    protected function getPublishAccessLevel()
+    {
+        return 'ROLE_PUBLISH_META';
     }
 
 }

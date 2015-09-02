@@ -2,125 +2,117 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Related
  */
-abstract class Related
+abstract class Related extends AbstractMetaModel
 {
     /**
-     * @var integer
+     * @var String
      */
-    protected $id;
+    private $description;
 
     /**
-     * @var Article
+     * @var String
      */
-    private $article;
+    private $backgroundLink;
 
     /**
-     * @var string
+     * @var ArrayCollection
      */
-    private $type;
+    private $articles;
 
-    /**
-     * @var \DateTime
-     */
-    private $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    private $modifiedAt;
-
-    /**
-     * @return integer
-     */
-    public function getId()
+    function __construct()
     {
-        return $this->id;
+        parent::__construct();
+        $this->articles = array();
+    }
+
+    /**
+     * @param $description
+     * @return $this
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return String
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param $backgroundLink
+     * @return $this
+     */
+    public function setBackgroundLink($backgroundLink)
+    {
+        $this->backgroundLink = $backgroundLink;
+
+        return $this;
+    }
+
+    /**
+     * @return String
+     */
+    public function getBackgroundLink()
+    {
+        return $this->backgroundLink;
     }
 
     /**
      * @param Article $article
      * @return $this
      */
-    public function setArticle(Article $article)
+    public function addArticle(Article $article)
     {
-        $this->article = $article;
+        if (!$this->articles->contains($article)) {
+            $this->articles->add($article);
+            $article->setRelated($this);
+        }
 
         return $this;
     }
 
     /**
-     * @return Article
+     * @param Article $article
+     * @return ArrayCollection
      */
-    public function getArticle()
+    public function removeArticle(Article $article)
     {
-        return $this->article;
-    }
-
-    /**
-     * @param $type
-     * @return $this
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
+        $this->articles->remove($article);
 
         return $this;
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getType()
+    public function getArticles()
     {
-        return $this->type;
+        return $this->articles->toArray();
     }
 
     /**
-     * Set modifiedAt
-     *
-     * @return \DateTime
+     * @return String
      */
-    public function setModifiedAt()
-    {
-        $this->modifiedAt = new \DateTime();
-
-        return $this;
-    }
+    abstract public function getType();
 
     /**
-     * Get modifiedAt
-     *
-     * @return \DateTime
+     * @return String
      */
-    public function getModifiedAt()
+    function __toString()
     {
-        return $this->modifiedAt;
-    }
-
-    /**
-     * Set createdAt
-     *
-     * @return \DateTime
-     */
-    public function setCreatedAt()
-    {
-        $this->createdAt = new \DateTime();
-
-        return $this;
-    }
-
-    /**
-     * Get createdAt
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
+        return $this->getName().' ('.$this->getType().')';
     }
 }

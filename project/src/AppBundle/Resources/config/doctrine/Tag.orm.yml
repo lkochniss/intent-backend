@@ -9,15 +9,8 @@ AppBundle\Entity\Tag:
             generator:
                 strategy: AUTO
     fields:
-        name:
-            type: string
-            length: 255
-        slug:
-            type: string
-            length: 255
-    lifecycleCallbacks:
-        prePersist:
-            - setModifiedAt
-            - setCreatedAt
-        preUpdate:
-            - setModifiedAt
+    manyToMany:
+        articles:
+            targetEntity: Article
+            mappedBy: tags
+    lifecycleCallbacks: { }

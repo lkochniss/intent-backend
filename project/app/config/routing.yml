@@ -1,9 +1,16 @@
 intent_backend_login:
     path:   /login
-    defaults: { _controller: AppBundle:Security:login }
+    defaults: { _controller: appbundle:security:login }
 
 intent_backend_login_check:
     path:   /login_check
+
+intent_backend_logout:
+    path:   /logout
+
+intent_backend_password_reset:
+    path:   /reset
+    defaults: { _controller: appbundle:security:resetpassword }
 
 intent_backend_user:
     resource: routing/user.yml
@@ -49,14 +56,18 @@ intent_backend_image:
     resource: routing/image.yml
     prefix:   /image
 
+intent_backend_expansion:
+    resource: routing/expansion.yml
+    prefix:   /expansion
+
 intent_backend_filemanager:
     resource: routing/filemanager.yml
     prefix:   /filemanager
 
+intent_backend_profile:
+    resource: routing/profile.yml
+    prefix:   /profile
+
 intent_backend_dashboard:
     path:   /
     defaults: { _controller: AppBundle:Dashboard:index }
-
-intent_backend_profile:
-    path:   /
-    defaults: { _controller: AppBundle:User:profile }

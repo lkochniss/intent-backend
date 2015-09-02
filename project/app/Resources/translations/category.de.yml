@@ -1,9 +1,11 @@
 category:
     actions:    Aktionen
     create:     Kategorie erstellen
+    count:      Anzahl der Artikel
     delete:     Kategorie löschen
     edit:       Kategorie bearbeiten
     list:       Kategorieübersicht
     name:       Kategorie
     not_found:  Kategorie nicht gefunden
+    priority:   Priorität
     submit:     Kategorie speichern

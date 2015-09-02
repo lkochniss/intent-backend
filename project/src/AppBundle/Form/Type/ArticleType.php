@@ -51,31 +51,38 @@ class ArticleType extends AbstractType
                 'category',
                 'entity',
                 array(
-                    'label' => 'article.category',
+                    'label' => 'article.category.label',
                     'translation_domain' => 'article',
                     'class' => 'AppBundle\Entity\Category',
                     'multiple' => false,
-                    'expanded' => false
+                    'expanded' => false,
+                    'placeholder' => 'article.category.select',
+                    'empty_data' => null
                 )
             )
             ->add(
                 'related',
                 'entity',
                 array(
-                    'label' => 'article.related',
+                    'label' => 'article.related.label',
                     'translation_domain' => 'article',
                     'class' => 'AppBundle\Entity\Related',
+                    'placeholder' => 'article.related.select',
+                    'empty_data' => null
                 )
             )
             ->add(
                 'event',
                 'entity',
                 array(
-                    'label' => 'article.event',
+                    'label' => 'article.event.label',
                     'translation_domain' => 'article',
                     'class' => 'AppBundle\Entity\Event',
                     'multiple' => false,
-                    'expanded' => false
+                    'expanded' => false,
+                    'placeholder' => 'article.event.select',
+                    'empty_data' => null,
+                    'required' => false,
                 )
             )
             ->add(

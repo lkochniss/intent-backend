@@ -1,41 +1,54 @@
-{% extends "::base.html.twig" %}
+{% extends "::list.html.twig" %}
 
 {% block title %}{{ parent() }} {% trans from "game" %}game.list{% endtrans %}{% endblock %}
 
 {% block content %}
-    <h3>{% trans from "game" %}game.list{% endtrans %}</h3>
     <a href="{{ path('intent_backend_game_create') }}" class="btn btn-default pull-right">{% trans from "game" %}
         game.create{% endtrans %}</a>
+    <h3>{% trans from "game" %}game.list{% endtrans %}</h3>
     <table class="table">
         <thead>
         <tr>
-            <td>{% trans from "game" %}game.name{% endtrans %}</td>
-            <td>{% trans from "game" %}game.event{% endtrans %}</td>
-            <td>{% trans from "game" %}game.franchise{% endtrans %}</td>
-            <td>{% trans from "game" %}game.studio{% endtrans %}</td>
-            <td>{% trans from "game" %}game.publisher{% endtrans %}</td>
-            <td>{% trans from "game" %}game.actions{% endtrans %}</td>
+            <th>{% trans from "game" %}game.name{% endtrans %}</th>
+            <th>{% trans from "game" %}game.franchise.name{% endtrans %}</th>
+            <th>{% trans from "game" %}game.studio.name{% endtrans %}</th>
+            <th>{% trans from "game" %}game.publisher{% endtrans %}</th>
+            <th>{% trans from "game" %}game.actions{% endtrans %}</th>
         </tr>
         </thead>
         <tbody>
         {% for game in entities %}
             <tr>
                 <td>{{ game.name }}</td>
+                {% if game.franchise %}
+                    <td>{{ game.franchise.name }}</td>
+                {% else %}
+                    <td>&nbsp;</td>
+                {% endif %}
+                {% if game.studio %}
+                    <td>{{ game.studio.name }}</td>
+                {% else %}
+                    <td>&nbsp;</td>
+                {% endif %}
+                {% if game.franchise %}
+                    {% if game.franchise.publisher %}
+                        <td>{{ game.franchise.publisher.name }}</td>
+                    {% else %}
+                        <td>&nbsp;</td>
+                    {% endif %}
+                {% else %}
+                    <td>&nbsp;</td>
+                {% endif %}
                 <td>
-                    {% for event in game.events %}
-                        {% if "now"|date("d.m.Y") >= event.startAt|date('d.m.Y') and "now"|date("d.m.Y") < event.endAt|date('d.m.Y') %}
-                            {{ event.name }}
-                        {% endif %}
-                    {% endfor %}
+                    <a class="table-padding" href="{{ path('intent_backend_game_edit',{'id' : game.id}) }}">
+                        <span class="glyphicon glyphicon-pencil"/>
+                    </a>
+                    <a class="table-padding" href="{{ path('intent_backend_game_show',{'id' : game.id}) }}">
+                        <span class="glyphicon glyphicon-eye-open"/>
+                    </a>
                 </td>
-                <td>{{ game.franchise.name }}</td>
-                <td>{{ game.studio.name }}</td>
-                <td>{{ game.franchise.publisher.name }}</td>
-                <td><a class="table-padding" href="{{ path('intent_backend_game_edit',{'id' : game.id}) }}"><span
-                                class="glyphicon glyphicon-pencil"/></a></td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-    {% include '::pagination.html.twig' with { 'default_page': 'game' } %}
 {% endblock %}

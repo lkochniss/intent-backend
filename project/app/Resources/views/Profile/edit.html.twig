@@ -1,0 +1,29 @@
+{% extends "::editor.html.twig" %}
+
+{% block title %}
+    {{ parent() }}
+    {% if  app.request.get('_route') ends with '_create' %}
+        {% trans from "profile" %}profile.create{% endtrans %}
+    {% else %}
+        {% trans from "profile" %}profile.edit{% endtrans %}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <h1>
+        {% if  app.request.get('_route') ends with '_create' %}
+            {% trans from "profile" %}profile.create{% endtrans %}
+        {% else %}
+            {% trans from "profile" %}profile.edit{% endtrans %}
+        {% endif %}
+    </h1>
+    {{ form_start(form) }}
+    <div class="col-md-9 editor">
+        {{ form_row(form.name) }}
+        {{ form_row(form.description) }}
+    </div>
+    <div class="col-md-3 meta">
+        {{ form_row(form.submit) }}
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

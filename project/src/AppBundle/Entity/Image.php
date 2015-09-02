@@ -3,42 +3,58 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Image
  */
-class Image
+class Image extends AbstractModel
 {
     /**
-     * @var integer
-     */
-    private $id;
-
-    /**
-     * @var string
+     * @var String
+     *
+     * @Assert\NotBlank()
      */
     private $name;
 
     /**
-     * @var string
+     * @var String
      */
-    private $altText;
+    private $description;
 
     /**
-     * Get id
+     * @var String
      *
-     * @return integer 
+     * @Assert\NotBlank()
      */
-    public function getId()
-    {
-        return $this->id;
-    }
+    private $path;
 
     /**
-     * Set name
+     * @var String
      *
-     * @param string $name
-     * @return Image
+     * @Assert\NotBlank()
+     */
+    private $fullPath;
+
+    /**
+     * @var Directory
+     */
+    private $parentDirectory;
+
+    /**
+     * @var UploadedFile
+     *
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"image/jpeg", "image/png", "image/gif"},
+     * )
+     */
+    private $file;
+
+    /**
+     * @param $name
+     * @return $this
      */
     public function setName($name)
     {
@@ -48,9 +64,7 @@ class Image
     }
 
     /**
-     * Get name
-     *
-     * @return string 
+     * @return String
      */
     public function getName()
     {
@@ -58,25 +72,107 @@ class Image
     }
 
     /**
-     * Set altText
-     *
-     * @param string $altText
-     * @return Image
+     * @param String $description
      */
-    public function setAltText($altText)
+    public function setDescription($description)
     {
-        $this->altText = $altText;
+        $this->description = $description;
+    }
+
+    /**
+     * @return String
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param $path
+     * @return $this
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+        $this->resetFullPath();
 
         return $this;
     }
 
     /**
-     * Get altText
-     *
-     * @return string 
+     * @return String
      */
-    public function getAltText()
+    public function getPath()
     {
-        return $this->altText;
+        return $this->path;
+    }
+
+    /**
+     * @return Directory
+     */
+    public function getParentDirectory()
+    {
+        return $this->parentDirectory;
+    }
+
+    /**
+     * @return String
+     */
+    public function getFullPath()
+    {
+        return $this->fullPath;
+    }
+
+    /**
+     * @return String
+     */
+    public function resetFullPath()
+    {
+        if (is_null($this->parentDirectory)) {
+            $this->fullPath = $this->path;
+        } else {
+            $this->fullPath = $this->parentDirectory->getFullPath().'/'.$this->path;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Directory $parentDirectory
+     */
+    public function setParentDirectory(Directory $parentDirectory)
+    {
+        $this->parentDirectory = $parentDirectory;
+    }
+
+    /**
+     * @param UploadedFile|null $file
+     */
+    public function setFile(UploadedFile $file = null)
+    {
+        $this->file = $file;
+    }
+
+    /**
+     * @return UploadedFile
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    public function upload()
+    {
+        $this->setPath($this->path.'.'.$this->getFile()->guessExtension());
+        if (null === $this->getFile()) {
+            return;
+        }
+
+        $this->getFile()->move(
+            $this->parentDirectory->getFullPath(),
+            $this->path
+        );
+
+        $this->file = null;
     }
 }

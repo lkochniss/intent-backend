@@ -42,22 +42,28 @@ class GameType extends AbstractType
                 'studio',
                 'entity',
                 array(
-                    'label' => 'game.studio',
+                    'label' => 'game.studio.name',
                     'translation_domain' => 'game',
                     'class' => 'AppBundle\Entity\Studio',
                     'multiple' => false,
-                    'expanded' => false
+                    'expanded' => false,
+                    'placeholder' => 'game.studio.select',
+                    'empty_data' => null,
+                    'required' => false,
                 )
             )
             ->add(
                 'franchise',
                 'entity',
                 array(
-                    'label' => 'game.franchise',
+                    'label' => 'game.franchise.name',
                     'translation_domain' => 'game',
                     'class' => 'AppBundle\Entity\Franchise',
                     'multiple' => false,
-                    'expanded' => false
+                    'expanded' => false,
+                    'placeholder' => 'game.franchise.select',
+                    'empty_data' => null,
+                    'required' => false,
                 )
             )
             ->add(

@@ -1,25 +1,31 @@
-{% extends "::base.html.twig" %}
+{% extends "::list.html.twig" %}
 
 {% block title %}{{ parent() }} {% trans from "tag" %}tag.list{% endtrans %}{% endblock %}
 
 {% block content %}
-    <h3>{% trans from "tag" %}tag.list{% endtrans %}</h3>
     <a href="{{ path('intent_backend_tag_create') }}" class="btn btn-default pull-right">{% trans from "tag" %}tag.create{% endtrans %}</a>
+    <h3>{% trans from "tag" %}tag.list{% endtrans %}</h3>
     <table class="table">
         <thead>
         <tr>
-            <td>{% trans from "tag" %}tag.name{% endtrans %}</td>
-            <td>{% trans from "tag" %}tag.actions{% endtrans %}</td>
+            <th>{% trans from "tag" %}tag.name{% endtrans %}</th>
+            <th>{% trans from "tag" %}tag.actions{% endtrans %}</th>
         </tr>
         </thead>
         <tbody>
         {% for tag in entities %}
             <tr>
                 <td>{{ category.name }}</td>
-                <td><a class="table-padding" href="{{ path('intent_backend_tag_edit',{'id' : tag.id}) }}"><span class="glyphicon glyphicon-pencil"/></a></td>
+                <td>
+                    <a class="table-padding" href="{{ path('intent_backend_tag_edit',{'id' : tag.id}) }}">
+                        <span class="glyphicon glyphicon-pencil"/>
+                    </a>
+                    <a class="table-padding" href="{{ path('intent_backend_tag_show',{'id' : tag.id}) }}">
+                        <span class="glyphicon glyphicon-eye-open"/>
+                    </a>
+                </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-    {% include '::pagination.html.twig' with { 'default_page': 'tag' } %}
 {% endblock %}

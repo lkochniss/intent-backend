@@ -2,32 +2,42 @@
 
 namespace AppBundle\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Class AbstractModel
  */
-abstract class  AbstractModel
+abstract class AbstractModel
 {
+    /**
+     * @var Integer
+     */
     protected $id;
 
     /**
      * @var \DateTime
+     *
+     * @Assert\DateTime()
      */
     private $createdAt;
 
     /**
      * @var \DateTime
+     *
+     * @Assert\DateTime()
      */
     private $modifiedAt;
 
+    /**
+     * @return int
+     */
     public function getId()
     {
         return $this->id;
     }
 
     /**
-     * Set modifiedAt
-     *
-     * @return \DateTime
+     * @return $this
      */
     public function setModifiedAt()
     {
@@ -37,8 +47,6 @@ abstract class  AbstractModel
     }
 
     /**
-     * Get modifiedAt
-     *
      * @return \DateTime
      */
     public function getModifiedAt()
@@ -47,9 +55,7 @@ abstract class  AbstractModel
     }
 
     /**
-     * Set createdAt
-     *
-     * @return \DateTime
+     * @return $this
      */
     public function setCreatedAt()
     {
@@ -59,8 +65,6 @@ abstract class  AbstractModel
     }
 
     /**
-     * Get createdAt
-     *
      * @return \DateTime
      */
     public function getCreatedAt()

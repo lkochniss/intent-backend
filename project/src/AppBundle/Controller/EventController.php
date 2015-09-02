@@ -3,9 +3,10 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Event;
+use AppBundle\Form\Type\EventPublishType;
 use AppBundle\Form\Type\EventType;
 
-class EventController extends AbstractCrudController
+class EventController extends AbstractRelatedController
 {
     /**
      * @return Event
@@ -21,6 +22,14 @@ class EventController extends AbstractCrudController
     protected function getFormType()
     {
         return new EventType();
+    }
+
+    /**
+     * @return EventPublishType
+     */
+    protected function getPublishType()
+    {
+        return new EventPublishType();
     }
 
     /**
@@ -52,21 +61,18 @@ class EventController extends AbstractCrudController
         return 'event';
     }
 
-    public function showAction($id)
+    protected function getReadAccessLevel()
     {
-        return $this->render(
-            ':Event:show.html.twig',
-            array(// ...
-            )
-        );
+        return 'ROLE_READ_META';
     }
 
-    public function deleteAction($id)
+    protected function getWriteAccessLevel()
     {
-        return $this->render(
-            ':Event:delete.html.twig',
-            array(// ...
-            )
-        );
+        return 'ROLE_WRITE_META';
+    }
+
+    protected function getPublishAccessLevel()
+    {
+        return 'ROLE_PUBLISH_META';
     }
 }

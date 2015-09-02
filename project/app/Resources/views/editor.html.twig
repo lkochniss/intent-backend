@@ -2,11 +2,15 @@
 
 {% block title %}{{ parent() }}{% endblock %}
 
-{% block content %}
-
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('/css/select2.min.css') }}" rel="stylesheet" />
 {% endblock %}
+
+{% block content %}{% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
     {{ tinymce_init() }}
+    <script src="{{ asset('/js/select2.min.js') }}"></script>
 {% endblock %}

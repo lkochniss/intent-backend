@@ -1,0 +1,38 @@
+{% extends "::list.html.twig" %}
+
+{% block title %}{{ parent() }} {% trans from "expansion" %}expansion.list{% endtrans %}{% endblock %}
+
+{% block content %}
+    <a href="{{ path('intent_backend_expansion_create') }}" class="btn btn-default pull-right">{% trans from "expansion" %}
+        expansion.create{% endtrans %}</a>
+    <h3>{% trans from "expansion" %}expansion.list{% endtrans %}</h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>{% trans from "expansion" %}expansion.name{% endtrans %}</th>
+            <th>{% trans from "expansion" %}expansion.game.name{% endtrans %}</th>
+            <th>{% trans from "expansion" %}expansion.actions{% endtrans %}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for expansion in entities %}
+            <tr>
+                <td>{{ expansion.name }}</td>
+                {% if expansion.game %}
+                    <td>{{ expansion.game.name }}</td>
+                {% else %}
+                    <td>&nbsp;</td>
+                {% endif %}
+                <td>
+                    <a class="table-padding" href="{{ path('intent_backend_expansion_edit',{'id' : expansion.id}) }}">
+                        <span class="glyphicon glyphicon-pencil"/>
+                    </a>
+                    <a class="table-padding" href="{{ path('intent_backend_expansion_show',{'id' : expansion.id}) }}">
+                        <span class="glyphicon glyphicon-eye-open"/>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,13 @@
+AppBundle\Entity\AbstractMetaModel:
+    type: mappedSuperclass
+    table: null
+    fields:
+        name:
+            type: string
+            length: 255
+        slug:
+            type: string
+            length: 255
+        published:
+            type: boolean
+    lifecycleCallbacks: { }

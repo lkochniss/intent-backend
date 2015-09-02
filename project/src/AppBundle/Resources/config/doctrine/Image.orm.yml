@@ -12,7 +12,18 @@ AppBundle\Entity\Image:
         name:
             type: string
             length: 255
-        altText:
+        description:
+            type: text
+        path:
             type: string
             length: 255
+        fullPath:
+            type: string
+            length: 255
+            column: full_path
+    manyToOne:
+        parentDirectory:
+            targetEntity: Directory
+            inversedBy: images
+            column: parent_directory
     lifecycleCallbacks: {  }
