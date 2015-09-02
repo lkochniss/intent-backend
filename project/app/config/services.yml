@@ -19,6 +19,11 @@ services:
         arguments:
             - @app.repository.event
 
+    app.expansion.service:
+        class: AppBundle\Service\ExpansionExport
+        arguments:
+            - @app.repository.expansion
+
     app.franchise.service:
         class: AppBundle\Service\FranchiseExport
         arguments:
@@ -33,11 +38,6 @@ services:
         class: AppBundle\Service\ImageExport
         arguments:
             - @app.repository.image
-
-    app.invite.service:
-        class: AppBundle\Service\InviteExport
-        arguments:
-            - @app.repository.invite
 
     app.page.service:
         class: AppBundle\Service\PageExport
@@ -92,6 +92,12 @@ services:
         factory: ["@doctrine.orm.entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\Event
+
+    app.repository.expansion:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - AppBundle\Entity\Expansion
 
     app.repository.franchise:
         class: Doctrine\ORM\EntityRepository

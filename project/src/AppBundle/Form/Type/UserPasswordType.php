@@ -7,10 +7,10 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class UserType
+ * Class UserPasswordType
  * @package AppBundle\Form\Type
  */
-class UserType extends AbstractType
+class UserPasswordType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -20,44 +20,26 @@ class UserType extends AbstractType
     {
         $builder
             ->add(
-                'username',
-                'text',
+                'password',
+                'repeated',
                 array(
-                    'label' => 'user.name',
-                    'translation_domain' => 'user',
-                )
-            )
-            ->add(
-                'email',
-                'email',
-                array(
-                    'label' => 'user.email',
-                    'translation_domain' => 'user',
-                    'required' => true
-                )
-            )
-            ->add(
-                'roles',
-                'entity',
-                array(
-                    'class' => 'AppBundle\Entity\Role',
+                    'type' => 'password',
                     'required' => true,
-                    'multiple' => true,
-                )
-            )
-            ->add(
-                'isActive',
-                'checkbox',
-                array(
-                    'label' => 'user.active',
-                    'translation_domain' => 'user'
+                    'first_options' => array(
+                        'label' => 'user.password.first',
+                        'translation_domain' => 'user'
+                    ),
+                    'second_options' => array(
+                        'label' => 'user.password.second',
+                        'translation_domain' => 'user'
+                    ),
                 )
             )
             ->add(
                 'submit',
                 'submit',
                 array(
-                    'label' => 'user.submit',
+                    'label' => 'user.password.submit',
                     'translation_domain' => 'user',
                 )
             );
@@ -80,6 +62,6 @@ class UserType extends AbstractType
      */
     public function getName()
     {
-        return 'user';
+        return 'user_password';
     }
 }

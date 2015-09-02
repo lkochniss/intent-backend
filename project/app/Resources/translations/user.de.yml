@@ -1,16 +1,19 @@
 user:
-    actions:    Aktionen
-    active:     Login aktiv
-    create:     Benutzer erstellen
-    delete:     Benutzer löschen
-    edit:       Benutzer bearbeiten
-    email:      Email
-    invite:     Benutzer einladen
-    list:       Benutzerübersicht
-    name:       Benutzername
-    not_found:  Benutzer nicht gefunden
+    actions:        Aktionen
+    active:         Login aktiv
+    access_denied:  kein Zugriff
+    create:         Benutzer erstellen
+    delete:         Benutzer löschen
+    edit:           Benutzer bearbeiten
+    email:          Email
+    invite:         Benutzer einladen
+    list:           Benutzerübersicht
+    name:           Benutzername
+    not_found:      Benutzer nicht gefunden
     password:
-        first:  Passwort eingeben
-        second: Passwort wiederholen
-    role:       Berechtigungen
-    submit:     Benutzer speichern
+        first:      Passwort eingeben
+        reset:      neues Passwort
+        second:     Passwort wiederholen
+        submit:     Passwort speichern
+    role:           Berechtigungen
+    submit:         Benutzer speichern

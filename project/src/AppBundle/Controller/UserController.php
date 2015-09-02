@@ -2,42 +2,49 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\AbstractModel;
-use AppBundle\Entity\Invite;
 use AppBundle\Entity\User;
-use AppBundle\Form\Type\InviteType;
+use AppBundle\Form\Type\UserPasswordType;
 use AppBundle\Form\Type\UserType;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Util\SecureRandom;
 
 class UserController extends AbstractCrudController
 {
-
-    public function inviteAction(Request $request)
+    /**
+     * @param Request $request
+     * @return RedirectResponse|Response
+     */
+    public function createAction(Request $request)
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, $this->get('translator')->trans(
-            'user.access_denied',
-            array(),
-            'user')
+        $this->denyAccessUnlessGranted(
+            'ROLE_ADMIN',
+            null,
+            $this->get('translator')->trans(
+                'user.access_denied',
+                array(),
+                'user'
+            )
         );
 
-        $invite = new Invite();
-        $form = $this->createForm(
-            new InviteType(),
-            $invite
-        );
+        $user = new User();
+        $form = $this->createForm(new UserType(), $user);
 
         if (in_array($request->getMethod(), ['POST'])) {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                $invite = $form->getData();
-
                 $generator = new SecureRandom();
-                $random = $generator->nextBytes(15);
-                $invite->setToken(md5($random));
+                $password = $generator->nextBytes(8);
 
-                $this->getDoctrine()->getRepository('AppBundle:Invite')->save($invite, $this->getUser());
+                $encoder = $this->container->get('security.password_encoder');
+                $encodedPassword = $encoder->encodePassword($user, $password);
+                $user->setPassword($encodedPassword);
+
+                $user->setValidUntil(new \DateTime('+1 day'));
+
+                $this->getDoctrine()->getRepository('AppBundle:User')->save($user);
 
                 $translator = $this->get('translator');
 
@@ -46,12 +53,13 @@ class UserController extends AbstractCrudController
                 $message = $mailer->createMessage()
                     ->setSubject($translator->trans('invite.mail.subject', array(), 'invite'))
                     ->setFrom($translator->trans('invite.mail.from', array(), 'invite'))
-                    ->setTo($invite->getEmail())
+                    ->setTo($user->getEmail())
                     ->setBody(
                         $this->renderView(
-                            'User/mail.html.twig',
+                            'Mail/new_user.html.twig',
                             array(
-                                'invite' => $invite,
+                                'user' => $user,
+                                'password' => $password,
                             )
                         ),
                         'text/html'
@@ -59,23 +67,50 @@ class UserController extends AbstractCrudController
 
                 $mailer->send($message);
 
-                return $this->redirectToRoute(
-                    'intent_backend_user_list'
-                );
+                return $this->redirectToRoute('intent_backend_user_list');
             }
         }
 
         return $this->render(
-            'User/invite.html.twig',
+            'User/edit.html.twig',
             array(
                 'form' => $form->createView(),
             )
         );
     }
 
-    public function tokenAction($token, Request $request)
+    /**
+     * @param $id
+     * @param Request $request
+     * @return RedirectResponse|Response
+     */
+    public function passwordAction($id, Request $request)
     {
+        $user = $this->getDoctrine()->getRepository('AppBundle:User')->find($id);
+        $form = $this->createForm(new UserPasswordType(), $user);
 
+        if (in_array($request->getMethod(), ['POST'])) {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $encoder = $this->container->get('security.password_encoder');
+                $encodedPassword = $encoder->encodePassword($user, $user->getPassword());
+                $user->setPassword($encodedPassword);
+
+                $user->setValidUntil(null);
+
+                $this->getDoctrine()->getRepository('AppBundle:User')->save($user);
+
+                return $this->redirectToRoute('intent_backend_dashboard');
+            }
+        }
+
+        return $this->render(
+            'User/password.html.twig',
+            array(
+                'form' => $form->createView(),
+            )
+        );
     }
 
     /**
@@ -121,23 +156,5 @@ class UserController extends AbstractCrudController
     protected function getTranslationDomain()
     {
         return 'user';
-    }
-
-    /**
-     * @param AbstractModel $entity
-     */
-    protected function handleValidForm(AbstractModel $entity)
-    {
-        $plainPassword = $entity->getPassword();
-
-        $encoder = $this->container->get('security.password_encoder');
-        $encodedPassword = $encoder->encodePassword($entity, $plainPassword);
-
-        $entity->setPassword($encodedPassword);
-
-        $repository = $this->getDoctrine()->getRepository($this->getEntityName());
-        $repository->save($entity, $this->getUser());
-
-        $this->addFlash('success', "Speichern erfolgreich");
     }
 }

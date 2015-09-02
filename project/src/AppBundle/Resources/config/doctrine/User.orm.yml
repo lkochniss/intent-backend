@@ -21,6 +21,10 @@ AppBundle\Entity\User:
         isActive:
             type: boolean
             column: is_active
+        validUntil:
+            type: datetime
+            column: valid_until
+            nullable: true
     oneToOne:
         profile:
             targetEntity: Profile

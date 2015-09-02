@@ -23,10 +23,10 @@ class ExportDatabaseCommand extends ContainerAwareCommand
         $this->addOption('cat', '', InputOption::VALUE_NONE, 'Export entity category.');
         $this->addOption('dir', '', InputOption::VALUE_NONE, 'Export entity directory.');
         $this->addOption('evt', '', InputOption::VALUE_NONE, 'Export entity event.');
+        $this->addOption('exp', '', InputOption::VALUE_NONE, 'Export entity expansion.');
         $this->addOption('fra', '', InputOption::VALUE_NONE, 'Export entity franchise. Mind the dependencies.');
         $this->addOption('gam', '', InputOption::VALUE_NONE, 'Export entity game. Mind the dependencies.');
         $this->addOption('img', '', InputOption::VALUE_NONE, 'Export entity image. Mind the dependencies.');
-        $this->addOption('inv', '', InputOption::VALUE_NONE, 'Export entity invite. Mind the dependencies.');
         $this->addOption('pag', '', InputOption::VALUE_NONE, 'Export entity page.');
         $this->addOption('pro', '', InputOption::VALUE_NONE, 'Export entity profile. Mind the dependencies');
         $this->addOption('pub', '', InputOption::VALUE_NONE, 'Export entity publisher.');
@@ -62,6 +62,11 @@ class ExportDatabaseCommand extends ContainerAwareCommand
             $output->writeln("exported event entity");
         }
 
+        if($input->getOption('all') || $input->getOption('exp') ){
+            $this->getContainer()->get('app.expansion.service')->exportEntity();
+            $output->writeln("exported expansion entity");
+        }
+
         if($input->getOption('all') || $input->getOption('fra') ){
             $this->getContainer()->get('app.franchise.service')->exportEntity();
             $output->writeln("exported franchise entity");
@@ -75,11 +80,6 @@ class ExportDatabaseCommand extends ContainerAwareCommand
         if($input->getOption('all') || $input->getOption('img') ){
             $this->getContainer()->get('app.image.service')->exportEntity();
             $output->writeln("exported image entity");
-        }
-
-        if($input->getOption('all') || $input->getOption('inv') ){
-            $this->getContainer()->get('app.invite.service')->exportEntity();
-            $output->writeln("exported invite entity");
         }
 
         if($input->getOption('all') || $input->getOption('pag') ){

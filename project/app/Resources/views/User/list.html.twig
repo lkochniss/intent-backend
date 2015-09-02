@@ -3,7 +3,7 @@
 {% block title %}{{ parent() }} {% trans from "user" %}user.list{% endtrans %}{% endblock %}
 
 {% block content %}
-    <a href="{{ path('intent_backend_user_invite') }}" class="btn btn-default pull-right">{% trans from "user" %}user.invite{% endtrans %}</a>
+    <a href="{{ path('intent_backend_user_create') }}" class="btn btn-default pull-right">{% trans from "user" %}user.create{% endtrans %}</a>
     <h3>{% trans from "user" %}user.list{% endtrans %}</h3>
     <table class="table">
         <thead>
@@ -23,7 +23,7 @@
                         {% if loop.last %}
                             {{ role.name }}
                         {% else %}
-                            {{ role.name }} ~,
+                            {{ role.name }} ,
                         {% endif %}
                     {% endfor %}
                 </td>

@@ -23,8 +23,6 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
 
     /**
      * @var String
-     *
-     * @Assert\NotBlank()
      */
     private $password;
 
@@ -44,6 +42,13 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
      * )
      */
     private $isActive;
+
+    /**
+     * @var \DateTime
+     *
+     * @Assert\DateTime()
+     */
+    private $validUntil;
 
     /**
      * @var ArrayCollection
@@ -144,6 +149,22 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
     }
 
     /**
+     * @param null $validUntil
+     */
+    public function setValidUntil($validUntil = null)
+    {
+        $this->validUntil = $validUntil;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getValidUntil()
+    {
+        return $this->validUntil;
+    }
+
+    /**
      * @param Role $role
      * @return $this
      */
@@ -163,7 +184,7 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
      */
     public function removeRole(Role $role)
     {
-        $this->roles->remove($role);
+        $this->roles->removeElement($role);
 
         return $this;
     }
@@ -272,7 +293,8 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
      */
     public function isAccountNonexpired()
     {
-        return true;
+        $now = new \DateTime();
+        return $this->validUntil < $now;
     }
 
     /**

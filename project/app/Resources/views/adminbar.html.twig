@@ -16,6 +16,7 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{ path('intent_backend_user_password',{'id': app.user.id}) }}">{% trans from "adminbar" %}adminbar.password{% endtrans %} <span class="glyphicon glyphicon-lock"/></a></li>
                 {% if app.user.profile is null %}
                     <li><a href="{{ path('intent_backend_profile_create') }}">{% trans from "adminbar" %}adminbar.profile.create{% endtrans %} <span class="glyphicon glyphicon-user"/></a></li>
                 {% else %}

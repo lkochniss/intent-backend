@@ -1,10 +1,6 @@
-intent_backend_user_activate:
-    path:     /{token}/invite
-    defaults: { _controller: AppBundle:User:token }
-
-intent_backend_user_invite:
-    path:     /invite
-    defaults: { _controller: AppBundle:User:invite }
+intent_backend_user_password:
+    path:     /{id}/password
+    defaults: { _controller: AppBundle:User:password }
 
 intent_backend_user_create:
     path:     /create
