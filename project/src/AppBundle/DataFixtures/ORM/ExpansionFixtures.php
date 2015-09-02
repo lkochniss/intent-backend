@@ -27,14 +27,14 @@ class ExpansionFixtures extends AbstractFixture implements OrderedFixtureInterfa
             $expansion->setBackgroundLink("$item->backgroundLink");
 
             if ("$item->game" != "") {
-                $expansion->setGame($this->getReference("$item->franchise"));
+                $expansion->setGame($this->getReference("$item->game"));
             }
 
             $manager->getRepository('AppBundle:Expansion')->save(
                 $expansion
             );
 
-            $this->addReference('expansion-'.$expansion->getSlug(), $expansion);
+            $this->addReference('dlc/expansion-'.$expansion->getSlug(), $expansion);
         }
     }
 
