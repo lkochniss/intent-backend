@@ -44,11 +44,11 @@ class EventExport
             $item->published = null;
             $item->published->addCData($event->isPublished());
 
-            $item->startedAt = null;
-            $item->startedAt->addCData($event->getStartAt()->format('Y-M-d H:i:s'));
+            $item->startAt = null;
+            $item->startAt->addCData($event->getStartAt()->format('Y-m-d'));
 
             $item->endAt = null;
-            $item->endAt->addCData($event->getEndAt()->format('Y-M-d H:i:s'));
+            $item->endAt->addCData($event->getEndAt()->format('Y-m-d'));
         }
 
         $xml->saveXML('web/export/event.xml');

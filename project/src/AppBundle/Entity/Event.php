@@ -26,14 +26,14 @@ class Event extends AbstractMetaModel
     /**
      * @var \DateTime
      *
-     * @Assert\DateTime()
+     * @Assert\Date()
      */
     private $startAt;
 
     /**
      * @var \DateTime
      *
-     * @Assert\DateTime()
+     * @Assert\Date()
      * @Assert\Expression(
      *     "value > this.getStartAt()"
      * )

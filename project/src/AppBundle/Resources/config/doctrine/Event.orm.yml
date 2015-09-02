@@ -18,10 +18,10 @@ AppBundle\Entity\Event:
             nullable: true
             column: background_link
         startAt:
-            type: datetime
+            type: date
             column: start_at
         endAt:
-            type: datetime
+            type: date
             column: end_at
     oneToMany:
         articles:
