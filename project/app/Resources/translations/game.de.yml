@@ -1,5 +1,6 @@
 game:
     actions:        Aktionen
+    categories:     Artikel zu
     create:         Game erstellen
     description:    Beschreibung
     delete:         Game löschen
