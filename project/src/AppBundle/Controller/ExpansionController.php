@@ -2,34 +2,34 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Game;
-use AppBundle\Form\Type\GamePublishType;
-use AppBundle\Form\Type\GameType;
+use AppBundle\Entity\Expansion;
+use AppBundle\Form\Type\ExpansionPublishType;
+use AppBundle\Form\Type\ExpansionType;
 
-class GameController extends AbstractRelatedController
+class ExpansionController extends AbstractRelatedController
 {
     /**
-     * @return Game
+     * @return Expansion
      */
     protected function createNewEntity()
     {
-        return new Game();
+        return new Expansion();
     }
 
     /**
-     * @return GameType
+     * @return ExpansionType
      */
     protected function getFormType()
     {
-        return new GameType();
+        return new ExpansionType();
     }
 
     /**
-     * @return GamePublishType
+     * @return ExpansionPublishType
      */
     protected function getPublishType()
     {
-        return new GamePublishType();
+        return new ExpansionPublishType();
     }
 
     /**
@@ -37,7 +37,7 @@ class GameController extends AbstractRelatedController
      */
     protected function getTemplateBasePath()
     {
-        return 'Game';
+        return 'Expansion';
     }
 
     /**
@@ -45,7 +45,7 @@ class GameController extends AbstractRelatedController
      */
     protected function getEntityName()
     {
-        return 'AppBundle\Entity\Game';
+        return 'AppBundle\Entity\Expansion';
     }
 
     /**
@@ -53,12 +53,12 @@ class GameController extends AbstractRelatedController
      */
     protected function getRoutePrefix()
     {
-        return 'intent_backend_game';
+        return 'intent_backend_expansion';
     }
 
     protected function getTranslationDomain()
     {
-        return 'game';
+        return 'expansion';
     }
 
     protected function getReadAccessLevel()

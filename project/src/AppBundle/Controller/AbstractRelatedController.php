@@ -31,6 +31,7 @@ abstract class AbstractRelatedController extends AbstractMetaController
     {
         $franchises = null;
         $games = null;
+        $expansions = null;
 
         $resultList = $related = $this->getRelatedArticles($entity);
 
@@ -41,14 +42,20 @@ abstract class AbstractRelatedController extends AbstractMetaController
         } elseif ($entity->getType() == 'studio') {
             $franchises = $entity->getFranchises();
             $games = $entity->getGames();
+        } elseif ($entity->getType() == 'game') {
+            $expansions = $entity->getExpansions();
         }
 
         if (!is_null($franchises)) {
             foreach ($franchises as $franchise) {
                 $resultList = array_merge($resultList, $this->getRelatedArticles($franchise));
 
-                foreach ($franchise->getGames() as $game) {
-                    $resultList = array_merge($resultList, $this->getRelatedArticles($game));
+                if (!is_null($franchise->getGames())) {
+                    if (!is_null($games)) {
+                        $games = array_merge($games, $franchise->getGames());
+                    } else {
+                        $games = $franchise->getGames();
+                    }
                 }
             }
         }
@@ -56,6 +63,20 @@ abstract class AbstractRelatedController extends AbstractMetaController
         if (!is_null($games)) {
             foreach ($games as $game) {
                 $resultList = array_merge($resultList, $this->getRelatedArticles($game));
+
+                if (!is_null($game->getExpansions())) {
+                    if (!is_null($expansions)) {
+                        $expansions = array_merge($expansions, $game->getExpansions());
+                    } else {
+                        $expansions = $game->getExpansions();
+                    }
+                }
+            }
+        }
+
+        if (!is_null($expansions)) {
+            foreach ($expansions as $expansion) {
+                $resultList = array_merge($resultList, $this->getRelatedArticles($expansion));
             }
         }
 

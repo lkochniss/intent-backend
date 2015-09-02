@@ -3,6 +3,7 @@
 namespace AppBundle\Repository;
 
 use AppBundle\Entity\Article;
+use AppBundle\Entity\Expansion;
 use AppBundle\Entity\Franchise;
 use AppBundle\Entity\Game;
 use AppBundle\Entity\Publisher;
@@ -45,6 +46,7 @@ class ArticleRepository extends AbstractRepository
         $franchise = null;
         $studio = null;
         $game = null;
+        $expansion = null;
 
         $article->resetTags();
 
@@ -56,6 +58,13 @@ class ArticleRepository extends AbstractRepository
             $franchise = $related;
         } elseif ($related instanceof Game) {
             $game = $related;
+        }elseif ($related instanceof Expansion) {
+            $expansion = $related;
+        }
+
+        if(!is_null($expansion)){
+            $article->addTag($this->getTag($expansion->getName()));
+            $game = $expansion->getGame();
         }
 
         if (!is_null($game)) {

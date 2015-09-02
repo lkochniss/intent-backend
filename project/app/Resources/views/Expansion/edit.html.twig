@@ -1,0 +1,38 @@
+{% extends "::editor.html.twig" %}
+
+{% block title %}
+    {{ parent() }}
+    {% if  app.request.get('_route') ends with '_create' %}
+        {% trans from "expansion" %}expansion.create{% endtrans %}
+    {% else %}
+        {% trans from "expansion" %}expansion.edit{% endtrans %}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <h1>
+        {% if  app.request.get('_route') ends with '_create' %}
+            {% trans from "expansion" %}expansion.create{% endtrans %}
+        {% else %}
+            {% trans from "expansion" %}expansion.edit{% endtrans %}
+        {% endif %}
+    </h1>
+    {{ form_start(form) }}
+    <div class="col-md-9 editor">
+        {{ form_row(form.name) }}
+        {{ form_row(form.description) }}
+    </div>
+    <div class="col-md-3 meta">
+        {{ form_row(form.game) }}
+        {{ form_row(form.submit) }}
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $('#expansion_game').select2();
+
+    </script>
+{% endblock %}

@@ -4,6 +4,11 @@ AppBundle\Entity\Game:
     repositoryClass: AppBundle\Repository\GameRepository
 
     fields:
+
+    oneToMany:
+        expansions:
+            targetEntity: Expansion
+            mappedBy: game
     
     manyToOne:
         studio:

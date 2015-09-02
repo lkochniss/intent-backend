@@ -1,0 +1,15 @@
+AppBundle\Entity\Expansion:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\ExpansionRepository
+
+    fields:
+    
+    manyToOne:
+        game:
+            targetEntity: Game
+            inversedBy: expansions
+            joinColumn:
+                name: game_id
+                referencedColumnName: id
+    lifecycleCallbacks: { }

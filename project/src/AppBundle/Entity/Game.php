@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -18,6 +19,18 @@ class Game extends Related
      * @var Franchise
      */
     private $franchise;
+
+    /**
+     * @var ArrayCollection
+     */
+    private $expansions;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->expansions = array();
+    }
+
 
     /**
      * @param Studio $studio
@@ -55,6 +68,39 @@ class Game extends Related
     public function getFranchise()
     {
         return $this->franchise;
+    }
+
+    /**
+     * @param Expansion $expansion
+     * @return $this
+     */
+    public function addExpansion(Expansion $expansion)
+    {
+        if (!$this->expansions->contains($expansion)){
+            $this->expansions->add($expansion);
+            $expansion->setGame($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Expansion $expansion
+     * @return $this
+     */
+    public function removeExpansion(Expansion $expansion)
+    {
+        $this->expansions->remove($expansion);
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getExpansions()
+    {
+        return $this->expansions->toArray();
     }
 
     /**
