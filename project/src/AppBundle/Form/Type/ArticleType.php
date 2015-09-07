@@ -86,6 +86,20 @@ class ArticleType extends AbstractType
                 )
             )
             ->add(
+                'thumbnail',
+                'entity',
+                array(
+                    'label' => 'article.thumbnail.label',
+                    'translation_domain' => 'article',
+                    'class' => 'AppBundle\Entity\Image',
+                    'multiple' => false,
+                    'expanded' => false,
+                    'placeholder' => 'article.thumbnail.select',
+                    'empty_data' => null,
+                    'required' => false,
+                )
+            )
+            ->add(
                 'submit',
                 'submit',
                 array(

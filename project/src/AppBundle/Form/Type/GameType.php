@@ -67,6 +67,34 @@ class GameType extends AbstractType
                 )
             )
             ->add(
+                'background_image',
+                'entity',
+                array(
+                    'label' => 'game.backgroundimage.label',
+                    'translation_domain' => 'game',
+                    'class' => 'AppBundle\Entity\Image',
+                    'multiple' => false,
+                    'expanded' => false,
+                    'placeholder' => 'game.backgroundimage.select',
+                    'empty_data' => null,
+                    'required' => false,
+                )
+            )
+            ->add(
+                'thumbnail',
+                'entity',
+                array(
+                    'label' => 'game.thumbnail.label',
+                    'translation_domain' => 'game',
+                    'class' => 'AppBundle\Entity\Image',
+                    'multiple' => false,
+                    'expanded' => false,
+                    'placeholder' => 'game.thumbnail.select',
+                    'empty_data' => null,
+                    'required' => false,
+                )
+            )
+            ->add(
                 'submit',
                 'submit',
                 array(

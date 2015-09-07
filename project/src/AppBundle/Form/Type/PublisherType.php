@@ -39,6 +39,34 @@ class PublisherType extends AbstractType
                 )
             )
             ->add(
+                'background_image',
+                'entity',
+                array(
+                    'label' => 'publisher.backgroundimage.label',
+                    'translation_domain' => 'publisher',
+                    'class' => 'AppBundle\Entity\Image',
+                    'multiple' => false,
+                    'expanded' => false,
+                    'placeholder' => 'publisher.backgroundimage.select',
+                    'empty_data' => null,
+                    'required' => false,
+                )
+            )
+            ->add(
+                'thumbnail',
+                'entity',
+                array(
+                    'label' => 'publisher.thumbnail.label',
+                    'translation_domain' => 'publisher',
+                    'class' => 'AppBundle\Entity\Image',
+                    'multiple' => false,
+                    'expanded' => false,
+                    'placeholder' => 'publisher.thumbnail.select',
+                    'empty_data' => null,
+                    'required' => false,
+                )
+            )
+            ->add(
                 'submit',
                 'submit',
                 array(

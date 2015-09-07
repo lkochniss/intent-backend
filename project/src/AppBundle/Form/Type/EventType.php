@@ -58,6 +58,34 @@ class EventType extends AbstractType
                 )
             )
             ->add(
+                'background_image',
+                'entity',
+                array(
+                    'label' => 'event.backgroundimage.label',
+                    'translation_domain' => 'event',
+                    'class' => 'AppBundle\Entity\Image',
+                    'multiple' => false,
+                    'expanded' => false,
+                    'placeholder' => 'event.backgroundimage.select',
+                    'empty_data' => null,
+                    'required' => false,
+                )
+            )
+            ->add(
+                'thumbnail',
+                'entity',
+                array(
+                    'label' => 'event.thumbnail.label',
+                    'translation_domain' => 'event',
+                    'class' => 'AppBundle\Entity\Image',
+                    'multiple' => false,
+                    'expanded' => false,
+                    'placeholder' => 'event.thumbnail.select',
+                    'empty_data' => null,
+                    'required' => false,
+                )
+            )
+            ->add(
                 'submit',
                 'submit',
                 array(

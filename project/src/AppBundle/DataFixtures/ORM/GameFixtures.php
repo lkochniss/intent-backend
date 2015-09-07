@@ -33,6 +33,15 @@ class GameFixtures extends AbstractFixture implements OrderedFixtureInterface, C
                 $game->setStudio($this->getReference("$item->studio"));
             }
 
+            if ("$item->backgroundImage" != "") {
+                $game->setBackgroundImage($this->getReference("$item->backgroundImage"));
+            }
+
+            if ("$item->thumbnail" != "") {
+                $game->setThumbnail($this->getReference("$item->thumbnail"));
+            }
+
+
             $manager->getRepository('AppBundle:Game')->save(
                 $game
             );

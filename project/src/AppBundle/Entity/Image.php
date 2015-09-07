@@ -25,15 +25,11 @@ class Image extends AbstractModel
 
     /**
      * @var String
-     *
-     * @Assert\NotBlank()
      */
     private $path;
 
     /**
      * @var String
-     *
-     * @Assert\NotBlank()
      */
     private $fullPath;
 
@@ -45,6 +41,7 @@ class Image extends AbstractModel
     /**
      * @var UploadedFile
      *
+     * @Assert\NotBlank()
      * @Assert\File(
      *     maxSize = "1024k",
      *     mimeTypes = {"image/jpeg", "image/png", "image/gif"},
@@ -163,10 +160,13 @@ class Image extends AbstractModel
 
     public function upload()
     {
-        $this->setPath($this->path.'.'.$this->getFile()->guessExtension());
         if (null === $this->getFile()) {
             return;
         }
+
+        $this->setPath($this->path.'.'.$this->getFile()->guessExtension());
+        var_dump($this->getParentDirectory()->getFullPath());
+        var_dump($this->path);
 
         $this->getFile()->move(
             $this->parentDirectory->getFullPath(),
@@ -175,4 +175,14 @@ class Image extends AbstractModel
 
         $this->file = null;
     }
+
+    /**
+     * @return String
+     */
+    function __toString()
+    {
+        return $this->name . ' ( ' . $this->fullPath . ' )';
+    }
+
+
 }

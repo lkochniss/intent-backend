@@ -67,6 +67,34 @@ class FranchiseType extends AbstractType
                 )
             )
             ->add(
+                'background_image',
+                'entity',
+                array(
+                    'label' => 'franchise.backgroundimage.label',
+                    'translation_domain' => 'franchise',
+                    'class' => 'AppBundle\Entity\Image',
+                    'multiple' => false,
+                    'expanded' => false,
+                    'placeholder' => 'franchise.backgroundimage.select',
+                    'empty_data' => null,
+                    'required' => false,
+                )
+            )
+            ->add(
+                'thumbnail',
+                'entity',
+                array(
+                    'label' => 'franchise.thumbnail.label',
+                    'translation_domain' => 'franchise',
+                    'class' => 'AppBundle\Entity\Image',
+                    'multiple' => false,
+                    'expanded' => false,
+                    'placeholder' => 'franchise.thumbnail.select',
+                    'empty_data' => null,
+                    'required' => false,
+                )
+            )
+            ->add(
                 'submit',
                 'submit',
                 array(

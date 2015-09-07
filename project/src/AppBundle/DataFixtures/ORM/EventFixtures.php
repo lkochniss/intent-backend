@@ -26,6 +26,14 @@ class EventFixtures extends AbstractFixture implements OrderedFixtureInterface, 
             $event->setStartAt(new \DateTime("$item->startAt"));
             $event->setEndAt(new \DateTime("$item->endAt"));
 
+            if ("$item->backgroundImage" != "") {
+                $event->setBackgroundImage($this->getReference("$item->backgroundImage"));
+            }
+
+            if ("$item->thumbnail" != "") {
+                $event->setThumbnail($this->getReference("$item->thumbnail"));
+            }
+
             $manager->getRepository('AppBundle:Event')->save(
                 $event
             );

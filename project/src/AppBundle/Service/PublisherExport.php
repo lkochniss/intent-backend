@@ -46,6 +46,16 @@ class PublisherExport
 
             $item->backgroundLink = null;
             $item->backgroundLink->addCData($publisher->getBackgroundLink());
+
+            $item->backgroundImage = null;
+            if ($publisher->getBackgroundImage()) {
+                $item->backgroundImage->addCData('image-'. $publisher->getBackgroundImage()->getFullPath());
+            }
+
+            $item->thumbnail = null;
+            if ($publisher->getThumbnail()) {
+                $item->thumbnail->addCData('image-'. $publisher->getThumbnail()->getFullPath());
+            }
         }
 
         $xml->saveXML('web/export/publisher.xml');

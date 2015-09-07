@@ -163,7 +163,7 @@ abstract class AbstractCrudController extends Controller
             if ($form->isValid()) {
                 $this->handleValidForm($entity);
 
-                return $this->redirect($this->generateUrlForAction('edit', array('id' => $entity->getId())));
+                return $this->redirect($this->generateUrlForAction('edit', array('entity' => $entity)));
             }
         }
 

@@ -56,6 +56,16 @@ class GameExport
             if ($game->getStudio()) {
                 $item->studio->addCData('studio-'.$game->getStudio()->getSlug());
             }
+
+            $item->backgroundImage = null;
+            if ($game->getBackgroundImage()) {
+                $item->backgroundImage->addCData('image-'. $game->getBackgroundImage()->getFullPath());
+            }
+
+            $item->thumbnail = null;
+            if ($game->getThumbnail()) {
+                $item->thumbnail->addCData('image-'. $game->getThumbnail()->getFullPath());
+            }
         }
 
         $xml->saveXML('web/export/game.xml');

@@ -22,6 +22,16 @@ abstract class Related extends AbstractMetaModel
     private $backgroundLink;
 
     /**
+     * @var Image
+     */
+    private $backgroundImage;
+
+    /**
+     * @var Image
+     */
+    private $thumbnail;
+
+    /**
      * @var ArrayCollection
      */
     private $articles;
@@ -68,6 +78,38 @@ abstract class Related extends AbstractMetaModel
     public function getBackgroundLink()
     {
         return $this->backgroundLink;
+    }
+
+    /**
+     * @param Image $backgroundImage
+     */
+    public function setBackgroundImage($backgroundImage)
+    {
+        $this->backgroundImage = $backgroundImage;
+    }
+
+    /**
+     * @return Image
+     */
+    public function getBackgroundImage()
+    {
+        return $this->backgroundImage;
+    }
+
+    /**
+     * @param Image $thumbnail
+     */
+    public function setThumbnail($thumbnail)
+    {
+        $this->thumbnail = $thumbnail;
+    }
+
+    /**
+     * @return Image
+     */
+    public function getThumbnail()
+    {
+        return $this->thumbnail;
     }
 
     /**

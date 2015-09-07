@@ -30,6 +30,15 @@ class ExpansionFixtures extends AbstractFixture implements OrderedFixtureInterfa
                 $expansion->setGame($this->getReference("$item->game"));
             }
 
+            if ("$item->backgroundImage" != "") {
+                $expansion->setBackgroundImage($this->getReference("$item->backgroundImage"));
+            }
+
+            if ("$item->thumbnail" != "") {
+                $expansion->setThumbnail($this->getReference("$item->thumbnail"));
+            }
+
+
             $manager->getRepository('AppBundle:Expansion')->save(
                 $expansion
             );

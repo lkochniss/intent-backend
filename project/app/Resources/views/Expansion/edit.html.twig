@@ -23,7 +23,21 @@
         {{ form_row(form.description) }}
     </div>
     <div class="col-md-3 meta">
+
+        {{ form_label(entity.thumbnail) }}
+        {% if entity.thumbnail %}
+            <img src="/{{ entity.thumbnail.fullPath }}" class="img-responsive" /><br />
+        {% endif %}
+        {{ form_widget(form.thumbnail) }}
+
         {{ form_row(form.game) }}
+
+        {{ form_label(form.background_image) }}
+        {% if entity.backgroundImage %}
+            <img src="/{{ entity.backgroundImage.fullPath }}" class="img-responsive" /><br />
+        {% endif %}
+        {{ form_widget(form.background_image) }}
+
         {{ form_row(form.submit) }}
     </div>
     {{ form_end(form) }}
@@ -34,5 +48,8 @@
     <script type="text/javascript">
         $('#expansion_game').select2();
 
+        $('#expansion_thumbnail').select2();
+
+        $('#expansion_background_image').select2();
     </script>
 {% endblock %}

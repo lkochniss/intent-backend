@@ -56,6 +56,16 @@ class FranchiseExport
             if ($franchise->getStudio()) {
                 $item->studio->addCData('studio-'.$franchise->getStudio()->getSlug());
             }
+
+            $item->backgroundImage = null;
+            if ($franchise->getBackgroundImage()) {
+                $item->backgroundImage->addCData('image-'. $franchise->getBackgroundImage()->getFullPath());
+            }
+
+            $item->thumbnail = null;
+            if ($franchise->getThumbnail()) {
+                $item->thumbnail->addCData('image-'. $franchise->getThumbnail()->getFullPath());
+            }
         }
 
         $xml->saveXML('web/export/franchise.xml');

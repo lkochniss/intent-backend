@@ -1,19 +1,25 @@
 publisher:
-    actions:        Aktionen
-    categories:     Artikel zu
-    create:         Publisher erstellen
-    description:    Beschreibung
-    delete:         Publisher löschen
-    edit:           Publisher bearbeiten
-    game:           Games
-    franchise:      Franchises
-    list:           Publisherübersicht
-    name:           Publisher
-    not_found:      Publisher nicht gefunden
-    publish:        Publisher veröffentlichen
+    actions:            Aktionen
+    backgroundimage:
+        label:          Hintergrundbild
+        select:         Hintergrundbild auswählen
+    categories:         Artikel zu
+    create:             Publisher erstellen
+    description:        Beschreibung
+    delete:             Publisher löschen
+    edit:               Publisher bearbeiten
+    game:               Games
+    franchise:          Franchises
+    list:               Publisherübersicht
+    name:               Publisher
+    not_found:          Publisher nicht gefunden
+    publish:            Publisher veröffentlichen
     published:
-        at:         Veröffentlicht am
-        by:         Author
-    show:           Publishervorschau
-    studio:         Entwicklerstudios
-    submit:         Publisher speichern
+        at:             Veröffentlicht am
+        by:             Author
+    show:               Publishervorschau
+    studio:             Entwicklerstudios
+    submit:             Publisher speichern
+    thumbnail:
+        label:          Publisher Logo
+        select:         Publisher Logo auswählen

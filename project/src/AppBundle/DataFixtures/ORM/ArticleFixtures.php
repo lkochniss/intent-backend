@@ -37,6 +37,11 @@ class ArticleFixtures extends AbstractFixture implements OrderedFixtureInterface
             if ("$item->event" != "") {
                 $article->setEvent($this->getReference("$item->event"));
             }
+
+            if ("$item->thumbnail" != "") {
+                $article->setThumbnail($this->getReference("$item->thumbnail"));
+            }
+
             $manager->getRepository('AppBundle:Article')->save(
                 $article,
                 $this->getReference('user-'."$item->author")

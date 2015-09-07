@@ -54,6 +54,34 @@ class ExpansionType extends AbstractType
                 )
             )
             ->add(
+                'background_image',
+                'entity',
+                array(
+                    'label' => 'expansion.backgroundimage.label',
+                    'translation_domain' => 'expansion',
+                    'class' => 'AppBundle\Entity\Image',
+                    'multiple' => false,
+                    'expanded' => false,
+                    'placeholder' => 'expansion.backgroundimage.select',
+                    'empty_data' => null,
+                    'required' => false,
+                )
+            )
+            ->add(
+                'thumbnail',
+                'entity',
+                array(
+                    'label' => 'expansion.thumbnail.label',
+                    'translation_domain' => 'expansion',
+                    'class' => 'AppBundle\Entity\Image',
+                    'multiple' => false,
+                    'expanded' => false,
+                    'placeholder' => 'expansion.thumbnail.select',
+                    'empty_data' => null,
+                    'required' => false,
+                )
+            )
+            ->add(
                 'submit',
                 'submit',
                 array(

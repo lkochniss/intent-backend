@@ -34,8 +34,36 @@ class StudioType extends AbstractType
                     'translation_domain' => 'studio',
                     'attr' => array(
                         'class' => 'tinymce',
-                        'data-theme' => 'advanced'
-                    )
+                        'data-theme' => 'advanced',
+                    ),
+                )
+            )
+            ->add(
+                'background_image',
+                'entity',
+                array(
+                    'label' => 'studio.backgroundimage.label',
+                    'translation_domain' => 'studio',
+                    'class' => 'AppBundle\Entity\Image',
+                    'multiple' => false,
+                    'expanded' => false,
+                    'placeholder' => 'studio.backgroundimage.select',
+                    'empty_data' => null,
+                    'required' => false,
+                )
+            )
+            ->add(
+                'thumbnail',
+                'entity',
+                array(
+                    'label' => 'studio.thumbnail.label',
+                    'translation_domain' => 'studio',
+                    'class' => 'AppBundle\Entity\Image',
+                    'multiple' => false,
+                    'expanded' => false,
+                    'placeholder' => 'studio.thumbnail.select',
+                    'empty_data' => null,
+                    'required' => false,
                 )
             )
             ->add(

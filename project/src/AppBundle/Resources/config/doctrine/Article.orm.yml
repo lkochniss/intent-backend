@@ -41,6 +41,11 @@ AppBundle\Entity\Article:
             joinColumn:
                 name: related_id
                 referencedColumnName: id
+        thumbnail:
+            targetEntity: Image
+            joinColumn:
+                name: thumbnail_id
+                referencedColumnName: id
     manyToMany:
         tags:
             targetEntity: Tag

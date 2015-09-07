@@ -69,6 +69,11 @@ class ArticleExport
             if ($article->getEvent()) {
                 $item->event->addCData('event-'. $article->getEvent()->getSlug());
             }
+
+            $item->thumbnail = null;
+            if ($article->getThumbnail()) {
+                $item->thumbnail->addCData('image-'. $article->getThumbnail()->getFullPath());
+            }
         }
 
         $xml->saveXML('web/export/article.xml');

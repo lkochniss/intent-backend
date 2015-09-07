@@ -52,6 +52,16 @@ class ExpansionExport
             if ($expansion->getGame()) {
                 $item->game->addCData('game-'.$expansion->getGame()->getSlug());
             }
+
+            $item->backgroundImage = null;
+            if ($expansion->getBackgroundImage()) {
+                $item->backgroundImage->addCData('image-'. $expansion->getBackgroundImage()->getFullPath());
+            }
+
+            $item->thumbnail = null;
+            if ($expansion->getThumbnail()) {
+                $item->thumbnail->addCData('image-'. $expansion->getThumbnail()->getFullPath());
+            }
         }
 
         $xml->saveXML('web/export/expansion.xml');

@@ -46,6 +46,11 @@ class Article extends AbstractArticleModel
     private $related;
 
     /**
+     * @var Image
+     */
+    private $thumbnail;
+
+    /**
      * @var ArrayCollection
      */
     private $tags;
@@ -169,6 +174,22 @@ class Article extends AbstractArticleModel
     public function getRelated(){
 
         return $this->related;
+    }
+
+    /**
+     * @param Image $thumbnail
+     */
+    public function setThumbnail($thumbnail)
+    {
+        $this->thumbnail = $thumbnail;
+    }
+
+    /**
+     * @return Image
+     */
+    public function getThumbnail()
+    {
+        return $this->thumbnail;
     }
 
     /**

@@ -25,6 +25,14 @@ class StudioFixtures extends AbstractFixture implements OrderedFixtureInterface,
             $studio->setPublished(intval("$item->published"));
             $studio->setBackgroundLink("$item->backgroundLink");
 
+            if ("$item->backgroundImage" != "") {
+                $studio->setBackgroundImage($this->getReference("$item->backgroundImage"));
+            }
+
+            if ("$item->thumbnail" != "") {
+                $studio->setThumbnail($this->getReference("$item->thumbnail"));
+            }
+
             $manager->getRepository('AppBundle:Studio')->save(
                 $studio
             );

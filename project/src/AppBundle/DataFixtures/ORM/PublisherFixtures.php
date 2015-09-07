@@ -25,6 +25,14 @@ class PublisherFixtures extends AbstractFixture implements OrderedFixtureInterfa
             $publisher->setPublished(intval("$item->published"));
             $publisher->setBackgroundLink("$item->backgroundLink");
 
+            if ("$item->backgroundImage" != "") {
+                $publisher->setBackgroundImage($this->getReference("$item->backgroundImage"));
+            }
+
+            if ("$item->thumbnail" != "") {
+                $publisher->setThumbnail($this->getReference("$item->thumbnail"));
+            }
+
             $manager->getRepository('AppBundle:Publisher')->save(
                 $publisher
             );

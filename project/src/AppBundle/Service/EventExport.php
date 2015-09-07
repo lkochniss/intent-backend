@@ -49,6 +49,16 @@ class EventExport
 
             $item->endAt = null;
             $item->endAt->addCData($event->getEndAt()->format('Y-m-d'));
+
+            $item->backgroundImage = null;
+            if ($event->getBackgroundImage()) {
+                $item->backgroundImage->addCData('image-'. $event->getBackgroundImage()->getFullPath());
+            }
+
+            $item->thumbnail = null;
+            if ($event->getThumbnail()) {
+                $item->thumbnail->addCData('image-'. $event->getThumbnail()->getFullPath());
+            }
         }
 
         $xml->saveXML('web/export/event.xml');

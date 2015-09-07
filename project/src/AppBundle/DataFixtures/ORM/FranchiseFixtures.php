@@ -33,6 +33,15 @@ class FranchiseFixtures extends AbstractFixture implements OrderedFixtureInterfa
                 $franchise->setStudio($this->getReference("$item->studio"));
             }
 
+            if ("$item->backgroundImage" != "") {
+                $franchise->setBackgroundImage($this->getReference("$item->backgroundImage"));
+            }
+
+            if ("$item->thumbnail" != "") {
+                $franchise->setThumbnail($this->getReference("$item->thumbnail"));
+            }
+
+
             $manager->getRepository('AppBundle:Franchise')->save(
                 $franchise
             );

@@ -47,6 +47,16 @@ class StudioExport
 
             $item->backgroundLink = null;
             $item->backgroundLink->addCData($studio->getBackgroundLink());
+
+            $item->backgroundImage = null;
+            if ($studio->getBackgroundImage()) {
+                $item->backgroundImage->addCData('image-'. $studio->getBackgroundImage()->getFullPath());
+            }
+
+            $item->thumbnail = null;
+            if ($studio->getThumbnail()) {
+                $item->thumbnail->addCData('image-'. $studio->getThumbnail()->getFullPath());
+            }
         }
 
         $xml->saveXML('web/export/studio.xml');
