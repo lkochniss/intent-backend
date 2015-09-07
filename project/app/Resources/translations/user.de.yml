@@ -6,6 +6,16 @@ user:
     delete:         Benutzer löschen
     edit:           Benutzer bearbeiten
     email:          Email
+    mail:
+        activate:   Mit dem Passwort kannst du dich einloggen. Das Passwort muss jedoch innerhalb eines Tages erneuert werden.
+        from:       system@int-ent.de
+        hello:      Hallo
+        invite:     Du wurdest zu intent-backend test.dev hinzugefügt.
+        password:   Dein Passwort lautet
+        regards:    Grüße, dein int.ent Team
+        role:       Folgende Rechte wurden dir erteilt:
+        subject:    Neuer Benutzer
+        url:        Zum Login
     invite:         Benutzer einladen
     list:           Benutzerübersicht
     name:           Benutzername

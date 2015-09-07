@@ -36,7 +36,7 @@ class UserController extends AbstractCrudController
 
             if ($form->isValid()) {
                 $generator = new SecureRandom();
-                $password = $generator->nextBytes(8);
+                $password = md5(uniqid(rand(), true));
 
                 $encoder = $this->container->get('security.password_encoder');
                 $encodedPassword = $encoder->encodePassword($user, $password);
@@ -51,8 +51,8 @@ class UserController extends AbstractCrudController
                 $mailer = $this->get('mailer');
 
                 $message = $mailer->createMessage()
-                    ->setSubject($translator->trans('invite.mail.subject', array(), 'invite'))
-                    ->setFrom($translator->trans('invite.mail.from', array(), 'invite'))
+                    ->setSubject($translator->trans('user.mail.subject', array(), 'user'))
+                    ->setFrom($translator->trans('user.mail.from', array(), 'user'))
                     ->setTo($user->getEmail())
                     ->setBody(
                         $this->renderView(
