@@ -5,6 +5,8 @@ namespace AppBundle\Service;
 use AppBundle\Entity\Image;
 use AppBundle\SimpleXMLExtended;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Class ImageExport
@@ -44,10 +46,16 @@ class ImageExport
             $item->path = null;
             $item->path->addCData($image->getPath());
 
+            $item->fullpath = null;
+            $item->fullpath->addCData($image->getFullPath());
+
             $item->parent = null;
             if ($image->getParentDirectory()) {
                 $item->parent->addCData($image->getParentDirectory()->getName());
             }
+
+            $filesystem = new Filesystem();
+            $filesystem->copy('web/'.$image->getFullPath(), 'web/export/images/'.$image->getFullPath());
         }
 
         $xml->saveXML('web/export/image.xml');

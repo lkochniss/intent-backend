@@ -2,7 +2,6 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
-use AppBundle\Entity\Directory;
 use AppBundle\Entity\Image;
 use AppBundle\SimpleXMLExtended;
 use Doctrine\Common\DataFixtures\AbstractFixture;
@@ -29,9 +28,11 @@ class ImageFixtures extends AbstractFixture implements OrderedFixtureInterface, 
                 $image->setParentDirectory($this->getReference('directory-'."$item->parent"));
             }
 
-            $manager->getRepository('AppBundle:Image')->save(
-                $image
-            );
+            $image->resetFullPath();
+
+            $manager->persist($image);
+            $manager->flush();
+
             $this->addReference('image-'.$image->getName(), $image);
         }
     }
