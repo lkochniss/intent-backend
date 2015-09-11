@@ -146,7 +146,7 @@ abstract class AbstractArticleController extends AbstractCrudController
                 $this->handleValidForm($entity);
                 $entity->setPublished(true);
 
-                return $this->redirect($this->generateUrlForAction('show', array('id' => $entity->getId())));
+                return $this->redirect($this->generateUrlForAction($action, array('id' => $entity->getId())));
             }
         }
 

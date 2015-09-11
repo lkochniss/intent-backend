@@ -36,6 +36,7 @@ class ArticleType extends AbstractType
                 array(
                     'label' => 'article.content',
                     'translation_domain' => 'article',
+                    'required' => false,
                     'attr' => array(
                         'class' => 'tinymce',
                         'data-theme' => 'advanced'

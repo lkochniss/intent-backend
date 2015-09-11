@@ -36,6 +36,7 @@ class PageType extends AbstractType
                 array(
                     'label' => 'page.content',
                     'translation_domain' => 'page',
+                    'required' => false,
                     'attr' => array(
                         'class' => 'tinymce',
                         'data-theme' => 'advanced'
