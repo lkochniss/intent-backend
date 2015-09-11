@@ -59,7 +59,7 @@ class ExpansionControllerTest extends AbstractControllerTest
      */
     public function testShowPage()
     {
-        $this->pageResponse('GET', sprintf('/expansion/%s/edit', $this->expansion->getId()));
+        $this->pageResponse('GET', sprintf('/expansion/%s/show', $this->expansion->getId()));
 
         return null;
     }

@@ -59,7 +59,7 @@ class GameControllerTest extends AbstractControllerTest
      */
     public function testShowPage()
     {
-        $this->pageResponse('GET', sprintf('/game/%s/edit', $this->game->getId()));
+        $this->pageResponse('GET', sprintf('/game/%s/show', $this->game->getId()));
 
         return null;
     }

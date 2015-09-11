@@ -59,7 +59,7 @@ class EventControllerTest extends AbstractControllerTest
      */
     public function testShowPage()
     {
-        $this->pageResponse('GET', sprintf('/event/%s/edit', $this->event->getId()));
+        $this->pageResponse('GET', sprintf('/event/%s/show', $this->event->getId()));
 
         return null;
     }

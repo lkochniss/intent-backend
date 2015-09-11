@@ -54,6 +54,6 @@ class PublisherPublishType extends AbstractType
      */
     public function getName()
     {
-        return 'publish_publish';
+        return 'publisher_publish';
     }
 }

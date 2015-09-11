@@ -15,5 +15,5 @@ intent_backend_studio_delete:
     defaults: { _controller: AppBundle:Studio:delete }
 
 intent_backend_studio_list:
-    path:     /{page}
-    defaults: { _controller: AppBundle:Studio:list, page: 1 }
+    path:     /
+    defaults: { _controller: AppBundle:Studio:list }

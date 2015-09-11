@@ -39,7 +39,10 @@ class TagControllerTest extends AbstractControllerTest
      */
     public function testCreatePage()
     {
-        $this->pageResponse('GET', '/tag/create');
+        $crawler = $this->pageResponse('GET', '/tag/create');
+
+        $this->checkIfOneContentExist($crawler, 'input[id="tag_name"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="tag_submit"]');
 
         return null;
     }
@@ -49,7 +52,10 @@ class TagControllerTest extends AbstractControllerTest
      */
     public function testEditPage()
     {
-        $this->pageResponse('GET', sprintf('/tag/%s/edit', $this->tag->getId()));
+        $crawler = $this->pageResponse('GET', sprintf('/tag/%s/edit', $this->tag->getId()));
+
+        $this->checkIfOneContentExist($crawler, 'input[id="tag_name"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="tag_submit"]');
 
         return null;
     }
@@ -59,7 +65,9 @@ class TagControllerTest extends AbstractControllerTest
      */
     public function testShowPage()
     {
-        $this->pageResponse('GET', sprintf('/tag/%s/edit', $this->tag->getId()));
+        $crawler = $this->pageResponse('GET', sprintf('/tag/%s/show', $this->tag->getId()));
+
+        $this->checkIfOneContentExist($crawler, 'button[id="tag_publish_submit"]');
 
         return null;
     }
@@ -69,7 +77,9 @@ class TagControllerTest extends AbstractControllerTest
      */
     public function testListPage()
     {
-        $this->pageResponse('GET', '/tag/');
+        $crawler = $this->pageResponse('GET', '/tag/');
+
+        $this->checkIfOneContentExist($crawler, 'table[id="entity_list"]');
 
         return null;
     }

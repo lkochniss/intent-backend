@@ -57,16 +57,6 @@ class UserControllerTest extends AbstractControllerTest
     /**
      * @return null
      */
-    public function testShowPage()
-    {
-        $this->pageResponse('GET', sprintf('/user/%s/edit', $this->user->getId()));
-
-        return null;
-    }
-
-    /**
-     * @return null
-     */
     public function testListPage()
     {
         $this->pageResponse('GET', '/user/');

@@ -23,8 +23,9 @@
         {{ form_row(form.description) }}
     </div>
     <div class="col-md-3 meta">
-        
-        {% if form.thumbnail %}
+
+        {{ form_label(form.thumbnail) }}
+        {% if entity.thumbnail %}
         <img src="/{{ entity.thumbnail.fullPath }}" class="img-responsive" /><br />
         {% endif %}
         {{ form_widget(form.thumbnail) }}

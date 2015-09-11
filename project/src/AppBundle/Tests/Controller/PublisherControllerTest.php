@@ -39,7 +39,13 @@ class PublisherControllerTest extends AbstractControllerTest
      */
     public function testCreatePage()
     {
-        $this->pageResponse('GET', '/publisher/create');
+        $crawler = $this->pageResponse('GET', '/publisher/create');
+
+        $this->checkIfOneContentExist($crawler, 'input[id="publisher_name"]');
+        $this->checkIfOneContentExist($crawler, 'textarea[id="publisher_description"]');
+        $this->checkIfOneContentExist($crawler, 'select[id="publisher_thumbnail"]');
+        $this->checkIfOneContentExist($crawler, 'select[id="publisher_background_image"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="publisher_submit"]');
 
         return null;
     }
@@ -49,7 +55,13 @@ class PublisherControllerTest extends AbstractControllerTest
      */
     public function testEditPage()
     {
-        $this->pageResponse('GET', sprintf('/publisher/%s/edit', $this->publisher->getId()));
+        $crawler = $this->pageResponse('GET', sprintf('/publisher/%s/edit', $this->publisher->getId()));
+
+        $this->checkIfOneContentExist($crawler, 'input[id="publisher_name"]');
+        $this->checkIfOneContentExist($crawler, 'textarea[id="publisher_description"]');
+        $this->checkIfOneContentExist($crawler, 'select[id="publisher_thumbnail"]');
+        $this->checkIfOneContentExist($crawler, 'select[id="publisher_background_image"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="publisher_submit"]');
 
         return null;
     }
@@ -59,7 +71,9 @@ class PublisherControllerTest extends AbstractControllerTest
      */
     public function testShowPage()
     {
-        $this->pageResponse('GET', sprintf('/publisher/%s/edit', $this->publisher->getId()));
+        $crawler = $this->pageResponse('GET', sprintf('/publisher/%s/show', $this->publisher->getId()));
+
+        $this->checkIfOneContentExist($crawler, 'button[id="publisher_publish_submit"]');
 
         return null;
     }
@@ -69,7 +83,9 @@ class PublisherControllerTest extends AbstractControllerTest
      */
     public function testListPage()
     {
-        $this->pageResponse('GET', '/publisher/');
+        $crawler = $this->pageResponse('GET', '/publisher/');
+
+        $this->checkIfOneContentExist($crawler, 'table[id="entity_list"]');
 
         return null;
     }

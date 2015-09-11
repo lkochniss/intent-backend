@@ -59,7 +59,7 @@ class FranchiseControllerTest extends AbstractControllerTest
      */
     public function testShowPage()
     {
-        $this->pageResponse('GET', sprintf('/franchise/%s/edit', $this->franchise->getId()));
+        $this->pageResponse('GET', sprintf('/franchise/%s/show', $this->franchise->getId()));
 
         return null;
     }

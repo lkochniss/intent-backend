@@ -4,7 +4,7 @@
 
 {% block content %}
     <a href="{{ path('intent_backend_publisher_create') }}" class="btn btn-default pull-right">{% trans from "publisher" %}publisher.create{% endtrans %}</a>
-    <table class="table">
+    <table class="table" id="entity_list">
     <h3>{% trans from "publisher" %}publisher.list{% endtrans %}</h3>
         <thead>
         <tr>

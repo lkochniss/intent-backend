@@ -59,7 +59,7 @@ class ProfileControllerTest extends AbstractControllerTest
      */
     public function testShowPage()
     {
-        $this->pageResponse('GET', sprintf('/profile/%s/edit', $this->profile->getId()));
+        $this->pageResponse('GET', sprintf('/profile/%s/show', $this->profile->getId()));
 
         return null;
     }
