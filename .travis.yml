@@ -3,4 +3,10 @@ php:
   - 5.4
   - 5.5
   - 5.6
-script: cd project && php app/console ca:c --env=test && php bin/phpunit -c app
+before_script:
+  - cd project
+  - composer self-update
+  - composer install --prefer-source
+script:
+  - php app/console ca:c --env=test
+  - php bin/phpunit -c app
