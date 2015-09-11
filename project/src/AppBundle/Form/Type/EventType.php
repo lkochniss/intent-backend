@@ -36,6 +36,7 @@ class EventType extends AbstractType
                 array(
                     'label' => 'event.description',
                     'translation_domain' => 'event',
+                    'required' => false,
                     'attr' => array(
                         'class' => 'tinymce',
                         'data-theme' => 'advanced'

@@ -36,6 +36,7 @@ class ExpansionType extends AbstractType
                 array(
                     'label' => 'expansion.description',
                     'translation_domain' => 'expansion',
+                    'required' => false,
                     'attr' => array(
                         'class' => 'tinymce',
                         'data-theme' => 'advanced'

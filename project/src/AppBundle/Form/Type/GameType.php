@@ -36,6 +36,7 @@ class GameType extends AbstractType
                 array(
                     'label' => 'game.description',
                     'translation_domain' => 'game',
+                    'required' => false,
                     'attr' => array(
                         'class' => 'tinymce',
                         'data-theme' => 'advanced'

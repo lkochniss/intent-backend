@@ -36,6 +36,7 @@ class PublisherType extends AbstractType
                 array(
                     'label' => 'publisher.description',
                     'translation_domain' => 'publisher',
+                    'required' => false,
                     'attr' => array(
                         'class' => 'tinymce',
                         'data-theme' => 'advanced'

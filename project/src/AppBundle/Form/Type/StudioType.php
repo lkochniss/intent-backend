@@ -36,6 +36,7 @@ class StudioType extends AbstractType
                 array(
                     'label' => 'studio.description',
                     'translation_domain' => 'studio',
+                    'required' => false,
                     'attr' => array(
                         'class' => 'tinymce',
                         'data-theme' => 'advanced',

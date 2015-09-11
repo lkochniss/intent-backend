@@ -36,6 +36,7 @@ class ProfileType extends AbstractType
                 array(
                     'label' => 'profile.description',
                     'translation_domain' => 'profile',
+                    'required' => false,
                     'attr' => array(
                         'class' => 'tinymce',
                         'data-theme' => 'advanced'

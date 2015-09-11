@@ -36,6 +36,7 @@ class FranchiseType extends AbstractType
                 array(
                     'label' => 'franchise.description',
                     'translation_domain' => 'franchise',
+                    'required' => false,
                     'attr' => array(
                         'class' => 'tinymce',
                         'data-theme' => 'advanced'
