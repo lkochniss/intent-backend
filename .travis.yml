@@ -6,6 +6,10 @@ before_script:
   - cd project
   - composer self-update
   - composer install --prefer-source
+  - pear install pear/PHP_CodeSniffer
+  - phpenv rehash
+  - pyrus install pear/PHP_CodeSniffer
+  - phpenv rehash
   - cp app/config/parameters.yml.dist app/config/parameters.yml
   - php app/console do:da:cr
   - php app/console do:mi:mi -n
