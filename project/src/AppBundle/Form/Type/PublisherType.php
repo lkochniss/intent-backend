@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Form\Type
+ */
 
 namespace AppBundle\Form\Type;
 
@@ -12,8 +15,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class PublisherType extends AbstractType
 {
     /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param FormBuilderInterface $builder Builder.
+     * @param array                $options Options.
+     * @return null
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -74,10 +78,13 @@ class PublisherType extends AbstractType
                     'translation_domain' => 'publisher',
                 )
             );
+
+        return null;
     }
 
     /**
-     * @param OptionsResolver $resolver
+     * @param OptionsResolver $resolver Add publisher to form.
+     * @return null
      */
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -86,6 +93,8 @@ class PublisherType extends AbstractType
                 'data_class' => 'AppBundle\Entity\Publisher',
             )
         );
+
+        return null;
     }
 
     /**

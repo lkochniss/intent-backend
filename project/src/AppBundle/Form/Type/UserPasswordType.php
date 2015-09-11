@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Form\Type
+ */
 
 namespace AppBundle\Form\Type;
 
@@ -8,13 +11,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class UserPasswordType
- * @package AppBundle\Form\Type
  */
 class UserPasswordType extends AbstractType
 {
     /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param FormBuilderInterface $builder Builder.
+     * @param array                $options Options.
+     * @return null
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -43,10 +46,13 @@ class UserPasswordType extends AbstractType
                     'translation_domain' => 'user',
                 )
             );
+
+        return null;
     }
 
     /**
-     * @param OptionsResolver $resolver
+     * @param OptionsResolver $resolver Load user in form.
+     * @return null
      */
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -55,6 +61,8 @@ class UserPasswordType extends AbstractType
                 'data_class' => 'AppBundle\Entity\User',
             )
         );
+
+        return null;
     }
 
     /**

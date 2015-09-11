@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Form\Type
+ */
 
 namespace AppBundle\Form\Type;
 
@@ -8,13 +11,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class ExpansionType
- * @package AppBundle\Form\Type
  */
 class ExpansionType extends AbstractType
 {
     /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param FormBuilderInterface $builder Builder.
+     * @param array                $options Optopns.
+     * @return null
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -89,10 +92,13 @@ class ExpansionType extends AbstractType
                     'translation_domain' => 'expansion',
                 )
             );
+
+        return null;
     }
 
     /**
-     * @param OptionsResolver $resolver
+     * @param OptionsResolver $resolver Add expansion to form.
+     * @return null
      */
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -101,6 +107,8 @@ class ExpansionType extends AbstractType
                 'data_class' => 'AppBundle\Entity\Expansion',
             )
         );
+
+        return null;
     }
 
     /**

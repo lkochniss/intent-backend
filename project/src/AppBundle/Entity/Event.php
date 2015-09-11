@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Entity
+ */
 
 namespace AppBundle\Entity;
 
@@ -7,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Event
+ * Class Event
  */
 class Event extends AbstractMetaModel
 {
@@ -55,7 +58,11 @@ class Event extends AbstractMetaModel
      */
     private $articles;
 
-    function __construct()
+    /**
+     * Set start and end date.
+     * Add empty article array.
+     */
+    public function __construct()
     {
         parent::__construct();
         $this->startAt = new \DateTime();
@@ -64,7 +71,7 @@ class Event extends AbstractMetaModel
     }
 
     /**
-     * @param $description
+     * @param string $description Set description.
      * @return $this
      */
     public function setDescription($description)
@@ -75,7 +82,7 @@ class Event extends AbstractMetaModel
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getDescription()
     {
@@ -83,7 +90,7 @@ class Event extends AbstractMetaModel
     }
 
     /**
-     * @param $backgroundLink
+     * @param string $backgroundLink Set background link.
      * @return $this
      */
     public function setBackgroundLink($backgroundLink)
@@ -94,7 +101,7 @@ class Event extends AbstractMetaModel
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getBackgroundLink()
     {
@@ -102,7 +109,7 @@ class Event extends AbstractMetaModel
     }
 
     /**
-     * @param \DateTime $startAt
+     * @param \DateTime $startAt Set startAt.
      * @return $this
      */
     public function setStartAt(\DateTime $startAt)
@@ -121,7 +128,7 @@ class Event extends AbstractMetaModel
     }
 
     /**
-     * @param \DateTime $endAt
+     * @param \DateTime $endAt Set endAt.
      * @return $this
      */
     public function setEndAt(\DateTime $endAt)
@@ -140,11 +147,14 @@ class Event extends AbstractMetaModel
     }
 
     /**
-     * @param Image $backgroundImage
+     * @param Image $backgroundImage Set background image.
+     * @return $this
      */
-    public function setBackgroundImage($backgroundImage)
+    public function setBackgroundImage(Image $backgroundImage)
     {
         $this->backgroundImage = $backgroundImage;
+
+        return $this;
     }
 
     /**
@@ -156,11 +166,14 @@ class Event extends AbstractMetaModel
     }
 
     /**
-     * @param Image $thumbnail
+     * @param Image $thumbnail Set thumbnail.
+     * @return $this
      */
-    public function setThumbnail($thumbnail)
+    public function setThumbnail(Image $thumbnail)
     {
         $this->thumbnail = $thumbnail;
+
+        return $this;
     }
 
     /**
@@ -172,7 +185,7 @@ class Event extends AbstractMetaModel
     }
 
     /**
-     * @param Article $article
+     * @param Article $article Add article to array.
      * @return $this
      */
     public function addArticle(Article $article)
@@ -186,7 +199,7 @@ class Event extends AbstractMetaModel
     }
 
     /**
-     * @param Article $article
+     * @param Article $article Remove article from array.
      * @return $this
      */
     public function removeArticle(Article $article)
@@ -205,7 +218,7 @@ class Event extends AbstractMetaModel
     }
 
     /**
-     * @return bool
+     * @return boolean
      */
     public function isActive()
     {
@@ -217,10 +230,8 @@ class Event extends AbstractMetaModel
     /**
      * @return string
      */
-    function __toString()
+    public function __toString()
     {
         return $this->getName();
     }
-
-
 }

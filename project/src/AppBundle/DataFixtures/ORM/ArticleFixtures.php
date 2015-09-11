@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\DataFixtures\ORM
+ */
 
 namespace AppBundle\DataFixtures\ORM;
 
@@ -11,10 +14,17 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\File\File;
 
+/**
+ * Class ArticleFixtures
+ */
 class ArticleFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     private $container;
 
+    /**
+     * @param ObjectManager $manager Manager to save article.
+     * @return null
+     */
     public function load(ObjectManager $manager)
     {
         $xml = new SimpleXMLExtended(file_get_contents('web/export/article.xml'));
@@ -26,29 +36,29 @@ class ArticleFixtures extends AbstractFixture implements OrderedFixtureInterface
             $article->setSlideshow(intval("$item->slideshow"));
             $article->setPublished(intval("$item->published"));
             $article->setPublishAt(new \DateTime("$item->publishedAt"));
-            if ("$item->relatedType" != "") {
-                $article->setRelated($this->getReference("$item->relatedType".'-'."$item->related"));
+            if ("$item->relatedType" != '') {
+                $article->setRelated($this->getReference("$item->relatedType" . '-' . "$item->related"));
             }
 
-            if ("$item->category" != "") {
+            if ("$item->category" != '') {
                 $article->setCategory($this->getReference("$item->category"));
             }
 
-            if ("$item->event" != "") {
+            if ("$item->event" != '') {
                 $article->setEvent($this->getReference("$item->event"));
             }
 
-            if ("$item->thumbnail" != "") {
+            if ("$item->thumbnail" != '') {
                 $article->setThumbnail($this->getReference("$item->thumbnail"));
             }
 
             $manager->getRepository('AppBundle:Article')->save(
                 $article,
-                $this->getReference('user-'."$item->author")
+                $this->getReference('user-' . "$item->author")
             );
         }
 
-        $dataDirectory = __DIR__.'/../data/articles';
+        $dataDirectory = __DIR__ . '/../data/articles';
         $directory = opendir($dataDirectory);
 
         $count = 0;
@@ -60,23 +70,24 @@ class ArticleFixtures extends AbstractFixture implements OrderedFixtureInterface
 
             if ($file != 'imported') {
                 $count++;
-                $this->saveWordpressArticle($manager, $dataDirectory.DIRECTORY_SEPARATOR.$file, $count);
+                $this->saveWordpressArticle($manager, $dataDirectory . DIRECTORY_SEPARATOR . $file, $count);
             }
         }
         $manager->flush();
+
+        return null;
     }
 
 
     /**
-     * @param ObjectManager $manager
-     * @param $path
-     * @param $count
+     * @param ObjectManager $manager Manager to save article.
+     * @param string        $path    Path to xml.
+     * @return null
      */
-    public function saveWordpressArticle(ObjectManager $manager, $path, $count)
+    public function saveWordpressArticle(ObjectManager $manager, $path)
     {
         $xml = new \SimpleXMLElement(file_get_contents($path));
         foreach ($xml->channel->item as $item) {
-
             $namespaces = $item->getNameSpaces(true);
             $dc = $item->children($namespaces['dc']);
             $content = $item->children($namespaces['content']);
@@ -92,7 +103,7 @@ class ArticleFixtures extends AbstractFixture implements OrderedFixtureInterface
                     if ($b == 'category') {
                         $article->setCategory(
                             $this->getReference(
-                                'category-'.preg_replace("/[^a-z0-9]+/", "-", strtolower("$category"))
+                                'category-' . preg_replace('/[^a-z0-9]+/', '-', strtolower("$category"))
                             )
                         );
                     }
@@ -101,29 +112,31 @@ class ArticleFixtures extends AbstractFixture implements OrderedFixtureInterface
 
             $manager->getRepository('AppBundle:Article')->save(
                 $article,
-                $this->getReference('user-'."$dc->creator")
+                $this->getReference('user-' . "$dc->creator")
             );
         }
 
         $file = new File($path);
-        $file->move(__DIR__.'/../data/articles/imported');
+        $file->move(__DIR__ . '/../data/articles/imported');
+
+        return null;
     }
 
     /**
-     * @param ContainerInterface|null $containerInterface
+     * @param ContainerInterface|null $containerInterface ContainerInterface.
+     * @return $this
      */
-    public
-    function setContainer(
-        ContainerInterface $containerInterface = null
-    ) {
+    public function setContainer(ContainerInterface $containerInterface = null)
+    {
         $this->container = $containerInterface;
+
+        return $this;
     }
 
     /**
-     * @return int
+     * @return integer
      */
-    public
-    function getOrder()
+    public function getOrder()
     {
         return 13;
     }

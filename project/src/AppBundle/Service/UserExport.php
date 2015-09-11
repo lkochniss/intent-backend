@@ -1,4 +1,8 @@
 <?php
+/**
+ * Class UserExport
+ * @package AppBundle\Service
+ */
 
 namespace AppBundle\Service;
 
@@ -16,13 +20,18 @@ class UserExport
     private $repository;
 
     /**
-     * @param EntityRepository $repository
+     * @param EntityRepository $repository Get the entity repository.
      */
     public function __construct(EntityRepository $repository)
     {
         $this->repository = $repository;
+
+        return null;
     }
 
+    /**
+     * @return boolean
+     */
     public function exportEntity()
     {
         $users = $this->repository->findAll();
@@ -47,15 +56,16 @@ class UserExport
             $item->active = null;
             $item->active->addCData($user->getIsActive());
 
-            if(is_null($user->getRoles())){
+            if (is_null($user->getRoles())) {
                 $item->role = null;
             }
             foreach ($user->getRoles() as $role) {
-                $item->addChild('role','role-'.$role->getName());
+                $item->addChild('role', 'role-' . $role->getName());
             }
-
         }
 
         $xml->saveXML('web/export/user.xml');
+
+        return true;
     }
 }

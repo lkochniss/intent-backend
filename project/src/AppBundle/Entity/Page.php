@@ -1,11 +1,14 @@
 <?php
+/**
+ * @package AppBundle\Entity
+ */
 
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Page
+ * Class Page
  */
 class Page extends AbstractArticleModel
 {

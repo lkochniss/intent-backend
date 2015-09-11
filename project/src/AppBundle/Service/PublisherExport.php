@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Service
+ */
 
 namespace AppBundle\Service;
 
@@ -8,7 +11,6 @@ use Doctrine\ORM\EntityRepository;
 
 /**
  * Class PublisherExport
- * @package AppBundle\Service
  */
 class PublisherExport
 {
@@ -16,13 +18,16 @@ class PublisherExport
     private $repository;
 
     /**
-     * @param EntityRepository $repository
+     * @param EntityRepository $repository Get the entity repository.
      */
     public function __construct(EntityRepository $repository)
     {
         $this->repository = $repository;
     }
 
+    /**
+     * @return boolean
+     */
     public function exportEntity()
     {
         $publishers = $this->repository->findAll();
@@ -49,15 +54,17 @@ class PublisherExport
 
             $item->backgroundImage = null;
             if ($publisher->getBackgroundImage()) {
-                $item->backgroundImage->addCData('image-'. $publisher->getBackgroundImage()->getFullPath());
+                $item->backgroundImage->addCData('image-' . $publisher->getBackgroundImage()->getFullPath());
             }
 
             $item->thumbnail = null;
             if ($publisher->getThumbnail()) {
-                $item->thumbnail->addCData('image-'. $publisher->getThumbnail()->getFullPath());
+                $item->thumbnail->addCData('image-' . $publisher->getThumbnail()->getFullPath());
             }
         }
 
         $xml->saveXML('web/export/publisher.xml');
+
+        return true;
     }
 }

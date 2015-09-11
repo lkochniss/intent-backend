@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Form\Type
+ */
 
 namespace AppBundle\Form\Type;
 
@@ -12,8 +15,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class UploadType extends AbstractType
 {
     /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param FormBuilderInterface $builder Builder.
+     * @param array                $options Options.
+     * @return null
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -55,10 +59,13 @@ class UploadType extends AbstractType
                     'translation_domain' => 'filemanager',
                 )
             );
+
+        return null;
     }
 
     /**
-     * @param OptionsResolver $resolver
+     * @param OptionsResolver $resolver Adds image to form.
+     * @return null
      */
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -67,6 +74,8 @@ class UploadType extends AbstractType
                 'data_class' => 'AppBundle\Entity\Image',
             )
         );
+
+        return null;
     }
 
     /**

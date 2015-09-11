@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\DataFixtures\ORM
+ */
 
 namespace AppBundle\DataFixtures\ORM;
 
@@ -10,10 +13,17 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+/**
+ * Class RoleFixtures
+ */
 class RoleFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     private $container;
 
+    /**
+     * @param ObjectManager $manager Manager to save role.
+     * @return boolean
+     */
     public function load(ObjectManager $manager)
     {
         $xml = new SimpleXMLExtended(file_get_contents('web/export/role.xml'));
@@ -27,39 +37,25 @@ class RoleFixtures extends AbstractFixture implements OrderedFixtureInterface, C
                 $role
             );
 
-            $this->addReference('role-'.$role->getName(), $role);
+            $this->addReference('role-' . $role->getName(), $role);
         }
+
+        return true;
     }
 
     /**
-     * @param ObjectManager $manager
-     * @param $path
-     * @param $count
-     */
-    public function saveRole(ObjectManager $manager, $path, $count)
-    {
-        $roleData = json_decode(file_get_contents($path), true);
-
-        $role = new Role();
-        $role->setName($roleData['name']);
-        $role->setRole($roleData['role']);
-
-        $this->addReference('role-'.$role->getName(), $role);
-
-        $manager->persist($role);
-        $manager->flush();
-    }
-
-    /**
-     * @param ContainerInterface|null $containerInterface
+     * @param ContainerInterface|null $containerInterface ContainerInterface.
+     * @return $this
      */
     public function setContainer(ContainerInterface $containerInterface = null)
     {
         $this->container = $containerInterface;
+
+        return $this;
     }
 
     /**
-     * @return int
+     * @return integer
      */
     public function getOrder()
     {

@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Form\Type
+ */
 
 namespace AppBundle\Form\Type;
 
@@ -7,13 +10,14 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class FilemanagerType
+ * Class DirectoryType
  */
 class DirectoryType extends AbstractType
 {
     /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param FormBuilderInterface $builder Builder.
+     * @param array                $options Options.
+     * @return null
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -34,10 +38,13 @@ class DirectoryType extends AbstractType
                     'translation_domain' => 'filemanager',
                 )
             );
+
+        return null;
     }
 
     /**
-     * @param OptionsResolver $resolver
+     * @param OptionsResolver $resolver Add directory to form.
+     * @return null
      */
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -46,6 +53,8 @@ class DirectoryType extends AbstractType
                 'data_class' => 'AppBundle\Entity\Directory',
             )
         );
+
+        return null;
     }
 
     /**

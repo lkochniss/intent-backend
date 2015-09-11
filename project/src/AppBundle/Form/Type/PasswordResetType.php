@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Form\Type
+ */
 
 namespace AppBundle\Form\Type;
 
@@ -8,13 +11,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class UserPasswordType
- * @package AppBundle\Form\Type
  */
 class PasswordResetType extends AbstractType
 {
     /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param FormBuilderInterface $builder Builder.
+     * @param array                $options Option.
+     * @return null
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -35,6 +38,8 @@ class PasswordResetType extends AbstractType
                     'translation_domain' => 'security',
                 )
             );
+
+        return null;
     }
 
     /**

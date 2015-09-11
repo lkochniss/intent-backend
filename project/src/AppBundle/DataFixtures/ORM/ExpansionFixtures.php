@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\DataFixtures\ORM
+ */
 
 namespace AppBundle\DataFixtures\ORM;
 
@@ -11,10 +14,17 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+/**
+ * Class ExpansionFixtures
+ */
 class ExpansionFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     private $container;
 
+    /**
+     * @param ObjectManager $manager Manager to save expansion.
+     * @return null;
+     */
     public function load(ObjectManager $manager)
     {
         $xml = new SimpleXMLExtended(file_get_contents('web/export/expansion.xml'));
@@ -26,15 +36,15 @@ class ExpansionFixtures extends AbstractFixture implements OrderedFixtureInterfa
             $expansion->setPublished(intval("$item->published"));
             $expansion->setBackgroundLink("$item->backgroundLink");
 
-            if ("$item->game" != "") {
+            if ("$item->game" != '') {
                 $expansion->setGame($this->getReference("$item->game"));
             }
 
-            if ("$item->backgroundImage" != "") {
+            if ("$item->backgroundImage" != '') {
                 $expansion->setBackgroundImage($this->getReference("$item->backgroundImage"));
             }
 
-            if ("$item->thumbnail" != "") {
+            if ("$item->thumbnail" != '') {
                 $expansion->setThumbnail($this->getReference("$item->thumbnail"));
             }
 
@@ -43,20 +53,25 @@ class ExpansionFixtures extends AbstractFixture implements OrderedFixtureInterfa
                 $expansion
             );
 
-            $this->addReference('dlc/expansion-'.$expansion->getSlug(), $expansion);
+            $this->addReference('dlc/expansion-' . $expansion->getSlug(), $expansion);
         }
+
+        return null;
     }
 
     /**
-     * @param ContainerInterface|null $containerInterface
+     * @param ContainerInterface|null $containerInterface ContainerInterface.
+     * @return $this
      */
     public function setContainer(ContainerInterface $containerInterface = null)
     {
         $this->container = $containerInterface;
+
+        return $this;
     }
 
     /**
-     * @return int
+     * @return integer
      */
     public function getOrder()
     {

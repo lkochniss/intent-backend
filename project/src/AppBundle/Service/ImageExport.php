@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Service
+ */
 
 namespace AppBundle\Service;
 
@@ -10,7 +13,6 @@ use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Class ImageExport
- * @package AppBundle\Service
  */
 class ImageExport
 {
@@ -18,13 +20,16 @@ class ImageExport
     private $repository;
 
     /**
-     * @param EntityRepository $repository
+     * @param EntityRepository $repository Get the entity repository.
      */
     public function __construct(EntityRepository $repository)
     {
         $this->repository = $repository;
     }
 
+    /**
+     * @return boolean
+     */
     public function exportEntity()
     {
         $images = $this->repository->findAll();
@@ -55,9 +60,11 @@ class ImageExport
             }
 
             $filesystem = new Filesystem();
-            $filesystem->copy('web/'.$image->getFullPath(), 'web/export/images/'.$image->getFullPath());
+            $filesystem->copy('web/' . $image->getFullPath(), 'web/export/images/' . $image->getFullPath());
         }
 
         $xml->saveXML('web/export/image.xml');
+
+        return true;
     }
 }

@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Entity
+ */
 
 namespace AppBundle\Entity;
 
@@ -6,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Studio
+ * Class Studio
  */
 class Studio extends Related
 {
@@ -20,7 +23,10 @@ class Studio extends Related
      */
     private $games;
 
-    function __construct()
+    /**
+     * set franchises and games
+     */
+    public function __construct()
     {
         parent::__construct();
         $this->franchises = array();
@@ -28,7 +34,7 @@ class Studio extends Related
     }
 
     /**
-     * @param Franchise $franchise
+     * @param Franchise $franchise Add franchise to array.
      * @return $this
      */
     public function addFranchise(Franchise $franchise)
@@ -42,7 +48,7 @@ class Studio extends Related
     }
 
     /**
-     * @param Franchise $franchise
+     * @param Franchise $franchise Remove franchise from array.
      * @return $this
      */
     public function removeFranchise(Franchise $franchise)
@@ -61,7 +67,7 @@ class Studio extends Related
     }
 
     /**
-     * @param Game $game
+     * @param Game $game Add game to array.
      * @return $this
      */
     public function addGame(Game $game)
@@ -75,7 +81,7 @@ class Studio extends Related
     }
 
     /**
-     * @param Game $game
+     * @param Game $game Remove game from array.
      * @return $this
      */
     public function removeGame(Game $game)
@@ -94,7 +100,7 @@ class Studio extends Related
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getType()
     {

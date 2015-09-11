@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Service
+ */
 
 namespace AppBundle\Service;
 
@@ -8,7 +11,6 @@ use Doctrine\ORM\EntityRepository;
 
 /**
  * Class ProfileExport
- * @package AppBundle\Service
  */
 class ProfileExport
 {
@@ -16,13 +18,16 @@ class ProfileExport
     private $repository;
 
     /**
-     * @param EntityRepository $repository
+     * @param EntityRepository $repository Get the entity repository.
      */
     public function __construct(EntityRepository $repository)
     {
         $this->repository = $repository;
     }
 
+    /**
+     * @return boolean
+     */
     public function exportEntity()
     {
         $profiles = $this->repository->findAll();
@@ -42,10 +47,13 @@ class ProfileExport
             $item->description->addCData($profile->getDescription());
 
             $item->user = null;
-            if(is_null($profile->getUser()->getUsername())){
+            if (is_null($profile->getUser()->getUsername())) {
+                $item->user->addCData($profile->getUser()->getUsername());
             }
         }
 
         $xml->saveXML('web/export/profile.xml');
+
+        return true;
     }
 }

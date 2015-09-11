@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Controller
+ */
 
 namespace AppBundle\Controller;
 
@@ -10,10 +13,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/**
+ * Class AbstractCrudController
+ */
 abstract class AbstractCrudController extends Controller
 {
     /**
-     * @param Request $request
+     * @param Request $request HTTP Request.
      * @return RedirectResponse|Response
      */
     public function createAction(Request $request)
@@ -24,8 +30,9 @@ abstract class AbstractCrudController extends Controller
     }
 
     /**
-     * @param $id
-     * @param Request $request
+     * @param integer $id      Id of entity.
+     * @param Request $request HTTP Request.
+     * @throws NotFoundHttpException Throw exception if entity not found.
      * @return RedirectResponse|Response
      */
     public function editAction($id, Request $request)
@@ -35,7 +42,7 @@ abstract class AbstractCrudController extends Controller
         if (is_null($entity)) {
             throw new NotFoundHttpException(
                 $this->get('translator')->trans(
-                    $this->getTranslationDomain().'.not_found',
+                    $this->getTranslationDomain() . '.not_found',
                     array(),
                     $this->getTranslationDomain()
                 )
@@ -46,18 +53,18 @@ abstract class AbstractCrudController extends Controller
     }
 
     /**
-     * @param $id
-     * @param Request $request
+     * @param integer $id Id of entity.
+     * @throws NotFoundHttpException Throw exception if entity not found.
      * @return Response
      */
-    public function showAction($id, Request $request)
+    public function showAction($id)
     {
         $entity = $this->getDoctrine()->getRepository($this->getEntityName())->find($id);
 
         if (is_null($entity)) {
             throw new NotFoundHttpException(
                 $this->get('translator')->trans(
-                    $this->getTranslationDomain().'.not_found',
+                    $this->getTranslationDomain() . '.not_found',
                     array(),
                     $this->getTranslationDomain()
                 )
@@ -88,11 +95,11 @@ abstract class AbstractCrudController extends Controller
     }
 
     /**
-     * @param $action
-     * @param array $options
+     * @param string $action  Type of action.
+     * @param array  $options Optionarray.
      * @return string
      */
-    protected function generateUrlForAction($action, $options = array())
+    protected function generateUrlForAction($action, array $options = array())
     {
         return $this->generateUrl(
             sprintf('%s_%s', $this->getRoutePrefix(), $action),
@@ -101,14 +108,17 @@ abstract class AbstractCrudController extends Controller
     }
 
     /**
-     * @param AbstractModel $entity
+     * @param AbstractModel $entity Entity for form.
+     * @return null;
      */
     protected function handleValidForm(AbstractModel $entity)
     {
         $repository = $this->getDoctrine()->getRepository($this->getEntityName());
         $repository->save($entity, $this->getUser());
 
-        $this->addFlash('success', "Speichern erfolgreich");
+        $this->addFlash('success', 'Speichern erfolgreich');
+
+        return null;
     }
 
     /**
@@ -142,11 +152,13 @@ abstract class AbstractCrudController extends Controller
     abstract protected function getTranslationDomain();
 
     /**
-     * @param AbstractModel $entity
-     * @param $request
+     * @param AbstractModel $entity  Entity for form.
+     * @param Request       $request HTTP Request.
+     * @param string        $action  Type of action.
+     * @param array         $options Options for twig render.
      * @return RedirectResponse|Response
      */
-    protected function createAndHandleForm(AbstractModel $entity, $request, $action, $options = array())
+    protected function createAndHandleForm(AbstractModel $entity, Request $request, $action, array $options = array())
     {
         $form = $this->createForm(
             $this->getFormType(),

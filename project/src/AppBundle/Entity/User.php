@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Entity
+ */
 
 namespace AppBundle\Entity;
 
@@ -10,7 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * User
+ * Class User
  */
 class User extends AbstractModel implements AdvancedUserInterface, EquatableInterface, \Serializable
 {
@@ -65,7 +68,10 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
      */
     private $articles;
 
-    function __construct()
+    /**
+     * set user active
+     */
+    public function __construct()
     {
         $this->isActive = true;
         $this->roles = new ArrayCollection();
@@ -73,7 +79,7 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
     }
 
     /**
-     * @param $username
+     * @param string $username Set username.
      * @return $this
      */
     public function setUsername($username)
@@ -84,7 +90,7 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getUsername()
     {
@@ -92,7 +98,7 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
     }
 
     /**
-     * @param $password
+     * @param string $password Set encrypted password.
      * @return $this
      */
     public function setPassword($password)
@@ -103,7 +109,7 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getPassword()
     {
@@ -111,7 +117,7 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
     }
 
     /**
-     * @param $email
+     * @param string $email Set email.
      * @return $this
      */
     public function setEmail($email)
@@ -122,7 +128,7 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getEmail()
     {
@@ -130,7 +136,7 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
     }
 
     /**
-     * @param $isActive
+     * @param boolean $isActive Set isActive.
      * @return $this
      */
     public function setIsActive($isActive)
@@ -141,7 +147,7 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
     }
 
     /**
-     * @return bool
+     * @return boolean
      */
     public function getIsActive()
     {
@@ -149,11 +155,14 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
     }
 
     /**
-     * @param null $validUntil
+     * @param \DateTime|null $validUntil Set validUntil.
+     * @return $this
      */
-    public function setValidUntil($validUntil = null)
+    public function setValidUntil(\DateTime $validUntil = null)
     {
         $this->validUntil = $validUntil;
+
+        return $this;
     }
 
     /**
@@ -165,7 +174,7 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
     }
 
     /**
-     * @param Role $role
+     * @param Role $role Add role to array.
      * @return $this
      */
     public function addRole(Role $role)
@@ -179,7 +188,7 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
     }
 
     /**
-     * @param Role $role
+     * @param Role $role Remove role from array.
      * @return $this
      */
     public function removeRole(Role $role)
@@ -198,7 +207,7 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
     }
 
     /**
-     * @param Profile $profile
+     * @param Profile $profile Set profile.
      * @return $this
      */
     public function setProfile(Profile $profile)
@@ -217,7 +226,7 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
     }
 
     /**
-     * @param Article $article
+     * @param Article $article Add article to array.
      * @return $this
      */
     public function addArticle(Article $article)
@@ -231,7 +240,7 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
     }
 
     /**
-     * @param Article $article
+     * @param Article $article Remove article from array.
      * @return $this
      */
     public function removeArticle(Article $article)
@@ -266,7 +275,8 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
     }
 
     /**
-     * @param string $serialized
+     * @param string $serialized Unserialize id, username, password, isActive and role.
+     * @return $this
      */
     public function unserialize($serialized)
     {
@@ -278,6 +288,8 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
             $this->roles,
             )
             = unserialize($serialized);
+
+        return $this;
     }
 
     /**
@@ -289,16 +301,17 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
     }
 
     /**
-     * @return bool
+     * @return boolean
      */
     public function isAccountNonexpired()
     {
         $now = new \DateTime();
+
         return $this->validUntil < $now;
     }
 
     /**
-     * @return bool
+     * @return boolean
      */
     public function isAccountNonLocked()
     {
@@ -306,7 +319,7 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
     }
 
     /**
-     * @return bool
+     * @return boolean
      */
     public function isCredentialsNonExpired()
     {
@@ -314,21 +327,24 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
     }
 
     /**
-     * @return bool
+     * @return boolean
      */
     public function isEnabled()
     {
         return $this->isActive;
     }
 
+    /**
+     * @return null
+     */
     public function eraseCredentials()
     {
-
+        return null;
     }
 
     /**
-     * @param UserInterface $user
-     * @return bool
+     * @param UserInterface $user Chef if roles are equal.
+     * @return boolean
      */
     public function isEqualTo(UserInterface $user)
     {

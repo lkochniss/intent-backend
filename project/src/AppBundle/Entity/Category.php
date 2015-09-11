@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Entity
+ */
 
 namespace AppBundle\Entity;
 
@@ -6,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Category
+ * Class Category
  */
 class Category extends AbstractMetaModel
 {
@@ -24,14 +27,17 @@ class Category extends AbstractMetaModel
      */
     private $articles;
 
-    function __construct()
+    /**
+     * add empty article array
+     */
+    public function __construct()
     {
         parent::__construct();
         $this->articles = array();
     }
 
     /**
-     * @param $priority
+     * @param integer $priority Set priority.
      * @return $this
      */
     public function setPriority($priority)
@@ -42,7 +48,7 @@ class Category extends AbstractMetaModel
     }
 
     /**
-     * @return int
+     * @return integer
      */
     public function getPriority()
     {
@@ -50,7 +56,7 @@ class Category extends AbstractMetaModel
     }
 
     /**
-     * @param Article $article
+     * @param Article $article Add article to array.
      * @return $this
      */
     public function addArticle(Article $article)
@@ -64,7 +70,7 @@ class Category extends AbstractMetaModel
     }
 
     /**
-     * @param Article $article
+     * @param Article $article Remove article from array.
      * @return $this
      */
     public function removeArticle(Article $article)
@@ -85,7 +91,7 @@ class Category extends AbstractMetaModel
     /**
      * @return string
      */
-    function __toString()
+    public function __toString()
     {
         return $this->getName();
     }

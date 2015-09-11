@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Controller
+ */
 
 namespace AppBundle\Controller;
 
@@ -6,6 +9,9 @@ use AppBundle\Entity\Publisher;
 use AppBundle\Form\Type\PublisherPublishType;
 use AppBundle\Form\Type\PublisherType;
 
+/**
+ * Class PublisherController
+ */
 class PublisherController extends AbstractRelatedController
 {
     /**
@@ -56,24 +62,35 @@ class PublisherController extends AbstractRelatedController
         return 'intent_backend_publisher';
     }
 
+    /**
+     * @return string
+     */
     protected function getTranslationDomain()
     {
         return 'publisher';
     }
 
+    /**
+     * @return string
+     */
     protected function getReadAccessLevel()
     {
         return 'ROLE_READ_META';
     }
 
+    /**
+     * @return string
+     */
     protected function getWriteAccessLevel()
     {
         return 'ROLE_WRITE_META';
     }
 
+    /**
+     * @return string
+     */
     protected function getPublishAccessLevel()
     {
         return 'ROLE_PUBLISH_META';
     }
-
 }

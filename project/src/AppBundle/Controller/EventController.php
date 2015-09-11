@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Controller
+ */
 
 namespace AppBundle\Controller;
 
@@ -6,6 +9,9 @@ use AppBundle\Entity\Event;
 use AppBundle\Form\Type\EventPublishType;
 use AppBundle\Form\Type\EventType;
 
+/**
+ * Class EventController
+ */
 class EventController extends AbstractRelatedController
 {
     /**
@@ -56,21 +62,33 @@ class EventController extends AbstractRelatedController
         return 'intent_backend_event';
     }
 
+    /**
+     * @return string
+     */
     protected function getTranslationDomain()
     {
         return 'event';
     }
 
+    /**
+     * @return string
+     */
     protected function getReadAccessLevel()
     {
         return 'ROLE_READ_META';
     }
 
+    /**
+     * @return string
+     */
     protected function getWriteAccessLevel()
     {
         return 'ROLE_WRITE_META';
     }
 
+    /**
+     * @return string
+     */
     protected function getPublishAccessLevel()
     {
         return 'ROLE_PUBLISH_META';

@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Repository
+ */
 
 namespace AppBundle\Repository;
 
@@ -12,10 +15,14 @@ use AppBundle\Entity\Tag;
 use AppBundle\Entity\User;
 
 /**
- * ArticleRepository
+ * Class ArticleRepository
  */
 class ArticleRepository extends AbstractRepository
 {
+    /**
+     * @param String $name Save related as tag.
+     * @return Tag
+     */
     protected function getTag($name)
     {
         $slug = $this->slugify($name);
@@ -35,7 +42,8 @@ class ArticleRepository extends AbstractRepository
     }
 
     /**
-     * @param Article $article
+     * @param Article $article Save Tags for article.
+     * @return boolean.
      */
     protected function saveTags(Article $article)
     {
@@ -58,11 +66,11 @@ class ArticleRepository extends AbstractRepository
             $franchise = $related;
         } elseif ($related instanceof Game) {
             $game = $related;
-        }elseif ($related instanceof Expansion) {
+        } elseif ($related instanceof Expansion) {
             $expansion = $related;
         }
 
-        if(!is_null($expansion)){
+        if (!is_null($expansion)) {
             $article->addTag($this->getTag($expansion->getName()));
             $game = $expansion->getGame();
         }
@@ -92,11 +100,14 @@ class ArticleRepository extends AbstractRepository
         if (!is_null($event)) {
             $article->addTag($this->getTag($event->getName()));
         }
+
+        return true;
     }
 
     /**
-     * @param Article $article
-     * @param User $user
+     * @param Article $article Persist article.
+     * @param User    $user    Set author to user.
+     * @return boolean
      */
     public function save(Article $article, User $user)
     {
@@ -113,5 +124,7 @@ class ArticleRepository extends AbstractRepository
         $this->getEntityManager()->flush();
 
         $this->saveTags($article);
+
+        return true;
     }
 }

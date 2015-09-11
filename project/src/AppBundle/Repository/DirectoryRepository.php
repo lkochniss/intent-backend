@@ -1,17 +1,21 @@
 <?php
+/**
+ * @package AppBundle\Repository
+ */
 
 namespace AppBundle\Repository;
 
 use AppBundle\Entity\Directory;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Class DirectoryRepository
- * @package AppBundle\Repository
  */
 class DirectoryRepository extends AbstractRepository
 {
     /**
-     * @param Directory $directory
+     * @param Directory $directory Persist directory.
+     * @return JsonResponse
      */
     public function save(Directory $directory)
     {
@@ -20,5 +24,7 @@ class DirectoryRepository extends AbstractRepository
 
         $this->getEntityManager()->persist($directory);
         $this->getEntityManager()->flush();
+
+        return new JsonResponse('success');
     }
 }

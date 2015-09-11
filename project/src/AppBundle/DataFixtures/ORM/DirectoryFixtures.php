@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\DataFixtures\ORM
+ */
 
 namespace AppBundle\DataFixtures\ORM;
 
@@ -10,10 +13,17 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+/**
+ * Class DirectoryFixtures
+ */
 class DirectoryFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     private $container;
 
+    /**
+     * @param ObjectManager $manager Manager to save directory.
+     * @return null
+     */
     public function load(ObjectManager $manager)
     {
         $xml = new SimpleXMLExtended(file_get_contents('web/export/directory.xml'));
@@ -23,27 +33,32 @@ class DirectoryFixtures extends AbstractFixture implements OrderedFixtureInterfa
             $directory->setName("$item->name");
             $directory->setPath("$item->path");
 
-            if("$item->parent" != ""){
-                $directory->setParentDirectory($this->getReference('directory-'."$item->parent"));
+            if ("$item->parent" != '') {
+                $directory->setParentDirectory($this->getReference('directory-' . "$item->parent"));
             }
 
             $manager->getRepository('AppBundle:Directory')->save(
                 $directory
             );
-            $this->addReference('directory-'.$directory->getName(), $directory);
+            $this->addReference('directory-' . $directory->getName(), $directory);
         }
+
+        return null;
     }
 
     /**
-     * @param ContainerInterface|null $containerInterface
+     * @param ContainerInterface|null $containerInterface ContainerInterface.
+     * @return $this
      */
     public function setContainer(ContainerInterface $containerInterface = null)
     {
         $this->container = $containerInterface;
+
+        return $this;
     }
 
     /**
-     * @return int
+     * @return integer
      */
     public function getOrder()
     {

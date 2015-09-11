@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Entity
+ */
 
 namespace AppBundle\Entity;
 
@@ -7,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Article
+ * Class Article
  */
 class Article extends AbstractArticleModel
 {
@@ -55,7 +58,11 @@ class Article extends AbstractArticleModel
      */
     private $tags;
 
-    function __construct()
+    /**
+     * Set slideshow default to false.
+     * Add empty tag array.
+     */
+    public function __construct()
     {
         parent::__construct();
         $this->slideshow = false;
@@ -63,7 +70,7 @@ class Article extends AbstractArticleModel
     }
 
     /**
-     * @param $slideshow
+     * @param string $slideshow Set slideshow.
      * @return $this
      */
     public function setSlideshow($slideshow)
@@ -74,7 +81,7 @@ class Article extends AbstractArticleModel
     }
 
     /**
-     * @return bool
+     * @return boolean
      */
     public function isSlideshow()
     {
@@ -82,7 +89,7 @@ class Article extends AbstractArticleModel
     }
 
     /**
-     * @param Category $category
+     * @param Category $category Set category.
      * @return $this
      */
     public function setCategory(Category $category)
@@ -101,7 +108,7 @@ class Article extends AbstractArticleModel
     }
 
     /**
-     * @param User $user
+     * @param User $user Set createdBy user.
      * @return $this
      */
     public function setCreatedBy(User $user)
@@ -120,7 +127,7 @@ class Article extends AbstractArticleModel
     }
 
     /**
-     * @param User $user
+     * @param User $user Set modifiedBy user.
      * @return $this
      */
     public function setModifiedBy(User $user)
@@ -139,7 +146,7 @@ class Article extends AbstractArticleModel
     }
 
     /**
-     * @param Event $event
+     * @param Event $event Set event.
      * @return $this
      */
     public function setEvent(Event $event)
@@ -152,13 +159,14 @@ class Article extends AbstractArticleModel
     /**
      * @return Event
      */
-    public function getEvent(){
+    public function getEvent()
+    {
 
         return $this->event;
     }
 
     /**
-     * @param Related $related
+     * @param Related $related Set Related.
      * @return $this
      */
     public function setRelated(Related $related)
@@ -171,17 +179,21 @@ class Article extends AbstractArticleModel
     /**
      * @return Related
      */
-    public function getRelated(){
+    public function getRelated()
+    {
 
         return $this->related;
     }
 
     /**
-     * @param Image $thumbnail
+     * @param Image $thumbnail Set Thumbnail.
+     * @return $this
      */
-    public function setThumbnail($thumbnail)
+    public function setThumbnail(Image $thumbnail)
     {
         $this->thumbnail = $thumbnail;
+
+        return $this;
     }
 
     /**
@@ -193,12 +205,12 @@ class Article extends AbstractArticleModel
     }
 
     /**
-     * @param Tag $tag
+     * @param Tag $tag Add tag to array.
      * @return $this
      */
     public function addTag(Tag $tag)
     {
-        if (!$this->tags->contains($tag)){
+        if (!$this->tags->contains($tag)) {
             $this->tags->add($tag);
             $tag->addArticle($this);
         }
@@ -207,7 +219,7 @@ class Article extends AbstractArticleModel
     }
 
     /**
-     * @param Tag $tag
+     * @param Tag $tag Remove tag from array.
      * @return $this
      */
     public function removeTag(Tag $tag)

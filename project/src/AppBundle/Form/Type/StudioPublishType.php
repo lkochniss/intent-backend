@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Form\Type
+ */
 
 namespace AppBundle\Form\Type;
 
@@ -12,8 +15,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class StudioPublishType extends AbstractType
 {
     /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param FormBuilderInterface $builder Builder.
+     * @param array                $options Options.
+     * @return null
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -26,10 +30,13 @@ class StudioPublishType extends AbstractType
                     'translation_domain' => 'studio',
                 )
             );
+
+        return null;
     }
 
     /**
-     * @param OptionsResolver $resolver
+     * @param OptionsResolver $resolver Add studio to form.
+     * @return null
      */
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -38,6 +45,8 @@ class StudioPublishType extends AbstractType
                 'data_class' => 'AppBundle\Entity\Studio',
             )
         );
+
+        return null;
     }
 
     /**

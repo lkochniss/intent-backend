@@ -1,22 +1,13 @@
 <?php
+/**
+ * @package AppBundle\Repository
+ */
 
 namespace AppBundle\Repository;
 
-use AppBundle\Entity\Category;
-
 /**
- * CategoryRepository
+ * Class CategoryRepository
  */
-class CategoryRepository extends AbstractRepository
+class CategoryRepository extends AbstractMetaRepository
 {
-    /**
-     * @param Category $category
-     */
-    public function save(Category $category)
-    {
-        $slug = $this->slugify($category->getName());
-        $category->setSlug($slug);
-        $this->getEntityManager()->persist($category);
-        $this->getEntityManager()->flush();
-    }
 }

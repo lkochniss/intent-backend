@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Service
+ */
 
 namespace AppBundle\Service;
 
@@ -8,7 +11,6 @@ use Doctrine\ORM\EntityRepository;
 
 /**
  * Class EventExport
- * @package AppBundle\Service
  */
 class EventExport
 {
@@ -16,13 +18,16 @@ class EventExport
     private $repository;
 
     /**
-     * @param EntityRepository $repository
+     * @param EntityRepository $repository Get the entity repository.
      */
     public function __construct(EntityRepository $repository)
     {
         $this->repository = $repository;
     }
 
+    /**
+     * @return boolean
+     */
     public function exportEntity()
     {
         $events = $this->repository->findAll();
@@ -52,15 +57,17 @@ class EventExport
 
             $item->backgroundImage = null;
             if ($event->getBackgroundImage()) {
-                $item->backgroundImage->addCData('image-'. $event->getBackgroundImage()->getFullPath());
+                $item->backgroundImage->addCData('image-' . $event->getBackgroundImage()->getFullPath());
             }
 
             $item->thumbnail = null;
             if ($event->getThumbnail()) {
-                $item->thumbnail->addCData('image-'. $event->getThumbnail()->getFullPath());
+                $item->thumbnail->addCData('image-' . $event->getThumbnail()->getFullPath());
             }
         }
 
         $xml->saveXML('web/export/event.xml');
+
+        return true;
     }
 }

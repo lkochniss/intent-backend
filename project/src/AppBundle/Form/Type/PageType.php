@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Form\Type
+ */
 
 namespace AppBundle\Form\Type;
 
@@ -12,8 +15,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class PageType extends AbstractType
 {
     /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param FormBuilderInterface $builder Builder.
+     * @param array                $options Options.
+     * @return null
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -46,10 +50,13 @@ class PageType extends AbstractType
                     'translation_domain' => 'page',
                 )
             );
+
+        return null;
     }
 
     /**
-     * @param OptionsResolver $resolver
+     * @param OptionsResolver $resolver Add page to form.
+     * @return null
      */
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -58,6 +65,8 @@ class PageType extends AbstractType
                 'data_class' => 'AppBundle\Entity\Page',
             )
         );
+
+        return null;
     }
 
     /**

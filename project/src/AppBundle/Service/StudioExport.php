@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Service
+ */
 
 namespace AppBundle\Service;
 
@@ -8,7 +11,6 @@ use Doctrine\ORM\EntityRepository;
 
 /**
  * Class StudioExport
- * @package AppBundle\Service
  */
 class StudioExport
 {
@@ -16,13 +18,16 @@ class StudioExport
     private $repository;
 
     /**
-     * @param EntityRepository $repository
+     * @param EntityRepository $repository Get the entity repository.
      */
     public function __construct(EntityRepository $repository)
     {
         $this->repository = $repository;
     }
 
+    /**
+     * @return boolean
+     */
     public function exportEntity()
     {
         $studios = $this->repository->findAll();
@@ -50,15 +55,17 @@ class StudioExport
 
             $item->backgroundImage = null;
             if ($studio->getBackgroundImage()) {
-                $item->backgroundImage->addCData('image-'. $studio->getBackgroundImage()->getFullPath());
+                $item->backgroundImage->addCData('image-' . $studio->getBackgroundImage()->getFullPath());
             }
 
             $item->thumbnail = null;
             if ($studio->getThumbnail()) {
-                $item->thumbnail->addCData('image-'. $studio->getThumbnail()->getFullPath());
+                $item->thumbnail->addCData('image-' . $studio->getThumbnail()->getFullPath());
             }
         }
 
         $xml->saveXML('web/export/studio.xml');
+
+        return true;
     }
 }

@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Service
+ */
 
 namespace AppBundle\Service;
 
@@ -8,7 +11,6 @@ use Doctrine\ORM\EntityRepository;
 
 /**
  * Class PageExport
- * @package AppBundle\Service
  */
 class PageExport
 {
@@ -16,13 +18,16 @@ class PageExport
     private $repository;
 
     /**
-     * @param EntityRepository $repository
+     * @param EntityRepository $repository Get the entity repository.
      */
     public function __construct(EntityRepository $repository)
     {
         $this->repository = $repository;
     }
 
+    /**
+     * @return boolean
+     */
     public function exportEntity()
     {
         $pages = $this->repository->findAll();
@@ -49,5 +54,7 @@ class PageExport
         }
 
         $xml->saveXML('web/export/page.xml');
+
+        return true;
     }
 }

@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Controller
+ */
 
 namespace AppBundle\Controller;
 
@@ -6,6 +9,9 @@ use AppBundle\Entity\Page;
 use AppBundle\Form\Type\PagePublishType;
 use AppBundle\Form\Type\PageType;
 
+/**
+ * Class PageController
+ */
 class PageController extends AbstractArticleController
 {
     /**
@@ -56,21 +62,33 @@ class PageController extends AbstractArticleController
         return 'intent_backend_page';
     }
 
+    /**
+     * @return string
+     */
     protected function getTranslationDomain()
     {
         return 'page';
     }
 
+    /**
+     * @return string
+     */
     protected function getReadAccessLevel()
     {
         return 'ROLE_ADMIN';
     }
 
+    /**
+     * @return string
+     */
     protected function getWriteAccessLevel()
     {
         return 'ROLE_ADMIN';
     }
 
+    /**
+     * @return string
+     */
     protected function getPublishAccessLevel()
     {
         return 'ROLE_ADMIN';

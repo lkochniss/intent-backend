@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Entity
+ */
 
 namespace AppBundle\Entity;
 
@@ -29,7 +32,7 @@ abstract class AbstractModel
     private $modifiedAt;
 
     /**
-     * @return int
+     * @return integer
      */
     public function getId()
     {

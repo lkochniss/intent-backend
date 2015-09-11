@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Controller
+ */
 
 namespace AppBundle\Controller;
 
@@ -10,10 +13,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Util\SecureRandom;
 
+/**
+ * Class UserController
+ */
 class UserController extends AbstractCrudController
 {
     /**
-     * @param Request $request
+     * @param Request $request HTTP Request.
      * @return RedirectResponse|Response
      */
     public function createAction(Request $request)
@@ -80,8 +86,8 @@ class UserController extends AbstractCrudController
     }
 
     /**
-     * @param $id
-     * @param Request $request
+     * @param integer $id      UserID.
+     * @param Request $request HTTP Request.
      * @return RedirectResponse|Response
      */
     public function passwordAction($id, Request $request)
@@ -153,6 +159,9 @@ class UserController extends AbstractCrudController
         return 'intent_backend_user';
     }
 
+    /**
+     * @return string
+     */
     protected function getTranslationDomain()
     {
         return 'user';

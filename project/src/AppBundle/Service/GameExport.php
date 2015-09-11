@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Service
+ */
 
 namespace AppBundle\Service;
 
@@ -8,7 +11,6 @@ use Doctrine\ORM\EntityRepository;
 
 /**
  * Class GameExport
- * @package AppBundle\Service
  */
 class GameExport
 {
@@ -16,13 +18,16 @@ class GameExport
     private $repository;
 
     /**
-     * @param EntityRepository $repository
+     * @param EntityRepository $repository Get the entity repository.
      */
     public function __construct(EntityRepository $repository)
     {
         $this->repository = $repository;
     }
 
+    /**
+     * @return boolean
+     */
     public function exportEntity()
     {
         $games = $this->repository->findAll();
@@ -49,25 +54,27 @@ class GameExport
 
             $item->franchise = null;
             if ($game->getFranchise()) {
-                $item->franchise->addCData('franchise-'.$game->getFranchise()->getSlug());
+                $item->franchise->addCData('franchise-' . $game->getFranchise()->getSlug());
             }
 
             $item->studio = null;
             if ($game->getStudio()) {
-                $item->studio->addCData('studio-'.$game->getStudio()->getSlug());
+                $item->studio->addCData('studio-' . $game->getStudio()->getSlug());
             }
 
             $item->backgroundImage = null;
             if ($game->getBackgroundImage()) {
-                $item->backgroundImage->addCData('image-'. $game->getBackgroundImage()->getFullPath());
+                $item->backgroundImage->addCData('image-' . $game->getBackgroundImage()->getFullPath());
             }
 
             $item->thumbnail = null;
             if ($game->getThumbnail()) {
-                $item->thumbnail->addCData('image-'. $game->getThumbnail()->getFullPath());
+                $item->thumbnail->addCData('image-' . $game->getThumbnail()->getFullPath());
             }
         }
 
         $xml->saveXML('web/export/game.xml');
+
+        return true;
     }
 }

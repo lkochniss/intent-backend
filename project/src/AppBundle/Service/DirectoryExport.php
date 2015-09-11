@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Service
+ */
 
 namespace AppBundle\Service;
 
@@ -8,7 +11,6 @@ use Doctrine\ORM\EntityRepository;
 
 /**
  * Class DirectoryExport
- * @package AppBundle\Service
  */
 class DirectoryExport
 {
@@ -16,13 +18,16 @@ class DirectoryExport
     private $repository;
 
     /**
-     * @param EntityRepository $repository
+     * @param EntityRepository $repository Get the entity repository.
      */
     public function __construct(EntityRepository $repository)
     {
         $this->repository = $repository;
     }
 
+    /**
+     * @return boolean
+     */
     public function exportEntity()
     {
         $directories = $this->repository->findAll();
@@ -42,11 +47,13 @@ class DirectoryExport
             $item->path->addCData($directory->getPath());
 
             $item->parent = null;
-            if($directory->getParentDirectory()){
+            if ($directory->getParentDirectory()) {
                 $item->parent->addCData($directory->getParentDirectory()->getName());
             }
         }
 
         $xml->saveXML('web/export/directory.xml');
+
+        return true;
     }
 }
