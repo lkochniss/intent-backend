@@ -8,6 +8,7 @@ namespace AppBundle\Tests\Controller;
 use Doctrine\ORM\EntityManager;
 use Liip\FunctionalTestBundle\Test\WebTestCase;
 use Symfony\Component\HttpKernel\Client;
+use Symfony\Component\DomCrawler\Crawler;
 
 /**
  * Class AbstractControllerTest
@@ -76,12 +77,49 @@ class AbstractControllerTest extends WebTestCase
     /**
      * @param string $method Type of method (POST, GET).
      * @param string $url    Which url should be checked.
-     * @return null
+     * @return Crawler
      */
     protected function pageResponse($method, $url)
     {
-        $this->client->request($method, $url);
+        $crawler = $this->client->request($method, $url);
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        return $crawler;
+    }
+
+    /**
+     * @param Crawler $crawler The crawler with the Response.
+     * @param string  $needle  The needle to search after.
+     * @return null
+     */
+    protected function checkIfOneContentExist(Crawler $crawler, $needle)
+    {
+        $this->assertEquals(
+            1,
+            $crawler
+                ->filter($needle)
+                ->count(),
+            sprintf('%s not found', $needle)
+        );
+
+        return null;
+    }
+
+    /**
+     * @param Crawler $crawler The crawler with the Response.
+     * @param string  $needle  The needle to search after.
+     * @param integer $number  The number of minimum Elements.
+     * @return null
+     */
+    protected function checkIfContentExist(Crawler $crawler, $needle, $number)
+    {
+        $this->assertGreaterThan(
+            $number,
+            $crawler
+                ->filter($needle)
+                ->count(),
+            sprintf('%s not found', $needle)
+        );
 
         return null;
     }

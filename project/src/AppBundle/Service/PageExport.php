@@ -48,6 +48,11 @@ class PageExport
 
             $item->published = null;
             $item->published->addCData($page->isPublished());
+
+            $item->publishedAt = null;
+            if (!is_null($page->getPublishAt())) {
+                $item->publishedAt->addCData($page->getPublishAt()->format('Y-M-d H:i:s'));
+            }
         }
 
         $xml->saveXML('web/export/page.xml');

@@ -39,7 +39,11 @@ class PageControllerTest extends AbstractControllerTest
      */
     public function testCreatePage()
     {
-        $this->pageResponse('GET', '/page/create');
+        $crawler = $this->pageResponse('GET', '/page/create');
+
+        $this->checkIfOneContentExist($crawler, 'input[id="page_title"]');
+        $this->checkIfOneContentExist($crawler, 'textarea[id="page_content"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="page_submit"]');
 
         return null;
     }
@@ -49,7 +53,11 @@ class PageControllerTest extends AbstractControllerTest
      */
     public function testEditPage()
     {
-        $this->pageResponse('GET', sprintf('/page/%s/edit', $this->page->getId()));
+        $crawler = $this->pageResponse('GET', sprintf('/page/%s/edit', $this->page->getId()));
+
+        $this->checkIfOneContentExist($crawler, 'input[id="page_title"]');
+        $this->checkIfOneContentExist($crawler, 'textarea[id="page_content"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="page_submit"]');
 
         return null;
     }
@@ -59,7 +67,10 @@ class PageControllerTest extends AbstractControllerTest
      */
     public function testShowPage()
     {
-        $this->pageResponse('GET', sprintf('/page/%s/edit', $this->page->getId()));
+        $crawler = $this->pageResponse('GET', sprintf('/page/%s/show', $this->page->getId()));
+
+        $this->checkIfOneContentExist($crawler, 'div[id="page_publish_publishAt"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="page_publish_submit"]');
 
         return null;
     }
@@ -69,7 +80,9 @@ class PageControllerTest extends AbstractControllerTest
      */
     public function testListPage()
     {
-        $this->pageResponse('GET', '/page/');
+        $crawler = $this->pageResponse('GET', '/page/');
+
+        $this->checkIfOneContentExist($crawler, 'table[id="entity_list"]');
 
         return null;
     }
