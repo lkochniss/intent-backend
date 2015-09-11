@@ -13,6 +13,7 @@ use AppBundle\Entity\Publisher;
 use AppBundle\Entity\Studio;
 use AppBundle\Entity\Tag;
 use AppBundle\Entity\User;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Class ArticleRepository
@@ -107,7 +108,7 @@ class ArticleRepository extends AbstractRepository
     /**
      * @param Article $article Persist article.
      * @param User    $user    Set author to user.
-     * @return boolean
+     * @return JsonResponse
      */
     public function save(Article $article, User $user)
     {
@@ -125,6 +126,6 @@ class ArticleRepository extends AbstractRepository
 
         $this->saveTags($article);
 
-        return true;
+        return new JsonResponse('success');
     }
 }

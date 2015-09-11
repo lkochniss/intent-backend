@@ -11,5 +11,5 @@ intent_backend_page_show:
     defaults: { _controller: AppBundle:Page:show }
 
 intent_backend_page_list:
-    path:     /{page}
-    defaults: { _controller: AppBundle:Page:list, page: 1 }
+    path:     /
+    defaults: { _controller: AppBundle:Page:list }
