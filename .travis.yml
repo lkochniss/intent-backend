@@ -7,6 +7,11 @@ before_script:
   - cd project
   - composer self-update
   - composer install --prefer-source
+  - cp app/config/parameters.yml.dist app/config/parameters.yml
 script:
+  - php app/console do:da:dr --force
+  - php app/console do:da:cr
+  - php app/console do:mi:mi -n
+  - php app/console do:fi:lo -n
   - php app/console ca:c --env=test
   - php bin/phpunit -c app
