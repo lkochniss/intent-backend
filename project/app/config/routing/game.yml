@@ -15,5 +15,5 @@ intent_backend_game_delete:
     defaults: { _controller: AppBundle:Game:delete }
 
 intent_backend_game_list:
-    path:     /{page}
-    defaults: { _controller: AppBundle:Game:list, page: 1 }
+    path:     /
+    defaults: { _controller: AppBundle:Game:list }
