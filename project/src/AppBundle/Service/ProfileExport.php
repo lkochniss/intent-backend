@@ -47,7 +47,7 @@ class ProfileExport
             $item->description->addCData($profile->getDescription());
 
             $item->user = null;
-            if (is_null($profile->getUser()->getUsername())) {
+            if (!is_null($profile->getUser()->getUsername())) {
                 $item->user->addCData($profile->getUser()->getUsername());
             }
         }
