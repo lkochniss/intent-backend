@@ -31,7 +31,6 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
-            new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
             new AppBundle\AppBundle(),
         );
 

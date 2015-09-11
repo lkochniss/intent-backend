@@ -86,21 +86,21 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
-stfalcon_tinymce:
-    include_jquery: true
-    tinymce_jquery: true
-    selector: ".tinymce"
-    language: %locale%
-    external_plugins:
-        filemanager:
-            url: "asset[js/tinymce/plugins/filemanager/plugin.js]"
-    theme:
-        advanced:
-             plugins:
-                 - "advlist autolink lists link image charmap print preview hr anchor pagebreak"
-                 - "searchreplace wordcount visualblocks visualchars code fullscreen"
-                 - "insertdatetime media nonbreaking save table contextmenu directionality"
-                 - "emoticons template paste textcolor"
-                 - "filemanager"
-             toolbar1: "filemanager insertfile undo redo | styleselect forecolor| bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
-             image_advtab: true
+#stfalcon_tinymce:
+#    include_jquery: true
+#    tinymce_jquery: true
+#    selector: ".tinymce"
+#    language: %locale%
+#    external_plugins:
+#        filemanager:
+#            url: "asset[js/tinymce/plugins/filemanager/plugin.js]"
+#    theme:
+#        advanced:
+#             plugins:
+#                 - "advlist autolink lists link image charmap print preview hr anchor pagebreak"
+#                 - "searchreplace wordcount visualblocks visualchars code fullscreen"
+#                 - "insertdatetime media nonbreaking save table contextmenu directionality"
+#                 - "emoticons template paste textcolor"
+#                 - "filemanager"
+#             toolbar1: "filemanager insertfile undo redo | styleselect forecolor| bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+#             image_advtab: true

@@ -11,6 +11,13 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {{ tinymce_init() }}
     <script src="{{ asset('/js/select2.min.js') }}"></script>
+    <script src="{{ asset('/js/tinymce/tinymce.jquery.min.js') }}"></script>
+
+    <script type="application/javascript">
+        tinymce.init({
+            theme : "advanced",
+            mode : "textareas"
+        })
+    </script>
 {% endblock %}
