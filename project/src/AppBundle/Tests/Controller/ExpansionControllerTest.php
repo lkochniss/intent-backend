@@ -5,17 +5,17 @@
 
 namespace AppBundle\Tests\Controller;
 
-use AppBundle\Entity\Article;
+use AppBundle\Entity\Expansion;
 
 /**
- * Class ArticleControllerTest
+ * Class ExpansionControllerTest
  */
-class ArticleControllerTest extends AbstractControllerTest
+class ExpansionControllerTest extends AbstractControllerTest
 {
     /**
-     * @var Article
+     * @var Expansion
      */
-    protected $article;
+    protected $expansion;
 
     /**
      * @return $this
@@ -24,8 +24,8 @@ class ArticleControllerTest extends AbstractControllerTest
     {
         parent::setUp();
 
-        $repository = $this->getEntityManager()->getRepository('AppBundle:Article');
-        $this->article = $repository->findBy(
+        $repository = $this->getEntityManager()->getRepository('AppBundle:Expansion');
+        $this->expansion = $repository->findBy(
             array(),
             array(),
             1
@@ -39,7 +39,7 @@ class ArticleControllerTest extends AbstractControllerTest
      */
     public function testCreatePage()
     {
-        $this->pageResponse('GET', '/article/create');
+        $this->pageResponse('GET', '/expansion/create');
 
         return null;
     }
@@ -49,7 +49,7 @@ class ArticleControllerTest extends AbstractControllerTest
      */
     public function testEditPage()
     {
-        $this->pageResponse('GET', sprintf('/article/%s/edit', $this->article->getId()));
+        $this->pageResponse('GET', sprintf('/expansion/%s/edit', $this->expansion->getId()));
 
         return null;
     }
@@ -59,7 +59,7 @@ class ArticleControllerTest extends AbstractControllerTest
      */
     public function testShowPage()
     {
-        $this->pageResponse('GET', sprintf('/article/%s/show', $this->article->getId()));
+        $this->pageResponse('GET', sprintf('/expansion/%s/edit', $this->expansion->getId()));
 
         return null;
     }
@@ -69,7 +69,7 @@ class ArticleControllerTest extends AbstractControllerTest
      */
     public function testListPage()
     {
-        $this->pageResponse('GET', '/article/');
+        $this->pageResponse('GET', '/expansion/');
 
         return null;
     }

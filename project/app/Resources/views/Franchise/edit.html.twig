@@ -24,7 +24,7 @@
     </div>
     <div class="col-md-3 meta">
 
-        {{ form_label(entity.thumbnail) }}
+        {{ form_label(form.thumbnail) }}
         {% if entity.thumbnail %}
             <img src="/{{ entity.thumbnail.fullPath }}" class="img-responsive" /><br />
         {% endif %}

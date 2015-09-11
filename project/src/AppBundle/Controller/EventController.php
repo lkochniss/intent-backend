@@ -12,7 +12,7 @@ use AppBundle\Form\Type\EventType;
 /**
  * Class EventController
  */
-class EventController extends AbstractRelatedController
+class EventController extends AbstractMetaController
 {
     /**
      * @return Event

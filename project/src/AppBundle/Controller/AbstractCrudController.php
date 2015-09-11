@@ -57,7 +57,7 @@ abstract class AbstractCrudController extends Controller
      * @throws NotFoundHttpException Throw exception if entity not found.
      * @return Response
      */
-    public function showAction($id)
+    public function showAction($id, Request $request)
     {
         $entity = $this->getDoctrine()->getRepository($this->getEntityName())->find($id);
 

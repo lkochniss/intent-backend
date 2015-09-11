@@ -15,5 +15,5 @@ intent_backend_publisher_delete:
     defaults: { _controller: AppBundle:Publisher:delete }
 
 intent_backend_publisher_list:
-    path:     /{page}
-    defaults: { _controller: AppBundle:Publisher:list, page: 1 }
+    path:     /
+    defaults: { _controller: AppBundle:Publisher:list}
