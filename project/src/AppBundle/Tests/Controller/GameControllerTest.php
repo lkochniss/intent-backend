@@ -39,7 +39,15 @@ class GameControllerTest extends AbstractControllerTest
      */
     public function testCreatePage()
     {
-        $this->pageResponse('GET', '/game/create');
+        $crawler = $this->pageResponse('GET', '/game/create');
+
+        $this->checkIfOneContentExist($crawler, 'input[id="game_name"]');
+        $this->checkIfOneContentExist($crawler, 'textarea[id="game_description"]');
+        $this->checkIfOneContentExist($crawler, 'select[id="game_thumbnail"]');
+        $this->checkIfOneContentExist($crawler, 'select[id="game_studio"]');
+        $this->checkIfOneContentExist($crawler, 'select[id="game_franchise"]');
+        $this->checkIfOneContentExist($crawler, 'select[id="game_background_image"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="game_submit"]');
 
         return null;
     }
@@ -49,7 +57,15 @@ class GameControllerTest extends AbstractControllerTest
      */
     public function testEditPage()
     {
-        $this->pageResponse('GET', sprintf('/game/%s/edit', $this->game->getId()));
+        $crawler = $this->pageResponse('GET', sprintf('/game/%s/edit', $this->game->getId()));
+
+        $this->checkIfOneContentExist($crawler, 'input[id="game_name"]');
+        $this->checkIfOneContentExist($crawler, 'textarea[id="game_description"]');
+        $this->checkIfOneContentExist($crawler, 'select[id="game_thumbnail"]');
+        $this->checkIfOneContentExist($crawler, 'select[id="game_studio"]');
+        $this->checkIfOneContentExist($crawler, 'select[id="game_franchise"]');
+        $this->checkIfOneContentExist($crawler, 'select[id="game_background_image"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="game_submit"]');
 
         return null;
     }
@@ -59,7 +75,9 @@ class GameControllerTest extends AbstractControllerTest
      */
     public function testShowPage()
     {
-        $this->pageResponse('GET', sprintf('/game/%s/show', $this->game->getId()));
+        $crawler = $this->pageResponse('GET', sprintf('/game/%s/show', $this->game->getId()));
+
+        $this->checkIfOneContentExist($crawler, 'button[id="game_publish_submit"]');
 
         return null;
     }
@@ -69,7 +87,9 @@ class GameControllerTest extends AbstractControllerTest
      */
     public function testListPage()
     {
-        $this->pageResponse('GET', '/game/');
+        $crawler = $this->pageResponse('GET', '/game/');
+
+        $this->checkIfOneContentExist($crawler, 'table[id="entity_list"]');
 
         return null;
     }

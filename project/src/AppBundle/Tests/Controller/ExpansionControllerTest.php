@@ -39,7 +39,14 @@ class ExpansionControllerTest extends AbstractControllerTest
      */
     public function testCreatePage()
     {
-        $this->pageResponse('GET', '/expansion/create');
+        $crawler = $this->pageResponse('GET', '/expansion/create');
+
+        $this->checkIfOneContentExist($crawler, 'input[id="expansion_name"]');
+        $this->checkIfOneContentExist($crawler, 'textarea[id="expansion_description"]');
+        $this->checkIfOneContentExist($crawler, 'select[id="expansion_thumbnail"]');
+        $this->checkIfOneContentExist($crawler, 'select[id="expansion_game"]');
+        $this->checkIfOneContentExist($crawler, 'select[id="expansion_background_image"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="expansion_submit"]');
 
         return null;
     }
@@ -49,7 +56,14 @@ class ExpansionControllerTest extends AbstractControllerTest
      */
     public function testEditPage()
     {
-        $this->pageResponse('GET', sprintf('/expansion/%s/edit', $this->expansion->getId()));
+        $crawler = $this->pageResponse('GET', sprintf('/expansion/%s/edit', $this->expansion->getId()));
+
+        $this->checkIfOneContentExist($crawler, 'input[id="expansion_name"]');
+        $this->checkIfOneContentExist($crawler, 'textarea[id="expansion_description"]');
+        $this->checkIfOneContentExist($crawler, 'select[id="expansion_thumbnail"]');
+        $this->checkIfOneContentExist($crawler, 'select[id="expansion_game"]');
+        $this->checkIfOneContentExist($crawler, 'select[id="expansion_background_image"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="expansion_submit"]');
 
         return null;
     }
@@ -59,7 +73,9 @@ class ExpansionControllerTest extends AbstractControllerTest
      */
     public function testShowPage()
     {
-        $this->pageResponse('GET', sprintf('/expansion/%s/show', $this->expansion->getId()));
+        $crawler = $this->pageResponse('GET', sprintf('/expansion/%s/show', $this->expansion->getId()));
+
+        $this->checkIfOneContentExist($crawler, 'button[id="expansion_publish_submit"]');
 
         return null;
     }
@@ -69,7 +85,9 @@ class ExpansionControllerTest extends AbstractControllerTest
      */
     public function testListPage()
     {
-        $this->pageResponse('GET', '/expansion/');
+        $crawler = $this->pageResponse('GET', '/expansion/');
+
+        $this->checkIfOneContentExist($crawler, 'table[id="entity_list"]');
 
         return null;
     }
