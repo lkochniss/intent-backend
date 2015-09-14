@@ -88,6 +88,7 @@ class ExpansionControllerTest extends AbstractControllerTest
         $crawler = $this->pageResponse('GET', '/expansion/');
 
         $this->checkIfOneContentExist($crawler, 'table[id="entity_list"]');
+        $this->checkIfOneContentExist($crawler, 'a[href="/expansion/create"]');
 
         return null;
     }

@@ -26,7 +26,7 @@ class DirectoryType extends AbstractType
                 'name',
                 'text',
                 array(
-                    'label' => 'filename.directory',
+                    'label' => 'filemanager.directory',
                     'translation_domain' => 'filemanager',
                 )
             )

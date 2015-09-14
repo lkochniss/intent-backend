@@ -54,6 +54,6 @@ class EventPublishType extends AbstractType
      */
     public function getName()
     {
-        return 'game_publish';
+        return 'event_publish';
     }
 }

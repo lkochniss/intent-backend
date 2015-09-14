@@ -93,6 +93,7 @@ class ArticleControllerTest extends AbstractControllerTest
         $crawler = $this->pageResponse('GET', '/article/');
 
         $this->checkIfOneContentExist($crawler, 'table[id="entity_list"]');
+        $this->checkIfNumberOfContentExist($crawler, 'a[href="/article/create"]', 2);
 
         return null;
     }

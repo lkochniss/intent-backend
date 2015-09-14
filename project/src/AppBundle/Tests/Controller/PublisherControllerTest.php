@@ -86,6 +86,7 @@ class PublisherControllerTest extends AbstractControllerTest
         $crawler = $this->pageResponse('GET', '/publisher/');
 
         $this->checkIfOneContentExist($crawler, 'table[id="entity_list"]');
+        $this->checkIfOneContentExist($crawler, 'a[href="/publisher/create"]');
 
         return null;
     }

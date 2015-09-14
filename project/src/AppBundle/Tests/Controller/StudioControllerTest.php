@@ -86,6 +86,7 @@ class StudioControllerTest extends AbstractControllerTest
         $crawler = $this->pageResponse('GET', '/studio/');
 
         $this->checkIfOneContentExist($crawler, 'table[id="entity_list"]');
+        $this->checkIfOneContentExist($crawler, 'a[href="/studio/create"]');
 
         return null;
     }

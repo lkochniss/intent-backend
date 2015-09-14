@@ -39,7 +39,15 @@ class EventControllerTest extends AbstractControllerTest
      */
     public function testCreatePage()
     {
-        $this->pageResponse('GET', '/event/create');
+        $crawler = $this->pageResponse('GET', '/event/create');
+
+        $this->checkIfOneContentExist($crawler, 'input[id="event_name"]');
+        $this->checkIfOneContentExist($crawler, 'textarea[id="event_description"]');
+        $this->checkIfOneContentExist($crawler, 'select[id="event_thumbnail"]');
+        $this->checkIfOneContentExist($crawler, 'div[id="event_startAt"]');
+        $this->checkIfOneContentExist($crawler, 'div[id="event_endAt"]');
+        $this->checkIfOneContentExist($crawler, 'select[id="event_background_image"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="event_submit"]');
 
         return null;
     }
@@ -49,7 +57,15 @@ class EventControllerTest extends AbstractControllerTest
      */
     public function testEditPage()
     {
-        $this->pageResponse('GET', sprintf('/event/%s/edit', $this->event->getId()));
+        $crawler = $this->pageResponse('GET', sprintf('/event/%s/edit', $this->event->getId()));
+
+        $this->checkIfOneContentExist($crawler, 'input[id="event_name"]');
+        $this->checkIfOneContentExist($crawler, 'textarea[id="event_description"]');
+        $this->checkIfOneContentExist($crawler, 'select[id="event_thumbnail"]');
+        $this->checkIfOneContentExist($crawler, 'div[id="event_startAt"]');
+        $this->checkIfOneContentExist($crawler, 'div[id="event_endAt"]');
+        $this->checkIfOneContentExist($crawler, 'select[id="event_background_image"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="event_submit"]');
 
         return null;
     }
@@ -59,7 +75,9 @@ class EventControllerTest extends AbstractControllerTest
      */
     public function testShowPage()
     {
-        $this->pageResponse('GET', sprintf('/event/%s/show', $this->event->getId()));
+        $crawler = $this->pageResponse('GET', sprintf('/event/%s/show', $this->event->getId()));
+
+        $this->checkIfOneContentExist($crawler, 'button[id="event_publish_submit"]');
 
         return null;
     }
@@ -69,7 +87,10 @@ class EventControllerTest extends AbstractControllerTest
      */
     public function testListPage()
     {
-        $this->pageResponse('GET', '/event/');
+        $crawler = $this->pageResponse('GET', '/event/');
+
+        $this->checkIfOneContentExist($crawler, 'table[id="entity_list"]');
+        $this->checkIfOneContentExist($crawler, 'a[href="/event/create"]');
 
         return null;
     }

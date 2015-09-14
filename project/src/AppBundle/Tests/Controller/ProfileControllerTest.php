@@ -39,7 +39,11 @@ class ProfileControllerTest extends AbstractControllerTest
      */
     public function testCreatePage()
     {
-        $this->pageResponse('GET', '/profile/create');
+        $crawler = $this->pageResponse('GET', '/profile/create');
+
+        $this->checkIfOneContentExist($crawler, 'input[id="profile_name"]');
+        $this->checkIfOneContentExist($crawler, 'textarea[id="profile_description"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="profile_submit"]');
 
         return null;
     }
@@ -49,17 +53,11 @@ class ProfileControllerTest extends AbstractControllerTest
      */
     public function testEditPage()
     {
-        $this->pageResponse('GET', sprintf('/profile/%s/edit', $this->profile->getId()));
+        $crawler = $this->pageResponse('GET', sprintf('/profile/%s/edit', $this->profile->getId()));
 
-        return null;
-    }
-
-    /**
-     * @return null
-     */
-    public function testShowPage()
-    {
-        $this->pageResponse('GET', sprintf('/profile/%s/show', $this->profile->getId()));
+        $this->checkIfOneContentExist($crawler, 'input[id="profile_name"]');
+        $this->checkIfOneContentExist($crawler, 'textarea[id="profile_description"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="profile_submit"]');
 
         return null;
     }
@@ -69,7 +67,10 @@ class ProfileControllerTest extends AbstractControllerTest
      */
     public function testListPage()
     {
-        $this->pageResponse('GET', '/profile/');
+        $crawler = $this->pageResponse('GET', '/profile/');
+
+        $this->checkIfOneContentExist($crawler, 'table[id="entity_list"]');
+        $this->checkIfContentExist($crawler, sprintf('a[href="/profile/%s/edit"]', $this->profile->getId()));
 
         return null;
     }

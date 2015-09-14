@@ -53,7 +53,31 @@ class AbstractControllerTest extends WebTestCase
      */
     public function testIsGeneralReachable()
     {
-        $this->pageResponse('GET', '');
+        $crawler = $this->pageResponse('GET', '');
+
+        /**
+         * Adminbar
+         */
+        $this->checkIfOneContentExist($crawler, 'a[href="/"]');
+        $this->checkIfOneContentExist($crawler, 'a[href="/article/create"]');
+        $this->checkIfOneContentExist($crawler, 'a[href="/logout"]');
+
+        /**
+         * Sidebar
+         */
+        $this->checkIfOneContentExist($crawler, 'a[href="/article/"]');
+        $this->checkIfOneContentExist($crawler, 'a[href="/page/"]');
+        $this->checkIfOneContentExist($crawler, 'a[href="/category/"]');
+        $this->checkIfOneContentExist($crawler, 'a[href="/tag/"]');
+        $this->checkIfOneContentExist($crawler, 'a[href="/event/"]');
+        $this->checkIfOneContentExist($crawler, 'a[href="/publisher/"]');
+        $this->checkIfOneContentExist($crawler, 'a[href="/studio/"]');
+        $this->checkIfOneContentExist($crawler, 'a[href="/franchise/"]');
+        $this->checkIfOneContentExist($crawler, 'a[href="/game/"]');
+        $this->checkIfOneContentExist($crawler, 'a[href="/expansion/"]');
+        $this->checkIfOneContentExist($crawler, 'a[href="/filemanager"]');
+        $this->checkIfOneContentExist($crawler, 'a[href="/user/"]');
+        $this->checkIfOneContentExist($crawler, 'a[href="/profile/"]');
 
         return null;
     }
@@ -92,6 +116,24 @@ class AbstractControllerTest extends WebTestCase
      * @param string  $needle  The needle to search after.
      * @return null
      */
+    protected function checkIfContentExist(Crawler $crawler, $needle)
+    {
+        $this->assertGreaterThanOrEqual(
+            1,
+            $crawler
+                ->filter($needle)
+                ->count(),
+            sprintf('%s not found or too many', $needle)
+        );
+
+        return null;
+    }
+
+    /**
+     * @param Crawler $crawler The crawler with the Response.
+     * @param string  $needle  The needle to search after.
+     * @return null
+     */
     protected function checkIfOneContentExist(Crawler $crawler, $needle)
     {
         $this->assertEquals(
@@ -99,7 +141,7 @@ class AbstractControllerTest extends WebTestCase
             $crawler
                 ->filter($needle)
                 ->count(),
-            sprintf('%s not found', $needle)
+            sprintf('%s not found or too many', $needle)
         );
 
         return null;
@@ -111,14 +153,14 @@ class AbstractControllerTest extends WebTestCase
      * @param integer $number  The number of minimum Elements.
      * @return null
      */
-    protected function checkIfContentExist(Crawler $crawler, $needle, $number)
+    protected function checkIfNumberOfContentExist(Crawler $crawler, $needle, $number)
     {
-        $this->assertGreaterThan(
+        $this->assertGreaterThanOrEqual(
             $number,
             $crawler
                 ->filter($needle)
                 ->count(),
-            sprintf('%s not found', $needle)
+            sprintf('%s not found or wrong number', $needle)
         );
 
         return null;

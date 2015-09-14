@@ -83,6 +83,6 @@ class UploadType extends AbstractType
      */
     public function getName()
     {
-        return 'uplpad';
+        return 'upload';
     }
 }

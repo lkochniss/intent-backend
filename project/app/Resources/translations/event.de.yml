@@ -1,18 +1,24 @@
 event:
-    actions:        Aktionen
-    active:         Event aktiv
-    create:         Event erstellen
-    description:    Beschreibung
-    delete:         Event löschen
-    edit:           Event bearbeiten
-    endAt:          Enddatum
-    list:           Eventübersicht
-    name:           Event
-    not_found:      Event nicht gefunden
-    publish:        Event veröffentlichen
+    actions:            Aktionen
+    active:             Event aktiv
+    backgroundimage:
+        label:          Hintergrundbild
+        select:         Hintergrundbild auswählen
+    create:             Event erstellen
+    description:        Beschreibung
+    delete:             Event löschen
+    edit:               Event bearbeiten
+    endAt:              Enddatum
+    list:               Eventübersicht
+    name:               Event
+    not_found:          Event nicht gefunden
+    publish:            Event veröffentlichen
     published:
-        at:         Veröffentlicht am
-        by:         Author
-    show:           Eventvorschau
-    startAt:        Anfangsdatum
-    submit:         Event speichern
+        at:             Veröffentlicht am
+        by:             Author
+    show:               Eventvorschau
+    startAt:            Anfangsdatum
+    submit:             Event speichern
+    thumbnail:
+        label:          Event Logo
+        select:         Event Logo auswählen

@@ -40,8 +40,15 @@ class FilemanagerControllerTest extends AbstractControllerTest
      */
     public function testCreatePage()
     {
-        $this->pageResponse('GET', sprintf('/filemanager/0/create/%s', $this->directory->getId()));
-        $this->pageResponse('GET', sprintf('/filemanager/1/create/%s', $this->directory->getId()));
+        $crawler = $this->pageResponse('GET', sprintf('/filemanager/0/create/%s', $this->directory->getId()));
+
+        $this->checkIfOneContentExist($crawler, 'input[id="directory_name"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="directory_submit"]');
+
+        $crawler = $this->pageResponse('GET', sprintf('/filemanager/1/create/%s', $this->directory->getId()));
+
+        $this->checkIfOneContentExist($crawler, 'input[id="directory_name"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="directory_submit"]');
 
         return null;
     }
@@ -51,8 +58,20 @@ class FilemanagerControllerTest extends AbstractControllerTest
      */
     public function testUploadPage()
     {
-        $this->pageResponse('GET', sprintf('/filemanager/0/upload/%s', $this->directory->getId()));
-        $this->pageResponse('GET', sprintf('/filemanager/1/upload/%s', $this->directory->getId()));
+        $crawler = $this->pageResponse('GET', sprintf('/filemanager/0/upload/%s', $this->directory->getId()));
+
+        $this->checkIfOneContentExist($crawler, 'input[id="upload_name"]');
+        $this->checkIfOneContentExist($crawler, 'textarea[id="upload_description"]');
+        $this->checkIfOneContentExist($crawler, 'input[id="upload_file"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="upload_submit"]');
+
+
+        $crawler = $this->pageResponse('GET', sprintf('/filemanager/1/upload/%s', $this->directory->getId()));
+
+        $this->checkIfOneContentExist($crawler, 'input[id="upload_name"]');
+        $this->checkIfOneContentExist($crawler, 'textarea[id="upload_description"]');
+        $this->checkIfOneContentExist($crawler, 'input[id="upload_file"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="upload_submit"]');
 
         return null;
     }
@@ -62,8 +81,35 @@ class FilemanagerControllerTest extends AbstractControllerTest
      */
     public function testListPage()
     {
-        $this->pageResponse('GET', '/filemanager/0');
-        $this->pageResponse('GET', '/filemanager/1');
+        /**
+         * with sidebar and adminbar
+         */
+        $crawler = $this->pageResponse('GET', '/filemanager/0');
+
+        $this->checkIfOneContentExist(
+            $crawler,
+            sprintf('a[href="/filemanager/0/upload/%s"]', $this->directory->getId())
+        );
+
+        $this->checkIfOneContentExist(
+            $crawler,
+            sprintf('a[href="/filemanager/0/create/%s"]', $this->directory->getId())
+        );
+
+        /**
+         * as popup
+         */
+        $crawler = $this->pageResponse('GET', '/filemanager/1');
+
+        $this->checkIfOneContentExist(
+            $crawler,
+            sprintf('a[href="/filemanager/1/upload/%s"]', $this->directory->getId())
+        );
+
+        $this->checkIfOneContentExist(
+            $crawler,
+            sprintf('a[href="/filemanager/1/create/%s"]', $this->directory->getId())
+        );
 
         return null;
     }

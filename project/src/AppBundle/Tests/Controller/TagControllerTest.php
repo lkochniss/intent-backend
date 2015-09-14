@@ -80,6 +80,7 @@ class TagControllerTest extends AbstractControllerTest
         $crawler = $this->pageResponse('GET', '/tag/');
 
         $this->checkIfOneContentExist($crawler, 'table[id="entity_list"]');
+        $this->checkIfOneContentExist($crawler, 'a[href="/tag/create"]');
 
         return null;
     }

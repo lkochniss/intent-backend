@@ -90,6 +90,7 @@ class GameControllerTest extends AbstractControllerTest
         $crawler = $this->pageResponse('GET', '/game/');
 
         $this->checkIfOneContentExist($crawler, 'table[id="entity_list"]');
+        $this->checkIfOneContentExist($crawler, 'a[href="/game/create"]');
 
         return null;
     }

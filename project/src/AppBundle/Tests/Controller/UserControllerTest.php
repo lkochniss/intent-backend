@@ -39,7 +39,13 @@ class UserControllerTest extends AbstractControllerTest
      */
     public function testCreatePage()
     {
-        $this->pageResponse('GET', '/user/create');
+        $crawler = $this->pageResponse('GET', '/user/create');
+
+        $this->checkIfOneContentExist($crawler, 'input[id="user_username"]');
+        $this->checkIfOneContentExist($crawler, 'input[id="user_email"]');
+        $this->checkIfOneContentExist($crawler, 'select[id="user_roles"]');
+        $this->checkIfOneContentExist($crawler, 'input[id="user_isActive"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="user_submit"]');
 
         return null;
     }
@@ -49,7 +55,27 @@ class UserControllerTest extends AbstractControllerTest
      */
     public function testEditPage()
     {
-        $this->pageResponse('GET', sprintf('/user/%s/edit', $this->user->getId()));
+        $crawler = $this->pageResponse('GET', sprintf('/user/%s/edit', $this->user->getId()));
+
+        $this->checkIfOneContentExist($crawler, 'input[id="user_username"]');
+        $this->checkIfOneContentExist($crawler, 'input[id="user_email"]');
+        $this->checkIfOneContentExist($crawler, 'select[id="user_roles"]');
+        $this->checkIfOneContentExist($crawler, 'input[id="user_isActive"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="user_submit"]');
+
+        return null;
+    }
+
+    /**
+     * @return null
+     */
+    public function testResetPassword()
+    {
+        $crawler = $this->pageResponse('GET', sprintf('/user/%s/password', $this->user->getId()));
+
+        $this->checkIfOneContentExist($crawler, 'input[id="user_password_password_first"]');
+        $this->checkIfOneContentExist($crawler, 'input[id="user_password_password_second"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="user_password_submit"]');
 
         return null;
     }
@@ -59,7 +85,10 @@ class UserControllerTest extends AbstractControllerTest
      */
     public function testListPage()
     {
-        $this->pageResponse('GET', '/user/');
+        $crawler = $this->pageResponse('GET', '/user/');
+
+        $this->checkIfOneContentExist($crawler, 'table[id="entity_list"]');
+        $this->checkIfOneContentExist($crawler, 'a[href="/user/create"]');
 
         return null;
     }
