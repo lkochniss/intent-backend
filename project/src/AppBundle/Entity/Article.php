@@ -66,7 +66,7 @@ class Article extends AbstractArticleModel
     {
         parent::__construct();
         $this->slideshow = false;
-        $this->tags = array();
+        $this->tags = new ArrayCollection();
     }
 
     /**
@@ -224,7 +224,7 @@ class Article extends AbstractArticleModel
      */
     public function removeTag(Tag $tag)
     {
-        $this->tags->remove($tag);
+        $this->tags->removeElement($tag);
 
         return $this;
     }

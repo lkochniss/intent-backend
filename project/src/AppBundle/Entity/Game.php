@@ -34,7 +34,7 @@ class Game extends Related
     public function __construct()
     {
         parent::__construct();
-        $this->expansions = array();
+        $this->expansions = new ArrayCollection();
     }
 
 
@@ -96,7 +96,7 @@ class Game extends Related
      */
     public function removeExpansion(Expansion $expansion)
     {
-        $this->expansions->remove($expansion);
+        $this->expansions->removeElement($expansion);
 
         return $this;
     }

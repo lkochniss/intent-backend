@@ -29,8 +29,8 @@ class Studio extends Related
     public function __construct()
     {
         parent::__construct();
-        $this->franchises = array();
-        $this->games = array();
+        $this->franchises = new ArrayCollection();
+        $this->games = new ArrayCollection();
     }
 
     /**
@@ -53,7 +53,7 @@ class Studio extends Related
      */
     public function removeFranchise(Franchise $franchise)
     {
-        $this->franchises->remove($franchise);
+        $this->franchises->removeElement($franchise);
 
         return $this;
     }
@@ -86,7 +86,7 @@ class Studio extends Related
      */
     public function removeGame(Game $game)
     {
-        $this->games->remove($game);
+        $this->games->removeElement($game);
 
         return $this;
     }

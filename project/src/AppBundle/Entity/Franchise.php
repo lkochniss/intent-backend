@@ -34,7 +34,7 @@ class Franchise extends Related
     public function __construct()
     {
         parent::__construct();
-        $this->games = array();
+        $this->games = new ArrayCollection();
     }
 
     /**
@@ -95,7 +95,7 @@ class Franchise extends Related
      */
     public function removeGame(Game $game)
     {
-        $this->games->remove($game);
+        $this->games->removeElement($game);
 
         return $this;
     }

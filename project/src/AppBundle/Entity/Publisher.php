@@ -24,7 +24,7 @@ class Publisher extends Related
     public function __construct()
     {
         parent::__construct();
-        $this->franchises = array();
+        $this->franchises = new ArrayCollection();
     }
 
     /**
@@ -47,7 +47,7 @@ class Publisher extends Related
      */
     public function removeFranchise(Franchise $franchise)
     {
-        $this->franchises->remove($franchise);
+        $this->franchises->removeElement($franchise);
 
         return $this;
     }

@@ -67,7 +67,7 @@ class Event extends AbstractMetaModel
         parent::__construct();
         $this->startAt = new \DateTime();
         $this->endAt = new \DateTime();
-        $this->articles = array();
+        $this->articles = new ArrayCollection();
     }
 
     /**
@@ -204,7 +204,7 @@ class Event extends AbstractMetaModel
      */
     public function removeArticle(Article $article)
     {
-        $this->articles->remove($article);
+        $this->articles->removeElement($article);
 
         return $this;
     }
