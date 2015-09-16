@@ -75,7 +75,7 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
     {
         $this->isActive = true;
         $this->roles = new ArrayCollection();
-        $this->articles = array();
+        $this->articles = new ArrayCollection();
     }
 
     /**
@@ -245,7 +245,7 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
      */
     public function removeArticle(Article $article)
     {
-        $this->articles->remove($article);
+        $this->articles->removeElement($article);
 
         return $this;
     }
@@ -360,5 +360,13 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
         }
 
         return false;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->username;
     }
 }

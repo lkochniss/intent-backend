@@ -24,7 +24,7 @@ class Tag extends AbstractMetaModel
     public function __construct()
     {
         parent::__construct();
-        $this->articles = array();
+        $this->articles = new ArrayCollection();
     }
 
     /**
@@ -47,7 +47,7 @@ class Tag extends AbstractMetaModel
      */
     public function removeArticle(Article $article)
     {
-        $this->articles->remove($article);
+        $this->articles->removeElement($article);
 
         return $this;
     }

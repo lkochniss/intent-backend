@@ -44,7 +44,7 @@ class Role implements RoleInterface, \Serializable
      */
     public function __construct()
     {
-        $this->users = array();
+        $this->users = new ArrayCollection();
     }
 
     /**
@@ -113,7 +113,7 @@ class Role implements RoleInterface, \Serializable
      */
     public function removeUser(User $user)
     {
-        $this->users->remove($user);
+        $this->users->removeElement($user);
 
         return $this;
     }
