@@ -46,7 +46,7 @@ class Image extends AbstractModel
      *
      * @Assert\NotBlank()
      * @Assert\File(
-     *     maxSize = "1024k",
+     *     maxSize = "10Mi",
      *     mimeTypes = {"image/jpeg", "image/png", "image/gif"},
      * )
      */
@@ -168,6 +168,14 @@ class Image extends AbstractModel
     public function getFile()
     {
         return $this->file;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAbsolutePath()
+    {
+        return '/' . $this->getFullPath();
     }
 
     /**

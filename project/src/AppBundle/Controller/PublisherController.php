@@ -6,7 +6,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Publisher;
-use AppBundle\Form\Type\PublisherPublishType;
 use AppBundle\Form\Type\PublisherType;
 
 /**
@@ -28,14 +27,6 @@ class PublisherController extends AbstractRelatedController
     protected function getFormType()
     {
         return new PublisherType();
-    }
-
-    /**
-     * @return PublisherPublishType
-     */
-    protected function getPublishType()
-    {
-        return new PublisherPublishType();
     }
 
     /**

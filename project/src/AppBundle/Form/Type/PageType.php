@@ -44,11 +44,25 @@ class PageType extends AbstractType
                 )
             )
             ->add(
-                'submit',
+                'save',
                 'submit',
                 array(
                     'label' => 'page.submit',
                     'translation_domain' => 'page',
+                    'attr' => array(
+                        'class' => 'btn-primary'
+                    )
+                )
+            )
+            ->add(
+                'saveAndPublish',
+                'submit',
+                array(
+                    'label' => 'page.publish',
+                    'translation_domain' => 'page',
+                    'attr' => array(
+                        'class' => 'btn-success'
+                    )
                 )
             );
 

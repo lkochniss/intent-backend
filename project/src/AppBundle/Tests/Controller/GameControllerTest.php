@@ -47,7 +47,8 @@ class GameControllerTest extends AbstractControllerTest
         $this->checkIfOneContentExist($crawler, 'select[id="game_studio"]');
         $this->checkIfOneContentExist($crawler, 'select[id="game_franchise"]');
         $this->checkIfOneContentExist($crawler, 'select[id="game_background_image"]');
-        $this->checkIfOneContentExist($crawler, 'button[id="game_submit"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="game_save"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="game_saveAndPublish"]');
 
         return null;
     }
@@ -65,7 +66,10 @@ class GameControllerTest extends AbstractControllerTest
         $this->checkIfOneContentExist($crawler, 'select[id="game_studio"]');
         $this->checkIfOneContentExist($crawler, 'select[id="game_franchise"]');
         $this->checkIfOneContentExist($crawler, 'select[id="game_background_image"]');
-        $this->checkIfOneContentExist($crawler, 'button[id="game_submit"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="game_save"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="game_saveAndPublish"]');
+
+        $this->checkIfOneContentExist($crawler, sprintf('a[href="/game/%s/show"]', $this->game->getId()));
 
         return null;
     }
@@ -77,7 +81,7 @@ class GameControllerTest extends AbstractControllerTest
     {
         $crawler = $this->pageResponse('GET', sprintf('/game/%s/show', $this->game->getId()));
 
-        $this->checkIfOneContentExist($crawler, 'button[id="game_publish_submit"]');
+        $this->checkIfOneContentExist($crawler, sprintf('a[href="/game/%s/edit"]', $this->game->getId()));
 
         return null;
     }

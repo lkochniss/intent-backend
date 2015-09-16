@@ -45,7 +45,8 @@ class StudioControllerTest extends AbstractControllerTest
         $this->checkIfOneContentExist($crawler, 'textarea[id="studio_description"]');
         $this->checkIfOneContentExist($crawler, 'select[id="studio_thumbnail"]');
         $this->checkIfOneContentExist($crawler, 'select[id="studio_background_image"]');
-        $this->checkIfOneContentExist($crawler, 'button[id="studio_submit"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="studio_save"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="studio_saveAndPublish"]');
 
         return null;
     }
@@ -61,7 +62,10 @@ class StudioControllerTest extends AbstractControllerTest
         $this->checkIfOneContentExist($crawler, 'textarea[id="studio_description"]');
         $this->checkIfOneContentExist($crawler, 'select[id="studio_thumbnail"]');
         $this->checkIfOneContentExist($crawler, 'select[id="studio_background_image"]');
-        $this->checkIfOneContentExist($crawler, 'button[id="studio_submit"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="studio_save"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="studio_saveAndPublish"]');
+
+        $this->checkIfOneContentExist($crawler, sprintf('a[href="/studio/%s/show"]', $this->studio->getId()));
 
         return null;
     }
@@ -73,7 +77,7 @@ class StudioControllerTest extends AbstractControllerTest
     {
         $crawler = $this->pageResponse('GET', sprintf('/studio/%s/show', $this->studio->getId()));
 
-        $this->checkIfOneContentExist($crawler, 'button[id="studio_publish_submit"]');
+        $this->checkIfOneContentExist($crawler, sprintf('a[href="/studio/%s/edit"]', $this->studio->getId()));
 
         return null;
     }

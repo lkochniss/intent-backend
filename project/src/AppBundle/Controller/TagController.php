@@ -6,7 +6,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Tag;
-use AppBundle\Form\Type\TagPublishType;
 use AppBundle\Form\Type\TagType;
 
 /**
@@ -28,14 +27,6 @@ class TagController extends AbstractMetaController
     protected function getFormType()
     {
         return new TagType();
-    }
-
-    /**
-     * @return TagPublishType
-     */
-    protected function getPublishType()
-    {
-        return new TagPublishType();
     }
 
     /**

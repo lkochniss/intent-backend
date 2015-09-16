@@ -6,7 +6,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Expansion;
-use AppBundle\Form\Type\ExpansionPublishType;
 use AppBundle\Form\Type\ExpansionType;
 
 /**
@@ -28,14 +27,6 @@ class ExpansionController extends AbstractRelatedController
     protected function getFormType()
     {
         return new ExpansionType();
-    }
-
-    /**
-     * @return ExpansionPublishType
-     */
-    protected function getPublishType()
-    {
-        return new ExpansionPublishType();
     }
 
     /**

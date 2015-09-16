@@ -8,17 +8,11 @@
 {% block content %}
     <div class="col-md-9 meta">
         <div class="content">
-            <h2>{{ entity.title }}</h2>
+            <h2>
+                {{ entity.title }}
+                <a href="{{ path('intent_backend_article_edit', {'id' : entity.id}) }}" class="glyphicon glyphicon-pencil"></a>
+            </h2>
             {{ entity.content|raw }}
         </div>
-        <div class="meta">
-            {% trans from "article" %}article.published.at{% endtrans %} {{ entity.publishAt|date('d.m.Y') }}
-        </div>
     </div>
-    {% if is_granted('ROLE_PUBLISH_ARTICLE') %}
-        <div class="col-md-3 meta">
-            {{ form_start(form) }}
-            {{ form_end(form) }}
-        </div>
-    {% endif %}
 {% endblock %}

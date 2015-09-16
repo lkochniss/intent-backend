@@ -72,11 +72,25 @@ class StudioType extends AbstractType
                 )
             )
             ->add(
-                'submit',
+                'save',
                 'submit',
                 array(
                     'label' => 'studio.submit',
                     'translation_domain' => 'studio',
+                    'attr' => array(
+                        'class' => 'btn-primary'
+                    )
+                )
+            )
+            ->add(
+                'saveAndPublish',
+                'submit',
+                array(
+                    'label' => 'studio.publish',
+                    'translation_domain' => 'studio',
+                    'attr' => array(
+                        'class' => 'btn-success'
+                    )
                 )
             );
 

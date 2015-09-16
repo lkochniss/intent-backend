@@ -53,7 +53,8 @@ abstract class AbstractCrudController extends Controller
     }
 
     /**
-     * @param integer $id Id of entity.
+     * @param integer $id      Id of entity.
+     * @param Request $request HTTP Request.
      * @throws NotFoundHttpException Throw exception if entity not found.
      * @return Response
      */
@@ -173,6 +174,10 @@ abstract class AbstractCrudController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
+                if ($form->get('saveAndPublish')->isClicked()) {
+                    $entity->setPublished(1);
+                }
+
                 $this->handleValidForm($entity);
 
                 return $this->redirect($this->generateUrlForAction('edit', array('id' => $entity->getId())));

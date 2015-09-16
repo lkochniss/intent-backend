@@ -6,7 +6,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Category;
-use AppBundle\Form\Type\CategoryPublishType;
 use AppBundle\Form\Type\CategoryType;
 
 /**
@@ -28,14 +27,6 @@ class CategoryController extends AbstractMetaController
     protected function getFormType()
     {
         return new CategoryType();
-    }
-
-    /**
-     * @return CategoryPublishType
-     */
-    protected function getPublishType()
-    {
-        return new CategoryPublishType();
     }
 
     /**

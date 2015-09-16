@@ -48,7 +48,9 @@ class ArticleControllerTest extends AbstractControllerTest
         $this->checkIfOneContentExist($crawler, 'select[id="article_category"]');
         $this->checkIfOneContentExist($crawler, 'select[id="article_event"]');
         $this->checkIfOneContentExist($crawler, 'input[id="article_slideshow"]');
-        $this->checkIfOneContentExist($crawler, 'button[id="article_submit"]');
+        $this->checkIfOneContentExist($crawler, 'div[id="article_publishAt"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="article_save"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="article_saveAndPublish"]');
 
         return null;
     }
@@ -67,7 +69,11 @@ class ArticleControllerTest extends AbstractControllerTest
         $this->checkIfOneContentExist($crawler, 'select[id="article_category"]');
         $this->checkIfOneContentExist($crawler, 'select[id="article_event"]');
         $this->checkIfOneContentExist($crawler, 'input[id="article_slideshow"]');
-        $this->checkIfOneContentExist($crawler, 'button[id="article_submit"]');
+        $this->checkIfOneContentExist($crawler, 'div[id="article_publishAt"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="article_save"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="article_saveAndPublish"]');
+
+        $this->checkIfOneContentExist($crawler, sprintf('a[href="/article/%s/show"]', $this->article->getId()));
 
         return null;
     }
@@ -79,8 +85,7 @@ class ArticleControllerTest extends AbstractControllerTest
     {
         $crawler = $this->pageResponse('GET', sprintf('/article/%s/show', $this->article->getId()));
 
-        $this->checkIfOneContentExist($crawler, 'div[id="article_publish_publishAt"]');
-        $this->checkIfOneContentExist($crawler, 'button[id="article_publish_submit"]');
+        $this->checkIfOneContentExist($crawler, sprintf('a[href="/article/%s/edit"]', $this->article->getId()));
 
         return null;
     }

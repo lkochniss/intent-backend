@@ -43,7 +43,8 @@ class CategoryControllerTest extends AbstractControllerTest
 
         $this->checkIfOneContentExist($crawler, 'input[id="category_name"]');
         $this->checkIfOneContentExist($crawler, 'input[id="category_priority"]');
-        $this->checkIfOneContentExist($crawler, 'button[id="category_submit"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="category_save"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="category_saveAndPublish"]');
 
         return null;
     }
@@ -57,7 +58,10 @@ class CategoryControllerTest extends AbstractControllerTest
 
         $this->checkIfOneContentExist($crawler, 'input[id="category_name"]');
         $this->checkIfOneContentExist($crawler, 'input[id="category_priority"]');
-        $this->checkIfOneContentExist($crawler, 'button[id="category_submit"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="category_save"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="category_saveAndPublish"]');
+
+        $this->checkIfOneContentExist($crawler, sprintf('a[href="/category/%s/show"]', $this->category->getId()));
 
         return null;
     }
@@ -69,7 +73,7 @@ class CategoryControllerTest extends AbstractControllerTest
     {
         $crawler = $this->pageResponse('GET', sprintf('/category/%s/show', $this->category->getId()));
 
-        $this->checkIfOneContentExist($crawler, 'button[id="page_publish_submit"]');
+        $this->checkIfOneContentExist($crawler, sprintf('a[href="/category/%s/edit"]', $this->category->getId()));
 
         return null;
     }

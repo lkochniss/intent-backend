@@ -8,7 +8,10 @@
 {% block content %}
     <div class="col-md-9 meta">
         <div class="game">
-            <h2>{{ entity.name }}</h2>
+            <h2>
+                {{ entity.name }}
+                <a href="{{ path('intent_backend_game_edit', {'id' : entity.id}) }}" class="glyphicon glyphicon-pencil"></a>
+            </h2>
             {{ entity.description|raw }}
         </div>
         <div class="category col-md-12">
@@ -25,20 +28,12 @@
         </div>
         {% if entity.expansions|length < 0 %}
             <div class="expansion col-md-12">
-                <h4>{% trans from "publisher" %}game.expansions{% endtrans %}</h4>
+                <h4>{% trans from "game" %}game.expansions{% endtrans %}</h4>
                 {% for expansion in entity.expansions %}
                     <div class="col-md-4">
                         <a href="{{ path('intent_backend_expansion_show',{'id': expansion.id }) }}">{{ expansion.name }}</a>
                     </div>
                 {% endfor %}
-            </div>
-        {% endif %}
-    </div>
-    <div class="col-md-3 meta">
-        {% if is_granted('ROLE_PUBLISH_META') %}
-            <div class="col-md-3 meta">
-                {{ form_start(form) }}
-                {{ form_end(form) }}
             </div>
         {% endif %}
     </div>

@@ -47,7 +47,8 @@ class FranchiseControllerTest extends AbstractControllerTest
         $this->checkIfOneContentExist($crawler, 'select[id="franchise_publisher"]');
         $this->checkIfOneContentExist($crawler, 'select[id="franchise_studio"]');
         $this->checkIfOneContentExist($crawler, 'select[id="franchise_background_image"]');
-        $this->checkIfOneContentExist($crawler, 'button[id="franchise_submit"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="franchise_save"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="franchise_saveAndPublish"]');
 
         return null;
     }
@@ -65,7 +66,10 @@ class FranchiseControllerTest extends AbstractControllerTest
         $this->checkIfOneContentExist($crawler, 'select[id="franchise_publisher"]');
         $this->checkIfOneContentExist($crawler, 'select[id="franchise_studio"]');
         $this->checkIfOneContentExist($crawler, 'select[id="franchise_background_image"]');
-        $this->checkIfOneContentExist($crawler, 'button[id="franchise_submit"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="franchise_save"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="franchise_saveAndPublish"]');
+
+        $this->checkIfOneContentExist($crawler, sprintf('a[href="/franchise/%s/show"]', $this->franchise->getId()));
 
         return null;
     }
@@ -77,7 +81,7 @@ class FranchiseControllerTest extends AbstractControllerTest
     {
         $crawler = $this->pageResponse('GET', sprintf('/franchise/%s/show', $this->franchise->getId()));
 
-        $this->checkIfOneContentExist($crawler, 'button[id="franchise_publish_submit"]');
+        $this->checkIfOneContentExist($crawler, sprintf('a[href="/franchise/%s/edit"]', $this->franchise->getId()));
 
         return null;
     }

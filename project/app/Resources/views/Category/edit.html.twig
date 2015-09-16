@@ -15,7 +15,19 @@
             {% trans from "category" %}category.create{% endtrans %}
         {% else %}
             {% trans from "category" %}category.edit{% endtrans %}
+            <a href="{{ path('intent_backend_category_show', {'id' : entity.id }) }}" class="glyphicon glyphicon-eye-open"></a>
         {% endif %}
     </h1>
-    {{ form(form) }}
+    {{ form_start(form) }}
+    <div class="col-md-9 editor">
+        {{ form_widget(form.name) }}
+        {{ form_widget(form.priority) }}
+    </div>
+    <div class="col-md-3 meta">
+        {{ form_row(form.save) }}
+        {% if is_granted('ROLE_PUBLISH_META') %}
+            {{ form_row(form.saveAndPublish) }}
+        {% endif %}
+    </div>
+    {{ form_end(form) }}
 {% endblock %}

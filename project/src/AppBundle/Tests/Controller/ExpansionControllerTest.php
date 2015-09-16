@@ -46,7 +46,8 @@ class ExpansionControllerTest extends AbstractControllerTest
         $this->checkIfOneContentExist($crawler, 'select[id="expansion_thumbnail"]');
         $this->checkIfOneContentExist($crawler, 'select[id="expansion_game"]');
         $this->checkIfOneContentExist($crawler, 'select[id="expansion_background_image"]');
-        $this->checkIfOneContentExist($crawler, 'button[id="expansion_submit"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="expansion_save"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="expansion_saveAndPublish"]');
 
         return null;
     }
@@ -63,7 +64,10 @@ class ExpansionControllerTest extends AbstractControllerTest
         $this->checkIfOneContentExist($crawler, 'select[id="expansion_thumbnail"]');
         $this->checkIfOneContentExist($crawler, 'select[id="expansion_game"]');
         $this->checkIfOneContentExist($crawler, 'select[id="expansion_background_image"]');
-        $this->checkIfOneContentExist($crawler, 'button[id="expansion_submit"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="expansion_save"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="expansion_saveAndPublish"]');
+
+        $this->checkIfOneContentExist($crawler, sprintf('a[href="/expansion/%s/show"]', $this->expansion->getId()));
 
         return null;
     }
@@ -75,7 +79,7 @@ class ExpansionControllerTest extends AbstractControllerTest
     {
         $crawler = $this->pageResponse('GET', sprintf('/expansion/%s/show', $this->expansion->getId()));
 
-        $this->checkIfOneContentExist($crawler, 'button[id="expansion_publish_submit"]');
+        $this->checkIfOneContentExist($crawler, sprintf('a[href="/expansion/%s/edit"]', $this->expansion->getId()));
 
         return null;
     }

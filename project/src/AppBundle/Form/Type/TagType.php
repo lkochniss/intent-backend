@@ -31,11 +31,25 @@ class TagType extends AbstractType
                 )
             )
             ->add(
-                'submit',
+                'save',
                 'submit',
                 array(
                     'label' => 'tag.submit',
                     'translation_domain' => 'tag',
+                    'attr' => array(
+                        'class' => 'btn-primary'
+                    )
+                )
+            )
+            ->add(
+                'saveAndPublish',
+                'submit',
+                array(
+                    'label' => 'tag.publish',
+                    'translation_domain' => 'tag',
+                    'attr' => array(
+                        'class' => 'btn-success'
+                    )
                 )
             );
 

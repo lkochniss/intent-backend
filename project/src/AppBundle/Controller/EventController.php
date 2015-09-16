@@ -6,7 +6,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Event;
-use AppBundle\Form\Type\EventPublishType;
 use AppBundle\Form\Type\EventType;
 
 /**
@@ -28,14 +27,6 @@ class EventController extends AbstractMetaController
     protected function getFormType()
     {
         return new EventType();
-    }
-
-    /**
-     * @return EventPublishType
-     */
-    protected function getPublishType()
-    {
-        return new EventPublishType();
     }
 
     /**

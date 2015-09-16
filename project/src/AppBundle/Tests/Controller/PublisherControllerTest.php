@@ -45,7 +45,8 @@ class PublisherControllerTest extends AbstractControllerTest
         $this->checkIfOneContentExist($crawler, 'textarea[id="publisher_description"]');
         $this->checkIfOneContentExist($crawler, 'select[id="publisher_thumbnail"]');
         $this->checkIfOneContentExist($crawler, 'select[id="publisher_background_image"]');
-        $this->checkIfOneContentExist($crawler, 'button[id="publisher_submit"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="publisher_save"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="publisher_saveAndPublish"]');
 
         return null;
     }
@@ -61,7 +62,10 @@ class PublisherControllerTest extends AbstractControllerTest
         $this->checkIfOneContentExist($crawler, 'textarea[id="publisher_description"]');
         $this->checkIfOneContentExist($crawler, 'select[id="publisher_thumbnail"]');
         $this->checkIfOneContentExist($crawler, 'select[id="publisher_background_image"]');
-        $this->checkIfOneContentExist($crawler, 'button[id="publisher_submit"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="publisher_save"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="publisher_saveAndPublish"]');
+
+        $this->checkIfOneContentExist($crawler, sprintf('a[href="/publisher/%s/show"]', $this->publisher->getId()));
 
         return null;
     }
@@ -73,7 +77,7 @@ class PublisherControllerTest extends AbstractControllerTest
     {
         $crawler = $this->pageResponse('GET', sprintf('/publisher/%s/show', $this->publisher->getId()));
 
-        $this->checkIfOneContentExist($crawler, 'button[id="publisher_publish_submit"]');
+        $this->checkIfOneContentExist($crawler, sprintf('a[href="/publisher/%s/edit"]', $this->publisher->getId()));
 
         return null;
     }

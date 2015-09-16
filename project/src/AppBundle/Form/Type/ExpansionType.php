@@ -86,11 +86,25 @@ class ExpansionType extends AbstractType
                 )
             )
             ->add(
-                'submit',
+                'save',
                 'submit',
                 array(
                     'label' => 'expansion.submit',
                     'translation_domain' => 'expansion',
+                    'attr' => array(
+                        'class' => 'btn-primary'
+                    )
+                )
+            )
+            ->add(
+                'saveAndPublish',
+                'submit',
+                array(
+                    'label' => 'expansion.publish',
+                    'translation_domain' => 'expansion',
+                    'attr' => array(
+                        'class' => 'btn-success'
+                    )
                 )
             );
 

@@ -90,11 +90,25 @@ class EventType extends AbstractType
                 )
             )
             ->add(
-                'submit',
+                'save',
                 'submit',
                 array(
                     'label' => 'event.submit',
                     'translation_domain' => 'event',
+                    'attr' => array(
+                        'class' => 'btn-primary'
+                    )
+                )
+            )
+            ->add(
+                'saveAndPublish',
+                'submit',
+                array(
+                    'label' => 'event.publish',
+                    'translation_domain' => 'event',
+                    'attr' => array(
+                        'class' => 'btn-success'
+                    )
                 )
             );
 

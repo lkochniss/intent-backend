@@ -66,7 +66,12 @@ abstract class AbstractArticleController extends AbstractCrudController
         $this->denyAccessUnlessGranted($this->getReadAccessLevel(), null, $this->getAccessDeniedMessage());
         $entity = $this->getDoctrine()->getRepository($this->getEntityName())->find($id);
 
-        return $this->createAndHandlePublishForm($entity, $request, 'show', array('id' => $entity->getId()));
+        return $this->render(
+            sprintf('%s/show.html.twig', $this->getTemplateBasePath()),
+            array(
+                'entity' => $entity,
+            )
+        );
     }
 
     /**
@@ -84,11 +89,6 @@ abstract class AbstractArticleController extends AbstractCrudController
             )
         );
     }
-
-    /**
-     * @return string
-     */
-    abstract protected function getPublishType();
 
     /**
      * @return string
@@ -114,48 +114,6 @@ abstract class AbstractArticleController extends AbstractCrudController
             $this->getTranslationDomain() . '.access_denied',
             array(),
             $this->getTranslationDomain()
-        );
-    }
-
-    /**
-     * @param AbstractModel $entity  Model of entity.
-     * @param Request       $request HTTP Request.
-     * @param string        $action  Type of action.
-     * @param array         $options Options for twig rendering.
-     * @return RedirectResponse|Response
-     */
-    protected function createAndHandlePublishForm(
-        AbstractModel $entity,
-        Request $request,
-        $action,
-        array $options = array()
-    ) {
-        $form = $this->createForm(
-            $this->getPublishType(),
-            $entity,
-            array(
-                'action' => $this->generateUrlForAction($action, $options),
-                'method' => 'POST',
-            )
-        );
-
-        if (in_array($request->getMethod(), ['POST'])) {
-            $form->handleRequest($request);
-
-            if ($form->isValid()) {
-                $this->handleValidForm($entity);
-                $entity->setPublished(true);
-
-                return $this->redirect($this->generateUrlForAction($action, array('id' => $entity->getId())));
-            }
-        }
-
-        return $this->render(
-            sprintf('%s/show.html.twig', $this->getTemplateBasePath()),
-            array(
-                'entity' => $entity,
-                'form' => $form->createView(),
-            )
         );
     }
 }

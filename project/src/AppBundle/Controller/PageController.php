@@ -6,7 +6,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Page;
-use AppBundle\Form\Type\PagePublishType;
 use AppBundle\Form\Type\PageType;
 
 /**
@@ -28,14 +27,6 @@ class PageController extends AbstractArticleController
     protected function getFormType()
     {
         return new PageType();
-    }
-
-    /**
-     * @return PagePublishType
-     */
-    protected function getPublishType()
-    {
-        return new PagePublishType();
     }
 
     /**

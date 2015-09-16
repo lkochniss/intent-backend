@@ -39,11 +39,25 @@ class CategoryType extends AbstractType
                 )
             )
             ->add(
-                'submit',
+                'save',
                 'submit',
                 array(
                     'label' => 'category.submit',
                     'translation_domain' => 'category',
+                    'attr' => array(
+                        'class' => 'btn-primary'
+                    )
+                )
+            )
+            ->add(
+                'saveAndPublish',
+                'submit',
+                array(
+                    'label' => 'category.publish',
+                    'translation_domain' => 'category',
+                    'attr' => array(
+                        'class' => 'btn-success'
+                    )
                 )
             );
 

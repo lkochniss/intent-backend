@@ -72,11 +72,25 @@ class PublisherType extends AbstractType
                 )
             )
             ->add(
-                'submit',
+                'save',
                 'submit',
                 array(
                     'label' => 'publisher.submit',
                     'translation_domain' => 'publisher',
+                    'attr' => array(
+                        'class' => 'btn-primary'
+                    )
+                )
+            )
+            ->add(
+                'saveAndPublish',
+                'submit',
+                array(
+                    'label' => 'publisher.publish',
+                    'translation_domain' => 'publisher',
+                    'attr' => array(
+                        'class' => 'btn-success'
+                    )
                 )
             );
 

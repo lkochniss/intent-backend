@@ -6,4 +6,5 @@ tag:
     list:       Tagübersicht
     name:       Tag
     not_found:  Tag nicht gefunden
+    show:       Tag anzeigen
     submit:     Tag speichern

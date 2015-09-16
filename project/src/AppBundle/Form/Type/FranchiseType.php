@@ -100,11 +100,25 @@ class FranchiseType extends AbstractType
                 )
             )
             ->add(
-                'submit',
+                'save',
                 'submit',
                 array(
                     'label' => 'franchise.submit',
                     'translation_domain' => 'franchise',
+                    'attr' => array(
+                        'class' => 'btn-primary'
+                    )
+                )
+            )
+            ->add(
+                'saveAndPublish',
+                'submit',
+                array(
+                    'label' => 'franchise.publish',
+                    'translation_domain' => 'franchise',
+                    'attr' => array(
+                        'class' => 'btn-success'
+                    )
                 )
             );
 

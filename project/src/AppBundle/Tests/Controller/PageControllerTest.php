@@ -43,7 +43,8 @@ class PageControllerTest extends AbstractControllerTest
 
         $this->checkIfOneContentExist($crawler, 'input[id="page_title"]');
         $this->checkIfOneContentExist($crawler, 'textarea[id="page_content"]');
-        $this->checkIfOneContentExist($crawler, 'button[id="page_submit"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="page_save"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="page_saveAndPublish"]');
 
         return null;
     }
@@ -57,7 +58,10 @@ class PageControllerTest extends AbstractControllerTest
 
         $this->checkIfOneContentExist($crawler, 'input[id="page_title"]');
         $this->checkIfOneContentExist($crawler, 'textarea[id="page_content"]');
-        $this->checkIfOneContentExist($crawler, 'button[id="page_submit"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="page_save"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="page_saveAndPublish"]');
+
+        $this->checkIfOneContentExist($crawler, sprintf('a[href="/page/%s/show"]', $this->page->getId()));
 
         return null;
     }
@@ -69,8 +73,7 @@ class PageControllerTest extends AbstractControllerTest
     {
         $crawler = $this->pageResponse('GET', sprintf('/page/%s/show', $this->page->getId()));
 
-        $this->checkIfOneContentExist($crawler, 'div[id="page_publish_publishAt"]');
-        $this->checkIfOneContentExist($crawler, 'button[id="page_publish_submit"]');
+        $this->checkIfOneContentExist($crawler, sprintf('a[href="/page/%s/edit"]', $this->page->getId()));
 
         return null;
     }

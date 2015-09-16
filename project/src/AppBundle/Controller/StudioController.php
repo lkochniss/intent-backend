@@ -6,7 +6,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Studio;
-use AppBundle\Form\Type\StudioPublishType;
 use AppBundle\Form\Type\StudioType;
 
 /**
@@ -28,14 +27,6 @@ class StudioController extends AbstractRelatedController
     protected function getFormType()
     {
         return new StudioType();
-    }
-
-    /**
-     * @return StudioPublishType
-     */
-    protected function getPublishType()
-    {
-        return new StudioPublishType();
     }
 
     /**

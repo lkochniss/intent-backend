@@ -100,11 +100,25 @@ class GameType extends AbstractType
                 )
             )
             ->add(
-                'submit',
+                'save',
                 'submit',
                 array(
                     'label' => 'game.submit',
                     'translation_domain' => 'game',
+                    'attr' => array(
+                        'class' => 'btn-primary'
+                    )
+                )
+            )
+            ->add(
+                'saveAndPublish',
+                'submit',
+                array(
+                    'label' => 'game.publish',
+                    'translation_domain' => 'game',
+                    'attr' => array(
+                        'class' => 'btn-success'
+                    )
                 )
             );
 

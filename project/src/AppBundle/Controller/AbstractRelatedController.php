@@ -145,26 +145,6 @@ abstract class AbstractRelatedController extends AbstractMetaController
         $action,
         array $options = array()
     ) {
-        $form = $this->createForm(
-            $this->getPublishType(),
-            $entity,
-            array(
-                'action' => $this->generateUrlForAction($action, $options),
-                'method' => 'POST',
-            )
-        );
-
-        if (in_array($request->getMethod(), ['POST'])) {
-            $form->handleRequest($request);
-
-            if ($form->isValid()) {
-                $this->handleValidForm($entity);
-                $entity->setPublished(true);
-
-                return $this->redirect($this->generateUrlForAction('edit', array('id' => $entity->getId())));
-            }
-        }
-
         $categories = $this->loopRelated($entity);
 
         return $this->render(
@@ -172,7 +152,6 @@ abstract class AbstractRelatedController extends AbstractMetaController
             array(
                 'entity' => $entity,
                 'categories' => $categories,
-                'form' => $form->createView(),
             )
         );
     }

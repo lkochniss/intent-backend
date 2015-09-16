@@ -105,11 +105,33 @@ class ArticleType extends AbstractType
                 )
             )
             ->add(
-                'submit',
+                'publishAt',
+                'datetime',
+                array(
+                    'label' => 'article.published.at',
+                    'translation_domain' => 'article',
+                )
+            )
+            ->add(
+                'save',
                 'submit',
                 array(
                     'label' => 'article.submit',
                     'translation_domain' => 'article',
+                    'attr' => array(
+                        'class' => 'btn-primary'
+                    )
+                )
+            )
+            ->add(
+                'saveAndPublish',
+                'submit',
+                array(
+                    'label' => 'article.publish',
+                    'translation_domain' => 'article',
+                    'attr' => array(
+                        'class' => 'btn-success'
+                    )
                 )
             );
 
