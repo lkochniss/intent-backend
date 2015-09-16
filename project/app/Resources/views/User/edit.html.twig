@@ -26,10 +26,12 @@
         {{ form_row(form.roles) }}
         {{ form_row(form.isActive) }}
         {{ form_row(form.submit) }}
-        <a href="{{ path('intent_backend_user_delete', {'id' : entity.id } ) }}"
-           class="btn btn-danger col-md-12">
-            {% trans from "user" %}user.delete.action{% endtrans %}
-        </a>
+        {% if  app.request.get('_edit') ends with '_create' %}
+            <a href="{{ path('intent_backend_user_delete', {'id' : entity.id } ) }}"
+               class="btn btn-danger col-md-12">
+                {% trans from "user" %}user.delete.action{% endtrans %}
+            </a>
+        {% endif %}
     </div>
     {{ form_end(form) }}
 {% endblock %}
