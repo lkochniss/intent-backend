@@ -108,10 +108,10 @@ class Article extends AbstractArticleModel
     }
 
     /**
-     * @param User $user Set createdBy user.
+     * @param User|null $user Set createdBy user.
      * @return $this
      */
-    public function setCreatedBy(User $user)
+    public function setCreatedBy(User $user = null)
     {
         $this->createdBy = $user;
 
@@ -127,10 +127,10 @@ class Article extends AbstractArticleModel
     }
 
     /**
-     * @param User $user Set modifiedBy user.
+     * @param User|null $user Set modifiedBy user.
      * @return $this
      */
-    public function setModifiedBy(User $user)
+    public function setModifiedBy(User $user = null)
     {
         $this->modifiedBy = $user;
 
@@ -245,5 +245,16 @@ class Article extends AbstractArticleModel
         $this->tags->clear();
 
         return $this;
+    }
+
+    /**
+     * @return null
+     */
+    public function nullUser()
+    {
+        $this->createdBy = null;
+        $this->modifiedBy = null;
+
+        return null;
     }
 }

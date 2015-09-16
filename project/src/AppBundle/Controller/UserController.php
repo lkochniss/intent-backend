@@ -6,11 +6,13 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
+use AppBundle\Form\Type\UserDeleteType;
 use AppBundle\Form\Type\UserPasswordType;
 use AppBundle\Form\Type\UserType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Util\SecureRandom;
 
 /**
@@ -81,6 +83,74 @@ class UserController extends AbstractCrudController
             'User/edit.html.twig',
             array(
                 'form' => $form->createView(),
+            )
+        );
+    }
+
+    /**
+     * @param integer $id      The user id.
+     * @param Request $request HTTP Request.
+     * @throws NotFoundHttpException Throws error if user not found.
+     * @return RedirectResponse|Response
+     */
+    public function deleteAction($id, Request $request)
+    {
+        $this->denyAccessUnlessGranted(
+            'ROLE_ADMIN',
+            null,
+            $this->get('translator')->trans(
+                'user.access_denied',
+                array(),
+                'user'
+            )
+        );
+
+        $user = $this->getDoctrine()->getRepository('AppBundle:User')->find($id);
+        if (is_null($user)) {
+            throw new NotFoundHttpException(
+                $this->get('translator')->trans(
+                    'user.access_denied',
+                    array(),
+                    'user'
+                )
+            );
+        }
+
+        $form = $this->createForm(new UserDeleteType());
+
+        if (in_array($request->getMethod(), ['POST'])) {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $data = $form->getData();
+                $userRepository = $this->getDoctrine()->getRepository('AppBundle:User');
+                $articleRepository = $this->getDoctrine()->getRepository('AppBundle:Article');
+
+                if (!is_null($data['user'])) {
+                    $newUser = $data['user'];
+
+                    foreach ($user->getArticles() as $article) {
+                        $article->setCreatedBy($newUser);
+                        $articleRepository->save($article, $newUser);
+
+                        $newUser->addArticle($article);
+                        $user->removeArticle($article);
+                    }
+                    $userRepository->save($newUser);
+                }
+
+                $userRepository->delete($user);
+
+                return $this->redirectToRoute('intent_backend_user_list');
+            }
+        }
+
+
+        return $this->render(
+            'User/delete.html.twig',
+            array(
+                'form' => $form->createView(),
+                'user' => $user
             )
         );
     }

@@ -29,8 +29,12 @@
                 </td>
                 <td>{{ user.email }}</td>
                 <td>
-                    <a class="table-padding" href="{{ path('intent_backend_user_edit',{'id' : user.id}) }}"><span class="glyphicon glyphicon-pencil"/></a>
-                    {#<a class="table-padding" href="{{ path('',{'id' : page.id}) }}"><span class="glyphicon glyphicon-eye-open"/></a>#}
+                    <a class="table-padding" href="{{ path('intent_backend_user_edit',{'id' : user.id}) }}">
+                        <span class="glyphicon glyphicon-pencil"/>
+                    </a>
+                    <a class="table-padding" href="{{ path('intent_backend_user_delete',{'id' : user.id}) }}">
+                        <span class="glyphicon glyphicon-remove"/>
+                    </a>
                 </td>
             </tr>
         {% endfor %}
