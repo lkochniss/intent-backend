@@ -3,6 +3,7 @@ filemanager:
     create:             Ordner erstellen
     directory:          Ordnername
     delete:             Ordner löschen
+    edit:               bearbeiten
     image:
         name:           Bildname
         description:    Bildbeschreibung

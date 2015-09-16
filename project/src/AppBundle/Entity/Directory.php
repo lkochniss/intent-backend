@@ -23,15 +23,11 @@ class Directory extends AbstractModel
 
     /**
      * @var String
-     *
-     * @Assert\NotBlank()
      */
     private $path;
 
     /**
      * @var String
-     *
-     * @Assert\NotBlank()
      */
     private $fullPath;
 
@@ -42,11 +38,13 @@ class Directory extends AbstractModel
 
     /**
      * @var ArrayCollection
+     * @OrderBy({"name" = "ASC"})
      */
     private $images;
 
     /**
      * @var ArrayCollection;
+     * @OrderBy({"name" = "ASC"})
      */
     private $childDirectories;
 
@@ -56,8 +54,8 @@ class Directory extends AbstractModel
      */
     public function __construct()
     {
-        $this->childDirectories = array();
-        $this->images = array();
+        $this->childDirectories = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     /**
@@ -180,7 +178,7 @@ class Directory extends AbstractModel
      */
     public function removeChildDirectory(Directory $directory)
     {
-        $this->childDirectories->remove($directory);
+        $this->childDirectories->removeElement($directory);
 
         return $this;
     }
@@ -214,7 +212,7 @@ class Directory extends AbstractModel
      */
     public function removeImages(Image $image)
     {
-        $this->images->remove($image);
+        $this->images->removeElement($image);
 
         return $this;
     }
