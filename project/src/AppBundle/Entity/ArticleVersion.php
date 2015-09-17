@@ -69,11 +69,6 @@ class ArticleVersion extends AbstractModel
     private $createdBy;
 
     /**
-     * @var User
-     */
-    private $modifiedBy;
-
-    /**
      * @var Event
      */
     private $event;
@@ -262,29 +257,10 @@ class ArticleVersion extends AbstractModel
     }
 
     /**
-     * @param User|null $user Set modifiedBy user.
+     * @param Event|null $event Set event.
      * @return $this
      */
-    public function setModifiedBy(User $user = null)
-    {
-        $this->modifiedBy = $user;
-
-        return $this;
-    }
-
-    /**
-     * @return User
-     */
-    public function getModifiedBy()
-    {
-        return $this->modifiedBy;
-    }
-
-    /**
-     * @param Event $event Set event.
-     * @return $this
-     */
-    public function setEvent(Event $event)
+    public function setEvent(Event $event = null)
     {
         $this->event = $event;
 
@@ -301,10 +277,10 @@ class ArticleVersion extends AbstractModel
     }
 
     /**
-     * @param Related $related Set Related.
+     * @param Related|null $related Set Related.
      * @return $this
      */
-    public function setRelated(Related $related)
+    public function setRelated(Related $related = null)
     {
         $this->related = $related;
 
@@ -321,10 +297,10 @@ class ArticleVersion extends AbstractModel
     }
 
     /**
-     * @param Image $thumbnail Set Thumbnail.
+     * @param Image|null $thumbnail Set Thumbnail.
      * @return $this
      */
-    public function setThumbnail(Image $thumbnail)
+    public function setThumbnail(Image $thumbnail = null)
     {
         $this->thumbnail = $thumbnail;
 

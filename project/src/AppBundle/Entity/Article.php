@@ -282,10 +282,10 @@ class Article extends AbstractModel
     }
 
     /**
-     * @param Event $event Set event.
+     * @param Event|null $event Set event.
      * @return $this
      */
-    public function setEvent(Event $event)
+    public function setEvent(Event $event = null)
     {
         $this->event = $event;
 
@@ -322,10 +322,10 @@ class Article extends AbstractModel
     }
 
     /**
-     * @param Image $thumbnail Set Thumbnail.
+     * @param Image|null $thumbnail Set Thumbnail.
      * @return $this
      */
-    public function setThumbnail(Image $thumbnail)
+    public function setThumbnail(Image $thumbnail = null)
     {
         $this->thumbnail = $thumbnail;
 
