@@ -42,10 +42,6 @@ class PageTest extends \PHPUnit_Framework_TestCase
         $page->setPublished($published);
         $this->assertEquals($page->isPublished(), $published);
 
-        $now = new \DateTime();
-        $page->setPublishAt($now);
-        $this->assertEquals($page->getPublishAt(), $now);
-
         return null;
     }
 }
