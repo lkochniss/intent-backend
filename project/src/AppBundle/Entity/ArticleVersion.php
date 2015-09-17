@@ -10,9 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class Article
+ * Class ArticleVersion
  */
-class Article extends AbstractModel
+class ArticleVersion extends AbstractModel
 {
     /**
      * @var String
@@ -94,9 +94,9 @@ class Article extends AbstractModel
     private $tags;
 
     /**
-     * @var ArrayCollection
+     * @var Article
      */
-    private $versions;
+    private $article;
 
     /**
      * Set slideshow default to false.
@@ -107,7 +107,6 @@ class Article extends AbstractModel
         $this->published = false;
         $this->slideshow = false;
         $this->tags = new ArrayCollection();
-        $this->versions = new ArrayCollection();
     }
 
     /**
@@ -348,7 +347,6 @@ class Article extends AbstractModel
     {
         if (!$this->tags->contains($tag)) {
             $this->tags->add($tag);
-            $tag->addArticle($this);
         }
 
         return $this;
@@ -366,6 +364,19 @@ class Article extends AbstractModel
     }
 
     /**
+     * @param array $tags Tags from article.
+     * @return null
+     */
+    public function setTags(array $tags)
+    {
+        foreach ($tags as $tag) {
+            $this->addTag($tag);
+        }
+
+        return null;
+    }
+
+    /**
      * @return array
      */
     public function getTags()
@@ -374,35 +385,22 @@ class Article extends AbstractModel
     }
 
     /**
-     * @param ArticleVersion $articleVersion Add new version.
+     * @param Article $article Set article.
      * @return $this
      */
-    public function addVersion(ArticleVersion $articleVersion)
+    public function setArticle(Article $article)
     {
-        if (!$this->versions->contains($articleVersion)) {
-            $this->versions->add($articleVersion);
-            $articleVersion->setArticle($this);
-        }
+        $this->article = $article;
 
         return $this;
     }
 
     /**
-     * @param ArticleVersion $articleVersion Remove version from array.
-     * @return $this
+     * @param Article $article Get article.
+     * @return Article
      */
-    public function removeVersion(ArticleVersion $articleVersion)
+    public function getArticle(Article $article)
     {
-        $this->versions->removeElement($articleVersion);
-
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getVersions()
-    {
-        return $this->versions->toArray();
+        return $this->article;
     }
 }

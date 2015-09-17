@@ -6,12 +6,7 @@
 namespace AppBundle\Repository;
 
 use AppBundle\Entity\Article;
-use AppBundle\Entity\Expansion;
-use AppBundle\Entity\Franchise;
-use AppBundle\Entity\Game;
-use AppBundle\Entity\Publisher;
-use AppBundle\Entity\Studio;
-use AppBundle\Entity\Tag;
+use AppBundle\Entity\ArticleVersion;
 use AppBundle\Entity\User;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -21,90 +16,30 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class ArticleRepository extends AbstractRepository
 {
     /**
-     * @param String $name Save related as tag.
-     * @return Tag
+     * @param Article $article Article to version.
+     * @return ArticleVersion
      */
-    protected function getTag($name)
+    public function saveVersion(Article $article)
     {
-        $slug = $this->slugify($name);
-        $tag = $this->getEntityManager()->getRepository('AppBundle:Tag')->findOneBy(array('slug' => $slug));
+        $version = new ArticleVersion();
+        $version->setTitle($article->getTitle());
+        $version->setSlug($article->getSlug());
+        $version->setContent($article->getContent());
+        $version->setPublishAt($article->getPublishAt());
+        $version->setPublished($article->isPublished());
+        $version->setSlideshow($article->isSlideshow());
+        $version->setCategory($article->getCategory());
+        $version->setCreatedBy($article->getModifiedBy());
+        $version->setEvent($article->getEvent());
+        $version->setRelated($article->getRelated());
+        $version->setThumbnail($article->getThumbnail());
+        $version->setTags($article->getTags());
 
-        if (is_null($tag)) {
-            $tag = new Tag();
-            $tag->setName($name);
-            $tag->setSlug($slug);
-            $this->getEntityManager()->persist($tag);
-            $this->getEntityManager()->flush();
+        $repository = $this->getEntityManager()->getRepository('AppBundle:ArticleVersion');
+        $repository->save($version);
 
-            return $tag;
-        }
-
-        return $tag;
+        return $version;
     }
-
-    /**
-     * @param Article $article Save Tags for article.
-     * @return boolean.
-     */
-    protected function saveTags(Article $article)
-    {
-        $related = $article->getRelated();
-        $event = $article->getEvent();
-
-        $publisher = null;
-        $franchise = null;
-        $studio = null;
-        $game = null;
-        $expansion = null;
-
-        $article->resetTags();
-
-        if ($related instanceof Publisher) {
-            $publisher = $related;
-        } elseif ($related instanceof Studio) {
-            $studio = $related;
-        } elseif ($related instanceof Franchise) {
-            $franchise = $related;
-        } elseif ($related instanceof Game) {
-            $game = $related;
-        } elseif ($related instanceof Expansion) {
-            $expansion = $related;
-        }
-
-        if (!is_null($expansion)) {
-            $article->addTag($this->getTag($expansion->getName()));
-            $game = $expansion->getGame();
-        }
-
-        if (!is_null($game)) {
-            $article->addTag($this->getTag($game->getName()));
-            $franchise = $game->getFranchise();
-            $studio = $game->getStudio();
-        }
-
-        if (!is_null($franchise)) {
-            $article->addTag($this->getTag($franchise->getName()));
-            if (is_null($studio)) {
-                $studio = $franchise->getStudio();
-            }
-            $publisher = $franchise->getPublisher();
-        }
-
-        if (!is_null($studio)) {
-            $article->addTag($this->getTag($studio->getName()));
-        }
-
-        if (!is_null($publisher)) {
-            $article->addTag($this->getTag($publisher->getName()));
-        }
-
-        if (!is_null($event)) {
-            $article->addTag($this->getTag($event->getName()));
-        }
-
-        return true;
-    }
-
     /**
      * @param Article $article Persist article.
      * @param User    $user    Set author to user.
@@ -121,10 +56,10 @@ class ArticleRepository extends AbstractRepository
 
         $article->setModifiedBy($user);
 
+        $article->addVersion($this->saveVersion($article));
+
         $this->getEntityManager()->persist($article);
         $this->getEntityManager()->flush();
-
-        $this->saveTags($article);
 
         return new JsonResponse('success');
     }
