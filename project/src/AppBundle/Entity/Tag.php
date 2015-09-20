@@ -67,6 +67,4 @@ class Tag extends AbstractMetaModel
     {
         return $this->getName();
     }
-
-
 }
