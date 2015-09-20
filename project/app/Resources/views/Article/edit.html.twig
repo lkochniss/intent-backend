@@ -32,6 +32,7 @@
         {{ form_row(form.related) }}
         {{ form_row(form.category) }}
         {{ form_row(form.event) }}
+        {{ form_row(form.tags) }}
         {{ form_row(form.slideshow) }}
         {{ form_row(form.publishAt) }}
         {{ form_row(form.save) }}
@@ -50,6 +51,8 @@
         $('#article_category').select2();
 
         $('#article_event').select2();
+
+        $('#article_tags').select2();
 
         $('#article_thumbnail').select2();
     </script>

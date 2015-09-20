@@ -91,6 +91,20 @@ class ArticleType extends AbstractType
                 )
             )
             ->add(
+                'tags',
+                'entity',
+                array(
+                    'label' => 'article.tag.label',
+                    'translation_domain' => 'article',
+                    'class' => 'AppBundle\Entity\Tag',
+                    'multiple' => true,
+                    'expanded' => false,
+                    'placeholder' => 'article.tag.select',
+                    'empty_data' => null,
+                    'required' => false,
+                )
+            )
+            ->add(
                 'thumbnail',
                 'entity',
                 array(

@@ -8,7 +8,7 @@ namespace AppBundle\Repository;
 /**
  * Class ExpansionRepository
  */
-class ExpansionRepository extends AbstractMetaRepository
+class ExpansionRepository extends AbstractRelatedRepository
 {
 
 }

@@ -8,7 +8,7 @@ namespace AppBundle\Repository;
 /**
  * Class GameRepository
  */
-class GameRepository extends AbstractMetaRepository
+class GameRepository extends AbstractRelatedRepository
 {
 
 }

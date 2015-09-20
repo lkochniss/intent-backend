@@ -28,7 +28,10 @@ article:
     slideshow:      Slideshow
     studio:         Studio
     submit:         Artikel speichern
+    tag:
+        label:      Tags
+        select:     Tags auswählen
     thumbnail:
-        label:       Artikelbild
+        label:      Artikelbild
         select:     Artikelbild auswählen
     title:          Titel

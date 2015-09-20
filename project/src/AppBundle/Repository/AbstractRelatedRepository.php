@@ -5,14 +5,15 @@
 
 namespace AppBundle\Repository;
 
-use AppBundle\Entity\Event;
+use AppBundle\Entity\AbstractModel;
 use AppBundle\Entity\Tag;
+use Doctrine\ORM\Mapping;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
- * Class EventRepository
+ * Class AbstractRelatedRepository
  */
-class EventRepository extends AbstractRepository
+abstract class AbstractRelatedRepository extends AbstractRepository
 {
     /**
      * @param string $name The name to check for.
@@ -35,16 +36,16 @@ class EventRepository extends AbstractRepository
     }
 
     /**
-     * @param Event $event Persist event.
+     * @param AbstractModel $entity Save entity.
      * @return JsonResponse
      */
-    public function save(Event $event)
+    public function save(AbstractModel $entity)
     {
-        $this->generateTag($event->getName());
+        $this->generateTag($entity->getName());
 
-        $slug = $this->slugify($event->getName());
-        $event->setSlug($slug);
-        $this->getEntityManager()->persist($event);
+        $slug = $this->slugify($entity->getName());
+        $entity->setSlug($slug);
+        $this->getEntityManager()->persist($entity);
         $this->getEntityManager()->flush();
 
         return new JsonResponse('success');

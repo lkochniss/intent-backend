@@ -8,6 +8,6 @@ namespace AppBundle\Repository;
 /**
  * Class StudioRepository
  */
-class StudioRepository extends AbstractMetaRepository
+class StudioRepository extends AbstractRelatedRepository
 {
 }
