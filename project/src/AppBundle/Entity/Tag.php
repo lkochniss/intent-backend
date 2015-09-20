@@ -59,4 +59,14 @@ class Tag extends AbstractMetaModel
     {
         return $this->articles->toArray();
     }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
+
 }
