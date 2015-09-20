@@ -35,8 +35,7 @@ class ArticleRepository extends AbstractRepository
         $version->setThumbnail($article->getThumbnail());
         $version->setTags($article->getTags());
 
-        $repository = $this->getEntityManager()->getRepository('AppBundle:ArticleVersion');
-        $repository->save($version);
+        $this->getEntityManager()->getRepository('AppBundle:ArticleVersion')->save($version);
 
         return $version;
     }
