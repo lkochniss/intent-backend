@@ -93,6 +93,8 @@ class ExpansionControllerTest extends AbstractControllerTest
 
         $this->checkIfOneContentExist($crawler, 'table[id="entity_list"]');
         $this->checkIfOneContentExist($crawler, 'a[href="/expansion/create"]');
+        $this->checkIfOneContentExist($crawler, sprintf('a[href="/expansion/%s/edit"]', $this->expansion->getId()));
+        $this->checkIfOneContentExist($crawler, sprintf('a[href="/expansion/%s/show"]', $this->expansion->getId()));
 
         return null;
     }

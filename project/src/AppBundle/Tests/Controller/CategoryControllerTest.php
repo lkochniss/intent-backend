@@ -87,6 +87,8 @@ class CategoryControllerTest extends AbstractControllerTest
 
         $this->checkIfOneContentExist($crawler, 'table[id="entity_list"]');
         $this->checkIfOneContentExist($crawler, 'a[href="/category/create"]');
+        $this->checkIfOneContentExist($crawler, sprintf('a[href="/category/%s/edit"]', $this->category->getId()));
+        $this->checkIfOneContentExist($crawler, sprintf('a[href="/category/%s/show"]', $this->category->getId()));
 
         return null;
     }

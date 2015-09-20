@@ -86,6 +86,8 @@ class PageControllerTest extends AbstractControllerTest
         $crawler = $this->pageResponse('GET', '/page/');
 
         $this->checkIfOneContentExist($crawler, 'table[id="entity_list"]');
+        $this->checkIfOneContentExist($crawler, sprintf('a[href="/page/%s/edit"]', $this->page->getId()));
+        $this->checkIfOneContentExist($crawler, sprintf('a[href="/page/%s/show"]', $this->page->getId()));
 
         return null;
     }

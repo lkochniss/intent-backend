@@ -95,6 +95,8 @@ class EventControllerTest extends AbstractControllerTest
 
         $this->checkIfOneContentExist($crawler, 'table[id="entity_list"]');
         $this->checkIfOneContentExist($crawler, 'a[href="/event/create"]');
+        $this->checkIfOneContentExist($crawler, sprintf('a[href="/event/%s/edit"]', $this->event->getId()));
+        $this->checkIfOneContentExist($crawler, sprintf('a[href="/event/%s/show"]', $this->event->getId()));
 
         return null;
     }

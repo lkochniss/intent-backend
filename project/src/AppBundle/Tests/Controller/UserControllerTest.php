@@ -89,6 +89,8 @@ class UserControllerTest extends AbstractControllerTest
 
         $this->checkIfOneContentExist($crawler, 'table[id="entity_list"]');
         $this->checkIfOneContentExist($crawler, 'a[href="/user/create"]');
+        $this->checkIfOneContentExist($crawler, sprintf('a[href="/user/%s/edit"]', $this->user->getId()));
+        $this->checkIfOneContentExist($crawler, sprintf('a[href="/user/%s/show"]', $this->user->getId()));
 
         return null;
     }

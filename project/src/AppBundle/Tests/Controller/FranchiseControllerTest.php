@@ -95,6 +95,8 @@ class FranchiseControllerTest extends AbstractControllerTest
 
         $this->checkIfOneContentExist($crawler, 'table[id="entity_list"]');
         $this->checkIfOneContentExist($crawler, 'a[href="/franchise/create"]');
+        $this->checkIfOneContentExist($crawler, sprintf('a[href="/franchise/%s/edit"]', $this->franchise->getId()));
+        $this->checkIfOneContentExist($crawler, sprintf('a[href="/franchise/%s/show"]', $this->franchise->getId()));
 
         return null;
     }
