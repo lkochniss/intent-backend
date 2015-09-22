@@ -42,6 +42,51 @@ class PageFixtures extends AbstractFixture implements OrderedFixtureInterface, C
             );
         }
 
+        $dataDirectory = __DIR__ . '/../data/pages';
+        $directory = opendir($dataDirectory);
+
+        $count = 0;
+
+        while (false !== $file = readdir($directory)) {
+            if ('.' === substr($file, 0, 1)) {
+                continue;
+            }
+
+            if ($file != 'imported') {
+                $count++;
+                $this->saveWordpressPage($manager, $dataDirectory . DIRECTORY_SEPARATOR . $file, $count);
+            }
+        }
+        $manager->flush();
+
+        return null;
+    }
+
+    /**
+     * @param ObjectManager $manager Manager to save pages.
+     * @param string        $path    Path to xml.
+     * @return null
+     */
+    public function saveWordpressPage(ObjectManager $manager, $path)
+    {
+        $xml = new \SimpleXMLElement(file_get_contents($path));
+        $pageRepository = $manager->getRepository('AppBundle:Page');
+
+        foreach ($xml->channel->item as $item) {
+            $namespaces = $item->getNameSpaces(true);
+            $content = $item->children($namespaces['content']);
+
+            $page = new Page();
+            $page->setTitle("$item->title");
+            $page->setPublished(true);
+            $page->setContent("$content->encoded");
+
+            $pageRepository->save($page);
+        }
+
+        $file = new File($path);
+        $file->move(__DIR__ . '/../data/pages/imported');
+
         return null;
     }
 
@@ -61,6 +106,6 @@ class PageFixtures extends AbstractFixture implements OrderedFixtureInterface, C
      */
     public function getOrder()
     {
-        return 14;
+        return 15;
     }
 }
