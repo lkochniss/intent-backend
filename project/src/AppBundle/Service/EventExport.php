@@ -55,6 +55,9 @@ class EventExport
             $item->endAt = null;
             $item->endAt->addCData($event->getEndAt()->format('Y-m-d'));
 
+            $item->backgroundLink = null;
+            $item->backgroundLink->addCData($event->getBackgroundLink());
+
             $item->backgroundImage = null;
             if ($event->getBackgroundImage()) {
                 $item->backgroundImage->addCData('image-' . $event->getBackgroundImage()->getFullPath());

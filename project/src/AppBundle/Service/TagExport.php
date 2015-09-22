@@ -5,14 +5,14 @@
 
 namespace AppBundle\Service;
 
-use AppBundle\Entity\Page;
+use AppBundle\Entity\Category;
 use AppBundle\SimpleXMLExtended;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * Class PageExport
+ * Class TagExport
  */
-class PageExport
+class TagExport
 {
     /** @var  EntityRepository */
     private $repository;
@@ -30,27 +30,24 @@ class PageExport
      */
     public function exportEntity()
     {
-        $pages = $this->repository->findAll();
+        $categories = $this->repository->findAll();
 
         $xml = new SimpleXMLExtended('<xml />');
 
         /**
-         * @var Page $page
+         * @var Category $category
          */
-        foreach ($pages as $page) {
+        foreach ($categories as $category) {
             $item = $xml->addChild('item');
 
-            $item->title = null;
-            $item->title->addCData($page->getTitle());
-
-            $item->content = null;
-            $item->content->addCData($page->getContent());
+            $item->name = null;
+            $item->name->addCData($category->getName());
 
             $item->published = null;
-            $item->published->addCData($page->isPublished());
+            $item->published->addCData($category->isPublished());
         }
 
-        $xml->saveXML('web/export/page.xml');
+        $xml->saveXML('web/export/tag.xml');
 
         return true;
     }

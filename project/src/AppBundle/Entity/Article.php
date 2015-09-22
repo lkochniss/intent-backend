@@ -405,4 +405,14 @@ class Article extends AbstractModel
     {
         return $this->versions->toArray();
     }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->title;
+    }
+
+
 }

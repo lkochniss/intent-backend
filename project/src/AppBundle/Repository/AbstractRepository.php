@@ -16,12 +16,20 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 abstract class AbstractRepository extends EntityRepository
 {
     /**
-     * @param string $string String to slugify.
+     * @param string $string What you want to slugify.
      * @return string
      */
-    protected function slugify($string)
+    public function slugify($string)
     {
-        return preg_replace('/[^a-z0-9]+/', '-', strtolower($string));
+        $string = strtolower($string);
+        $string = str_replace('ä', 'ae', $string);
+        $string = str_replace('ö', 'oe', $string);
+        $string = str_replace('ü', 'ue', $string);
+        $string = str_replace('ß', 'ss', $string);
+        $string = str_replace('&', '-and-', $string);
+        $string = preg_replace('/[^a-z0-9]+/', '-', $string);
+
+        return $string;
     }
 
     /**

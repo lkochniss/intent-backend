@@ -13,4 +13,5 @@ AppBundle\Entity\Tag:
         articles:
             targetEntity: Article
             mappedBy: tags
+            cascade: ["persist"]
     lifecycleCallbacks: { }

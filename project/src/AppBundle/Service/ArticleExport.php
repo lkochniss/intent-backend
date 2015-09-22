@@ -79,6 +79,13 @@ class ArticleExport
             if ($article->getThumbnail()) {
                 $item->thumbnail->addCData('image-' . $article->getThumbnail()->getFullPath());
             }
+
+            if (is_null($article->getTags())) {
+                $item->tag = null;
+            }
+            foreach ($article->getTags() as $tag) {
+                $item->addChild('tag', 'tag-' . $tag->getSlug());
+            }
         }
 
         $xml->saveXML('web/export/article.xml');

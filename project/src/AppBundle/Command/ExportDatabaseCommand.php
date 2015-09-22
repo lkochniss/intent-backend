@@ -36,7 +36,8 @@ class ExportDatabaseCommand extends ContainerAwareCommand
         $this->addOption('pro', '', InputOption::VALUE_NONE, 'Export entity profile. Mind the dependencies');
         $this->addOption('pub', '', InputOption::VALUE_NONE, 'Export entity publisher.');
         $this->addOption('rol', '', InputOption::VALUE_NONE, 'Export entity role.');
-        $this->addOption('stu', 'o', InputOption::VALUE_NONE, 'Export entity studio.');
+        $this->addOption('stu', '', InputOption::VALUE_NONE, 'Export entity studio.');
+        $this->addOption('tag', '', InputOption::VALUE_NONE, 'Export entity tag.');
         $this->addOption('usr', '', InputOption::VALUE_NONE, 'Export entity user. Mind the dependecies.');
 
         return null;
@@ -112,6 +113,11 @@ class ExportDatabaseCommand extends ContainerAwareCommand
         if ($input->getOption('all') || $input->getOption('stu')) {
             $this->getContainer()->get('app.studio.service')->exportEntity();
             $output->writeln('exported studio entity');
+        }
+
+        if ($input->getOption('all') || $input->getOption('tag')) {
+            $this->getContainer()->get('app.tag.service')->exportEntity();
+            $output->writeln('exported tag entity');
         }
 
         if ($input->getOption('all') || $input->getOption('usr')) {

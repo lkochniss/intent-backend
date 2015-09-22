@@ -6,6 +6,7 @@
 namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Article;
+use AppBundle\Entity\Tag;
 use AppBundle\SimpleXMLExtended;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -52,6 +53,10 @@ class ArticleFixtures extends AbstractFixture implements OrderedFixtureInterface
                 $article->setThumbnail($this->getReference("$item->thumbnail"));
             }
 
+            foreach ($item->tag as $tag) {
+                $article->addTag($this->getReference("$tag"));
+            }
+
             $manager->getRepository('AppBundle:Article')->save(
                 $article,
                 $this->getReference('user-' . "$item->author")
@@ -70,7 +75,7 @@ class ArticleFixtures extends AbstractFixture implements OrderedFixtureInterface
 
             if ($file != 'imported') {
                 $count++;
-                $this->saveWordpressArticle($manager, $dataDirectory . DIRECTORY_SEPARATOR . $file, $count);
+                $this->saveWordpressArticles($manager, $dataDirectory . DIRECTORY_SEPARATOR . $file, $count);
             }
         }
         $manager->flush();
@@ -84,9 +89,11 @@ class ArticleFixtures extends AbstractFixture implements OrderedFixtureInterface
      * @param string        $path    Path to xml.
      * @return null
      */
-    public function saveWordpressArticle(ObjectManager $manager, $path)
+    public function saveWordpressArticles(ObjectManager $manager, $path)
     {
         $xml = new \SimpleXMLElement(file_get_contents($path));
+        $articleRepository = $manager->getRepository('AppBundle:Article');
+
         foreach ($xml->channel->item as $item) {
             $namespaces = $item->getNameSpaces(true);
             $dc = $item->children($namespaces['dc']);
@@ -98,22 +105,34 @@ class ArticleFixtures extends AbstractFixture implements OrderedFixtureInterface
             $article->setPublishAt(new \DateTime("$wp->post_date"));
             $article->setPublished(true);
             $article->setContent("$content->encoded");
+
             foreach ($item->category as $category) {
                 foreach ($category->attributes() as $a => $b) {
                     if ($b == 'category') {
                         $article->setCategory(
                             $this->getReference(
-                                'category-' . preg_replace('/[^a-z0-9]+/', '-', strtolower("$category"))
+                                'category-' . $articleRepository->slugify("$category")
                             )
                         );
                     }
                 }
             }
 
-            $manager->getRepository('AppBundle:Article')->save(
-                $article,
-                $this->getReference('user-' . "$dc->creator")
-            );
+            $articleRepository->save($article, $this->getReference('user-' . "$dc->creator"));
+
+            foreach ($item->category as $category) {
+                foreach ($category->attributes() as $a => $b) {
+                    if ($b = 'post_tag') {
+                        $tag = $manager->getRepository('AppBundle:Tag')->findOneBy(array('name' => "$category"));
+                        if (is_null($tag)) {
+                            $tag = new Tag();
+                            $tag->setName("$category");
+                            $manager->getRepository('AppBundle:Tag')->save($tag);
+                        }
+                        $article->addTag($tag);
+                    }
+                }
+            }
         }
 
         $file = new File($path);
@@ -138,6 +157,6 @@ class ArticleFixtures extends AbstractFixture implements OrderedFixtureInterface
      */
     public function getOrder()
     {
-        return 13;
+        return 14;
     }
 }
