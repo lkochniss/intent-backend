@@ -6,12 +6,12 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
+use AppBundle\Form\Type\UserType;
 use AppBundle\Form\Type\UserDeleteType;
 use AppBundle\Form\Type\UserPasswordType;
-use AppBundle\Form\Type\UserType;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Util\SecureRandom;
 
@@ -43,7 +43,6 @@ class UserController extends AbstractCrudController
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                $generator = new SecureRandom();
                 $password = md5(uniqid(rand(), true));
 
                 $encoder = $this->container->get('security.password_encoder');
@@ -116,14 +115,16 @@ class UserController extends AbstractCrudController
             );
         }
 
-        $form = $this->createForm(new UserDeleteType());
+        $userRepository = $this->getDoctrine()->getRepository('AppBundle:User');
+        $users = $userRepository->findAllUsersBut($user);
+
+        $form = $this->createForm(new UserDeleteType(), null, array('users' => $users));
 
         if (in_array($request->getMethod(), ['POST'])) {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
                 $data = $form->getData();
-                $userRepository = $this->getDoctrine()->getRepository('AppBundle:User');
                 $articleRepository = $this->getDoctrine()->getRepository('AppBundle:Article');
 
                 if (!is_null($data['user'])) {

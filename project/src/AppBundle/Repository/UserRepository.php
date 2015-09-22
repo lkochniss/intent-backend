@@ -24,4 +24,17 @@ class UserRepository extends AbstractRepository
 
         return new JsonResponse('success');
     }
+
+    /**
+     * @param User $user The user we don't want selected.
+     * @return array
+     */
+    public function findAllUsersBut(User $user)
+    {
+        $queryBuilder = $this->createQueryBuilder('u');
+        $queryBuilder->where('u.id != :id')
+            ->setParameter('id', $user->getId());
+
+        return $queryBuilder->getQuery()->getResult();
+    }
 }

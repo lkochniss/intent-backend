@@ -7,6 +7,7 @@ namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class UserDeleteType
@@ -39,7 +40,8 @@ class UserDeleteType extends AbstractType
                     'class' => 'AppBundle\Entity\User',
                     'required' => false,
                     'multiple' => false,
-                    'placeholder' => 'user.delete.select'
+                    'placeholder' => 'user.delete.select',
+                    'choices' => $options['users']
                 )
             )
             ->add(
@@ -50,6 +52,21 @@ class UserDeleteType extends AbstractType
                     'translation_domain' => 'user',
                 )
             );
+
+        return null;
+    }
+
+    /**
+     * @param OptionsResolver $resolver Add user entity to form.
+     * @return null
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(
+            array(
+                'users' => null,
+            )
+        );
 
         return null;
     }
