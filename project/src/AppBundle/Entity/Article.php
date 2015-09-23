@@ -413,6 +413,4 @@ class Article extends AbstractModel
     {
         return $this->title;
     }
-
-
 }
