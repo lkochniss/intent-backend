@@ -29,7 +29,7 @@ abstract class AbstractRepository extends EntityRepository
         $string = str_replace('&', '-and-', $string);
         $string = preg_replace('/[^a-z0-9]+/', '-', $string);
 
-        return $string;
+        return preg_replace('/[^a-z0-9]+/', '-', $string);
     }
 
     /**

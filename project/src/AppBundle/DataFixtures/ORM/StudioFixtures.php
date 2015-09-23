@@ -47,7 +47,7 @@ class StudioFixtures extends AbstractFixture implements OrderedFixtureInterface,
                 $studio
             );
 
-            $this->addReference('studio-' . $studio->getSlug(), $studio);
+            $this->setReference('studio-' . $studio->getSlug(), $studio);
         }
 
         return true;
