@@ -123,7 +123,7 @@ class AbstractControllerTest extends WebTestCase
             $crawler
                 ->filter($needle)
                 ->count(),
-            sprintf('%s not found or too many', $needle)
+            sprintf('%s not found', $needle)
         );
 
         return null;
