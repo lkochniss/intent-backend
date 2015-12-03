@@ -5,7 +5,6 @@
 
 namespace AppBundle\Command;
 
-use AppBundle\PictureThumbnailCreator;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
