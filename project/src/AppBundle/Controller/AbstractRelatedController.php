@@ -96,7 +96,7 @@ abstract class AbstractRelatedController extends AbstractMetaController
      */
     private function getRelatedArticles(Related $entity)
     {
-        return $related = $this->getDoctrine()->getRepository('AppBundle:Article')->findBy(
+        return $this->getDoctrine()->getRepository('AppBundle:Article')->findBy(
             array('related' => $entity),
             array('publishAt' => 'DESC')
         );
