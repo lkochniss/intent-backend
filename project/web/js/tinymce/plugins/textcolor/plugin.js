@@ -213,7 +213,6 @@ tinymce.PluginManager.add('textcolor', function(editor) {
 				}
 
 				// Shift colors to the right
-				// TODO: Might need to be the left on RTL
 				if (i == cols) {
 					for (i = 0; i < cols - 1; i++) {
 						setDivColor(customColorCells[i], customColorCells[i + 1].getAttribute('data-mce-color'));

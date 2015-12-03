@@ -366,8 +366,6 @@ define("tinymce/pasteplugin/Clipboard", [
 			/**
 			 * Returns the rect of the current caret if the caret is in an empty block before a
 			 * BR we insert a temporary invisible character that we get the rect this way we always get a proper rect.
-			 *
-			 * TODO: This might be useful in core.
 			 */
 			function getCaretRect(rng) {
 				var rects, textNode, node, container = rng.startContainer;
@@ -393,7 +391,6 @@ define("tinymce/pasteplugin/Clipboard", [
 				}
 
 				// Check if the location is |<br>
-				// TODO: Might need to expand this to say |<table>
 				if (node.tagName == 'BR') {
 					textNode = dom.doc.createTextNode('\uFEFF');
 					node.parentNode.insertBefore(textNode, node);
@@ -469,7 +466,6 @@ define("tinymce/pasteplugin/Clipboard", [
 
 				// WebKit/Blink might clone the div so
 				// lets make sure we remove all clones
-				// TODO: Man o man is this ugly. WebKit is the new IE! Remove this if they ever fix it!
 				while ((pasteBinClone = editor.dom.get('mcepastebin'))) {
 					editor.dom.remove(pasteBinClone);
 					editor.dom.unbind(pasteBinClone);
@@ -493,7 +489,6 @@ define("tinymce/pasteplugin/Clipboard", [
 
 			// Since WebKit/Chrome might clone the paste bin when pasting
 			// for example: <img style="float: right"> we need to check if any of them contains some useful html.
-			// TODO: Man o man is this ugly. WebKit is the new IE! Remove this if they ever fix it!
 			pasteBinClones = editor.dom.select('div[id=mcepastebin]');
 			for (i = 0; i < pasteBinClones.length; i++) {
 				clone = pasteBinClones[i];

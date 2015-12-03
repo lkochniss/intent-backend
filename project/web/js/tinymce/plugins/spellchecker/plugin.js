@@ -120,7 +120,6 @@
 define("tinymce/spellcheckerplugin/DomTextMatcher", [], function() {
 	// Based on work developed by: James Padolsey http://james.padolsey.com
 	// released under UNLICENSE that is compatible with LGPL
-	// TODO: Handle contentEditable edgecase:
 	// <p>text<span contentEditable="false">text<span contentEditable="true">text</span>text</span>text</p>
 	return function(node, editor) {
 		var m, matches = [], text, dom = editor.dom;

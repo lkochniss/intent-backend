@@ -63,7 +63,6 @@ tinymce.PluginManager.add('preview', function(editor) {
 				if (!sandbox) {
 					// IE 6-11 doesn't support data uris on iframes
 					// so I guess they will have to be less secure since we can't sandbox on those
-					// TODO: Use sandbox if future versions of IE supports iframes with data: uris.
 					var doc = this.getEl('body').firstChild.contentWindow.document;
 					doc.open();
 					doc.write(previewHtml);

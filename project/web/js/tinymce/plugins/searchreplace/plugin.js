@@ -15,7 +15,6 @@
 (function() {
 	// Based on work developed by: James Padolsey http://james.padolsey.com
 	// released under UNLICENSE that is compatible with LGPL
-	// TODO: Handle contentEditable edgecase:
 	// <p>text<span contentEditable="false">text<span contentEditable="true">text</span>text</span>text</p>
 	function findAndReplaceDOMText(regex, node, replacementNode, captureGroup, schema) {
 		var m, matches = [], text, count = 0, doc;

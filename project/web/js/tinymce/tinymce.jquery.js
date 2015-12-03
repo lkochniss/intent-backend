@@ -4692,7 +4692,6 @@ define("tinymce/dom/StyleSheetLoader", [
 				link.onerror = failed;
 			} else {
 				// Sniff for old Firefox that doesn't support the onload event on link elements
-				// TODO: Remove this in the future when everyone uses modern browsers
 				if (navigator.userAgent.indexOf("Firefox") > 0) {
 					style = document.createElement('style');
 					style.textContent = '@import "' + url + '"';
@@ -4899,7 +4898,6 @@ define("tinymce/dom/DOMUtils", [
 		clone: function(node, deep) {
 			var self = this, clone, doc;
 
-			// TODO: Add feature detection here in the future
 			if (!isIE || node.nodeType !== 1 || deep) {
 				return node.cloneNode(deep);
 			}
@@ -6293,7 +6291,6 @@ define("tinymce/dom/DOMUtils", [
 						// If the only child is a bookmark then move it up
 						children = node.childNodes;
 
-						// TODO fix this complex if
 						if (children.length == 1 && children[0] && children[0].nodeType == 1 &&
 							children[0].getAttribute('data-mce-type') == 'bookmark') {
 							node.parentNode.insertBefore(children[0], node);
@@ -8442,7 +8439,6 @@ define("tinymce/html/Schema", [
 		// Flow content elements from the HTML5 spec (block+inline)
 		flowContent = flowContent || [].concat(blockContent, phrasingContent);
 
-		// HTML4 base schema TODO: Move HTML5 specific attributes to HTML5 specific if statement
 		// Schema items <element name>, <specific attributes>, <children ..>
 		add("html", "manifest", "head body");
 		add("head", "", "base command link meta noscript script style title");
@@ -8588,9 +8584,6 @@ define("tinymce/html/Schema", [
 		// Delete scripts by default due to possible XSS
 		delete schema.script;
 
-		// TODO: LI:s can only have value if parent is OL
-
-		// TODO: Handle transparent elements
 		// a ins del canvas map
 
 		mapCache[type] = schema;
@@ -8993,7 +8986,6 @@ define("tinymce/html/Schema", [
 			});
 
 			// Remove these by default
-			// TODO: Reenable in 4.1
 			/*each(split('script style'), function(name) {
 				delete elements[name];
 			});*/
@@ -9005,7 +8997,6 @@ define("tinymce/html/Schema", [
 		addValidChildren(settings.valid_children);
 		addValidElements(settings.extended_valid_elements);
 
-		// Todo: Remove this when we fix list handling to be valid
 		addValidChildren('+ol[ul|ol],+ul[ul|ol]');
 
 		// Delete invalid elements
@@ -11151,7 +11142,6 @@ define("tinymce/dom/Serializer", [
 			}
 		});
 
-		// Fix list elements, TODO: Replace this later
 		if (settings.fix_list_elements) {
 			htmlParser.addNodeFilter('ul,ol', function(nodes) {
 				var i = nodes.length, node, parentNode;
@@ -12451,7 +12441,6 @@ define("tinymce/dom/ControlSelection", [
 							e.preventDefault();
 
 							// This moves the selection from being a control selection to a text like selection like in WebKit #6753
-							// TODO: Fix this the day IE works like other browsers without this nasty native ugly control selections.
 							if (e.target.tagName == 'IMG') {
 								window.setTimeout(function() {
 									editor.selection.select(e.target);
@@ -14131,7 +14120,6 @@ define("tinymce/fmt/Preview", [
 				value = dom.getStyle(editor.getBody(), name, true);
 
 				// Ignore white since it's the default color, not the nicest fix
-				// TODO: Fix this by detecting runtime style
 				if (dom.toHex(value).toLowerCase() == '#ffffff') {
 					return;
 				}
@@ -14139,7 +14127,6 @@ define("tinymce/fmt/Preview", [
 
 			if (name == 'color') {
 				// Ignore black since it's the default color, not the nicest fix
-				// TODO: Fix this by detecting runtime style
 				if (dom.toHex(value).toLowerCase() == '#000000') {
 					return;
 				}
@@ -14511,7 +14498,6 @@ define("tinymce/Formatter", [
 					});
 
 					// Needed for the WebKit span spam bug
-					// TODO: Remove this once WebKit/Blink fixes this
 					if (fmt.styles) {
 						var styleVal = dom.getAttrib(elm, 'style');
 
@@ -14607,7 +14593,6 @@ define("tinymce/Formatter", [
 						}
 
 						// Can we rename the block
-						// TODO: Break this if up, too complex
 						if (contentEditable && !hasContentEditableState && format.block &&
 							!format.wrapper && isTextBlock(nodeName) && isValid(parentName, wrapName)) {
 							node = dom.rename(node, wrapName);
@@ -14640,7 +14625,6 @@ define("tinymce/Formatter", [
 						}
 
 						// Is it valid to wrap this item
-						// TODO: Break this if up, too complex
 						if (contentEditable && !hasContentEditableState && isValid(wrapName, nodeName) && isValid(parentName, wrapName) &&
 								!(!node_specific && node.nodeType === 3 &&
 								node.nodeValue.length === 1 &&
@@ -17641,7 +17625,6 @@ define("tinymce/ForceBlocks", [], function() {
 			node = rootNode.firstChild;
 			rootNodeName = rootNode.nodeName.toLowerCase();
 			while (node) {
-				// TODO: Break this up, too complex
 				if (((node.nodeType === 3 || (node.nodeType == 1 && !blockElements[node.nodeName]))) &&
 					schema.isValidChild(rootNodeName, forcedRootBlock.toLowerCase())) {
 					// Remove empty text nodes
@@ -18057,7 +18040,6 @@ define("tinymce/EditorCommands", [
 
 				// WebKit produces lists within block elements so we need to split them
 				// we will replace the native list creation logic to custom logic later on
-				// TODO: Remove this when the list creation logic is removed
 				listElm = dom.getParent(selection.getNode(), 'ol,ul');
 				if (listElm) {
 					listParent = listElm.parentNode;
@@ -18366,7 +18348,6 @@ define("tinymce/EditorCommands", [
 				if (node && node.nodeType == 3) {
 					rng.setStart(node, node.nodeValue.length);
 
-					// TODO: Why can't we normalize on IE
 					if (!isIE) {
 						node2 = marker.nextSibling;
 						if (node2 && node2.nodeType == 3) {
@@ -19831,7 +19812,6 @@ define("tinymce/data/ObservableObject", [
 		return node.nodeType > 0;
 	}
 
-	// Todo: Maybe this should be shallow compare since it might be huge object references
 	function isEqual(a, b) {
 		var k, checked;
 
@@ -20361,7 +20341,6 @@ define("tinymce/ui/Selector", [
 
 			// Fix for circular reference
 			if (!Collection) {
-				// TODO: Fix me!
 				Collection = Selector.Collection;
 			}
 
@@ -23166,7 +23145,6 @@ define("tinymce/ui/Container", [
 				self.add(self.render());
 			}
 
-			// TODO: Fix this!
 			self._hasBody = true;
 		},
 
@@ -23231,7 +23209,6 @@ define("tinymce/ui/Container", [
 
 			items = self.find('*');
 
-			// TODO: Figure out a better way to auto focus alert dialog buttons
 			if (self.statusbar) {
 				items.add(self.statusbar.items());
 			}
@@ -23578,7 +23555,6 @@ define("tinymce/ui/Container", [
 					Control.repaintControls[i].repaint();
 				}
 
-				// TODO: Fix me!
 				if (this.settings.layout !== "flow" && this.settings.layout !== "stack") {
 					this.repaint();
 				}
@@ -24119,7 +24095,6 @@ define("tinymce/ui/Movable", [
 		moveTo: function(x, y) {
 			var self = this;
 
-			// TODO: Move this to some global class
 			function constrain(value, max, size) {
 				if (value < 0) {
 					return 0;
@@ -24198,7 +24173,6 @@ define("tinymce/ui/Resizable", [
 		 * @return {tinymce.ui.Control} Current control instance.
 		 */
 		resizeTo: function(w, h) {
-			// TODO: Fix hack
 			if (w <= 1 || h <= 1) {
 				var rect = DomUtils.getWindowSize();
 
@@ -25727,7 +25701,6 @@ define("tinymce/util/Quirks", [
 			var MutationObserver = window.MutationObserver, olderWebKit, dragStartRng;
 
 			// Add mini polyfill for older WebKits
-			// TODO: Remove this when old Safari versions gets updated
 			if (!MutationObserver) {
 				olderWebKit = true;
 
@@ -27025,7 +26998,6 @@ define("tinymce/util/Quirks", [
 					if (!args.isDefaultPrevented()) {
 						// iOS WebKit can't place the caret properly once
 						// you bind touch events so we need to do this manually
-						// TODO: Expand to the closest word? Touble tap still works.
 						editor.selection.placeCaretAt(endTouch.clientX, endTouch.clientY);
 						editor.nodeChanged();
 					}
@@ -29084,7 +29056,6 @@ define("tinymce/Editor", [
 			}
 
 			// Create iframe
-			// TODO: ACC add the appropriate description on this.
 			var ifr = DOM.create('iframe', {
 				id: self.id + "_ifr",
 				//src: url || 'javascript:""', // Workaround for HTTPS warning in IE6/7
@@ -29177,7 +29148,6 @@ define("tinymce/Editor", [
 				// Prevent leak in IE
 				settings.content_document = settings.content_window = null;
 
-				// TODO: Fix this
 				settings.root_name = targetElm.nodeName.toLowerCase();
 			}
 
@@ -30705,13 +30675,11 @@ define("tinymce/FocusManager", [
 				return document.activeElement;
 			} catch (ex) {
 				// IE sometimes fails to get the activeElement when resizing table
-				// TODO: Investigate this
 				return document.body;
 			}
 		}
 
 		// We can't store a real range on IE 11 since it gets mutated so we need to use a bookmark object
-		// TODO: Move this to a separate range utils class since it's it's logic is present in Selection as well.
 		function createBookmark(dom, rng) {
 			if (rng && rng.startContainer) {
 				// Verify that the range is within the root of the editor
@@ -33267,7 +33235,7 @@ define("tinymce/ui/ComboBox", [
 
 			self.classes.add('combobox');
 			self.subinput = true;
-			self.ariaTarget = 'inp'; // TODO: Figure out a better way
+			self.ariaTarget = 'inp';
 
 			settings.menu = settings.menu || settings.values;
 
@@ -33299,7 +33267,6 @@ define("tinymce/ui/ComboBox", [
 				}
 			});
 
-			// TODO: Rework this
 			self.on('keydown', function(e) {
 				if (e.target.nodeName == "INPUT" && e.keyCode == 13) {
 					self.parents().reverse().each(function(ctrl) {
@@ -35469,7 +35436,6 @@ define("tinymce/ui/FormatControls", [
 				onPostRender: function() {
 					var self = this;
 
-					// TODO: Fix this
 					if (editor.formatter) {
 						editor.formatter.formatChanged(name, function(state) {
 							self.active(state);
@@ -35526,7 +35492,6 @@ define("tinymce/ui/FormatControls", [
 				onPostRender: function() {
 					var self = this;
 
-					// TODO: Fix this
 					if (editor.formatter) {
 						editor.formatter.formatChanged(name, function(state) {
 							self.active(state);
@@ -36335,7 +36300,6 @@ define("tinymce/ui/MenuButton", [
 ], function(Button, Factory, MenuBar) {
 	"use strict";
 
-	// TODO: Maybe add as some global function
 	function isChildOf(node, parent) {
 		while (node) {
 			if (parent === node) {
