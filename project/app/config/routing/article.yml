@@ -17,4 +17,3 @@ intent_backend_article_delete:
 intent_backend_article_list:
     path:     /
     defaults: { _controller: AppBundle:Article:list }
-    #8
