@@ -5,9 +5,6 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\AbstractModel;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
