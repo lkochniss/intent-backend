@@ -40,7 +40,7 @@ abstract class AbstractRelatedController extends AbstractMetaController
         $games = null;
         $expansions = null;
 
-        $resultList = $related = $this->getRelatedArticles($entity);
+        $resultList = $this->getRelatedArticles($entity);
 
         if ($entity->getType() == 'publisher') {
             $franchises = $entity->getFranchises();
