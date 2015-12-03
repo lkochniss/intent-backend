@@ -9,7 +9,6 @@ use AppBundle\Entity\Image;
 use AppBundle\SimpleXMLExtended;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Class ImageExport

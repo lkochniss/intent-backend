@@ -6,7 +6,6 @@
 namespace AppBundle\Service;
 
 use AppBundle\Entity\Expansion;
-use AppBundle\Entity\Game;
 use AppBundle\SimpleXMLExtended;
 use Doctrine\ORM\EntityRepository;
 

@@ -5,9 +5,8 @@
 
 namespace AppBundle\Repository;
 
-use AppBundle\Entity\AbstractModel;
 use AppBundle\Entity\Tag;
-use Doctrine\ORM\Mapping;
+use AppBundle\Entity\AbstractModel;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
