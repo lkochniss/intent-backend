@@ -54,7 +54,7 @@ class UserExport
             $item->password->addCData($user->getPassword());
 
             $item->active = null;
-            $item->active->addCData($user->getIsActive());
+            $item->active->addCData($user->isActive());
 
             if (is_null($user->getRoles())) {
                 $item->role = null;

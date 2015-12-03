@@ -36,8 +36,8 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($user->getEmail(), $email);
 
         $active = 1;
-        $user->setIsActive($active);
-        $this->assertEquals($user->getIsActive(), $active);
+        $user->setActive($active);
+        $this->assertEquals($user->isActive(), $active);
 
         $now = new \DateTime();
         $user->setValidUntil($now);

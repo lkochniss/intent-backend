@@ -32,7 +32,7 @@ class UserFixtures extends AbstractFixture implements OrderedFixtureInterface, C
             $user = new User();
             $user->setUsername("$item->username");
             $user->setEmail("$item->email");
-            $user->setIsActive("$item->active");
+            $user->setActive("$item->active");
             $user->setPassword("$item->password");
 
             foreach ($item->role as $role) {
