@@ -9,4 +9,14 @@ AppBundle\Entity\Page:
             generator:
                 strategy: AUTO
     fields:
+        title:
+            type: string
+            length: 255
+        slug:
+            type: string
+            length: 255
+        content:
+            type: text
+        published:
+            type: boolean
     lifecycleCallbacks: { }

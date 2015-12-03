@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Entity
+ */
 
 namespace AppBundle\Entity;
 
@@ -7,7 +10,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class AbstractArticleModel
- * @package AppBundle\Entity
  */
 abstract class AbstractArticleModel extends AbstractModel
 {
@@ -46,13 +48,16 @@ abstract class AbstractArticleModel extends AbstractModel
      */
     private $published;
 
-    function __construct()
+    /**
+     * Publish is always false on create.
+     */
+    public function __construct()
     {
         $this->published = false;
     }
 
     /**
-     * @param $title
+     * @param String $title The title of the entity.
      * @return $this
      */
     public function setTitle($title)
@@ -63,7 +68,7 @@ abstract class AbstractArticleModel extends AbstractModel
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getTitle()
     {
@@ -71,7 +76,7 @@ abstract class AbstractArticleModel extends AbstractModel
     }
 
     /**
-     * @param $slug
+     * @param String $slug The automatic generated slug.
      * @return $this
      */
     public function setSlug($slug)
@@ -82,7 +87,7 @@ abstract class AbstractArticleModel extends AbstractModel
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getSlug()
     {
@@ -90,7 +95,7 @@ abstract class AbstractArticleModel extends AbstractModel
     }
 
     /**
-     * @param $content
+     * @param String $content Set the written content.
      * @return $this
      */
     public function setContent($content)
@@ -101,7 +106,7 @@ abstract class AbstractArticleModel extends AbstractModel
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getContent()
     {
@@ -109,10 +114,10 @@ abstract class AbstractArticleModel extends AbstractModel
     }
 
     /**
-     * @param $publishAt
+     * @param \DateTime $publishAt Set the date when the entity should be published.
      * @return $this
      */
-    public function setPublishAt($publishAt)
+    public function setPublishAt(\DateTime $publishAt)
     {
         $this->publishAt = $publishAt;
 
@@ -128,7 +133,7 @@ abstract class AbstractArticleModel extends AbstractModel
     }
 
     /**
-     * @param $published
+     * @param boolean $published Set true when publishing to frontend returns true.
      * @return $this
      */
     public function setPublished($published)
@@ -139,7 +144,7 @@ abstract class AbstractArticleModel extends AbstractModel
     }
 
     /**
-     * @return bool
+     * @return boolean
      */
     public function isPublished()
     {

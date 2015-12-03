@@ -1,8 +1,10 @@
 <?php
+/**
+ * @package AppBundle\DataFixtures\ORM
+ */
 
 namespace AppBundle\DataFixtures\ORM;
 
-use AppBundle\Entity\Directory;
 use AppBundle\Entity\Image;
 use AppBundle\SimpleXMLExtended;
 use Doctrine\Common\DataFixtures\AbstractFixture;
@@ -11,10 +13,17 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+/**
+ * Class ImageFixtures
+ */
 class ImageFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     private $container;
 
+    /**
+     * @param ObjectManager $manager Manager to save image.
+     * @return null
+     */
     public function load(ObjectManager $manager)
     {
         $xml = new SimpleXMLExtended(file_get_contents('web/export/image.xml'));
@@ -25,27 +34,34 @@ class ImageFixtures extends AbstractFixture implements OrderedFixtureInterface, 
             $image->setDescription("$item->description");
             $image->setPath("$item->path");
 
-            if("$item->parent" != ""){
-                $image->setParentDirectory($this->getReference('directory-'."$item->parent"));
+            if ("$item->parent" != '') {
+                $image->setParentDirectory($this->getReference('directory-' . "$item->parent"));
             }
 
-            $manager->getRepository('AppBundle:Image')->save(
-                $image
-            );
-            $this->addReference('image-'.$image->getName(), $image);
+            $image->resetFullPath();
+
+            $manager->persist($image);
+            $manager->flush();
+
+            $this->addReference('image-' . $image->getName(), $image);
         }
+
+        return null;
     }
 
     /**
-     * @param ContainerInterface|null $containerInterface
+     * @param ContainerInterface|null $containerInterface ContainerInterface.
+     * @return $this
      */
     public function setContainer(ContainerInterface $containerInterface = null)
     {
         $this->container = $containerInterface;
+
+        return $this;
     }
 
     /**
-     * @return int
+     * @return integer
      */
     public function getOrder()
     {

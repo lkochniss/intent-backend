@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Service
+ */
 
 namespace AppBundle\Service;
 
@@ -8,7 +11,6 @@ use Doctrine\ORM\EntityRepository;
 
 /**
  * Class CategoryExport
- * @package AppBundle\Service
  */
 class CategoryExport
 {
@@ -16,13 +18,16 @@ class CategoryExport
     private $repository;
 
     /**
-     * @param EntityRepository $repository
+     * @param EntityRepository $repository Get the entity repository.
      */
     public function __construct(EntityRepository $repository)
     {
         $this->repository = $repository;
     }
 
+    /**
+     * @return boolean
+     */
     public function exportEntity()
     {
         $categories = $this->repository->findAll();
@@ -46,5 +51,7 @@ class CategoryExport
         }
 
         $xml->saveXML('web/export/category.xml');
+
+        return true;
     }
 }

@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Controller
+ */
 
 namespace AppBundle\Controller;
 
@@ -6,6 +9,9 @@ use AppBundle\Entity\AbstractModel;
 use AppBundle\Entity\Profile;
 use AppBundle\Form\Type\ProfileType;
 
+/**
+ * Class ProfileController
+ */
 class ProfileController extends AbstractCrudController
 {
     /**
@@ -48,13 +54,17 @@ class ProfileController extends AbstractCrudController
         return 'intent_backend_profile';
     }
 
+    /**
+     * @return string
+     */
     protected function getTranslationDomain()
     {
         return 'profile';
     }
 
     /**
-     * @param AbstractModel $entity
+     * @param AbstractModel $entity Abstract model of entity.
+     * @return null
      */
     protected function handleValidForm(AbstractModel $entity)
     {
@@ -64,6 +74,8 @@ class ProfileController extends AbstractCrudController
 
         $repository->save($entity);
 
-        $this->addFlash('success', "Speichern erfolgreich");
+        $this->addFlash('success', 'Speichern erfolgreich');
+
+        return null;
     }
 }

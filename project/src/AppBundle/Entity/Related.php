@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Entity
+ */
 
 namespace AppBundle\Entity;
 
@@ -7,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Related
+ * Class Related
  */
 abstract class Related extends AbstractMetaModel
 {
@@ -22,18 +25,31 @@ abstract class Related extends AbstractMetaModel
     private $backgroundLink;
 
     /**
+     * @var Image
+     */
+    private $backgroundImage;
+
+    /**
+     * @var Image
+     */
+    private $thumbnail;
+
+    /**
      * @var ArrayCollection
      */
     private $articles;
 
-    function __construct()
+    /**
+     * set empty articles array
+     */
+    public function __construct()
     {
         parent::__construct();
-        $this->articles = array();
+        $this->articles = new ArrayCollection();
     }
 
     /**
-     * @param $description
+     * @param string $description Set description.
      * @return $this
      */
     public function setDescription($description)
@@ -44,7 +60,7 @@ abstract class Related extends AbstractMetaModel
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getDescription()
     {
@@ -52,7 +68,7 @@ abstract class Related extends AbstractMetaModel
     }
 
     /**
-     * @param $backgroundLink
+     * @param string $backgroundLink Set a background link.
      * @return $this
      */
     public function setBackgroundLink($backgroundLink)
@@ -63,7 +79,7 @@ abstract class Related extends AbstractMetaModel
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getBackgroundLink()
     {
@@ -71,7 +87,45 @@ abstract class Related extends AbstractMetaModel
     }
 
     /**
-     * @param Article $article
+     * @param Image $backgroundImage Set a background image.
+     * @return $this
+     */
+    public function setBackgroundImage(Image $backgroundImage)
+    {
+        $this->backgroundImage = $backgroundImage;
+
+        return $this;
+    }
+
+    /**
+     * @return Image
+     */
+    public function getBackgroundImage()
+    {
+        return $this->backgroundImage;
+    }
+
+    /**
+     * @param Image $thumbnail Set a thumbnail.
+     * @return $this
+     */
+    public function setThumbnail(Image $thumbnail)
+    {
+        $this->thumbnail = $thumbnail;
+
+        return $this;
+    }
+
+    /**
+     * @return Image
+     */
+    public function getThumbnail()
+    {
+        return $this->thumbnail;
+    }
+
+    /**
+     * @param Article $article Add an article to array.
      * @return $this
      */
     public function addArticle(Article $article)
@@ -85,12 +139,12 @@ abstract class Related extends AbstractMetaModel
     }
 
     /**
-     * @param Article $article
+     * @param Article $article Remove article from array.
      * @return ArrayCollection
      */
     public function removeArticle(Article $article)
     {
-        $this->articles->remove($article);
+        $this->articles->removeElement($article);
 
         return $this;
     }
@@ -104,15 +158,15 @@ abstract class Related extends AbstractMetaModel
     }
 
     /**
-     * @return String
+     * @return string
      */
     abstract public function getType();
 
     /**
-     * @return String
+     * @return string
      */
-    function __toString()
+    public function __toString()
     {
-        return $this->getName().' ('.$this->getType().')';
+        return $this->getName() . ' (' . $this->getType() . ')';
     }
 }

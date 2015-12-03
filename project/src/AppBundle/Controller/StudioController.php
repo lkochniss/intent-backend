@@ -1,11 +1,16 @@
 <?php
+/**
+ * @package AppBundle\Controller
+ */
 
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Studio;
-use AppBundle\Form\Type\StudioPublishType;
 use AppBundle\Form\Type\StudioType;
 
+/**
+ * Class StudioController
+ */
 class StudioController extends AbstractRelatedController
 {
     /**
@@ -22,14 +27,6 @@ class StudioController extends AbstractRelatedController
     protected function getFormType()
     {
         return new StudioType();
-    }
-
-    /**
-     * @return StudioPublishType
-     */
-    protected function getPublishType()
-    {
-        return new StudioPublishType();
     }
 
     /**
@@ -56,21 +53,33 @@ class StudioController extends AbstractRelatedController
         return 'intent_backend_studio';
     }
 
+    /**
+     * @return string
+     */
     protected function getTranslationDomain()
     {
         return 'studio';
     }
 
+    /**
+     * @return string
+     */
     protected function getReadAccessLevel()
     {
         return 'ROLE_READ_META';
     }
 
+    /**
+     * @return string
+     */
     protected function getWriteAccessLevel()
     {
         return 'ROLE_WRITE_META';
     }
 
+    /**
+     * @return string
+     */
     protected function getPublishAccessLevel()
     {
         return 'ROLE_PUBLISH_META';

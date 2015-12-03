@@ -1,11 +1,16 @@
-{% extends "::list.html.twig" %}
+{% extends "::base.html.twig" %}
 
 {% block title %}{{ parent() }} {% trans from "article" %}article.list{% endtrans %}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/datatables.min.css') }}"/>
+{% endblock %}
 
 {% block content %}
     <a href="{{ path('intent_backend_article_create') }}" class="btn btn-default pull-right">{% trans from "article" %}article.create{% endtrans %}</a>
     <h3>{% trans from "article" %}article.list{% endtrans %}</h3>
-    <table class="table">
+    <table class="table" id="entity_list">
         <thead>
         <tr>
             <th>{% trans from "article" %}article.title{% endtrans %}</th>
@@ -35,7 +40,7 @@
                 {% else %}
                     <td class="createdBy">&nbsp;</td>
                 {% endif %}
-                <td class="publishAt">{{ article.publishAt|date('d.m.Y H:i') }}</td>
+                <td class="publishAt">{{ article.publishAt|date('Y.m.d H:i') }}</td>
                 <td>
                     <a class="table-padding"
                        href="{{ path('intent_backend_article_edit',{'id' : article.id}) }}">
@@ -50,3 +55,20 @@
         </tbody>
     </table>
 {% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/datatables.min.js') }}"></script>
+    <script type="application/javascript">
+        $(document).ready(function () {
+            $('.table').DataTable({
+                "order" : [[ 4, "desc" ]],
+                "language": {
+                    "url": "/js/datatable_de.json"
+                }
+            });
+        });
+    </script>
+{% endblock %}
+

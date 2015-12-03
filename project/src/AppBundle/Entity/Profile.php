@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Entity
+ */
 
 namespace AppBundle\Entity;
 
@@ -6,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Profile
+ * Class Profile
  */
 class Profile extends AbstractModel
 {
@@ -28,7 +31,7 @@ class Profile extends AbstractModel
     private $user;
 
     /**
-     * @param $name
+     * @param string $name Set name.
      * @return $this
      */
     public function setName($name)
@@ -39,7 +42,7 @@ class Profile extends AbstractModel
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getName()
     {
@@ -47,7 +50,7 @@ class Profile extends AbstractModel
     }
 
     /**
-     * @param $description
+     * @param string $description Set description.
      * @return $this
      */
     public function setDescription($description)
@@ -58,7 +61,7 @@ class Profile extends AbstractModel
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getDescription()
     {
@@ -66,7 +69,7 @@ class Profile extends AbstractModel
     }
 
     /**
-     * @param User $user
+     * @param User $user Set user.
      * @return $this
      */
     public function setUser(User $user)

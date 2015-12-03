@@ -1,24 +1,31 @@
 game:
-    actions:        Aktionen
-    categories:     Artikel zu
-    create:         Game erstellen
-    description:    Beschreibung
-    delete:         Game löschen
-    edit:           Game bearbeiten
-    event:          aktive Events
+    actions:            Aktionen
+    backgroundimage:
+        label:          Hintergrundbild
+        select:         Hintergrundbild auswählen
+    categories:         Artikel zu
+    create:             Game erstellen
+    description:        Beschreibung
+    delete:             Game löschen
+    edit:               Game bearbeiten
+    event:              aktive Events
+    expansion:          Expansion/ DLC
     franchise:
-        name:       Franchise
-        select:     Franchise auswählen
-    list:           Gamesübersicht
-    name:           Game
-    not_found:      Game nicht gefunden
-    publish:        Game veröffentlichen
+        name:           Franchise
+        select:         Franchise auswählen
+    list:               Gamesübersicht
+    name:               Game
+    not_found:          Game nicht gefunden
+    publish:            Game veröffentlichen
     published:
-        at:         Veröffentlicht am
-        by:         Author
-    publisher:      Publisher
-    show:           Gamevorschau
+        at:             Veröffentlicht am
+        by:             Author
+    publisher:          Publisher
+    show:               Gamevorschau
     studio:
-        name:       Entwicklerstudio
-        select:     Entwicklerstudio auswählen
-    submit:         Game speichern
+        name:           Entwicklerstudio
+        select:         Entwicklerstudio auswählen
+    submit:             Game speichern
+    thumbnail:
+        label:          Game Logo
+        select:         Game Logo auswählen

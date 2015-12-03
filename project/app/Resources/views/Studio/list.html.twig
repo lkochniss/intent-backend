@@ -5,7 +5,7 @@
 {% block content %}
     <a href="{{ path('intent_backend_studio_create') }}" class="btn btn-default pull-right">{% trans from "studio" %}studio.create{% endtrans %}</a>
     <h3>{% trans from "studio" %}studio.list{% endtrans %}</h3>
-    <table class="table">
+    <table class="table" id="entity_list">
         <thead>
         <tr>
             <th>{% trans from "studio" %}studio.name{% endtrans %}</th>

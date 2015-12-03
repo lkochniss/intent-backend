@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Service
+ */
 
 namespace AppBundle\Service;
 
@@ -8,7 +11,6 @@ use Doctrine\ORM\EntityRepository;
 
 /**
  * Class ArticleExport
- * @package AppBundle\Service
  */
 class ArticleExport
 {
@@ -16,13 +18,16 @@ class ArticleExport
     private $repository;
 
     /**
-     * @param EntityRepository $repository
+     * @param EntityRepository $repository Get the entity repository.
      */
     public function __construct(EntityRepository $repository)
     {
         $this->repository = $repository;
     }
 
+    /**
+     * @return boolean
+     */
     public function exportEntity()
     {
         $articles = $this->repository->findAll();
@@ -62,15 +67,29 @@ class ArticleExport
 
             $item->category = null;
             if ($article->getCategory()) {
-                $item->category->addCData('category-'. $article->getCategory()->getSlug());
+                $item->category->addCData('category-' . $article->getCategory()->getSlug());
             }
 
             $item->event = null;
             if ($article->getEvent()) {
-                $item->event->addCData('event-'. $article->getEvent()->getSlug());
+                $item->event->addCData('event-' . $article->getEvent()->getSlug());
+            }
+
+            $item->thumbnail = null;
+            if ($article->getThumbnail()) {
+                $item->thumbnail->addCData('image-' . $article->getThumbnail()->getFullPath());
+            }
+
+            if (is_null($article->getTags())) {
+                $item->tag = null;
+            }
+            foreach ($article->getTags() as $tag) {
+                $item->addChild('tag', 'tag-' . $tag->getSlug());
             }
         }
 
         $xml->saveXML('web/export/article.xml');
+
+        return true;
     }
 }

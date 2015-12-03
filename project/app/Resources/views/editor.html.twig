@@ -11,6 +11,22 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {{ tinymce_init() }}
     <script src="{{ asset('/js/select2.min.js') }}"></script>
+    <script src="{{ asset('/js/tinymce/tinymce.jquery.min.js') }}"></script>
+
+    <script type="application/javascript">
+        tinymce.init({
+            theme : "advanced",
+            mode : "specific_textareas",
+            editor_selector : "tinymce",
+            plugins:    " advlist autolink lists link image charmap print preview hr anchor pagebreak" +
+                        " searchreplace wordcount visualblocks visualchars code fullscreen" +
+                        " insertdatetime media nonbreaking save table contextmenu directionality" +
+                        " emoticons template paste textcolor filemanager",
+            toolbar: "filemanager insertfile undo redo | styleselect forecolor| bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent code | link image",
+            image_advtab: true,
+            height: 600,
+            spellsheck: "true"
+        })
+    </script>
 {% endblock %}

@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Entity
+ */
 
 namespace AppBundle\Entity;
 
@@ -7,10 +10,45 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Article
+ * Class Article
  */
-class Article extends AbstractArticleModel
+class Article extends AbstractModel
 {
+    /**
+     * @var String
+     *
+     * @Assert\NotBlank()
+     */
+    private $title;
+
+    /**
+     * @var String
+     */
+    private $slug;
+
+    /**
+     * @var String
+     *
+     * @Assert\NotBlank()
+     */
+    private $content;
+
+    /**
+     * @var \DateTime
+     *
+     * @Assert\DateTime()
+     */
+    private $publishAt;
+
+    /**
+     * @var Boolean
+     *
+     * @Assert\Type(
+     *     type="bool"
+     * )
+     */
+    private $published;
+
     /**
      * @var Boolean
      *
@@ -46,19 +84,129 @@ class Article extends AbstractArticleModel
     private $related;
 
     /**
+     * @var Image
+     */
+    private $thumbnail;
+
+    /**
      * @var ArrayCollection
      */
     private $tags;
 
-    function __construct()
+    /**
+     * @var ArrayCollection
+     */
+    private $versions;
+
+    /**
+     * Set slideshow default to false.
+     * Add empty tag array.
+     */
+    public function __construct()
     {
-        parent::__construct();
+        $this->published = false;
         $this->slideshow = false;
-        $this->tags = array();
+        $this->tags = new ArrayCollection();
+        $this->versions = new ArrayCollection();
     }
 
     /**
-     * @param $slideshow
+     * @param String $title The title of the entity.
+     * @return $this
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param String $slug The automatic generated slug.
+     * @return $this
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param String $content Set the written content.
+     * @return $this
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * @param \DateTime $publishAt Set the date when the entity should be published.
+     * @return $this
+     */
+    public function setPublishAt(\DateTime $publishAt)
+    {
+        $this->publishAt = $publishAt;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getPublishAt()
+    {
+        return $this->publishAt;
+    }
+
+    /**
+     * @param boolean $published Set true when publishing to frontend returns true.
+     * @return $this
+     */
+    public function setPublished($published)
+    {
+        $this->published = $published;
+
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isPublished()
+    {
+        return $this->published;
+    }
+
+    /**
+     * @param string $slideshow Set slideshow.
      * @return $this
      */
     public function setSlideshow($slideshow)
@@ -69,7 +217,7 @@ class Article extends AbstractArticleModel
     }
 
     /**
-     * @return bool
+     * @return boolean
      */
     public function isSlideshow()
     {
@@ -77,7 +225,7 @@ class Article extends AbstractArticleModel
     }
 
     /**
-     * @param Category $category
+     * @param Category $category Set category.
      * @return $this
      */
     public function setCategory(Category $category)
@@ -96,10 +244,10 @@ class Article extends AbstractArticleModel
     }
 
     /**
-     * @param User $user
+     * @param User|null $user Set createdBy user.
      * @return $this
      */
-    public function setCreatedBy(User $user)
+    public function setCreatedBy(User $user = null)
     {
         $this->createdBy = $user;
 
@@ -115,10 +263,10 @@ class Article extends AbstractArticleModel
     }
 
     /**
-     * @param User $user
+     * @param User|null $user Set modifiedBy user.
      * @return $this
      */
-    public function setModifiedBy(User $user)
+    public function setModifiedBy(User $user = null)
     {
         $this->modifiedBy = $user;
 
@@ -134,10 +282,10 @@ class Article extends AbstractArticleModel
     }
 
     /**
-     * @param Event $event
+     * @param Event|null $event Set event.
      * @return $this
      */
-    public function setEvent(Event $event)
+    public function setEvent(Event $event = null)
     {
         $this->event = $event;
 
@@ -147,13 +295,14 @@ class Article extends AbstractArticleModel
     /**
      * @return Event
      */
-    public function getEvent(){
+    public function getEvent()
+    {
 
         return $this->event;
     }
 
     /**
-     * @param Related $related
+     * @param Related $related Set Related.
      * @return $this
      */
     public function setRelated(Related $related)
@@ -166,18 +315,38 @@ class Article extends AbstractArticleModel
     /**
      * @return Related
      */
-    public function getRelated(){
+    public function getRelated()
+    {
 
         return $this->related;
     }
 
     /**
-     * @param Tag $tag
+     * @param Image|null $thumbnail Set Thumbnail.
+     * @return $this
+     */
+    public function setThumbnail(Image $thumbnail = null)
+    {
+        $this->thumbnail = $thumbnail;
+
+        return $this;
+    }
+
+    /**
+     * @return Image
+     */
+    public function getThumbnail()
+    {
+        return $this->thumbnail;
+    }
+
+    /**
+     * @param Tag $tag Add tag to array.
      * @return $this
      */
     public function addTag(Tag $tag)
     {
-        if (!$this->tags->contains($tag)){
+        if (!$this->tags->contains($tag)) {
             $this->tags->add($tag);
             $tag->addArticle($this);
         }
@@ -186,12 +355,12 @@ class Article extends AbstractArticleModel
     }
 
     /**
-     * @param Tag $tag
+     * @param Tag $tag Remove tag from array.
      * @return $this
      */
     public function removeTag(Tag $tag)
     {
-        $this->tags->remove($tag);
+        $this->tags->removeElement($tag);
 
         return $this;
     }
@@ -205,12 +374,43 @@ class Article extends AbstractArticleModel
     }
 
     /**
+     * @param ArticleVersion $articleVersion Add new version.
      * @return $this
      */
-    public function resetTags()
+    public function addVersion(ArticleVersion $articleVersion)
     {
-        $this->tags->clear();
+        if (!$this->versions->contains($articleVersion)) {
+            $this->versions->add($articleVersion);
+            $articleVersion->setArticle($this);
+        }
 
         return $this;
+    }
+
+    /**
+     * @param ArticleVersion $articleVersion Remove version from array.
+     * @return $this
+     */
+    public function removeVersion(ArticleVersion $articleVersion)
+    {
+        $this->versions->removeElement($articleVersion);
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getVersions()
+    {
+        return $this->versions->toArray();
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->title;
     }
 }

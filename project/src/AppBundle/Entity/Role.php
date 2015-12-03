@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Entity
+ */
 
 namespace AppBundle\Entity;
 
@@ -8,7 +11,7 @@ use Symfony\Component\Security\Core\Role\RoleInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Role
+ * Class Role
  */
 class Role implements RoleInterface, \Serializable
 {
@@ -36,13 +39,16 @@ class Role implements RoleInterface, \Serializable
      */
     private $users;
 
-    function __construct()
+    /**
+     * set empty user array
+     */
+    public function __construct()
     {
-        $this->users = array();
+        $this->users = new ArrayCollection();
     }
 
     /**
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -50,7 +56,7 @@ class Role implements RoleInterface, \Serializable
     }
 
     /**
-     * @param $name
+     * @param string $name Set name.
      * @return $this
      */
     public function setName($name)
@@ -61,7 +67,7 @@ class Role implements RoleInterface, \Serializable
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getName()
     {
@@ -69,7 +75,7 @@ class Role implements RoleInterface, \Serializable
     }
 
     /**
-     * @param $role
+     * @param string $role Set role.
      * @return $this
      */
     public function setRole($role)
@@ -80,7 +86,7 @@ class Role implements RoleInterface, \Serializable
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getRole()
     {
@@ -88,7 +94,7 @@ class Role implements RoleInterface, \Serializable
     }
 
     /**
-     * @param User $user
+     * @param User $user Add user to array.
      * @return $this
      */
     public function addUser(User $user)
@@ -102,12 +108,12 @@ class Role implements RoleInterface, \Serializable
     }
 
     /**
-     * @param User $user
+     * @param User $user Remove user from array.
      * @return $this
      */
     public function removeUser(User $user)
     {
-        $this->users->remove($user);
+        $this->users->removeElement($user);
 
         return $this;
     }
@@ -125,14 +131,17 @@ class Role implements RoleInterface, \Serializable
      */
     public function serialize()
     {
-        return \serialize(array(
-            $this->id,
-            $this->role
-        ));
+        return \serialize(
+            array(
+                $this->id,
+                $this->role,
+            )
+        );
     }
 
     /**
-     * @param string $serialized
+     * @param string $serialized Unserialize id and role.
+     * @return $this
      */
     public function unserialize($serialized)
     {
@@ -140,12 +149,14 @@ class Role implements RoleInterface, \Serializable
             $this->id,
             $this->role
             ) = \unserialize($serialized);
+
+        return $this;
     }
 
     /**
      * @return string
      */
-    function __toString()
+    public function __toString()
     {
         return $this->name;
     }

@@ -1,44 +1,109 @@
 <?php
+/**
+ * @package AppBundle\Tests\Controller
+ */
 
 namespace AppBundle\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use AppBundle\Entity\Article;
 
-class ArticleControllerTest extends WebTestCase
+/**
+ * Class ArticleControllerTest
+ */
+class ArticleControllerTest extends AbstractControllerTest
 {
-    public function testCreate()
-    {
-        $client = static::createClient();
+    /**
+     * @var Article
+     */
+    protected $article;
 
-        $crawler = $client->request('GET', '/article/create');
+    /**
+     * @return $this
+     */
+    public function setUp()
+    {
+        parent::setUp();
+
+        $repository = $this->getEntityManager()->getRepository('AppBundle:Article');
+        $this->article = $repository->findBy(
+            array(),
+            array(),
+            1
+        )[0];
+
+        return $this;
     }
 
-    public function testEdit()
+    /**
+     * @return null
+     */
+    public function testCreatePage()
     {
-        $client = static::createClient();
+        $crawler = $this->pageResponse('GET', '/article/create');
 
-        $crawler = $client->request('GET', '/article/{id}/edit');
+        $this->checkIfOneContentExist($crawler, 'input[id="article_title"]');
+        $this->checkIfOneContentExist($crawler, 'textarea[id="article_content"]');
+        $this->checkIfOneContentExist($crawler, 'select[id="article_thumbnail"]');
+        $this->checkIfOneContentExist($crawler, 'select[id="article_related"]');
+        $this->checkIfOneContentExist($crawler, 'select[id="article_category"]');
+        $this->checkIfOneContentExist($crawler, 'select[id="article_event"]');
+        $this->checkIfOneContentExist($crawler, 'select[id="article_tags"]');
+        $this->checkIfOneContentExist($crawler, 'input[id="article_slideshow"]');
+        $this->checkIfOneContentExist($crawler, 'div[id="article_publishAt"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="article_save"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="article_saveAndPublish"]');
+
+        return null;
     }
 
-    public function testShow()
+    /**
+     * @return null
+     */
+    public function testEditPage()
     {
-        $client = static::createClient();
+        $crawler = $this->pageResponse('GET', sprintf('/article/%s/edit', $this->article->getId()));
 
-        $crawler = $client->request('GET', '/article/{id}/show');
+        $this->checkIfOneContentExist($crawler, 'input[id="article_title"]');
+        $this->checkIfOneContentExist($crawler, 'textarea[id="article_content"]');
+        $this->checkIfOneContentExist($crawler, 'select[id="article_thumbnail"]');
+        $this->checkIfOneContentExist($crawler, 'select[id="article_related"]');
+        $this->checkIfOneContentExist($crawler, 'select[id="article_category"]');
+        $this->checkIfOneContentExist($crawler, 'select[id="article_event"]');
+        $this->checkIfOneContentExist($crawler, 'select[id="article_tags"]');
+        $this->checkIfOneContentExist($crawler, 'input[id="article_slideshow"]');
+        $this->checkIfOneContentExist($crawler, 'div[id="article_publishAt"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="article_save"]');
+        $this->checkIfOneContentExist($crawler, 'button[id="article_saveAndPublish"]');
+
+        $this->checkIfOneContentExist($crawler, sprintf('a[href="/article/%s/show"]', $this->article->getId()));
+
+        return null;
     }
 
-    public function testDelete()
+    /**
+     * @return null
+     */
+    public function testShowPage()
     {
-        $client = static::createClient();
+        $crawler = $this->pageResponse('GET', sprintf('/article/%s/show', $this->article->getId()));
 
-        $crawler = $client->request('GET', '/article/{id}/delete');
+        $this->checkIfOneContentExist($crawler, sprintf('a[href="/article/%s/edit"]', $this->article->getId()));
+
+        return null;
     }
 
-    public function testList()
+    /**
+     * @return null
+     */
+    public function testListPage()
     {
-        $client = static::createClient();
+        $crawler = $this->pageResponse('GET', '/article/');
 
-        $crawler = $client->request('GET', '/articles/{page}');
+        $this->checkIfOneContentExist($crawler, 'table[id="entity_list"]');
+        $this->checkIfNumberOfContentExist($crawler, 'a[href="/article/create"]', 2);
+        $this->checkIfOneContentExist($crawler, sprintf('a[href="/article/%s/edit"]', $this->article->getId()));
+        $this->checkIfOneContentExist($crawler, sprintf('a[href="/article/%s/show"]', $this->article->getId()));
+
+        return null;
     }
-
 }

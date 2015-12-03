@@ -1,8 +1,12 @@
 <?php
+/**
+ * @package AppBundle\DataFixtures\ORM
+ */
 
 namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Article;
+use AppBundle\Entity\Tag;
 use AppBundle\SimpleXMLExtended;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -11,10 +15,17 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\File\File;
 
+/**
+ * Class ArticleFixtures
+ */
 class ArticleFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     private $container;
 
+    /**
+     * @param ObjectManager $manager Manager to save article.
+     * @return null
+     */
     public function load(ObjectManager $manager)
     {
         $xml = new SimpleXMLExtended(file_get_contents('web/export/article.xml'));
@@ -26,24 +37,33 @@ class ArticleFixtures extends AbstractFixture implements OrderedFixtureInterface
             $article->setSlideshow(intval("$item->slideshow"));
             $article->setPublished(intval("$item->published"));
             $article->setPublishAt(new \DateTime("$item->publishedAt"));
-            if ("$item->relatedType" != "") {
-                $article->setRelated($this->getReference("$item->relatedType".'-'."$item->related"));
+            if ("$item->relatedType" != '') {
+                $article->setRelated($this->getReference("$item->relatedType" . '-' . "$item->related"));
             }
 
-            if ("$item->category" != "") {
+            if ("$item->category" != '') {
                 $article->setCategory($this->getReference("$item->category"));
             }
 
-            if ("$item->event" != "") {
+            if ("$item->event" != '') {
                 $article->setEvent($this->getReference("$item->event"));
             }
+
+            if ("$item->thumbnail" != '') {
+                $article->setThumbnail($this->getReference("$item->thumbnail"));
+            }
+
+            foreach ($item->tag as $tag) {
+                $article->addTag($this->getReference("$tag"));
+            }
+
             $manager->getRepository('AppBundle:Article')->save(
                 $article,
-                $this->getReference('user-'."$item->author")
+                $this->getReference('user-' . "$item->author")
             );
         }
 
-        $dataDirectory = __DIR__.'/../data/articles';
+        $dataDirectory = __DIR__ . '/../data/articles';
         $directory = opendir($dataDirectory);
 
         $count = 0;
@@ -55,23 +75,26 @@ class ArticleFixtures extends AbstractFixture implements OrderedFixtureInterface
 
             if ($file != 'imported') {
                 $count++;
-                $this->saveWordpressArticle($manager, $dataDirectory.DIRECTORY_SEPARATOR.$file, $count);
+                $this->saveWordpressArticles($manager, $dataDirectory . DIRECTORY_SEPARATOR . $file, $count);
             }
         }
         $manager->flush();
+
+        return null;
     }
 
 
     /**
-     * @param ObjectManager $manager
-     * @param $path
-     * @param $count
+     * @param ObjectManager $manager Manager to save article.
+     * @param string        $path    Path to xml.
+     * @return null
      */
-    public function saveWordpressArticle(ObjectManager $manager, $path, $count)
+    public function saveWordpressArticles(ObjectManager $manager, $path)
     {
         $xml = new \SimpleXMLElement(file_get_contents($path));
-        foreach ($xml->channel->item as $item) {
+        $articleRepository = $manager->getRepository('AppBundle:Article');
 
+        foreach ($xml->channel->item as $item) {
             $namespaces = $item->getNameSpaces(true);
             $dc = $item->children($namespaces['dc']);
             $content = $item->children($namespaces['content']);
@@ -82,44 +105,58 @@ class ArticleFixtures extends AbstractFixture implements OrderedFixtureInterface
             $article->setPublishAt(new \DateTime("$wp->post_date"));
             $article->setPublished(true);
             $article->setContent("$content->encoded");
+
             foreach ($item->category as $category) {
                 foreach ($category->attributes() as $a => $b) {
                     if ($b == 'category') {
                         $article->setCategory(
                             $this->getReference(
-                                'category-'.preg_replace("/[^a-z0-9]+/", "-", strtolower("$category"))
+                                'category-' . $articleRepository->slugify("$category")
                             )
                         );
                     }
                 }
             }
 
-            $manager->getRepository('AppBundle:Article')->save(
-                $article,
-                $this->getReference('user-'."$dc->creator")
-            );
+            $articleRepository->save($article, $this->getReference('user-' . "$dc->creator"));
+
+            foreach ($item->category as $category) {
+                foreach ($category->attributes() as $a => $b) {
+                    if ($b = 'post_tag') {
+                        $tag = $manager->getRepository('AppBundle:Tag')->findOneBy(array('name' => "$category"));
+                        if (is_null($tag)) {
+                            $tag = new Tag();
+                            $tag->setName("$category");
+                            $manager->getRepository('AppBundle:Tag')->save($tag);
+                        }
+                        $article->addTag($tag);
+                    }
+                }
+            }
         }
 
         $file = new File($path);
-        $file->move(__DIR__.'/../data/articles/imported');
+        $file->move(__DIR__ . '/../data/articles/imported');
+
+        return null;
     }
 
     /**
-     * @param ContainerInterface|null $containerInterface
+     * @param ContainerInterface|null $containerInterface ContainerInterface.
+     * @return $this
      */
-    public
-    function setContainer(
-        ContainerInterface $containerInterface = null
-    ) {
-        $this->container = $containerInterface;
-    }
-
-    /**
-     * @return int
-     */
-    public
-    function getOrder()
+    public function setContainer(ContainerInterface $containerInterface = null)
     {
-        return 13;
+        $this->container = $containerInterface;
+
+        return $this;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getOrder()
+    {
+        return 14;
     }
 }

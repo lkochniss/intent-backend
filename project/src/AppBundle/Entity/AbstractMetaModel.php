@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Entity
+ */
 
 namespace AppBundle\Entity;
 
@@ -6,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Related
+ * Class AbstractMetaModel
  */
 abstract class AbstractMetaModel extends AbstractModel
 {
@@ -31,14 +34,18 @@ abstract class AbstractMetaModel extends AbstractModel
      */
     private $published;
 
-    function __construct()
+    /**
+     * Initialize createdAt.
+     * Set published default to false.
+     */
+    public function __construct()
     {
         parent::setCreatedAt();
         $this->published = false;
     }
 
     /**
-     * @param $name
+     * @param string $name Set name.
      * @return $this
      */
     public function setName($name)
@@ -49,7 +56,7 @@ abstract class AbstractMetaModel extends AbstractModel
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getName()
     {
@@ -57,7 +64,7 @@ abstract class AbstractMetaModel extends AbstractModel
     }
 
     /**
-     * @param $slug
+     * @param string $slug Set auto generated slug.
      * @return $this
      */
     public function setSlug($slug)
@@ -68,7 +75,7 @@ abstract class AbstractMetaModel extends AbstractModel
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getSlug()
     {
@@ -76,7 +83,7 @@ abstract class AbstractMetaModel extends AbstractModel
     }
 
     /**
-     * @param $published
+     * @param boolean $published Set published.
      * @return $this
      */
     public function setPublished($published)
@@ -87,7 +94,7 @@ abstract class AbstractMetaModel extends AbstractModel
     }
 
     /**
-     * @return bool
+     * @return boolean
      */
     public function isPublished()
     {

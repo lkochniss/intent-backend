@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Form\Type
+ */
 
 namespace AppBundle\Form\Type;
 
@@ -12,8 +15,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class StudioType extends AbstractType
 {
     /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param FormBuilderInterface $builder Builder.
+     * @param array                $options Options.
+     * @return null
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -32,24 +36,70 @@ class StudioType extends AbstractType
                 array(
                     'label' => 'studio.description',
                     'translation_domain' => 'studio',
+                    'required' => false,
                     'attr' => array(
                         'class' => 'tinymce',
-                        'data-theme' => 'advanced'
-                    )
+                        'data-theme' => 'advanced',
+                    ),
                 )
             )
             ->add(
-                'submit',
+                'background_image',
+                'entity',
+                array(
+                    'label' => 'studio.backgroundimage.label',
+                    'translation_domain' => 'studio',
+                    'class' => 'AppBundle\Entity\Image',
+                    'multiple' => false,
+                    'expanded' => false,
+                    'placeholder' => 'studio.backgroundimage.select',
+                    'empty_data' => null,
+                    'required' => false,
+                )
+            )
+            ->add(
+                'thumbnail',
+                'entity',
+                array(
+                    'label' => 'studio.thumbnail.label',
+                    'translation_domain' => 'studio',
+                    'class' => 'AppBundle\Entity\Image',
+                    'multiple' => false,
+                    'expanded' => false,
+                    'placeholder' => 'studio.thumbnail.select',
+                    'empty_data' => null,
+                    'required' => false,
+                )
+            )
+            ->add(
+                'save',
                 'submit',
                 array(
                     'label' => 'studio.submit',
                     'translation_domain' => 'studio',
+                    'attr' => array(
+                        'class' => 'btn-primary'
+                    )
+                )
+            )
+            ->add(
+                'saveAndPublish',
+                'submit',
+                array(
+                    'label' => 'studio.publish',
+                    'translation_domain' => 'studio',
+                    'attr' => array(
+                        'class' => 'btn-success'
+                    )
                 )
             );
+
+        return null;
     }
 
     /**
-     * @param OptionsResolver $resolver
+     * @param OptionsResolver $resolver Add studio to form.
+     * @return null
      */
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -58,6 +108,8 @@ class StudioType extends AbstractType
                 'data_class' => 'AppBundle\Entity\Studio',
             )
         );
+
+        return null;
     }
 
     /**

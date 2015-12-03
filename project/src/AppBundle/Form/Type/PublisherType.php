@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Form\Type
+ */
 
 namespace AppBundle\Form\Type;
 
@@ -12,8 +15,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class PublisherType extends AbstractType
 {
     /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param FormBuilderInterface $builder Builder.
+     * @param array                $options Options.
+     * @return null
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -32,6 +36,7 @@ class PublisherType extends AbstractType
                 array(
                     'label' => 'publisher.description',
                     'translation_domain' => 'publisher',
+                    'required' => false,
                     'attr' => array(
                         'class' => 'tinymce',
                         'data-theme' => 'advanced'
@@ -39,17 +44,62 @@ class PublisherType extends AbstractType
                 )
             )
             ->add(
-                'submit',
+                'background_image',
+                'entity',
+                array(
+                    'label' => 'publisher.backgroundimage.label',
+                    'translation_domain' => 'publisher',
+                    'class' => 'AppBundle\Entity\Image',
+                    'multiple' => false,
+                    'expanded' => false,
+                    'placeholder' => 'publisher.backgroundimage.select',
+                    'empty_data' => null,
+                    'required' => false,
+                )
+            )
+            ->add(
+                'thumbnail',
+                'entity',
+                array(
+                    'label' => 'publisher.thumbnail.label',
+                    'translation_domain' => 'publisher',
+                    'class' => 'AppBundle\Entity\Image',
+                    'multiple' => false,
+                    'expanded' => false,
+                    'placeholder' => 'publisher.thumbnail.select',
+                    'empty_data' => null,
+                    'required' => false,
+                )
+            )
+            ->add(
+                'save',
                 'submit',
                 array(
                     'label' => 'publisher.submit',
                     'translation_domain' => 'publisher',
+                    'attr' => array(
+                        'class' => 'btn-primary'
+                    )
+                )
+            )
+            ->add(
+                'saveAndPublish',
+                'submit',
+                array(
+                    'label' => 'publisher.publish',
+                    'translation_domain' => 'publisher',
+                    'attr' => array(
+                        'class' => 'btn-success'
+                    )
                 )
             );
+
+        return null;
     }
 
     /**
-     * @param OptionsResolver $resolver
+     * @param OptionsResolver $resolver Add publisher to form.
+     * @return null
      */
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -58,6 +108,8 @@ class PublisherType extends AbstractType
                 'data_class' => 'AppBundle\Entity\Publisher',
             )
         );
+
+        return null;
     }
 
     /**

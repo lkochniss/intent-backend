@@ -15,6 +15,7 @@
             {% trans from "event" %}event.create{% endtrans %}
         {% else %}
             {% trans from "event" %}event.edit{% endtrans %}
+            <a href="{{ path('intent_backend_event_show', {'id' : entity.id }) }}" class="glyphicon glyphicon-eye-open"></a>
         {% endif %}
     </h1>
     {{ form_start(form) }}
@@ -23,9 +24,18 @@
         {{ form_row(form.description) }}
     </div>
     <div class="col-md-3 meta">
+        {{ form_label(form.thumbnail) }}
+        {% if entity.thumbnail %}
+            <img src="{{ entity.thumbnail.absolutePath }}" class="img-responsive" /><br />
+        {% endif %}
+        {{ form_widget(form.thumbnail) }}
         {{ form_row(form.startAt) }}
         {{ form_row(form.endAt) }}
-        {{ form_row(form.submit) }}
+        {{ form_row(form.background_image) }}
+        {{ form_row(form.save) }}
+        {% if is_granted('ROLE_PUBLISH_META') %}
+            {{ form_row(form.saveAndPublish) }}
+        {% endif %}
     </div>
     {{ form_end(form) }}
 {% endblock %}

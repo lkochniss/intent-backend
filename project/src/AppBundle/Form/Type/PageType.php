@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Form\Type
+ */
 
 namespace AppBundle\Form\Type;
 
@@ -12,8 +15,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class PageType extends AbstractType
 {
     /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param FormBuilderInterface $builder Builder.
+     * @param array                $options Options.
+     * @return null
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -32,6 +36,7 @@ class PageType extends AbstractType
                 array(
                     'label' => 'page.content',
                     'translation_domain' => 'page',
+                    'required' => false,
                     'attr' => array(
                         'class' => 'tinymce',
                         'data-theme' => 'advanced'
@@ -39,17 +44,34 @@ class PageType extends AbstractType
                 )
             )
             ->add(
-                'submit',
+                'save',
                 'submit',
                 array(
                     'label' => 'page.submit',
                     'translation_domain' => 'page',
+                    'attr' => array(
+                        'class' => 'btn-primary'
+                    )
+                )
+            )
+            ->add(
+                'saveAndPublish',
+                'submit',
+                array(
+                    'label' => 'page.publish',
+                    'translation_domain' => 'page',
+                    'attr' => array(
+                        'class' => 'btn-success'
+                    )
                 )
             );
+
+        return null;
     }
 
     /**
-     * @param OptionsResolver $resolver
+     * @param OptionsResolver $resolver Add page to form.
+     * @return null
      */
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -58,6 +80,8 @@ class PageType extends AbstractType
                 'data_class' => 'AppBundle\Entity\Page',
             )
         );
+
+        return null;
     }
 
     /**

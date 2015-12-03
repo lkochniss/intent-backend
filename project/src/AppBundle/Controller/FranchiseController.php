@@ -1,11 +1,16 @@
 <?php
+/**
+ * @package AppBundle\Controller
+ */
 
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Franchise;
-use AppBundle\Form\Type\FranchisePublishType;
 use AppBundle\Form\Type\FranchiseType;
 
+/**
+ * Class FranchiseController
+ */
 class FranchiseController extends AbstractRelatedController
 {
     /**
@@ -22,14 +27,6 @@ class FranchiseController extends AbstractRelatedController
     protected function getFormType()
     {
         return new FranchiseType();
-    }
-
-    /**
-     * @return FranchisePublishType
-     */
-    protected function getPublishType()
-    {
-        return new FranchisePublishType();
     }
 
     /**
@@ -56,24 +53,35 @@ class FranchiseController extends AbstractRelatedController
         return 'intent_backend_franchise';
     }
 
+    /**
+     * @return string
+     */
     protected function getTranslationDomain()
     {
         return 'franchise';
     }
 
+    /**
+     * @return string
+     */
     protected function getReadAccessLevel()
     {
         return 'ROLE_READ_META';
     }
 
+    /**
+     * @return string
+     */
     protected function getWriteAccessLevel()
     {
         return 'ROLE_WRITE_META';
     }
 
+    /**
+     * @return string
+     */
     protected function getPublishAccessLevel()
     {
         return 'ROLE_PUBLISH_META';
     }
-
 }

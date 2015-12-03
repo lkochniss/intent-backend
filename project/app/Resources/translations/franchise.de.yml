@@ -1,23 +1,29 @@
 franchise:
-    actions:    Aktionen
-    categories: Artikel zu
-    create:     Franchise erstellen
-    descripton: Beschreibung
-    delete:     Franchise löschen
-    edit:       Franchise bearbeiten
-    games:      Games zu
-    list:       Franchiseübersicht
-    name:       Franchise
-    not_found:  Franchise nicht gefunden
-    publish:    Franchise veröffentlichen
+    actions:            Aktionen
+    backgroundimage:
+        label:          Hintergrundbild
+        select:         Hintergrundbild auswählen
+    categories:         Artikel zu
+    create:             Franchise erstellen
+    descripton:         Beschreibung
+    delete:             Franchise löschen
+    edit:               Franchise bearbeiten
+    games:              Games zu
+    list:               Franchiseübersicht
+    name:               Franchise
+    not_found:          Franchise nicht gefunden
+    publish:            Franchise veröffentlichen
     published:
-        at:     Veröffentlicht am
-        by:     Author
+        at:             Veröffentlicht am
+        by:             Autor
     publisher:
-        name:   Publisher
-        select: Publisher auswählen
-    show:       Franchisevorschau
+        name:           Publisher
+        select:         Publisher auswählen
+    show:               Franchisevorschau
     studio:
-        name:   Entwicklerstudio
-        select: Entwicklerstudio auswählen
-    submit:     Franchise speichern
+        name:           Entwicklerstudio
+        select:         Entwicklerstudio auswählen
+    submit:             Franchise speichern
+    thumbnail:
+        label:          Franchise Logo
+        select:         Franchise Logo auswählen

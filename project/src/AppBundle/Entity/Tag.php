@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Entity
+ */
 
 namespace AppBundle\Entity;
 
@@ -6,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Tag
+ * Class Tag
  */
 class Tag extends AbstractMetaModel
 {
@@ -15,19 +18,22 @@ class Tag extends AbstractMetaModel
      */
     private $articles;
 
-    function __construct()
+    /**
+     * init
+     */
+    public function __construct()
     {
         parent::__construct();
-        $this->articles = array();
+        $this->articles = new ArrayCollection();
     }
 
     /**
-     * @param Article $article
+     * @param Article $article Add article to array.
      * @return $this
      */
     public function addArticle(Article $article)
     {
-        if(!$this->articles->contains($article)){
+        if (!$this->articles->contains($article)) {
             $this->articles->add($article);
             $article->addTag($this);
         }
@@ -36,12 +42,12 @@ class Tag extends AbstractMetaModel
     }
 
     /**
-     * @param Article $article
+     * @param Article $article Remove article from array.
      * @return $this
      */
     public function removeArticle(Article $article)
     {
-        $this->articles->remove($article);
+        $this->articles->removeElement($article);
 
         return $this;
     }
@@ -52,5 +58,13 @@ class Tag extends AbstractMetaModel
     public function getArticles()
     {
         return $this->articles->toArray();
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getName();
     }
 }

@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Form\Type
+ */
 
 namespace AppBundle\Form\Type;
 
@@ -12,8 +15,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class CategoryType extends AbstractType
 {
     /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param FormBuilderInterface $builder Builder.
+     * @param array                $options Options.
+     * @return null
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -35,17 +39,34 @@ class CategoryType extends AbstractType
                 )
             )
             ->add(
-                'submit',
+                'save',
                 'submit',
                 array(
                     'label' => 'category.submit',
                     'translation_domain' => 'category',
+                    'attr' => array(
+                        'class' => 'btn-primary'
+                    )
+                )
+            )
+            ->add(
+                'saveAndPublish',
+                'submit',
+                array(
+                    'label' => 'category.publish',
+                    'translation_domain' => 'category',
+                    'attr' => array(
+                        'class' => 'btn-success'
+                    )
                 )
             );
+
+        return null;
     }
 
     /**
-     * @param OptionsResolver $resolver
+     * @param OptionsResolver $resolver Add category to form.
+     * @return null
      */
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -54,6 +75,8 @@ class CategoryType extends AbstractType
                 'data_class' => 'AppBundle\Entity\Category',
             )
         );
+
+        return null;
     }
 
     /**

@@ -27,6 +27,17 @@ AppBundle\Entity\Event:
         articles:
             targetEntity: Article
             mappedBy: event
+    manyToOne:
+        backgroundImage:
+            targetEntity: Image
+            joinColumn:
+                name: background_image_id
+                referencedColumnName: id
+        thumbnail:
+            targetEntity: Image
+            joinColumn:
+                name: thumbnail_id
+                referencedColumnName: id
     lifecycleCallbacks:
         prePersist:
             - setModifiedAt

@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Service
+ */
 
 namespace AppBundle\Service;
 
@@ -9,7 +12,6 @@ use Doctrine\ORM\EntityRepository;
 
 /**
  * Class ExpansionExport
- * @package AppBundle\Service
  */
 class ExpansionExport
 {
@@ -17,13 +19,16 @@ class ExpansionExport
     private $repository;
 
     /**
-     * @param EntityRepository $repository
+     * @param EntityRepository $repository Get the entity repository.
      */
     public function __construct(EntityRepository $repository)
     {
         $this->repository = $repository;
     }
 
+    /**
+     * @return boolean
+     */
     public function exportEntity()
     {
         $expansions = $this->repository->findAll();
@@ -50,10 +55,22 @@ class ExpansionExport
 
             $item->game = null;
             if ($expansion->getGame()) {
-                $item->game->addCData('game-'.$expansion->getGame()->getSlug());
+                $item->game->addCData('game-' . $expansion->getGame()->getSlug());
+            }
+
+            $item->backgroundImage = null;
+            if ($expansion->getBackgroundImage()) {
+                $item->backgroundImage->addCData('image-' . $expansion->getBackgroundImage()->getFullPath());
+            }
+
+            $item->thumbnail = null;
+            if ($expansion->getThumbnail()) {
+                $item->thumbnail->addCData('image-' . $expansion->getThumbnail()->getFullPath());
             }
         }
 
         $xml->saveXML('web/export/expansion.xml');
+
+        return true;
     }
 }

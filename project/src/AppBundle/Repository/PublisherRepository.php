@@ -1,22 +1,14 @@
 <?php
+/**
+ * @package AppBundle\Repository
+ */
 
 namespace AppBundle\Repository;
 
-use AppBundle\Entity\Publisher;
-
 /**
- * PublisherRepository
+ * Class PublisherRepository
  */
-class PublisherRepository extends AbstractRepository
+class PublisherRepository extends AbstractRelatedRepository
 {
-    /**
-     * @param Publisher $publisher
-     */
-    public function save(Publisher $publisher)
-    {
-        $slug = $this->slugify($publisher->getName());
-        $publisher->setSlug($slug);
-        $this->getEntityManager()->persist($publisher);
-        $this->getEntityManager()->flush();
-    }
+
 }

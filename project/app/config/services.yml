@@ -64,6 +64,11 @@ services:
         arguments:
             - @app.repository.studio
 
+    app.tag.service:
+        class: AppBundle\Service\TagExport
+        arguments:
+            - @app.repository.tag
+
     app.user.service:
         class: AppBundle\Service\UserExport
         arguments:
@@ -140,6 +145,12 @@ services:
         factory: ["@doctrine.orm.entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\Publisher
+
+    app.repository.tag:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - AppBundle\Entity\Tag
 
     app.repository.role:
         class: Doctrine\ORM\EntityRepository

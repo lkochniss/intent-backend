@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Form\Type
+ */
 
 namespace AppBundle\Form\Type;
 
@@ -7,17 +10,17 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class GameType
+ * Class EventType
  */
 class EventType extends AbstractType
 {
     /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param FormBuilderInterface $builder Builder.
+     * @param array                $options Options.
+     * @return null
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $now = new \DateTime();
         $builder
             ->add(
                 'name',
@@ -33,6 +36,7 @@ class EventType extends AbstractType
                 array(
                     'label' => 'event.description',
                     'translation_domain' => 'event',
+                    'required' => false,
                     'attr' => array(
                         'class' => 'tinymce',
                         'data-theme' => 'advanced'
@@ -58,17 +62,62 @@ class EventType extends AbstractType
                 )
             )
             ->add(
-                'submit',
+                'background_image',
+                'entity',
+                array(
+                    'label' => 'event.backgroundimage.label',
+                    'translation_domain' => 'event',
+                    'class' => 'AppBundle\Entity\Image',
+                    'multiple' => false,
+                    'expanded' => false,
+                    'placeholder' => 'event.backgroundimage.select',
+                    'empty_data' => null,
+                    'required' => false,
+                )
+            )
+            ->add(
+                'thumbnail',
+                'entity',
+                array(
+                    'label' => 'event.thumbnail.label',
+                    'translation_domain' => 'event',
+                    'class' => 'AppBundle\Entity\Image',
+                    'multiple' => false,
+                    'expanded' => false,
+                    'placeholder' => 'event.thumbnail.select',
+                    'empty_data' => null,
+                    'required' => false,
+                )
+            )
+            ->add(
+                'save',
                 'submit',
                 array(
                     'label' => 'event.submit',
                     'translation_domain' => 'event',
+                    'attr' => array(
+                        'class' => 'btn-primary'
+                    )
+                )
+            )
+            ->add(
+                'saveAndPublish',
+                'submit',
+                array(
+                    'label' => 'event.publish',
+                    'translation_domain' => 'event',
+                    'attr' => array(
+                        'class' => 'btn-success'
+                    )
                 )
             );
+
+        return null;
     }
 
     /**
-     * @param OptionsResolver $resolver
+     * @param OptionsResolver $resolver Add event to form.
+     * @return null
      */
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -77,6 +126,8 @@ class EventType extends AbstractType
                 'data_class' => 'AppBundle\Entity\Event',
             )
         );
+
+         return null;
     }
 
     /**

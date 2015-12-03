@@ -1,12 +1,17 @@
 <?php
+/**
+ * @package AppBundle\Controller
+ */
 
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Event;
-use AppBundle\Form\Type\EventPublishType;
 use AppBundle\Form\Type\EventType;
 
-class EventController extends AbstractRelatedController
+/**
+ * Class EventController
+ */
+class EventController extends AbstractMetaController
 {
     /**
      * @return Event
@@ -22,14 +27,6 @@ class EventController extends AbstractRelatedController
     protected function getFormType()
     {
         return new EventType();
-    }
-
-    /**
-     * @return EventPublishType
-     */
-    protected function getPublishType()
-    {
-        return new EventPublishType();
     }
 
     /**
@@ -56,21 +53,33 @@ class EventController extends AbstractRelatedController
         return 'intent_backend_event';
     }
 
+    /**
+     * @return string
+     */
     protected function getTranslationDomain()
     {
         return 'event';
     }
 
+    /**
+     * @return string
+     */
     protected function getReadAccessLevel()
     {
         return 'ROLE_READ_META';
     }
 
+    /**
+     * @return string
+     */
     protected function getWriteAccessLevel()
     {
         return 'ROLE_WRITE_META';
     }
 
+    /**
+     * @return string
+     */
     protected function getPublishAccessLevel()
     {
         return 'ROLE_PUBLISH_META';

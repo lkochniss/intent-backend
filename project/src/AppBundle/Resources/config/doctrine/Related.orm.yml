@@ -29,4 +29,15 @@ AppBundle\Entity\Related:
         articles:
             targetEntity: Article
             mappedBy: related
+    manyToOne:
+        backgroundImage:
+            targetEntity: Image
+            joinColumn:
+                name: background_image_id
+                referencedColumnName: id
+        thumbnail:
+            targetEntity: Image
+            joinColumn:
+                name: thumbnail_id
+                referencedColumnName: id
     lifecycleCallbacks: { }

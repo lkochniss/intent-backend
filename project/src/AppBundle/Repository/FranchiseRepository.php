@@ -1,22 +1,14 @@
 <?php
+/**
+ * @package AppBundle\Repository
+ */
 
 namespace AppBundle\Repository;
 
-use AppBundle\Entity\Franchise;
-
 /**
- * FranchiseRepository
+ * Class FranchiseRepository
  */
-class FranchiseRepository extends AbstractRepository
+class FranchiseRepository extends AbstractRelatedRepository
 {
-    /**
-     * @param Franchise $franchise
-     */
-    public function save(Franchise $franchise)
-    {
-        $slug = $this->slugify($franchise->getName());
-        $franchise->setSlug($slug);
-        $this->getEntityManager()->persist($franchise);
-        $this->getEntityManager()->flush();
-    }
+
 }

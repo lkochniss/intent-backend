@@ -3,9 +3,26 @@ user:
     active:         Login aktiv
     access_denied:  kein Zugriff
     create:         Benutzer erstellen
-    delete:         Benutzer löschen
+    delete:
+        action:     Benutzer löschen
+        confirm:    Benutzer und Benutzerprofil wirklich löschen?
+        name:       löschen
+        select:     Benutzer auswählen
+        submit:     Benutzer löschen
+        user:       Artikel einem anderen Benutzer zuweisen. Wenn kein Benutzer gewählt wird, werden die Artikel gelöscht!
     edit:           Benutzer bearbeiten
     email:          Email
+    mail:
+        activate:   Mit dem Passwort kannst du dich einloggen. Das Passwort muss jedoch innerhalb eines Tages erneuert werden.
+        from:       system@int-ent.de
+        hello:      Hallo
+        invite:     Du wurdest zu intent-backend test.dev hinzugefügt.
+        password:   Dein Passwort lautet
+        regards:    Grüße, dein int.ent Team
+        reset:      Wir senden dir dein neues Passwort. Es ist 2 Stunden gültig. Dein Passwort lautet
+        role:       Folgende Rechte wurden dir erteilt:
+        subject:    Neuer Benutzer
+        url:        Zum Login
     invite:         Benutzer einladen
     list:           Benutzerübersicht
     name:           Benutzername

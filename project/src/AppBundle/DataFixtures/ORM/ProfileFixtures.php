@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\DataFixtures\ORM
+ */
 
 namespace AppBundle\DataFixtures\ORM;
 
@@ -11,10 +14,17 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+/**
+ * Class ProfileFixtures
+ */
 class ProfileFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     private $container;
 
+    /**
+     * @param ObjectManager $manager Manager to save profile.
+     * @return boolean
+     */
     public function load(ObjectManager $manager)
     {
         $xml = new SimpleXMLExtended(file_get_contents('web/export/profile.xml'));
@@ -24,27 +34,32 @@ class ProfileFixtures extends AbstractFixture implements OrderedFixtureInterface
             $profile->setName("$item->name");
             $profile->setDescription("$item->description");
 
-            if("$item->user" != ""){
-                $profile->setUser($this->getReference('user-'."$item->user"));
+            if ("$item->user" != '') {
+                $profile->setUser($this->getReference('user-' . "$item->user"));
             }
 
             $manager->getRepository('AppBundle:Profile')->save(
                 $profile
             );
-            $this->addReference('profile-'.$profile->getName(), $profile);
+            $this->addReference('profile-' . $profile->getName(), $profile);
         }
+
+        return true;
     }
 
     /**
-     * @param ContainerInterface|null $containerInterface
+     * @param ContainerInterface|null $containerInterface ContainerInterface.
+     * @return $this
      */
     public function setContainer(ContainerInterface $containerInterface = null)
     {
         $this->container = $containerInterface;
+
+        return $this;
     }
 
     /**
-     * @return int
+     * @return integer
      */
     public function getOrder()
     {

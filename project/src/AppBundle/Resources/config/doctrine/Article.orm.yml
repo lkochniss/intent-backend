@@ -9,8 +9,26 @@ AppBundle\Entity\Article:
             generator:
                 strategy: AUTO
     fields:
+        title:
+            type: string
+            length: 255
+        slug:
+            type: string
+            length: 255
+        content:
+            type: text
+        publishAt:
+            column: publish_at
+            type: datetime
+            nullable: true
+        published:
+            type: boolean
         slideshow:
             type: boolean
+    oneToMany:
+        versions:
+            targetEntity: ArticleVersion
+            mappedBy: article
     manyToOne:
         category:
             targetEntity: Category
@@ -41,10 +59,16 @@ AppBundle\Entity\Article:
             joinColumn:
                 name: related_id
                 referencedColumnName: id
+        thumbnail:
+            targetEntity: Image
+            joinColumn:
+                name: thumbnail_id
+                referencedColumnName: id
     manyToMany:
         tags:
             targetEntity: Tag
             inversedBy: articles
+            cascade: ["persist"]
             joinTable:
                 name: articles_tags
                 joinColumns:

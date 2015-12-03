@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Entity
+ */
 
 namespace AppBundle\Entity;
 
@@ -7,7 +10,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Image
+ * Class Image
  */
 class Image extends AbstractModel
 {
@@ -25,15 +28,11 @@ class Image extends AbstractModel
 
     /**
      * @var String
-     *
-     * @Assert\NotBlank()
      */
     private $path;
 
     /**
      * @var String
-     *
-     * @Assert\NotBlank()
      */
     private $fullPath;
 
@@ -45,15 +44,16 @@ class Image extends AbstractModel
     /**
      * @var UploadedFile
      *
+     * @Assert\NotBlank()
      * @Assert\File(
-     *     maxSize = "1024k",
+     *     maxSize = "10Mi",
      *     mimeTypes = {"image/jpeg", "image/png", "image/gif"},
      * )
      */
     private $file;
 
     /**
-     * @param $name
+     * @param string $name Set name.
      * @return $this
      */
     public function setName($name)
@@ -64,7 +64,7 @@ class Image extends AbstractModel
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getName()
     {
@@ -72,15 +72,18 @@ class Image extends AbstractModel
     }
 
     /**
-     * @param String $description
+     * @param string $description Set description.
+     * @return $this;
      */
     public function setDescription($description)
     {
         $this->description = $description;
+
+        return $this;
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getDescription()
     {
@@ -88,7 +91,7 @@ class Image extends AbstractModel
     }
 
     /**
-     * @param $path
+     * @param string $path Set path.
      * @return $this
      */
     public function setPath($path)
@@ -100,7 +103,7 @@ class Image extends AbstractModel
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getPath()
     {
@@ -116,7 +119,7 @@ class Image extends AbstractModel
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getFullPath()
     {
@@ -124,33 +127,39 @@ class Image extends AbstractModel
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function resetFullPath()
     {
         if (is_null($this->parentDirectory)) {
             $this->fullPath = $this->path;
         } else {
-            $this->fullPath = $this->parentDirectory->getFullPath().'/'.$this->path;
+            $this->fullPath = $this->parentDirectory->getFullPath() . '/' . $this->path;
         }
 
         return $this;
     }
 
     /**
-     * @param Directory $parentDirectory
+     * @param Directory $parentDirectory Set parentDirectory.
+     * @return $this
      */
     public function setParentDirectory(Directory $parentDirectory)
     {
         $this->parentDirectory = $parentDirectory;
+
+        return $this;
     }
 
     /**
-     * @param UploadedFile|null $file
+     * @param UploadedFile|null $file Set UploadFile.
+     * @return $this
      */
     public function setFile(UploadedFile $file = null)
     {
         $this->file = $file;
+
+        return $this;
     }
 
     /**
@@ -161,12 +170,24 @@ class Image extends AbstractModel
         return $this->file;
     }
 
+    /**
+     * @return string
+     */
+    public function getAbsolutePath()
+    {
+        return '/' . $this->getFullPath();
+    }
+
+    /**
+     * @return null|void
+     */
     public function upload()
     {
-        $this->setPath($this->path.'.'.$this->getFile()->guessExtension());
         if (null === $this->getFile()) {
-            return;
+            return null;
         }
+
+        $this->setPath($this->path . '.' . $this->getFile()->guessExtension());
 
         $this->getFile()->move(
             $this->parentDirectory->getFullPath(),
@@ -174,5 +195,15 @@ class Image extends AbstractModel
         );
 
         $this->file = null;
+
+        return null;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->name . ' ( ' . $this->fullPath . ' )';
     }
 }

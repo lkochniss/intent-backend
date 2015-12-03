@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Controller
+ */
 
 namespace AppBundle\Controller;
 
@@ -8,8 +11,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Util\SecureRandom;
 
+/**
+ * Class SecurityController
+ */
 class SecurityController extends Controller
 {
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function loginAction()
     {
         $authenticationUtils = $this->get('security.authentication_utils');
@@ -23,6 +32,10 @@ class SecurityController extends Controller
         );
     }
 
+    /**
+     * @param Request $request HTTP Request.
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function resetPasswordAction(Request $request)
     {
         $form = $this->createForm(new PasswordResetType());
@@ -37,7 +50,7 @@ class SecurityController extends Controller
                  */
                 $user = $repository->findOneBy(array('username' => $username));
 
-                if (!is_null($user)){
+                if (!is_null($user)) {
                     $generator = new SecureRandom();
                     $password = $generator->nextBytes(8);
 

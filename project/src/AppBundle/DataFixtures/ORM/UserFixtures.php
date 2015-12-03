@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\DataFixtures\ORM
+ */
 
 namespace AppBundle\DataFixtures\ORM;
 
@@ -10,10 +13,17 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+/**
+ * Class UserFixtures
+ */
 class UserFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     private $container;
 
+    /**
+     * @param ObjectManager $manager Object manager to get repository.
+     * @return null
+     */
     public function load(ObjectManager $manager)
     {
         $xml = new SimpleXMLExtended(file_get_contents('web/export/user.xml'));
@@ -33,20 +43,25 @@ class UserFixtures extends AbstractFixture implements OrderedFixtureInterface, C
                 $user
             );
 
-            $this->addReference('user-'.$user->getUsername(), $user);
+            $this->addReference('user-' . $user->getUsername(), $user);
         }
+
+        return null;
     }
 
     /**
-     * @param ContainerInterface|null $containerInterface
+     * @param ContainerInterface|null $containerInterface Set the ContainerInterface.
+     * @return $this
      */
     public function setContainer(ContainerInterface $containerInterface = null)
     {
         $this->container = $containerInterface;
+
+        return $this;
     }
 
     /**
-     * @return int
+     * @return integer
      */
     public function getOrder()
     {

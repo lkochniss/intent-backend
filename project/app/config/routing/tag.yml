@@ -15,5 +15,5 @@ intent_backend_tag_delete:
     defaults: { _controller: AppBundle:Tag:delete }
 
 intent_backend_tag_list:
-    path:     /{page}
-    defaults: { _controller: AppBundle:Tag:list, page: 1 }
+    path:     /
+    defaults: { _controller: AppBundle:Tag:list }

@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Controller
+ */
 
 namespace AppBundle\Controller;
 
@@ -10,10 +13,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/**
+ * Class AbstractMetaController
+ */
 abstract class AbstractMetaController extends AbstractCrudController
 {
     /**
-     * @param Request $request
+     * @param Request $request HTTP Request.
      * @return RedirectResponse|Response
      */
     public function createAction(Request $request)
@@ -25,8 +31,9 @@ abstract class AbstractMetaController extends AbstractCrudController
     }
 
     /**
-     * @param $id
-     * @param Request $request
+     * @param integer $id      Id of entity.
+     * @param Request $request HTTP Request.
+     * @throws NotFoundHttpException Throw exception if entity not found.
      * @return RedirectResponse|Response
      */
     public function editAction($id, Request $request)
@@ -37,7 +44,7 @@ abstract class AbstractMetaController extends AbstractCrudController
         if (is_null($entity)) {
             throw new NotFoundHttpException(
                 $this->get('translator')->trans(
-                    $this->getTranslationDomain().'.not_found',
+                    $this->getTranslationDomain() . '.not_found',
                     array(),
                     $this->getTranslationDomain()
                 )
@@ -48,8 +55,8 @@ abstract class AbstractMetaController extends AbstractCrudController
     }
 
     /**
-     * @param $id
-     * @param Request $request
+     * @param integer $id      Id of enttiy.
+     * @param Request $request HTTP Request.
      * @return RedirectResponse|Response
      */
     public function showAction($id, Request $request)
@@ -57,7 +64,12 @@ abstract class AbstractMetaController extends AbstractCrudController
         $this->denyAccessUnlessGranted($this->getReadAccessLevel(), null, $this->getAccessDeniedMessage());
         $entity = $this->getDoctrine()->getRepository($this->getEntityName())->find($id);
 
-        return $this->createAndHandlePublishForm($entity, $request, 'show', array('id' => $entity->getId()));
+        return $this->render(
+            sprintf('%s/show.html.twig', $this->getTemplateBasePath()),
+            array(
+                'entity' => $entity,
+            )
+        );
     }
 
     /**
@@ -77,69 +89,29 @@ abstract class AbstractMetaController extends AbstractCrudController
     }
 
     /**
-     * @return String
-     */
-    abstract protected function getPublishType();
-
-    /**
-     * @return String
+     * @return string
      */
     abstract protected function getReadAccessLevel();
 
     /**
-     * @return String
+     * @return string
      */
     abstract protected function getWriteAccessLevel();
 
     /**
-     * @return String
+     * @return string
      */
     abstract protected function getPublishAccessLevel();
 
     /**
-     * @return String
+     * @return string
      */
-    protected function getAccessDeniedMessage(){
+    protected function getAccessDeniedMessage()
+    {
         return $this->get('translator')->trans(
-            $this->getTranslationDomain().'.access_denied',
+            $this->getTranslationDomain() . '.access_denied',
             array(),
             $this->getTranslationDomain()
-        );
-    }
-
-    /**
-     * @param AbstractModel $entity
-     * @param $request
-     * @return RedirectResponse|Response
-     */
-    protected function createAndHandlePublishForm(AbstractModel $entity, $request, $action, $options = array())
-    {
-        $form = $this->createForm(
-            $this->getPublishType(),
-            $entity,
-            array(
-                'action' => $this->generateUrlForAction($action, $options),
-                'method' => 'POST',
-            )
-        );
-
-        if (in_array($request->getMethod(), ['POST'])) {
-            $form->handleRequest($request);
-
-            if ($form->isValid()) {
-                $this->handleValidForm($entity);
-                $entity->setPublished(true);
-
-                return $this->redirect($this->generateUrlForAction('edit', array('id' => $entity->getId())));
-            }
-        }
-
-        return $this->render(
-            sprintf('%s/show.html.twig', $this->getTemplateBasePath()),
-            array(
-                'entity' => $entity,
-                'form' => $form->createView(),
-            )
         );
     }
 }

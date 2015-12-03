@@ -5,7 +5,7 @@
 {% block content %}
     <a href="{{ path('intent_backend_franchise_create') }}" class="btn btn-default pull-right">{% trans from "franchise" %}franchise.create{% endtrans %}</a>
     <h3>{% trans from "franchise" %}franchise.list{% endtrans %}</h3>
-    <table class="table">
+    <table class="table" id="entity_list">
         <thead>
         <tr>
             <th>{% trans from "franchise" %}franchise.name{% endtrans %}</th>

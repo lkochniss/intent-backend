@@ -8,4 +8,5 @@ category:
     name:       Kategorie
     not_found:  Kategorie nicht gefunden
     priority:   Priorität
+    publish:    Kategorie veröffentlichen
     submit:     Kategorie speichern

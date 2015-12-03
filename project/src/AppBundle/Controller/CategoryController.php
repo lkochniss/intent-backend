@@ -1,11 +1,16 @@
 <?php
+/**
+ * @package AppBundle\Controller
+ */
 
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Category;
-use AppBundle\Form\Type\CategoryPublishType;
 use AppBundle\Form\Type\CategoryType;
 
+/**
+ * Class CategoryController
+ */
 class CategoryController extends AbstractMetaController
 {
     /**
@@ -22,14 +27,6 @@ class CategoryController extends AbstractMetaController
     protected function getFormType()
     {
         return new CategoryType();
-    }
-
-    /**
-     * @return CategoryPublishType
-     */
-    protected function getPublishType()
-    {
-        return new CategoryPublishType();
     }
 
     /**
@@ -56,21 +53,33 @@ class CategoryController extends AbstractMetaController
         return 'intent_backend_category';
     }
 
+    /**
+     * @return string
+     */
     protected function getTranslationDomain()
     {
         return 'category';
     }
 
+    /**
+     * @return string
+     */
     protected function getReadAccessLevel()
     {
         return 'ROLE_READ_META';
     }
 
+    /**
+     * @return string
+     */
     protected function getWriteAccessLevel()
     {
         return 'ROLE_WRITE_META';
     }
 
+    /**
+     * @return string
+     */
     protected function getPublishAccessLevel()
     {
         return 'ROLE_PUBLISH_META';

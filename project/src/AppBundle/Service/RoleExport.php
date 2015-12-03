@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Service
+ */
 
 namespace AppBundle\Service;
 
@@ -8,7 +11,6 @@ use Doctrine\ORM\EntityRepository;
 
 /**
  * Class RoleExport
- * @package AppBundle\Service
  */
 class RoleExport
 {
@@ -16,13 +18,16 @@ class RoleExport
     private $repository;
 
     /**
-     * @param EntityRepository $repository
+     * @param EntityRepository $repository Get the entity repository.
      */
     public function __construct(EntityRepository $repository)
     {
         $this->repository = $repository;
     }
 
+    /**
+     * @return boolean
+     */
     public function exportEntity()
     {
         $roles = $this->repository->findAll();
@@ -43,5 +48,7 @@ class RoleExport
         }
 
         $xml->saveXML('web/export/role.xml');
+
+        return true;
     }
 }

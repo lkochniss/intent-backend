@@ -1,18 +1,25 @@
 <?php
+/**
+ * @package AppBundle\Controller
+ */
 
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\AbstractModel;
+use AppBundle\Entity\Related;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class AbstractRelatedController
+ */
 abstract class AbstractRelatedController extends AbstractMetaController
 {
     /**
-     * @param $id
-     * @param Request $request
+     * @param integer $id      Id of entity.
+     * @param Request $request HTTP Request.
      * @return RedirectResponse|Response
      */
     public function showAction($id, Request $request)
@@ -24,10 +31,10 @@ abstract class AbstractRelatedController extends AbstractMetaController
     }
 
     /**
-     * @param $entity
+     * @param Related $entity Related entity.
      * @return array
      */
-    private function loopRelated($entity)
+    private function loopRelated(Related $entity)
     {
         $franchises = null;
         $games = null;
@@ -84,10 +91,10 @@ abstract class AbstractRelatedController extends AbstractMetaController
     }
 
     /**
-     * @param $entity
+     * @param Related $entity Related entity.
      * @return \AppBundle\Entity\Article[]|array
      */
-    private function getRelatedArticles($entity)
+    private function getRelatedArticles(Related $entity)
     {
         return $related = $this->getDoctrine()->getRepository('AppBundle:Article')->findBy(
             array('related' => $entity),
@@ -96,10 +103,10 @@ abstract class AbstractRelatedController extends AbstractMetaController
     }
 
     /**
-     * @param $articles
+     * @param array $articles Array of articles.
      * @return array
      */
-    private function mapArticlesToCategories($articles)
+    private function mapArticlesToCategories(array $articles)
     {
         $categories = $this->getDoctrine()->getRepository('AppBundle:Category')->findBy(
             array(),
@@ -126,32 +133,18 @@ abstract class AbstractRelatedController extends AbstractMetaController
     }
 
     /**
-     * @param AbstractModel $entity
-     * @param $request
+     * @param AbstractModel $entity  Abstract entity.
+     * @param Request       $request HTTP Request.
+     * @param string        $action  Type of action.
+     * @param array         $options Array of options.
      * @return RedirectResponse|Response
      */
-    protected function createAndHandlePublishForm(AbstractModel $entity, $request, $action, $options = array())
-    {
-        $form = $this->createForm(
-            $this->getPublishType(),
-            $entity,
-            array(
-                'action' => $this->generateUrlForAction($action, $options),
-                'method' => 'POST',
-            )
-        );
-
-        if (in_array($request->getMethod(), ['POST'])) {
-            $form->handleRequest($request);
-
-            if ($form->isValid()) {
-                $this->handleValidForm($entity);
-                $entity->setPublished(true);
-
-                return $this->redirect($this->generateUrlForAction('edit', array('id' => $entity->getId())));
-            }
-        }
-
+    protected function createAndHandlePublishForm(
+        AbstractModel $entity,
+        Request $request,
+        $action,
+        array $options = array()
+    ) {
         $categories = $this->loopRelated($entity);
 
         return $this->render(
@@ -159,7 +152,6 @@ abstract class AbstractRelatedController extends AbstractMetaController
             array(
                 'entity' => $entity,
                 'categories' => $categories,
-                'form' => $form->createView(),
             )
         );
     }

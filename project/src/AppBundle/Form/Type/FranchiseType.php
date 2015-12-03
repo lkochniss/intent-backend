@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Form\Type
+ */
 
 namespace AppBundle\Form\Type;
 
@@ -12,8 +15,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class FranchiseType extends AbstractType
 {
     /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param FormBuilderInterface $builder Builder.
+     * @param array                $options Options.
+     * @return null
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -32,6 +36,7 @@ class FranchiseType extends AbstractType
                 array(
                     'label' => 'franchise.description',
                     'translation_domain' => 'franchise',
+                    'required' => false,
                     'attr' => array(
                         'class' => 'tinymce',
                         'data-theme' => 'advanced'
@@ -67,17 +72,62 @@ class FranchiseType extends AbstractType
                 )
             )
             ->add(
-                'submit',
+                'background_image',
+                'entity',
+                array(
+                    'label' => 'franchise.backgroundimage.label',
+                    'translation_domain' => 'franchise',
+                    'class' => 'AppBundle\Entity\Image',
+                    'multiple' => false,
+                    'expanded' => false,
+                    'placeholder' => 'franchise.backgroundimage.select',
+                    'empty_data' => null,
+                    'required' => false,
+                )
+            )
+            ->add(
+                'thumbnail',
+                'entity',
+                array(
+                    'label' => 'franchise.thumbnail.label',
+                    'translation_domain' => 'franchise',
+                    'class' => 'AppBundle\Entity\Image',
+                    'multiple' => false,
+                    'expanded' => false,
+                    'placeholder' => 'franchise.thumbnail.select',
+                    'empty_data' => null,
+                    'required' => false,
+                )
+            )
+            ->add(
+                'save',
                 'submit',
                 array(
                     'label' => 'franchise.submit',
                     'translation_domain' => 'franchise',
+                    'attr' => array(
+                        'class' => 'btn-primary'
+                    )
+                )
+            )
+            ->add(
+                'saveAndPublish',
+                'submit',
+                array(
+                    'label' => 'franchise.publish',
+                    'translation_domain' => 'franchise',
+                    'attr' => array(
+                        'class' => 'btn-success'
+                    )
                 )
             );
+
+        return null;
     }
 
     /**
-     * @param OptionsResolver $resolver
+     * @param OptionsResolver $resolver Add franchise to form.
+     * @return null
      */
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -86,6 +136,8 @@ class FranchiseType extends AbstractType
                 'data_class' => 'AppBundle\Entity\Franchise',
             )
         );
+
+        return null;
     }
 
     /**

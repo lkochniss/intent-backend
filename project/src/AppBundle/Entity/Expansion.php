@@ -1,11 +1,14 @@
 <?php
+/**
+ * @package AppBundle\Entity
+ */
 
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Expansion
+ * Class Expansion
  */
 class Expansion extends Related
 {
@@ -15,11 +18,14 @@ class Expansion extends Related
     private $game;
 
     /**
-     * @param Game $game
+     * @param Game $game Set Game.
+     * @return $this
      */
-    public function setGame($game)
+    public function setGame(Game $game)
     {
         $this->game = $game;
+
+        return $this;
     }
 
     /**

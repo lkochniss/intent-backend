@@ -11,5 +11,5 @@ intent_backend_profile_show:
     defaults: { _controller: AppBundle:Profile:show }
 
 intent_backend_profile_list:
-    path:     /{page}
-    defaults: { _controller: AppBundle:Profile:list, page: 1 }
+    path:     /
+    defaults: { _controller: AppBundle:Profile:list }

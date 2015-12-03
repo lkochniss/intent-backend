@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Entity
+ */
 
 namespace AppBundle\Entity;
 
@@ -6,23 +9,26 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Publisher
+ * Class Publisher
  */
 class Publisher extends Related
 {
      /**
-     * @var ArrayCollection
-     */
+      * @var ArrayCollection
+      */
     private $franchises;
 
-    function __construct()
+    /**
+     * set empty franchise array
+     */
+    public function __construct()
     {
         parent::__construct();
-        $this->franchises = array();
+        $this->franchises = new ArrayCollection();
     }
 
     /**
-     * @param Franchise $franchise
+     * @param Franchise $franchise Add franchise to array.
      * @return $this
      */
     public function addFranchise(Franchise $franchise)
@@ -36,12 +42,12 @@ class Publisher extends Related
     }
 
     /**
-     * @param Franchise $franchise
+     * @param Franchise $franchise Remove franchise from array.
      * @return $this
      */
     public function removeFranchise(Franchise $franchise)
     {
-        $this->franchises->remove($franchise);
+        $this->franchises->removeElement($franchise);
 
         return $this;
     }
@@ -55,7 +61,7 @@ class Publisher extends Related
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getType()
     {

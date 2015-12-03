@@ -1,7 +1,12 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}AppBundle:Tag:delete{% endblock %}
+{% block title %}{% trans from "user" %}user.delete.action{% endtrans %}{% endblock %}
 
-{% block body %}
-<h1>Welcome to the Tag:delete page</h1>
+{% block content %}
+    <h1>{{ user.username }} {% trans from "user" %}user.delete.name{% endtrans %}</h1>
+    {{ form_start(form) }}
+        {{ form_row(form.confirm) }}
+        {{ form_row(form.user) }}
+        {{ form_row(form.submit) }}
+    {{ form_end(form) }}
 {% endblock %}

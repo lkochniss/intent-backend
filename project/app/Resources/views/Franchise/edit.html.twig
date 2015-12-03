@@ -15,6 +15,7 @@
             {% trans from "franchise" %}franchise.create{% endtrans %}
         {% else %}
             {% trans from "franchise" %}franchise.edit{% endtrans %}
+            <a href="{{ path('intent_backend_franchise_show', {'id' : entity.id }) }}" class="glyphicon glyphicon-eye-open"></a>
         {% endif %}
     </h1>
     {{ form_start(form) }}
@@ -23,9 +24,26 @@
         {{ form_row(form.description) }}
     </div>
     <div class="col-md-3 meta">
+
+        {{ form_label(form.thumbnail) }}
+        {% if entity.thumbnail %}
+            <img src="{{ entity.thumbnail.absolutePath }}" class="img-responsive" /><br />
+        {% endif %}
+        {{ form_widget(form.thumbnail) }}
+
         {{ form_row(form.publisher) }}
         {{ form_row(form.studio) }}
-        {{ form_row(form.submit) }}
+
+        {{ form_label(form.background_image) }}
+        {% if entity.backgroundImage %}
+            <img src="/{{ entity.backgroundImage.fullPath }}" class="img-responsive" /><br />
+        {% endif %}
+        {{ form_widget(form.background_image) }}
+
+        {{ form_row(form.save) }}
+        {% if is_granted('ROLE_PUBLISH_META') %}
+            {{ form_row(form.saveAndPublish) }}
+        {% endif %}
     </div>
     {{ form_end(form) }}
 {% endblock %}
@@ -36,5 +54,9 @@
         $('#franchise_publisher').select2();
 
         $('#franchise_studio').select2();
+
+        $('#franchise_thumbnail').select2();
+
+        $('#franchise_background_image').select2();
     </script>
 {% endblock %}

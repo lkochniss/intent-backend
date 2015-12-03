@@ -1,19 +1,25 @@
 expansion:
-    actions:        Aktionen
-    categories:     Kategorien
-    create:         Expansion/DLC erstellen
-    description:    Beschreibung
-    delete:         Expansion/DLC löschen
-    edit:           Expansion/DLC bearbeiten
+    actions:            Aktionen
+    backgroundimage:
+        label:          Hintergrundbild
+        select:         Hintergrundbild auswählen
+    categories:         Kategorien
+    create:             Expansion/DLC erstellen
+    description:        Beschreibung
+    delete:             Expansion/DLC löschen
+    edit:               Expansion/DLC bearbeiten
     game:
-        name:       Game
-        select:     Game auswählen
-    list:           Expansion- /DLC-Übersicht
-    name:           Expansion/DLC
-    not_found:      Expansion/DLC nicht gefunden
-    publish:        Expansion/DLC veröffentlichen
+        name:           Game
+        select:         Game auswählen
+    list:               Expansion- /DLC-Übersicht
+    name:               Expansion/DLC
+    not_found:          Expansion/DLC nicht gefunden
+    publish:            Expansion/DLC veröffentlichen
     published:
-        at:         Veröffentlicht am
-        by:         Author
-    show:           Expansion-/DLC-Vorschau
-    submit:         Expansion/DLC speichern
+        at:             Veröffentlicht am
+        by:             Author
+    show:               Expansion-/DLC-Vorschau
+    submit:             Expansion/DLC speichern
+    thumbnail:
+        label:          Expansion/DLC Logo
+        select:         Expansion/DLC Logo auswählen

@@ -10,14 +10,10 @@ intent_backend_user_edit:
     path:     /{id}/edit
     defaults: { _controller: AppBundle:User:edit }
 
-intent_backend_user_show:
-    path:     /{id}/show
-    defaults: { _controller: AppBundle:User:show }
-
 intent_backend_user_delete:
     path:     /{id}/delete
     defaults: { _controller: AppBundle:User:delete }
 
 intent_backend_user_list:
-    path:     /{page}
-    defaults: { _controller: AppBundle:User:list, page: 1 }
+    path:     /
+    defaults: { _controller: AppBundle:User:list}

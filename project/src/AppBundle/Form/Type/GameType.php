@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Form\Type
+ */
 
 namespace AppBundle\Form\Type;
 
@@ -12,8 +15,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class GameType extends AbstractType
 {
     /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param FormBuilderInterface $builder Builder.
+     * @param array                $options Options.
+     * @return null
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -32,6 +36,7 @@ class GameType extends AbstractType
                 array(
                     'label' => 'game.description',
                     'translation_domain' => 'game',
+                    'required' => false,
                     'attr' => array(
                         'class' => 'tinymce',
                         'data-theme' => 'advanced'
@@ -67,17 +72,62 @@ class GameType extends AbstractType
                 )
             )
             ->add(
-                'submit',
+                'background_image',
+                'entity',
+                array(
+                    'label' => 'game.backgroundimage.label',
+                    'translation_domain' => 'game',
+                    'class' => 'AppBundle\Entity\Image',
+                    'multiple' => false,
+                    'expanded' => false,
+                    'placeholder' => 'game.backgroundimage.select',
+                    'empty_data' => null,
+                    'required' => false,
+                )
+            )
+            ->add(
+                'thumbnail',
+                'entity',
+                array(
+                    'label' => 'game.thumbnail.label',
+                    'translation_domain' => 'game',
+                    'class' => 'AppBundle\Entity\Image',
+                    'multiple' => false,
+                    'expanded' => false,
+                    'placeholder' => 'game.thumbnail.select',
+                    'empty_data' => null,
+                    'required' => false,
+                )
+            )
+            ->add(
+                'save',
                 'submit',
                 array(
                     'label' => 'game.submit',
                     'translation_domain' => 'game',
+                    'attr' => array(
+                        'class' => 'btn-primary'
+                    )
+                )
+            )
+            ->add(
+                'saveAndPublish',
+                'submit',
+                array(
+                    'label' => 'game.publish',
+                    'translation_domain' => 'game',
+                    'attr' => array(
+                        'class' => 'btn-success'
+                    )
                 )
             );
+
+        return null;
     }
 
     /**
-     * @param OptionsResolver $resolver
+     * @param OptionsResolver $resolver Add game to form.
+     * @return null
      */
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -86,6 +136,8 @@ class GameType extends AbstractType
                 'data_class' => 'AppBundle\Entity\Game',
             )
         );
+
+        return null;
     }
 
     /**

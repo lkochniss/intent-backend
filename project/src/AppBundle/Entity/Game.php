@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Entity
+ */
 
 namespace AppBundle\Entity;
 
@@ -6,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Game
+ * Class Game
  */
 class Game extends Related
 {
@@ -25,15 +28,18 @@ class Game extends Related
      */
     private $expansions;
 
+    /**
+     * add empty expansion array
+     */
     public function __construct()
     {
         parent::__construct();
-        $this->expansions = array();
+        $this->expansions = new ArrayCollection();
     }
 
 
     /**
-     * @param Studio $studio
+     * @param Studio $studio Set studio for game.
      * @return $this
      */
     public function setStudio(Studio $studio)
@@ -52,7 +58,7 @@ class Game extends Related
     }
 
     /**
-     * @param Franchise $franchise
+     * @param Franchise $franchise Set franchise for game.
      * @return $this
      */
     public function setFranchise(Franchise $franchise)
@@ -71,12 +77,12 @@ class Game extends Related
     }
 
     /**
-     * @param Expansion $expansion
+     * @param Expansion $expansion Add expansion to array.
      * @return $this
      */
     public function addExpansion(Expansion $expansion)
     {
-        if (!$this->expansions->contains($expansion)){
+        if (!$this->expansions->contains($expansion)) {
             $this->expansions->add($expansion);
             $expansion->setGame($this);
         }
@@ -85,12 +91,12 @@ class Game extends Related
     }
 
     /**
-     * @param Expansion $expansion
+     * @param Expansion $expansion Remove expansion from array.
      * @return $this
      */
     public function removeExpansion(Expansion $expansion)
     {
-        $this->expansions->remove($expansion);
+        $this->expansions->removeElement($expansion);
 
         return $this;
     }

@@ -8,18 +8,13 @@
 {% block content %}
     <div class="col-md-9 meta">
         <div class="content">
-            <h2>{{ entity.name }}</h2>
+            <h2>
+                {{ entity.name }}
+                <a href="{{ path('intent_backend_event_edit', {'id' : entity.id}) }}" class="glyphicon glyphicon-pencil"></a>
+            </h2>
             {{ entity.description|raw }}
         </div>
         <div class="meta">
         </div>
-    </div>
-    <div class="col-md-3 meta">
-        {% if is_granted('ROLE_PUBLISH_META') %}
-            <div class="col-md-3 meta">
-                {{ form_start(form) }}
-                {{ form_end(form) }}
-            </div>
-        {% endif %}
     </div>
 {% endblock %}

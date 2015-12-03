@@ -1,0 +1,21 @@
+language: php
+php:
+  - 5.5
+  - 5.6
+before_script:
+  - cd project
+  - composer self-update
+  - composer install --prefer-source
+  - pear install pear/PHP_CodeSniffer
+  - phpenv rehash
+  - pyrus install pear/PHP_CodeSniffer
+  - phpenv rehash
+  - cp app/config/parameters.yml.dist app/config/parameters.yml
+  - php app/console do:da:cr
+  - php app/console do:mi:mi -n
+  - php app/console do:fi:lo -n
+  - php app/console ca:c --env=test
+script:
+  - php app/console ca:c --env=test
+  - php bin/phpunit -c app
+  - phpcs --standard=PSR1,PSR2 src -s

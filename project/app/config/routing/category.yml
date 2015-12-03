@@ -15,5 +15,5 @@ intent_backend_category_delete:
     defaults: { _controller: AppBundle:Category:delete }
 
 intent_backend_category_list:
-    path:     /{page}
-    defaults: { _controller: AppBundle:Category:list, page: 1 }
+    path:     /
+    defaults: { _controller: AppBundle:Category:list }

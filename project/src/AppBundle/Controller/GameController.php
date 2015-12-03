@@ -1,11 +1,16 @@
 <?php
+/**
+ * @package AppBundle\Controller
+ */
 
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Game;
-use AppBundle\Form\Type\GamePublishType;
 use AppBundle\Form\Type\GameType;
 
+/**
+ * Class GameController
+ */
 class GameController extends AbstractRelatedController
 {
     /**
@@ -22,14 +27,6 @@ class GameController extends AbstractRelatedController
     protected function getFormType()
     {
         return new GameType();
-    }
-
-    /**
-     * @return GamePublishType
-     */
-    protected function getPublishType()
-    {
-        return new GamePublishType();
     }
 
     /**
@@ -56,21 +53,33 @@ class GameController extends AbstractRelatedController
         return 'intent_backend_game';
     }
 
+    /**
+     * @return string
+     */
     protected function getTranslationDomain()
     {
         return 'game';
     }
 
+    /**
+     * @return string
+     */
     protected function getReadAccessLevel()
     {
         return 'ROLE_READ_META';
     }
 
+    /**
+     * @return string
+     */
     protected function getWriteAccessLevel()
     {
         return 'ROLE_WRITE_META';
     }
 
+    /**
+     * @return string
+     */
     protected function getPublishAccessLevel()
     {
         return 'ROLE_PUBLISH_META';

@@ -31,8 +31,9 @@ AppBundle\Entity\User:
             mappedBy: user
     oneToMany:
         articles:
-            targetEntity: Article
+            targetEntity: ArticleVersion
             mappedBy: createdBy
+            cascade: ["remove"]
     manyToMany:
         roles:
             targetEntity: Role

@@ -5,7 +5,7 @@
 {% block content %}
     <a href="{{ path('intent_backend_tag_create') }}" class="btn btn-default pull-right">{% trans from "tag" %}tag.create{% endtrans %}</a>
     <h3>{% trans from "tag" %}tag.list{% endtrans %}</h3>
-    <table class="table">
+    <table class="table" id="entity_list">
         <thead>
         <tr>
             <th>{% trans from "tag" %}tag.name{% endtrans %}</th>
@@ -15,7 +15,7 @@
         <tbody>
         {% for tag in entities %}
             <tr>
-                <td>{{ category.name }}</td>
+                <td>{{ tag.name }}</td>
                 <td>
                     <a class="table-padding" href="{{ path('intent_backend_tag_edit',{'id' : tag.id}) }}">
                         <span class="glyphicon glyphicon-pencil"/>

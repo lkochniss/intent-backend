@@ -1,6 +1,6 @@
 intent_backend_login:
     path:   /login
-    defaults: { _controller: appbundle:security:login }
+    defaults: { _controller: AppBundle:Security:login }
 
 intent_backend_login_check:
     path:   /login_check
@@ -10,7 +10,7 @@ intent_backend_logout:
 
 intent_backend_password_reset:
     path:   /reset
-    defaults: { _controller: appbundle:security:resetpassword }
+    defaults: { _controller: AppBundle:Security:resetPassword }
 
 intent_backend_user:
     resource: routing/user.yml

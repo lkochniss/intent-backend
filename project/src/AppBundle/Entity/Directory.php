@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package AppBundle\Entity
+ */
 
 namespace AppBundle\Entity;
 
@@ -7,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Directory
+ * Class Directory
  */
 class Directory extends AbstractModel
 {
@@ -20,15 +23,11 @@ class Directory extends AbstractModel
 
     /**
      * @var String
-     *
-     * @Assert\NotBlank()
      */
     private $path;
 
     /**
      * @var String
-     *
-     * @Assert\NotBlank()
      */
     private $fullPath;
 
@@ -39,22 +38,28 @@ class Directory extends AbstractModel
 
     /**
      * @var ArrayCollection
+     * @OrderBy({"name" = "ASC"})
      */
     private $images;
 
     /**
      * @var ArrayCollection;
+     * @OrderBy({"name" = "ASC"})
      */
     private $childDirectories;
 
-    function __construct()
+    /**
+     * add empty array for childDirectories
+     * add empty array for images
+     */
+    public function __construct()
     {
-        $this->childDirectories = array();
-        $this->images = array();
+        $this->childDirectories = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     /**
-     * @param $name
+     * @param string $name Set name.
      * @return $this
      */
     public function setName($name)
@@ -65,7 +70,7 @@ class Directory extends AbstractModel
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getName()
     {
@@ -73,7 +78,7 @@ class Directory extends AbstractModel
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getPath()
     {
@@ -81,7 +86,7 @@ class Directory extends AbstractModel
     }
 
     /**
-     * @param $path
+     * @param string $path Set path.
      * @return $this
      */
     public function setPath($path)
@@ -92,6 +97,9 @@ class Directory extends AbstractModel
         return $this;
     }
 
+    /**
+     * @return null
+     */
     public function updateFullpath()
     {
         $this->resetFullPath();
@@ -103,10 +111,11 @@ class Directory extends AbstractModel
             $image->resetFullPath();
         }
 
+        return null;
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function resetFullPath()
     {
@@ -116,13 +125,13 @@ class Directory extends AbstractModel
             return $this;
         }
 
-        $this->fullPath = $this->parentDirectory->getFullPath().'/'.$this->path;
+        $this->fullPath = $this->parentDirectory->getFullPath() . '/' . $this->path;
 
         return $this;
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getFullPath()
     {
@@ -130,10 +139,10 @@ class Directory extends AbstractModel
     }
 
     /**
-     * @param null $parentDirectory
+     * @param Directory|null $parentDirectory Set parentDirectory.
      * @return $this
      */
-    public function setParentDirectory($parentDirectory = null)
+    public function setParentDirectory(Directory $parentDirectory = null)
     {
         $this->parentDirectory = $parentDirectory;
 
@@ -149,7 +158,7 @@ class Directory extends AbstractModel
     }
 
     /**
-     * @param Directory $directory
+     * @param Directory $directory Add childDirectory to array.
      * @return $this
      */
     public function addChildDirectory(Directory $directory)
@@ -163,9 +172,13 @@ class Directory extends AbstractModel
         return $this;
     }
 
+    /**
+     * @param Directory $directory Remove childDirectory from array.
+     * @return $this
+     */
     public function removeChildDirectory(Directory $directory)
     {
-        $this->childDirectories->remove($directory);
+        $this->childDirectories->removeElement($directory);
 
         return $this;
     }
@@ -179,7 +192,7 @@ class Directory extends AbstractModel
     }
 
     /**
-     * @param Image $image
+     * @param Image $image Add image to array.
      * @return $this
      */
     public function addImage(Image $image)
@@ -193,9 +206,13 @@ class Directory extends AbstractModel
         return $this;
     }
 
+    /**
+     * @param Image $image Remove image from array.
+     * @return $this
+     */
     public function removeImages(Image $image)
     {
-        $this->images->remove($image);
+        $this->images->removeElement($image);
 
         return $this;
     }
@@ -209,7 +226,7 @@ class Directory extends AbstractModel
     }
 
     /**
-     * @return bool
+     * @return boolean
      */
     public function isRootNode()
     {
@@ -221,12 +238,10 @@ class Directory extends AbstractModel
     }
 
     /**
-     * @return String
+     * @return string
      */
-    function __toString()
+    public function __toString()
     {
         return $this->path;
     }
-
-
 }
