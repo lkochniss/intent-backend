@@ -138,7 +138,7 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
      * @param boolean $isActive Set isActive.
      * @return $this
      */
-    public function setIsActive($isActive)
+    public function setActive($isActive)
     {
         $this->isActive = $isActive;
 
@@ -148,7 +148,7 @@ class User extends AbstractModel implements AdvancedUserInterface, EquatableInte
     /**
      * @return boolean
      */
-    public function getIsActive()
+    public function isActive()
     {
         return $this->isActive;
     }
