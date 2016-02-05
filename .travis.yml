@@ -27,10 +27,10 @@ before_script:
 - if [ -n "GITHUB" ]; then composer config github-oauth.github.com ${GITHUB}; fi;
 - composer install -n
 - cp app/config/parameters.yml.dist app/config/parameters.yml
-- php bin/console ca:c --env=test
+- php app/console ca:c --env=test
 
 script:
-- php bin/console security:check
+- php app/console security:check
 - if [ "${CODESNIFF}" = "true" ]; then phpcs --standard=PSR1,PSR2 src -s; fi;
 #- if [ "${CODECOV}" = "true" ]; then php ./vendor/bin/phpunit --coverage-clover=coverage.xml; else php ./vendor/bin/phpunit; fi;
 
