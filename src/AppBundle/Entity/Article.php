@@ -19,8 +19,7 @@ class Article extends AbstractArticleModel
     private $versions;
 
     /**
-     * Set slideshow default to false.
-     * Add empty tag array.
+     * Add empty version array
      */
     public function __construct()
     {
