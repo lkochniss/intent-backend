@@ -1,0 +1,40 @@
+{% extends "::editor.html.twig" %}
+
+{% block title %}
+    {{ parent() }}
+    {% trans from "publisher" %}publisher.show{% endtrans %}
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-9 meta">
+        <div class="publisher">
+            <h2>
+                {{ entity.name }}
+                <a href="{{ path('intent_backend_publisher_edit', {'id' : entity.id}) }}" class="glyphicon glyphicon-pencil"></a>
+            </h2>
+            {{ entity.description|raw }}
+        </div>
+        <div class="category col-md-12">
+            <h4>{% trans from "publisher" %}publisher.categories{% endtrans %} {{ entity.name }}</h4>
+            {% for name, category in categories %}
+                <div class="col-md-4">
+                    <h4>{{ name }}</h4>
+                    {% for article in category %}
+                        <a href="{{ path('intent_backend_article_show',{'id': article.id }) }}">{{ article.title }}</a>
+                        <br/>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+        {% if entity.franchises|length < 0 %}
+            <div class="franchise col-md-12">
+                <h4>{% trans from "publisher" %}publisher.franchise{% endtrans %}</h4>
+                {% for franchise in entity.franchises %}
+                    <div class="col-md-4">
+                        <a href="{{ path('intent_backend_franchise_show',{'id': franchise.id }) }}">{{ franchise.name }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

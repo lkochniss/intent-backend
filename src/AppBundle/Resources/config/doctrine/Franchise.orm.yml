@@ -1,0 +1,24 @@
+AppBundle\Entity\Franchise:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\FranchiseRepository
+
+    fields:
+    oneToMany:
+        games:
+            targetEntity: Game
+            mappedBy: franchise
+    manyToOne:
+        publisher:
+            targetEntity: Publisher
+            inversedBy: franchises
+            joinColumn:
+                name: publisher_id
+                referencedColumnName: id
+        studio:
+            targetEntity: Studio
+            inversedBy: franchises
+            joinColumn:
+                name: studio_id
+                referencedColumnName: id
+    lifecycleCallbacks: { }

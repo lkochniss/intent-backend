@@ -1,0 +1,20 @@
+<h1>{% trans from "user" %}user.mail.hello{% endtrans %} {{ user.username }},</h1>
+
+<p>
+    {% trans from "user" %}user.mail.invite{% endtrans %}
+</p>
+<p>
+    {% trans from "user" %}user.mail.role{% endtrans %}
+    <ul>
+        {% for role in user.roles %}
+            <li>{{ role.name }}</li>
+        {% endfor %}
+    </ul>
+</p>
+<p>
+    {% trans from "user" %}user.mail.password{% endtrans %}{{ password }}.
+    {% trans from "user" %}user.mail.activate{% endtrans %}<a href="{{ path('intent_backend_login') }}">{% trans from "user" %}user.mail.url{% endtrans %}</a>
+</p>
+<p>
+    {% trans from "user" %}user.mail.regards{% endtrans %}
+</p>

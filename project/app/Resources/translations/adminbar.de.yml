@@ -1,8 +1,0 @@
-adminbar:
-    article:    Neuer Artikel
-    dashboard:  Dashboard
-    logout:     Logout
-    password:   neues Passwort
-    profile:
-        create: Profil erstellen
-        edit:   Profil von

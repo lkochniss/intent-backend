@@ -1,0 +1,29 @@
+{% extends "::editor.html.twig" %}
+
+{% block title %}
+    {{ parent() }}
+    {% trans from "expansion" %}expansion.show{% endtrans %}
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-9 meta">
+        <div class="game">
+            <h2>
+                {{ entity.name }}
+                <a href="{{ path('intent_backend_expansion_edit', {'id' : entity.id}) }}" class="glyphicon glyphicon-pencil"></a>
+            </h2>
+            {{ entity.description|raw }}
+        </div>
+        <div class="category col-md-12">
+            <h4>{% trans from "expansion" %}expansion.categories{% endtrans %}</h4>
+            {% for name, category in categories %}
+                <div class="col-md-4">
+                    <h4>{{ name }}</h4>
+                    {% for article in category %}
+                        <a href="{{ path('intent_backend_article_show',{'id': article.id }) }}">{{ article.title }}</a>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

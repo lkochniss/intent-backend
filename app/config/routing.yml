@@ -1,0 +1,73 @@
+intent_backend_login:
+    path:   /login
+    defaults: { _controller: AppBundle:Security:login }
+
+intent_backend_login_check:
+    path:   /login_check
+
+intent_backend_logout:
+    path:   /logout
+
+intent_backend_password_reset:
+    path:   /reset
+    defaults: { _controller: AppBundle:Security:resetPassword }
+
+intent_backend_user:
+    resource: routing/user.yml
+    prefix:   /user
+
+intent_backend_page:
+    resource: routing/page.yml
+    prefix:   /page
+
+intent_backend_article:
+    resource: routing/article.yml
+    prefix:   /article
+
+intent_backend_category:
+    resource: routing/category.yml
+    prefix:   /category
+
+intent_backend_tag:
+    resource: routing/tag.yml
+    prefix:   /tag
+
+intent_backend_published:
+    resource: routing/publisher.yml
+    prefix:   /publisher
+
+intent_backend_studio:
+    resource: routing/studio.yml
+    prefix:   /studio
+
+intent_backend_franchise:
+    resource: routing/franchise.yml
+    prefix:   /franchise
+
+intent_backend_game:
+    resource: routing/game.yml
+    prefix:   /game
+
+intent_backend_event:
+    resource: routing/event.yml
+    prefix:   /event
+
+intent_backend_image:
+    resource: routing/image.yml
+    prefix:   /image
+
+intent_backend_expansion:
+    resource: routing/expansion.yml
+    prefix:   /expansion
+
+intent_backend_filemanager:
+    resource: routing/filemanager.yml
+    prefix:   /filemanager
+
+intent_backend_profile:
+    resource: routing/profile.yml
+    prefix:   /profile
+
+intent_backend_dashboard:
+    path:   /
+    defaults: { _controller: AppBundle:Dashboard:index }

@@ -1,0 +1,20 @@
+{% extends "::editor.html.twig" %}
+
+{% block title %}
+    {{ parent() }}
+    {% trans from "event" %}event.show{% endtrans %}
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-9 meta">
+        <div class="content">
+            <h2>
+                {{ entity.name }}
+                <a href="{{ path('intent_backend_event_edit', {'id' : entity.id}) }}" class="glyphicon glyphicon-pencil"></a>
+            </h2>
+            {{ entity.description|raw }}
+        </div>
+        <div class="meta">
+        </div>
+    </div>
+{% endblock %}

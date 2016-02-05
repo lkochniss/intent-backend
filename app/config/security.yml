@@ -1,0 +1,33 @@
+security:
+    encoders:
+        AppBundle\Entity\User:
+            algorithm: bcrypt
+
+    providers:
+        secured:
+            entity: { class: AppBundle:User, property: username}
+
+    role_hierarchy:
+        ROLE_ADMIN : [ ROLE_READ_ARTICLE, ROLE_WRITE_ARTICLE, ROLE_PUBLISH_ARTICLE, ROLE_READ_META, ROLE_WRITE_META, ROLE_PUBLISH_META ]
+
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        backend:
+            anonymous : ~
+            pattern: ^/
+            form_login:
+                login_path: /login
+                check_path: /login_check
+            logout:
+                path: /logout
+                target: /
+
+    access_control:
+        - { path: ^/reset, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: http }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: http }
+        - { path: ^/login_check, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: http }
+        - { path: ^/, roles: [ROLE_ADMIN, ROLE_READ_ARTICLE, ROLE_WRITE_ARTICLE, ROLE_PUBLISH_ARTICLE, ROLE_READ_META, ROLE_WRITE_META, ROLE_PUBLISH_META ], requires_channel: http }

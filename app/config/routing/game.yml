@@ -1,0 +1,19 @@
+intent_backend_game_create:
+    path:     /create
+    defaults: { _controller: AppBundle:Game:create }
+
+intent_backend_game_edit:
+    path:     /{id}/edit
+    defaults: { _controller: AppBundle:Game:edit }
+
+intent_backend_game_show:
+    path:     /{id}/show
+    defaults: { _controller: AppBundle:Game:show }
+
+intent_backend_game_delete:
+    path:     /{id}/delete
+    defaults: { _controller: AppBundle:Game:delete }
+
+intent_backend_game_list:
+    path:     /
+    defaults: { _controller: AppBundle:Game:list }

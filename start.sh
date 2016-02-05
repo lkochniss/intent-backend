@@ -7,7 +7,7 @@ docker rm -f symfony-worker 2> /dev/null
 docker rm -f symfony-volume 2> /dev/null
 
 echo "init project volume"
-docker run -v $PWD/project:/project --name=symfony-volume busybox /bin/true
+docker run -v $PWD/:/project --name=symfony-volume busybox /bin/true
 
 echo "start container"
 docker run \

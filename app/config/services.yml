@@ -1,0 +1,75 @@
+services:
+    app.article.service:
+        class: AppBundle\Service\ArticleService
+        arguments:
+            - @doctrine.orm.entity_manager
+
+    app.category.service:
+        class: AppBundle\Service\CategoryService
+        arguments:
+            - @doctrine.orm.entity_manager
+
+    app.directory.service:
+        class: AppBundle\Service\DirectoryService
+        arguments:
+            - @doctrine.orm.entity_manager
+
+    app.event.service:
+        class: AppBundle\Service\EventService
+        arguments:
+            - @doctrine.orm.entity_manager
+
+    app.expansion.service:
+        class: AppBundle\Service\ExpansionService
+        arguments:
+            - @doctrine.orm.entity_manager
+
+    app.franchise.service:
+        class: AppBundle\Service\FranchiseService
+        arguments:
+            - @doctrine.orm.entity_manager
+
+    app.game.service:
+        class: AppBundle\Service\GameService
+        arguments:
+            - @doctrine.orm.entity_manager
+
+    app.image.service:
+        class: AppBundle\Service\ImageService
+        arguments:
+            - @doctrine.orm.entity_manager
+
+    app.page.service:
+        class: AppBundle\Service\PageService
+        arguments:
+            - @doctrine.orm.entity_manager
+
+    app.profile.service:
+        class: AppBundle\Service\ProfileService
+        arguments:
+            - @doctrine.orm.entity_manager
+
+    app.publisher.service:
+        class: AppBundle\Service\PublisherService
+        arguments:
+            - @doctrine.orm.entity_manager
+
+    app.role.service:
+        class: AppBundle\Service\RoleService
+        arguments:
+            - @doctrine.orm.entity_manager
+
+    app.studio.service:
+        class: AppBundle\Service\StudioService
+        arguments:
+            - @doctrine.orm.entity_manager
+
+    app.tag.service:
+        class: AppBundle\Service\TagService
+        arguments:
+            - @doctrine.orm.entity_manager
+
+    app.user.service:
+        class: AppBundle\Service\UserService
+        arguments:
+            - @doctrine.orm.entity_manager

@@ -1,0 +1,18 @@
+{% extends "::editor.html.twig" %}
+
+{% block title %}
+    {{ parent() }}
+    {% trans from "page" %}page.show{% endtrans %}
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-9 meta">
+        <div class="content">
+            <h2>
+                {{ entity.title }}
+                <a href="{{ path('intent_backend_page_edit', {'id' : entity.id}) }}" class="glyphicon glyphicon-pencil"></a>
+            </h2>
+            {{ entity.content|raw }}
+        </div>
+    </div>
+{% endblock %}

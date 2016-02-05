@@ -1,0 +1,37 @@
+nginx:
+    image: nginx
+    ports:
+        - "80:80"
+    volumes:
+        - project:/var/www/intent-backend
+        - ./resources/docker/nginx/nginx.conf:/nginx.conf
+        - ./.docker/logs/nginx:/var/log/nginx
+    links:
+        - php
+    command: nginx -c /nginx.conf
+php:
+    build: resources/docker/php
+    ports:
+        - "9000:9000"
+    links:
+        - mysql
+    environment:
+        ENVIRONMENT: docker
+    volumes:
+        - .:/srv
+mysql:
+    image: mysql:5.7.7
+    ports:
+        - "3306:3306"
+    volumes_from:
+        - mysqlVolume
+    environment:
+        MYSQL_ROOT_PASSWORD: admin
+        MYSQL_DATABASE: intent-backend
+        MYSQL_USER: intent
+        MYSQL_PASSWORD: intent
+mysqlVolume:
+    image: busybox
+    volumes:
+        - /var/lib/mysql
+    command: /bin/true

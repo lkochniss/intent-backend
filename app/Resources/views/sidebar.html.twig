@@ -1,0 +1,45 @@
+<div class="sidebar-nav">
+    <div class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="visible-xs navbar-brand">Sidebar menu</span>
+        </div>
+        <div class="navbar-collapse collapse sidebar-navbar-collapse">
+            <ul>
+                <li class="navbar-brand">{% trans from "sidebar" %}sidebar.name{% endtrans %}</li>
+                <li><span class="glyphicon glyphicon-pencil"/> {% trans from "sidebar" %}sidebar.writing.name{% endtrans %}</li>
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ path('intent_backend_article_list') }}">{% trans from "sidebar" %}sidebar.writing.article{% endtrans %}</a></li>
+                    <li><a href="{{ path('intent_backend_page_list') }}">{% trans from "sidebar" %}sidebar.writing.page{% endtrans %}</a></li>
+                </ul>
+                <li><span class="glyphicon glyphicon-list"/> {% trans from "sidebar" %}sidebar.meta.name{% endtrans %}</li>
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ path('intent_backend_category_list') }}">{% trans from "sidebar" %}sidebar.meta.category{% endtrans %}</a></li>
+                    <li><a href="{{ path('intent_backend_tag_list') }}">{% trans from "sidebar" %}sidebar.meta.tag{% endtrans %}</a></li>
+                    <li><a href="{{ path('intent_backend_event_list') }}">{% trans from "sidebar" %}sidebar.meta.event{% endtrans %}</a></li>
+                    <li><a href="{{ path('intent_backend_publisher_list') }}">{% trans from "sidebar" %}sidebar.meta.publisher{% endtrans %}</a></li>
+                    <li><a href="{{ path('intent_backend_studio_list') }}">{% trans from "sidebar" %}sidebar.meta.studio{% endtrans %}</a></li>
+                    <li><a href="{{ path('intent_backend_franchise_list') }}">{% trans from "sidebar" %}sidebar.meta.franchise{% endtrans %}</a></li>
+                    <li><a href="{{ path('intent_backend_game_list') }}">{% trans from "sidebar" %}sidebar.meta.game{% endtrans %}</a></li>
+                    <li><a href="{{ path('intent_backend_expansion_list') }}">{% trans from "sidebar" %}sidebar.meta.expansion{% endtrans %}</a></li>
+                </ul>
+                <li><span class="glyphicon glyphicon-picture"/> {% trans from "sidebar" %}sidebar.media.name{% endtrans %}</li>
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ path('intent_backend_filemanager_list') }}">{% trans from "sidebar" %}sidebar.media.image{% endtrans %}</a></li>
+                </ul>
+                {% if is_granted('ROLE_ADMIN') %}
+                <li><span class="glyphicon glyphicon-lock"/> {% trans from "sidebar" %}sidebar.admin.name{% endtrans %}</li>
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ path('intent_backend_user_list') }}">{% trans from "sidebar" %}sidebar.admin.user{% endtrans %}</a></li>
+                    <li><a href="{{ path('intent_backend_profile_list') }}">{% trans from "sidebar" %}sidebar.admin.profile{% endtrans %}</a></li>
+                </ul>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>

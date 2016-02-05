@@ -1,0 +1,59 @@
+{% extends "::editor.html.twig" %}
+
+{% block title %}
+    {{ parent() }}
+    {% if  app.request.get('_route') ends with '_create' %}
+        {% trans from "article" %}article.create{% endtrans %}
+    {% else %}
+        {% trans from "article" %}article.edit{% endtrans %}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <h1>
+        {% if  app.request.get('_route') ends with '_create' %}
+            {% trans from "article" %}article.create{% endtrans %}
+        {% else %}
+            {% trans from "article" %}article.edit{% endtrans %}
+            <a href="{{ path('intent_backend_article_show', {'id' : entity.id }) }}" class="glyphicon glyphicon-eye-open"></a>
+        {% endif %}
+    </h1>
+    {{ form_start(form) }}
+    <div class="col-md-9 editor">
+        {{ form_row(form.title) }}
+        {{ form_row(form.content) }}
+    </div>
+    <div class="col-md-3 meta">
+        {{ form_label(form.thumbnail) }}
+        {% if entity.thumbnail %}
+            <img src="{{ entity.thumbnail.absolutePath }}" class="img-responsive" /><br />
+        {% endif %}
+        {{ form_widget(form.thumbnail) }}
+        {{ form_row(form.related) }}
+        {{ form_row(form.category) }}
+        {{ form_row(form.event) }}
+        {{ form_row(form.tags) }}
+        {{ form_row(form.slideshow) }}
+        {{ form_row(form.publishAt) }}
+        {{ form_row(form.save) }}
+        {% if is_granted('ROLE_PUBLISH_ARTICLE') %}
+            {{ form_row(form.saveAndPublish) }}
+        {% endif %}
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $('#article_related').select2();
+
+        $('#article_category').select2();
+
+        $('#article_event').select2();
+
+        $('#article_tags').select2();
+
+        $('#article_thumbnail').select2();
+    </script>
+{% endblock %}

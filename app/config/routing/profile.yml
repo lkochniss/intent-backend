@@ -1,0 +1,15 @@
+intent_backend_profile_create:
+    path:     /create
+    defaults: { _controller: AppBundle:Profile:create }
+
+intent_backend_profile_edit:
+    path:     /{id}/edit
+    defaults: { _controller: AppBundle:Profile:edit }
+
+intent_backend_profile_show:
+    path:     /{id}/show
+    defaults: { _controller: AppBundle:Profile:show }
+
+intent_backend_profile_list:
+    path:     /
+    defaults: { _controller: AppBundle:Profile:list }

@@ -1,0 +1,19 @@
+intent_backend_event_create:
+    path:     /create
+    defaults: { _controller: AppBundle:Event:create }
+
+intent_backend_event_edit:
+    path:     /{id}/edit
+    defaults: { _controller: AppBundle:Event:edit }
+
+intent_backend_event_show:
+    path:     /{id}/show
+    defaults: { _controller: AppBundle:Event:show }
+
+intent_backend_event_delete:
+    path:     /{id}/delete
+    defaults: { _controller: AppBundle:Event:delete }
+
+intent_backend_event_list:
+    path:     /
+    defaults: { _controller: AppBundle:Event:list}
