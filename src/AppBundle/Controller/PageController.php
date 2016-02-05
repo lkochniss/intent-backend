@@ -11,7 +11,7 @@ use AppBundle\Form\Type\PageType;
 /**
  * Class PageController
  */
-class PageController extends AbstractArticleController
+class PageController extends AbstractMetaController
 {
     /**
      * @return Page
