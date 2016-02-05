@@ -40,7 +40,7 @@ class DirectoryFixtures extends AbstractFixture implements OrderedFixtureInterfa
             $manager->getRepository('AppBundle:Directory')->save(
                 $directory
             );
-            $this->addReference('directory-' . $directory->getName(), $directory);
+            $this->setReference('directory-' . $directory->getName(), $directory);
         }
 
         return null;
