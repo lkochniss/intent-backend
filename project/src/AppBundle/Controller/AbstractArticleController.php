@@ -5,6 +5,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Article;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,7 +40,12 @@ abstract class AbstractArticleController extends AbstractCrudController
      */
     public function editAction($id, Request $request)
     {
-        $this->denyAccessUnlessGranted($this->getWriteAccessLevel(), null, $this->getAccessDeniedMessage());
+        $this->denyAccessUnlessGranted(
+            $this->getWriteAccessLevel(),
+            null,
+            $this->getAccessDeniedMessage()
+        );
+
         $entity = $this->getDoctrine()->getRepository($this->getEntityName())->find($id);
 
         if (is_null($entity)) {
@@ -52,7 +58,14 @@ abstract class AbstractArticleController extends AbstractCrudController
             );
         }
 
-        return $this->createAndHandleForm($entity, $request, 'edit', array('id' => $entity->getId()));
+        return $this->createAndHandleForm(
+            $entity,
+            $request,
+            'edit',
+            array(
+                'id' => $entity->getId()
+            )
+        );
     }
 
     /**
@@ -62,7 +75,12 @@ abstract class AbstractArticleController extends AbstractCrudController
      */
     public function showAction($id, Request $request)
     {
-        $this->denyAccessUnlessGranted($this->getReadAccessLevel(), null, $this->getAccessDeniedMessage());
+        $this->denyAccessUnlessGranted(
+            $this->getReadAccessLevel(),
+            null,
+            $this->getAccessDeniedMessage()
+        );
+
         $entity = $this->getDoctrine()->getRepository($this->getEntityName())->find($id);
 
         return $this->render(
@@ -78,7 +96,12 @@ abstract class AbstractArticleController extends AbstractCrudController
      */
     public function listAction()
     {
-        $this->denyAccessUnlessGranted($this->getReadAccessLevel(), null, $this->getAccessDeniedMessage());
+        $this->denyAccessUnlessGranted(
+            $this->getReadAccessLevel(),
+            null,
+            $this->getAccessDeniedMessage()
+        );
+
         $entities = $this->getDoctrine()->getRepository($this->getEntityName())->findAll();
 
         return $this->render(

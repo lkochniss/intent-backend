@@ -227,7 +227,7 @@ class Article extends AbstractModel
      * @param Category $category Set category.
      * @return $this
      */
-    public function setCategory(Category $category)
+    public function setCategory(Category $category = null)
     {
         $this->category = $category;
 
@@ -343,9 +343,9 @@ class Article extends AbstractModel
      * @param Tag $tag Add tag to array.
      * @return $this
      */
-    public function addTag(Tag $tag)
+    public function addTag(Tag $tag = null)
     {
-        if (!$this->tags->contains($tag)) {
+        if (!is_null($tag) && !$this->tags->contains($tag)) {
             $this->tags->add($tag);
             $tag->addArticle($this);
         }

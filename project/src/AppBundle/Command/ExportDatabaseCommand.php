@@ -50,77 +50,77 @@ class ExportDatabaseCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         if ($input->getOption('all') || $input->getOption('art')) {
-            $this->getContainer()->get('app.article.service')->exportEntity();
+            $this->getContainer()->get('app.article.service')->exportEntities();
             $output->writeln('exported article entity');
         }
 
         if ($input->getOption('all') || $input->getOption('cat')) {
-            $this->getContainer()->get('app.category.service')->exportEntity();
+            $this->getContainer()->get('app.category.service')->exportEntities();
             $output->writeln('exported category entity');
         }
 
         if ($input->getOption('all') || $input->getOption('dir')) {
-            $this->getContainer()->get('app.directory.service')->exportEntity();
+            $this->getContainer()->get('app.directory.service')->exportEntities();
             $output->writeln('exported directory entity');
         }
 
         if ($input->getOption('all') || $input->getOption('evt')) {
-            $this->getContainer()->get('app.event.service')->exportEntity();
+            $this->getContainer()->get('app.event.service')->exportEntities();
             $output->writeln('exported event entity');
         }
 
         if ($input->getOption('all') || $input->getOption('exp')) {
-            $this->getContainer()->get('app.expansion.service')->exportEntity();
+            $this->getContainer()->get('app.expansion.service')->exportEntities();
             $output->writeln('exported expansion entity');
         }
 
         if ($input->getOption('all') || $input->getOption('fra')) {
-            $this->getContainer()->get('app.franchise.service')->exportEntity();
+            $this->getContainer()->get('app.franchise.service')->exportEntities();
             $output->writeln('exported franchise entity');
         }
 
         if ($input->getOption('all') || $input->getOption('gam')) {
-            $this->getContainer()->get('app.game.service')->exportEntity();
+            $this->getContainer()->get('app.game.service')->exportEntities();
             $output->writeln('exported game entity');
         }
 
         if ($input->getOption('all') || $input->getOption('img')) {
-            $this->getContainer()->get('app.image.service')->exportEntity();
+            $this->getContainer()->get('app.image.service')->exportEntities();
             $output->writeln('exported image entity');
         }
 
         if ($input->getOption('all') || $input->getOption('pag')) {
-            $this->getContainer()->get('app.page.service')->exportEntity();
+            $this->getContainer()->get('app.page.service')->exportEntities();
             $output->writeln('exported page entity');
         }
 
         if ($input->getOption('all') || $input->getOption('pro')) {
-            $this->getContainer()->get('app.profile.service')->exportEntity();
+            $this->getContainer()->get('app.profile.service')->exportEntities();
             $output->writeln('exported profile entity');
         }
 
         if ($input->getOption('all') || $input->getOption('pub')) {
-            $this->getContainer()->get('app.publisher.service')->exportEntity();
+            $this->getContainer()->get('app.publisher.service')->exportEntities();
             $output->writeln('exported publisher entity');
         }
 
         if ($input->getOption('all') || $input->getOption('rol')) {
-            $this->getContainer()->get('app.role.service')->exportEntity();
+            $this->getContainer()->get('app.role.service')->exportEntities();
             $output->writeln('exported role entity');
         }
 
         if ($input->getOption('all') || $input->getOption('stu')) {
-            $this->getContainer()->get('app.studio.service')->exportEntity();
+            $this->getContainer()->get('app.studio.service')->exportEntities();
             $output->writeln('exported studio entity');
         }
 
         if ($input->getOption('all') || $input->getOption('tag')) {
-            $this->getContainer()->get('app.tag.service')->exportEntity();
+            $this->getContainer()->get('app.tag.service')->exportEntities();
             $output->writeln('exported tag entity');
         }
 
         if ($input->getOption('all') || $input->getOption('usr')) {
-            $this->getContainer()->get('app.user.service')->exportEntity();
+            $this->getContainer()->get('app.user.service')->exportEntities();
             $output->writeln('exported user entity');
         }
 

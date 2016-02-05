@@ -1,6 +1,6 @@
 <?php
 /**
- * Class UserExport
+ * Class UserService
  * @package AppBundle\Service
  */
 
@@ -8,31 +8,33 @@ namespace AppBundle\Service;
 
 use AppBundle\Entity\User;
 use AppBundle\SimpleXMLExtended;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * Class UserExport
- * @package AppBundle\Service
+ * Class UserService
  */
-class UserExport
+class UserService
 {
+    /** @var  EntityManager */
+    private $manager;
+
     /** @var  EntityRepository */
     private $repository;
 
     /**
-     * @param EntityRepository $repository Get the entity repository.
+     * @param EntityManager $manager Get the entityManager.
      */
-    public function __construct(EntityRepository $repository)
+    public function __construct(EntityManager $manager)
     {
-        $this->repository = $repository;
-
-        return null;
+        $this->manager = $manager;
+        $this->repository = $manager->getRepository('AppBundle:User');
     }
 
     /**
      * @return boolean
      */
-    public function exportEntity()
+    public function exportEntities()
     {
         $users = $this->repository->findAll();
 

@@ -7,28 +7,33 @@ namespace AppBundle\Service;
 
 use AppBundle\Entity\Category;
 use AppBundle\SimpleXMLExtended;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * Class CategoryExport
+ * Class TagService
  */
-class CategoryExport
+class TagService
 {
+    /** @var  EntityManager */
+    private $manager;
+
     /** @var  EntityRepository */
     private $repository;
 
     /**
-     * @param EntityRepository $repository Get the entity repository.
+     * @param EntityManager $manager Get the entityManager.
      */
-    public function __construct(EntityRepository $repository)
+    public function __construct(EntityManager $manager)
     {
-        $this->repository = $repository;
+        $this->manager = $manager;
+        $this->repository = $manager->getRepository('AppBundle:Tag');
     }
 
     /**
      * @return boolean
      */
-    public function exportEntity()
+    public function exportEntities()
     {
         $categories = $this->repository->findAll();
 
@@ -43,14 +48,11 @@ class CategoryExport
             $item->name = null;
             $item->name->addCData($category->getName());
 
-            $item->priority = null;
-            $item->priority->addCData($category->getPriority());
-
             $item->published = null;
             $item->published->addCData($category->isPublished());
         }
 
-        $xml->saveXML('web/export/category.xml');
+        $xml->saveXML('web/export/tag.xml');
 
         return true;
     }

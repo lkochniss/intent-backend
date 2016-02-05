@@ -7,28 +7,33 @@ namespace AppBundle\Service;
 
 use AppBundle\Entity\Page;
 use AppBundle\SimpleXMLExtended;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * Class PageExport
+ * Class PageService
  */
-class PageExport
+class PageService
 {
+    /** @var  EntityManager */
+    private $manager;
+
     /** @var  EntityRepository */
     private $repository;
 
     /**
-     * @param EntityRepository $repository Get the entity repository.
+     * @param EntityManager $manager Get the entityManager.
      */
-    public function __construct(EntityRepository $repository)
+    public function __construct(EntityManager $manager)
     {
-        $this->repository = $repository;
+        $this->manager = $manager;
+        $this->repository = $manager->getRepository('AppBundle:Page');
     }
 
     /**
      * @return boolean
      */
-    public function exportEntity()
+    public function exportEntities()
     {
         $pages = $this->repository->findAll();
 

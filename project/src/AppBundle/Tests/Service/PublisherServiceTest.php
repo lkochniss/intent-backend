@@ -8,16 +8,16 @@ namespace AppBundle\Service;
 use AppBundle\Tests\Controller\AbstractControllerTest;
 
 /**
- * Class ProfileExportTest
+ * Class PublisherServiceTest
  */
-class ProfileExportTest extends AbstractControllerTest
+class PublisherServiceTest extends AbstractControllerTest
 {
     /**
      * @return null
      */
     public function testExport()
     {
-        $status = $this->getContainer()->get('app.profile.service')->exportEntity();
+        $status = $this->getContainer()->get('app.publisher.service')->exportEntities();
         $this->assertTrue($status);
 
         return null;

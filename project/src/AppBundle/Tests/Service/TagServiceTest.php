@@ -8,16 +8,16 @@ namespace AppBundle\Service;
 use AppBundle\Tests\Controller\AbstractControllerTest;
 
 /**
- * Class GameExportTest
+ * Class TagServiceTest
  */
-class GameExportTest extends AbstractControllerTest
+class TagServiceTest extends AbstractControllerTest
 {
     /**
      * @return null
      */
     public function testExport()
     {
-        $status = $this->getContainer()->get('app.game.service')->exportEntity();
+        $status = $this->getContainer()->get('app.tag.service')->exportEntities();
         $this->assertTrue($status);
 
         return null;

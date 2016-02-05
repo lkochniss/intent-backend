@@ -6,7 +6,11 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\AbstractModel;
+use AppBundle\Entity\Franchise;
+use AppBundle\Entity\Game;
+use AppBundle\Entity\Publisher;
 use AppBundle\Entity\Related;
+use AppBundle\Entity\Studio;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,14 +46,14 @@ abstract class AbstractRelatedController extends AbstractMetaController
 
         $resultList = $this->getRelatedArticles($entity);
 
-        if ($entity->getType() == 'publisher') {
+        if ($entity instanceof Publisher) {
             $franchises = $entity->getFranchises();
-        } elseif ($entity->getType() == 'franchise') {
+        } elseif ($entity instanceof Franchise) {
             $games = $entity->getGames();
-        } elseif ($entity->getType() == 'studio') {
+        } elseif ($entity instanceof Studio) {
             $franchises = $entity->getFranchises();
             $games = $entity->getGames();
-        } elseif ($entity->getType() == 'game') {
+        } elseif ($entity instanceof Game) {
             $expansions = $entity->getExpansions();
         }
 

@@ -19,7 +19,7 @@ class Expansion extends Related
      * @param Game $game Set Game.
      * @return $this
      */
-    public function setGame(Game $game)
+    public function setGame(Game $game = null)
     {
         $this->game = $game;
 

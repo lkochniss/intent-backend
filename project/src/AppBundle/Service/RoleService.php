@@ -7,28 +7,33 @@ namespace AppBundle\Service;
 
 use AppBundle\Entity\Role;
 use AppBundle\SimpleXMLExtended;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * Class RoleExport
+ * Class RoleService
  */
-class RoleExport
+class RoleService
 {
+    /** @var  EntityManager */
+    private $manager;
+
     /** @var  EntityRepository */
     private $repository;
 
     /**
-     * @param EntityRepository $repository Get the entity repository.
+     * @param EntityManager $manager Get the entityManager.
      */
-    public function __construct(EntityRepository $repository)
+    public function __construct(EntityManager $manager)
     {
-        $this->repository = $repository;
+        $this->manager = $manager;
+        $this->repository = $manager->getRepository('AppBundle:Role');
     }
 
     /**
      * @return boolean
      */
-    public function exportEntity()
+    public function exportEntities()
     {
         $roles = $this->repository->findAll();
 

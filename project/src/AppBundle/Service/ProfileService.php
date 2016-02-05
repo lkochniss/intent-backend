@@ -7,28 +7,33 @@ namespace AppBundle\Service;
 
 use AppBundle\Entity\Profile;
 use AppBundle\SimpleXMLExtended;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * Class ProfileExport
+ * Class ProfileService
  */
-class ProfileExport
+class ProfileService
 {
+    /** @var  EntityManager */
+    private $manager;
+
     /** @var  EntityRepository */
     private $repository;
 
     /**
-     * @param EntityRepository $repository Get the entity repository.
+     * @param EntityManager $manager Get the entityManager.
      */
-    public function __construct(EntityRepository $repository)
+    public function __construct(EntityManager $manager)
     {
-        $this->repository = $repository;
+        $this->manager = $manager;
+        $this->repository = $manager->getRepository('AppBundle:Profile');
     }
 
     /**
      * @return boolean
      */
-    public function exportEntity()
+    public function exportEntities()
     {
         $profiles = $this->repository->findAll();
 

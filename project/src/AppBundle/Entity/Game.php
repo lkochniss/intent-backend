@@ -41,7 +41,7 @@ class Game extends Related
      * @param Studio $studio Set studio for game.
      * @return $this
      */
-    public function setStudio(Studio $studio)
+    public function setStudio(Studio $studio = null)
     {
         $this->studio = $studio;
 
@@ -60,7 +60,7 @@ class Game extends Related
      * @param Franchise $franchise Set franchise for game.
      * @return $this
      */
-    public function setFranchise(Franchise $franchise)
+    public function setFranchise(Franchise $franchise = null)
     {
         $this->franchise = $franchise;
 

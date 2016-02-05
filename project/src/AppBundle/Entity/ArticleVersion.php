@@ -221,7 +221,7 @@ class ArticleVersion extends AbstractModel
      * @param Category $category Set category.
      * @return $this
      */
-    public function setCategory(Category $category)
+    public function setCategory(Category $category = null)
     {
         $this->category = $category;
 

@@ -40,7 +40,7 @@ class Franchise extends Related
      * @param Publisher $publisher Set Publisher for franchise.
      * @return $this
      */
-    public function setPublisher(Publisher $publisher)
+    public function setPublisher(Publisher $publisher = null)
     {
         $this->publisher = $publisher;
 
@@ -59,7 +59,7 @@ class Franchise extends Related
      * @param Studio $studio Set studio for franchise.
      * @return $this
      */
-    public function setStudio(Studio $studio)
+    public function setStudio(Studio $studio = null)
     {
         $this->studio = $studio;
 

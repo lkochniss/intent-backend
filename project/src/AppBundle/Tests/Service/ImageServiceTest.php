@@ -8,16 +8,16 @@ namespace AppBundle\Service;
 use AppBundle\Tests\Controller\AbstractControllerTest;
 
 /**
- * Class RoleExportTest
+ * Class ImageServiceTest
  */
-class RoleExportTest extends AbstractControllerTest
+class ImageServiceTest extends AbstractControllerTest
 {
     /**
      * @return null
      */
     public function testExport()
     {
-        $status = $this->getContainer()->get('app.role.service')->exportEntity();
+        $status = $this->getContainer()->get('app.image.service')->exportEntities();
         $this->assertTrue($status);
 
         return null;
