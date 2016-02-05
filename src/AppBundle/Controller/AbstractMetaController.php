@@ -21,7 +21,11 @@ abstract class AbstractMetaController extends AbstractCrudController
      */
     public function createAction(Request $request)
     {
-        $this->denyAccessUnlessGranted($this->getWriteAccessLevel(), null, $this->getAccessDeniedMessage());
+        $this->denyAccessUnlessGranted(
+            $this->getWriteAccessLevel(),
+            null,
+            $this->getAccessDeniedMessage()
+        );
         $entity = $this->createNewEntity();
 
         return $this->createAndHandleForm($entity, $request, 'create');
@@ -35,7 +39,12 @@ abstract class AbstractMetaController extends AbstractCrudController
      */
     public function editAction($id, Request $request)
     {
-        $this->denyAccessUnlessGranted($this->getWriteAccessLevel(), null, $this->getAccessDeniedMessage());
+        $this->denyAccessUnlessGranted(
+            $this->getWriteAccessLevel(),
+            null,
+            $this->getAccessDeniedMessage()
+        );
+
         $entity = $this->getDoctrine()->getRepository($this->getEntityName())->find($id);
 
         if (is_null($entity)) {
@@ -48,17 +57,29 @@ abstract class AbstractMetaController extends AbstractCrudController
             );
         }
 
-        return $this->createAndHandleForm($entity, $request, 'edit', array('id' => $entity->getId()));
+        return $this->createAndHandleForm(
+            $entity,
+            $request,
+            'edit',
+            array(
+                'id' => $entity->getId()
+            )
+        );
     }
 
     /**
-     * @param integer $id      Id of enttiy.
+     * @param integer $id      Id of entity.
      * @param Request $request HTTP Request.
      * @return RedirectResponse|Response
      */
     public function showAction($id, Request $request)
     {
-        $this->denyAccessUnlessGranted($this->getReadAccessLevel(), null, $this->getAccessDeniedMessage());
+        $this->denyAccessUnlessGranted(
+            $this->getReadAccessLevel(),
+            null,
+            $this->getAccessDeniedMessage()
+        );
+
         $entity = $this->getDoctrine()->getRepository($this->getEntityName())->find($id);
 
         return $this->render(
@@ -74,7 +95,12 @@ abstract class AbstractMetaController extends AbstractCrudController
      */
     public function listAction()
     {
-        $this->denyAccessUnlessGranted($this->getReadAccessLevel(), null, $this->getAccessDeniedMessage());
+        $this->denyAccessUnlessGranted(
+            $this->getReadAccessLevel(),
+            null,
+            $this->getAccessDeniedMessage()
+        );
+
         $entities = $this->getDoctrine()->getRepository($this->getEntityName())->findAll();
 
         return $this->render(

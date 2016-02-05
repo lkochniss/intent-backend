@@ -7,7 +7,6 @@ namespace AppBundle\Service;
 
 use AppBundle\Entity\Publisher;
 use AppBundle\SimpleXMLExtended;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -15,20 +14,8 @@ use Doctrine\ORM\EntityRepository;
  */
 class PublisherService
 {
-    /** @var  EntityManager */
-    private $manager;
-
     /** @var  EntityRepository */
     private $repository;
-
-    /**
-     * @param EntityManager $manager Get the entityManager.
-     */
-    public function __construct(EntityManager $manager)
-    {
-        $this->manager = $manager;
-        $this->repository = $manager->getRepository('AppBundle:Publisher');
-    }
 
     /**
      * @return boolean
