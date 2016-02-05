@@ -27,9 +27,12 @@ framework:
     trusted_proxies: ~
     session:
         # handler_id set to null will use default session handler from php.ini
+        name: %session_name%
         handler_id:  ~
+        save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
     fragments:       ~
     http_method_override: true
+    assets: ~
 
 # Twig Configuration
 twig:
@@ -42,7 +45,7 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ ]
+    bundles:        ['AppBundle']
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -85,22 +88,3 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
-
-#stfalcon_tinymce:
-#    include_jquery: true
-#    tinymce_jquery: true
-#    selector: ".tinymce"
-#    language: %locale%
-#    external_plugins:
-#        filemanager:
-#            url: "asset[js/tinymce/plugins/filemanager/plugin.js]"
-#    theme:
-#        advanced:
-#             plugins:
-#                 - "advlist autolink lists link image charmap print preview hr anchor pagebreak"
-#                 - "searchreplace wordcount visualblocks visualchars code fullscreen"
-#                 - "insertdatetime media nonbreaking save table contextmenu directionality"
-#                 - "emoticons template paste textcolor"
-#                 - "filemanager"
-#             toolbar1: "filemanager insertfile undo redo | styleselect forecolor| bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
-#             image_advtab: true
