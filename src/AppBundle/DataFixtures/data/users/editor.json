@@ -1,9 +1,0 @@
-{
-    "username": "Editor",
-    "password": "editor",
-    "email": "editor@int-ent.de",
-    "roles": {
-        "Admin" : "Admin"
-    },
-    "isActive" : "1"
-}

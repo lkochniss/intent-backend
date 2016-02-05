@@ -12,3 +12,4 @@
 /web/bundles/
 !/web/upload/.gitkeep
 /web/upload/*
+/web/export/*

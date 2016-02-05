@@ -241,6 +241,6 @@ class Directory extends AbstractModel
      */
     public function __toString()
     {
-        return $this->path;
+        return $this->fullPath . $this->name;
     }
 }
