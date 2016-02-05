@@ -16,5 +16,5 @@ parameters:
     mailer_password:   ~
 
     locale:            en
-    # A secret key that's used to generate certain security-related tokens
-    secret:            ThisTokenIsNotSoSecretChangeIt
+    secret:            bs9gJustNgForcfSensio9EInsightCoTo3sKeepxH4QuietRoH
+    session_name:      INTENTBACKEND
