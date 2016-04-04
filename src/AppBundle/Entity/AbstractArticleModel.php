@@ -5,7 +5,6 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -68,6 +67,11 @@ abstract class AbstractArticleModel extends AbstractModel
     private $createdBy;
 
     /**
+     * @var User
+     */
+    private $modifiedBy;
+
+    /**
      * @var Event
      */
     private $event;
@@ -83,18 +87,12 @@ abstract class AbstractArticleModel extends AbstractModel
     private $thumbnail;
 
     /**
-     * @var ArrayCollection
-     */
-    private $tags;
-
-    /**
      * Publish is always false on create.
      */
     public function __construct()
     {
         $this->published = false;
         $this->slideshow = false;
-        $this->tags = new ArrayCollection();
     }
 
     /**
@@ -250,6 +248,25 @@ abstract class AbstractArticleModel extends AbstractModel
     }
 
     /**
+     * @param User|null $user Set modifiedBy user.
+     * @return $this
+     */
+    public function setModifiedBy(User $user = null)
+    {
+        $this->modifiedBy = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function getModifiedBy()
+    {
+        return $this->modifiedBy;
+    }
+
+    /**
      * @param Event|null $event Set event.
      * @return $this
      */
@@ -306,50 +323,5 @@ abstract class AbstractArticleModel extends AbstractModel
     public function getThumbnail()
     {
         return $this->thumbnail;
-    }
-
-    /**
-     * @param Tag $tag Add tag to array.
-     * @return $this
-     */
-    public function addTag(Tag $tag)
-    {
-        if (!$this->tags->contains($tag)) {
-            $this->tags->add($tag);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param Tag $tag Remove tag from array.
-     * @return $this
-     */
-    public function removeTag(Tag $tag)
-    {
-        $this->tags->removeElement($tag);
-
-        return $this;
-    }
-
-    /**
-     * @param array $tags Tags from article.
-     * @return null
-     */
-    public function setTags(array $tags)
-    {
-        foreach ($tags as $tag) {
-            $this->addTag($tag);
-        }
-
-        return null;
-    }
-
-    /**
-     * @return array
-     */
-    public function getTags()
-    {
-        return $this->tags->toArray();
     }
 }

@@ -33,7 +33,6 @@ class ArticleRepository extends AbstractRepository
         $version->setEvent($article->getEvent());
         $version->setRelated($article->getRelated());
         $version->setThumbnail($article->getThumbnail());
-        $version->setTags($article->getTags());
 
         $this->getEntityManager()->getRepository('AppBundle:ArticleVersion')->save($version);
 
