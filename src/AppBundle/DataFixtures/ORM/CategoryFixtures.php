@@ -37,7 +37,7 @@ class CategoryFixtures extends AbstractFixture implements OrderedFixtureInterfac
             $manager->getRepository('AppBundle:Category')->save(
                 $category
             );
-            $this->addReference('category-' . $category->getSlug(), $category);
+            $this->setReference('category-' . $category->getSlug(), $category);
         }
 
         return null;
