@@ -22,25 +22,26 @@ class RoleFixtures extends AbstractFixture implements OrderedFixtureInterface, C
 
     /**
      * @param ObjectManager $manager Manager to save role.
-     * @return boolean
+     * @return null
      */
     public function load(ObjectManager $manager)
     {
-        $xml = new SimpleXMLExtended(file_get_contents('web/export/role.xml'));
+        $roles = \Nelmio\Alice\Fixtures::load(__DIR__.'/../../../../app/Resources/fixtures/roles/roles_dev.yml',$manager);
+//        $xml = new SimpleXMLExtended(file_get_contents('web/export/role.xml'));
+//
+//        foreach ($xml->item as $item) {
+//            $role = new Role();
+//            $role->setName("$item->name");
+//            $role->setRole("$item->role");
+//
+//            $manager->getRepository('AppBundle:Role')->save(
+//                $role
+//            );
+//
+//            $this->addReference('role-' . $role->getName(), $role);
+//        }
 
-        foreach ($xml->item as $item) {
-            $role = new Role();
-            $role->setName("$item->name");
-            $role->setRole("$item->role");
-
-            $manager->getRepository('AppBundle:Role')->save(
-                $role
-            );
-
-            $this->addReference('role-' . $role->getName(), $role);
-        }
-
-        return true;
+        return null;
     }
 
     /**

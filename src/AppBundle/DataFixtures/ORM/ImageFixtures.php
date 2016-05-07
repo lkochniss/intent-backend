@@ -26,25 +26,25 @@ class ImageFixtures extends AbstractFixture implements OrderedFixtureInterface, 
      */
     public function load(ObjectManager $manager)
     {
-        $xml = new SimpleXMLExtended(file_get_contents('web/export/image.xml'));
-
-        foreach ($xml->item as $item) {
-            $image = new Image();
-            $image->setName("$item->name");
-            $image->setDescription("$item->description");
-            $image->setPath("$item->path");
-
-            if ("$item->parent" != '') {
-                $image->setParentDirectory($this->getReference('directory-' . "$item->parent"));
-            }
-
-            $image->resetFullPath();
-
-            $manager->persist($image);
-            $manager->flush();
-
-            $this->addReference('image-' . $image->getFullPath(), $image);
-        }
+//        $xml = new SimpleXMLExtended(file_get_contents('web/export/image.xml'));
+//
+//        foreach ($xml->item as $item) {
+//            $image = new Image();
+//            $image->setName("$item->name");
+//            $image->setDescription("$item->description");
+//            $image->setPath("$item->path");
+//
+//            if ("$item->parent" != '') {
+//                $image->setParentDirectory($this->getReference('directory-' . "$item->parent"));
+//            }
+//
+//            $image->resetFullPath();
+//
+//            $manager->persist($image);
+//            $manager->flush();
+//
+//            $this->addReference('image-' . $image->getFullPath(), $image);
+//        }
 
         return null;
     }

@@ -26,25 +26,25 @@ class UserFixtures extends AbstractFixture implements OrderedFixtureInterface, C
      */
     public function load(ObjectManager $manager)
     {
-        $xml = new SimpleXMLExtended(file_get_contents('web/export/user.xml'));
-
-        foreach ($xml->item as $item) {
-            $user = new User();
-            $user->setUsername("$item->username");
-            $user->setEmail("$item->email");
-            $user->setActive("$item->active");
-            $user->setPassword("$item->password");
-
-            foreach ($item->role as $role) {
-                $user->addRole($this->getReference("$role"));
-            }
-
-            $manager->getRepository('AppBundle:User')->save(
-                $user
-            );
-
-            $this->addReference('user-' . $user->getUsername(), $user);
-        }
+//        $xml = new SimpleXMLExtended(file_get_contents('web/export/user.xml'));
+//
+//        foreach ($xml->item as $item) {
+//            $user = new User();
+//            $user->setUsername("$item->username");
+//            $user->setEmail("$item->email");
+//            $user->setActive("$item->active");
+//            $user->setPassword("$item->password");
+//
+//            foreach ($item->role as $role) {
+//                $user->addRole($this->getReference("$role"));
+//            }
+//
+//            $manager->getRepository('AppBundle:User')->save(
+//                $user
+//            );
+//
+//            $this->addReference('user-' . $user->getUsername(), $user);
+//        }
 
         return null;
     }

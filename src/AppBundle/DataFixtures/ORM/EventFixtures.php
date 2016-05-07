@@ -26,29 +26,29 @@ class EventFixtures extends AbstractFixture implements OrderedFixtureInterface, 
      */
     public function load(ObjectManager $manager)
     {
-        $xml = new SimpleXMLExtended(file_get_contents('web/export/event.xml'));
-
-        foreach ($xml->item as $item) {
-            $event = new Event();
-            $event->setName("$item->name");
-            $event->setPublished(intval("$item->published"));
-            $event->setDescription("$item->description");
-            $event->setStartAt(new \DateTime("$item->startAt"));
-            $event->setEndAt(new \DateTime("$item->endAt"));
-
-            if ("$item->backgroundImage" != '') {
-                $event->setBackgroundImage($this->getReference("$item->backgroundImage"));
-            }
-
-            if ("$item->thumbnail" != '') {
-                $event->setThumbnail($this->getReference("$item->thumbnail"));
-            }
-
-            $manager->getRepository('AppBundle:Event')->save(
-                $event
-            );
-            $this->setReference('event-' . $event->getSlug(), $event);
-        }
+//        $xml = new SimpleXMLExtended(file_get_contents('web/export/event.xml'));
+//
+//        foreach ($xml->item as $item) {
+//            $event = new Event();
+//            $event->setName("$item->name");
+//            $event->setPublished(intval("$item->published"));
+//            $event->setDescription("$item->description");
+//            $event->setStartAt(new \DateTime("$item->startAt"));
+//            $event->setEndAt(new \DateTime("$item->endAt"));
+//
+//            if ("$item->backgroundImage" != '') {
+//                $event->setBackgroundImage($this->getReference("$item->backgroundImage"));
+//            }
+//
+//            if ("$item->thumbnail" != '') {
+//                $event->setThumbnail($this->getReference("$item->thumbnail"));
+//            }
+//
+//            $manager->getRepository('AppBundle:Event')->save(
+//                $event
+//            );
+//            $this->setReference('event-' . $event->getSlug(), $event);
+//        }
 
         return null;
     }

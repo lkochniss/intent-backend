@@ -28,57 +28,57 @@ class ArticleFixtures extends AbstractFixture implements OrderedFixtureInterface
      */
     public function load(ObjectManager $manager)
     {
-        $xml = new SimpleXMLExtended(file_get_contents('web/export/article.xml'));
-
-        foreach ($xml->item as $item) {
-            $article = new Article();
-            $article->setTitle("$item->title");
-            $article->setContent("$item->content");
-            $article->setSlideshow(intval("$item->slideshow"));
-            $article->setPublished(intval("$item->published"));
-            $article->setPublishAt(new \DateTime("$item->publishedAt"));
-            if ("$item->relatedType" != '') {
-                $article->setRelated($this->getReference("$item->relatedType" . '-' . "$item->related"));
-            }
-
-            if ("$item->category" != '') {
-                $article->setCategory($this->getReference("$item->category"));
-            }
-
-            if ("$item->event" != '') {
-                $article->setEvent($this->getReference("$item->event"));
-            }
-
-            if ("$item->thumbnail" != '') {
-                $article->setThumbnail($this->getReference("$item->thumbnail"));
-            }
-
-            foreach ($item->tag as $tag) {
-                $article->addTag($this->getReference("$tag"));
-            }
-
-            $manager->getRepository('AppBundle:Article')->save(
-                $article,
-                $this->getReference('user-' . "$item->author")
-            );
-        }
-
-        $dataDirectory = __DIR__ . '/../data/articles';
-        $directory = opendir($dataDirectory);
-
-        $count = 0;
-
-        while (false !== $file = readdir($directory)) {
-            if ('.' === substr($file, 0, 1)) {
-                continue;
-            }
-
-            if ($file != 'imported') {
-                $count++;
-                $this->saveWordpressArticles($manager, $dataDirectory . DIRECTORY_SEPARATOR . $file, $count);
-            }
-        }
-        $manager->flush();
+//        $xml = new SimpleXMLExtended(file_get_contents('web/export/article.xml'));
+//
+//        foreach ($xml->item as $item) {
+//            $article = new Article();
+//            $article->setTitle("$item->title");
+//            $article->setContent("$item->content");
+//            $article->setSlideshow(intval("$item->slideshow"));
+//            $article->setPublished(intval("$item->published"));
+//            $article->setPublishAt(new \DateTime("$item->publishedAt"));
+//            if ("$item->relatedType" != '') {
+//                $article->setRelated($this->getReference("$item->relatedType" . '-' . "$item->related"));
+//            }
+//
+//            if ("$item->category" != '') {
+//                $article->setCategory($this->getReference("$item->category"));
+//            }
+//
+//            if ("$item->event" != '') {
+//                $article->setEvent($this->getReference("$item->event"));
+//            }
+//
+//            if ("$item->thumbnail" != '') {
+//                $article->setThumbnail($this->getReference("$item->thumbnail"));
+//            }
+//
+//            foreach ($item->tag as $tag) {
+//                $article->addTag($this->getReference("$tag"));
+//            }
+//
+//            $manager->getRepository('AppBundle:Article')->save(
+//                $article,
+//                $this->getReference('user-' . "$item->author")
+//            );
+//        }
+//
+//        $dataDirectory = __DIR__ . '/../data/articles';
+//        $directory = opendir($dataDirectory);
+//
+//        $count = 0;
+//
+//        while (false !== $file = readdir($directory)) {
+//            if ('.' === substr($file, 0, 1)) {
+//                continue;
+//            }
+//
+//            if ($file != 'imported') {
+//                $count++;
+//                $this->saveWordpressArticles($manager, $dataDirectory . DIRECTORY_SEPARATOR . $file, $count);
+//            }
+//        }
+//        $manager->flush();
 
         return null;
     }

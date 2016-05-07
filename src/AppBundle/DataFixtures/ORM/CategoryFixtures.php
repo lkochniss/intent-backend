@@ -26,19 +26,19 @@ class CategoryFixtures extends AbstractFixture implements OrderedFixtureInterfac
      */
     public function load(ObjectManager $manager)
     {
-        $xml = new SimpleXMLExtended(file_get_contents('web/export/category.xml'));
-
-        foreach ($xml->item as $item) {
-            $category = new Category();
-            $category->setName("$item->name");
-            $category->setPublished(intval("$item->published"));
-            $category->setPriority(intval("$item->priority"));
-
-            $manager->getRepository('AppBundle:Category')->save(
-                $category
-            );
-            $this->setReference('category-' . $category->getSlug(), $category);
-        }
+//        $xml = new SimpleXMLExtended(file_get_contents('web/export/category.xml'));
+//
+//        foreach ($xml->item as $item) {
+//            $category = new Category();
+//            $category->setName("$item->name");
+//            $category->setPublished(intval("$item->published"));
+//            $category->setPriority(intval("$item->priority"));
+//
+//            $manager->getRepository('AppBundle:Category')->save(
+//                $category
+//            );
+//            $this->setReference('category-' . $category->getSlug(), $category);
+//        }
 
         return null;
     }

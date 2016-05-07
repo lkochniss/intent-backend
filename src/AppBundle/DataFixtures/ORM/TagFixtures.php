@@ -27,18 +27,18 @@ class TagFixtures extends AbstractFixture implements OrderedFixtureInterface, Co
      */
     public function load(ObjectManager $manager)
     {
-        $xml = new SimpleXMLExtended(file_get_contents('web/export/tag.xml'));
-
-        foreach ($xml->item as $item) {
-            $tag = new Tag();
-            $tag->setName("$item->name");
-            $tag->setPublished(intval("$item->published"));
-
-            $manager->getRepository('AppBundle:Tag')->save(
-                $tag
-            );
-            $this->setReference('tag-' . $tag->getSlug(), $tag);
-        }
+//        $xml = new SimpleXMLExtended(file_get_contents('web/export/tag.xml'));
+//
+//        foreach ($xml->item as $item) {
+//            $tag = new Tag();
+//            $tag->setName("$item->name");
+//            $tag->setPublished(intval("$item->published"));
+//
+//            $manager->getRepository('AppBundle:Tag')->save(
+//                $tag
+//            );
+//            $this->setReference('tag-' . $tag->getSlug(), $tag);
+//        }
 
         return null;
     }

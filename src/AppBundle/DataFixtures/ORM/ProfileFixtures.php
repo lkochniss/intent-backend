@@ -27,22 +27,22 @@ class ProfileFixtures extends AbstractFixture implements OrderedFixtureInterface
      */
     public function load(ObjectManager $manager)
     {
-        $xml = new SimpleXMLExtended(file_get_contents('web/export/profile.xml'));
-
-        foreach ($xml->item as $item) {
-            $profile = new Profile();
-            $profile->setName("$item->name");
-            $profile->setDescription("$item->description");
-
-            if ("$item->user" != '') {
-                $profile->setUser($this->getReference('user-' . "$item->user"));
-            }
-
-            $manager->getRepository('AppBundle:Profile')->save(
-                $profile
-            );
-            $this->addReference('profile-' . $profile->getName(), $profile);
-        }
+//        $xml = new SimpleXMLExtended(file_get_contents('web/export/profile.xml'));
+//
+//        foreach ($xml->item as $item) {
+//            $profile = new Profile();
+//            $profile->setName("$item->name");
+//            $profile->setDescription("$item->description");
+//
+//            if ("$item->user" != '') {
+//                $profile->setUser($this->getReference('user-' . "$item->user"));
+//            }
+//
+//            $manager->getRepository('AppBundle:Profile')->save(
+//                $profile
+//            );
+//            $this->addReference('profile-' . $profile->getName(), $profile);
+//        }
 
         return true;
     }

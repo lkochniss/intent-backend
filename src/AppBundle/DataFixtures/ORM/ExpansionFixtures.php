@@ -27,34 +27,34 @@ class ExpansionFixtures extends AbstractFixture implements OrderedFixtureInterfa
      */
     public function load(ObjectManager $manager)
     {
-        $xml = new SimpleXMLExtended(file_get_contents('web/export/expansion.xml'));
-
-        foreach ($xml->item as $item) {
-            $expansion = new Expansion();
-            $expansion->setName("$item->name");
-            $expansion->setDescription("$item->description");
-            $expansion->setPublished(intval("$item->published"));
-            $expansion->setBackgroundLink("$item->backgroundLink");
-
-            if ("$item->game" != '') {
-                $expansion->setGame($this->getReference("$item->game"));
-            }
-
-            if ("$item->backgroundImage" != '') {
-                $expansion->setBackgroundImage($this->getReference("$item->backgroundImage"));
-            }
-
-            if ("$item->thumbnail" != '') {
-                $expansion->setThumbnail($this->getReference("$item->thumbnail"));
-            }
-
-
-            $manager->getRepository('AppBundle:Expansion')->save(
-                $expansion
-            );
-
-            $this->addReference('dlc/expansion-' . $expansion->getSlug(), $expansion);
-        }
+//        $xml = new SimpleXMLExtended(file_get_contents('web/export/expansion.xml'));
+//
+//        foreach ($xml->item as $item) {
+//            $expansion = new Expansion();
+//            $expansion->setName("$item->name");
+//            $expansion->setDescription("$item->description");
+//            $expansion->setPublished(intval("$item->published"));
+//            $expansion->setBackgroundLink("$item->backgroundLink");
+//
+//            if ("$item->game" != '') {
+//                $expansion->setGame($this->getReference("$item->game"));
+//            }
+//
+//            if ("$item->backgroundImage" != '') {
+//                $expansion->setBackgroundImage($this->getReference("$item->backgroundImage"));
+//            }
+//
+//            if ("$item->thumbnail" != '') {
+//                $expansion->setThumbnail($this->getReference("$item->thumbnail"));
+//            }
+//
+//
+//            $manager->getRepository('AppBundle:Expansion')->save(
+//                $expansion
+//            );
+//
+//            $this->addReference('dlc/expansion-' . $expansion->getSlug(), $expansion);
+//        }
 
         return null;
     }

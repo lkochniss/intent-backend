@@ -26,22 +26,22 @@ class DirectoryFixtures extends AbstractFixture implements OrderedFixtureInterfa
      */
     public function load(ObjectManager $manager)
     {
-        $xml = new SimpleXMLExtended(file_get_contents('web/export/directory.xml'));
-
-        foreach ($xml->item as $item) {
-            $directory = new Directory();
-            $directory->setName("$item->name");
-            $directory->setPath("$item->path");
-
-            if ("$item->parent" != '') {
-                $directory->setParentDirectory($this->getReference('directory-' . "$item->parent"));
-            }
-
-            $manager->getRepository('AppBundle:Directory')->save(
-                $directory
-            );
-            $this->setReference('directory-' . $directory, $directory);
-        }
+//        $xml = new SimpleXMLExtended(file_get_contents('web/export/directory.xml'));
+//
+//        foreach ($xml->item as $item) {
+//            $directory = new Directory();
+//            $directory->setName("$item->name");
+//            $directory->setPath("$item->path");
+//
+//            if ("$item->parent" != '') {
+//                $directory->setParentDirectory($this->getReference('directory-' . "$item->parent"));
+//            }
+//
+//            $manager->getRepository('AppBundle:Directory')->save(
+//                $directory
+//            );
+//            $this->setReference('directory-' . $directory, $directory);
+//        }
 
         return null;
     }
