@@ -5,7 +5,7 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
-use AppBundle\Entity\Category;
+use AppBundle\Entity\Role;
 use AppBundle\SimpleXMLExtended;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -14,31 +14,19 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class CategoryFixtures
+ * Class RoleFixtures
  */
-class CategoryFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class RoleFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     private $container;
 
     /**
-     * @param ObjectManager $manager Manager to save category.
+     * @param ObjectManager $manager Manager to save role.
      * @return null
      */
     public function load(ObjectManager $manager)
     {
-//        $xml = new SimpleXMLExtended(file_get_contents('web/export/category.xml'));
-//
-//        foreach ($xml->item as $item) {
-//            $category = new Category();
-//            $category->setName("$item->name");
-//            $category->setPublished(intval("$item->published"));
-//            $category->setPriority(intval("$item->priority"));
-//
-//            $manager->getRepository('AppBundle:Category')->save(
-//                $category
-//            );
-//            $this->setReference('category-' . $category->getSlug(), $category);
-//        }
+        $roles = \Nelmio\Alice\Fixtures::load(__DIR__.'/../../../../../app/Resources/fixtures/roles/roles_dev.yml',$manager);
 
         return null;
     }
@@ -59,6 +47,6 @@ class CategoryFixtures extends AbstractFixture implements OrderedFixtureInterfac
      */
     public function getOrder()
     {
-        return 12;
+        return 1;
     }
 }

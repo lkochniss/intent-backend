@@ -5,7 +5,8 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
-use AppBundle\Entity\Directory;
+use AppBundle\Entity\Category;
+use AppBundle\Entity\Tag;
 use AppBundle\SimpleXMLExtended;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -14,34 +15,30 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class DirectoryFixtures
+ * Class TagFixtures
  */
-class DirectoryFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class TagFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     private $container;
 
     /**
-     * @param ObjectManager $manager Manager to save directory.
+     * @param ObjectManager $manager Manager to save category.
      * @return null
      */
     public function load(ObjectManager $manager)
     {
-//        $xml = new SimpleXMLExtended(file_get_contents('web/export/directory.xml'));
-//
-//        foreach ($xml->item as $item) {
-//            $directory = new Directory();
-//            $directory->setName("$item->name");
-//            $directory->setPath("$item->path");
-//
-//            if ("$item->parent" != '') {
-//                $directory->setParentDirectory($this->getReference('directory-' . "$item->parent"));
-//            }
-//
-//            $manager->getRepository('AppBundle:Directory')->save(
-//                $directory
-//            );
-//            $this->setReference('directory-' . $directory, $directory);
-//        }
+        $xml = new SimpleXMLExtended(file_get_contents('web/export/tag.xml'));
+
+        foreach ($xml->item as $item) {
+            $tag = new Tag();
+            $tag->setName("$item->name");
+            $tag->setPublished(intval("$item->published"));
+
+            $manager->getRepository('AppBundle:Tag')->save(
+                $tag
+            );
+            $this->setReference('tag-' . $tag->getSlug(), $tag);
+        }
 
         return null;
     }
@@ -62,6 +59,6 @@ class DirectoryFixtures extends AbstractFixture implements OrderedFixtureInterfa
      */
     public function getOrder()
     {
-        return 4;
+        return 13;
     }
 }

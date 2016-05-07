@@ -6,7 +6,6 @@
 namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Directory;
-use AppBundle\Entity\Profile;
 use AppBundle\SimpleXMLExtended;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -15,36 +14,36 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class ProfileFixtures
+ * Class DirectoryFixtures
  */
-class ProfileFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class DirectoryFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     private $container;
 
     /**
-     * @param ObjectManager $manager Manager to save profile.
-     * @return boolean
+     * @param ObjectManager $manager Manager to save directory.
+     * @return null
      */
     public function load(ObjectManager $manager)
     {
-//        $xml = new SimpleXMLExtended(file_get_contents('web/export/profile.xml'));
-//
-//        foreach ($xml->item as $item) {
-//            $profile = new Profile();
-//            $profile->setName("$item->name");
-//            $profile->setDescription("$item->description");
-//
-//            if ("$item->user" != '') {
-//                $profile->setUser($this->getReference('user-' . "$item->user"));
-//            }
-//
-//            $manager->getRepository('AppBundle:Profile')->save(
-//                $profile
-//            );
-//            $this->addReference('profile-' . $profile->getName(), $profile);
-//        }
+        $xml = new SimpleXMLExtended(file_get_contents('web/export/directory.xml'));
 
-        return true;
+        foreach ($xml->item as $item) {
+            $directory = new Directory();
+            $directory->setName("$item->name");
+            $directory->setPath("$item->path");
+
+            if ("$item->parent" != '') {
+                $directory->setParentDirectory($this->getReference('directory-' . "$item->parent"));
+            }
+
+            $manager->getRepository('AppBundle:Directory')->save(
+                $directory
+            );
+            $this->setReference('directory-' . $directory, $directory);
+        }
+
+        return null;
     }
 
     /**
@@ -63,6 +62,6 @@ class ProfileFixtures extends AbstractFixture implements OrderedFixtureInterface
      */
     public function getOrder()
     {
-        return 3;
+        return 4;
     }
 }

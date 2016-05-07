@@ -26,29 +26,29 @@ class PublisherFixtures extends AbstractFixture implements OrderedFixtureInterfa
      */
     public function load(ObjectManager $manager)
     {
-//        $xml = new SimpleXMLExtended(file_get_contents('web/export/publisher.xml'));
-//
-//        foreach ($xml->item as $item) {
-//            $publisher = new Publisher();
-//            $publisher->setName("$item->name");
-//            $publisher->setDescription("$item->description");
-//            $publisher->setPublished(intval("$item->published"));
-//            $publisher->setBackgroundLink("$item->backgroundLink");
-//
-//            if ("$item->backgroundImage" != '') {
-//                $publisher->setBackgroundImage($this->getReference("$item->backgroundImage"));
-//            }
-//
-//            if ("$item->thumbnail" != '') {
-//                $publisher->setThumbnail($this->getReference("$item->thumbnail"));
-//            }
-//
-//            $manager->getRepository('AppBundle:Publisher')->save(
-//                $publisher
-//            );
-//
-//            $this->addReference('publisher-' . $publisher->getSlug(), $publisher);
-//        }
+        $xml = new SimpleXMLExtended(file_get_contents('web/export/publisher.xml'));
+
+        foreach ($xml->item as $item) {
+            $publisher = new Publisher();
+            $publisher->setName("$item->name");
+            $publisher->setDescription("$item->description");
+            $publisher->setPublished(intval("$item->published"));
+            $publisher->setBackgroundLink("$item->backgroundLink");
+
+            if ("$item->backgroundImage" != '') {
+                $publisher->setBackgroundImage($this->getReference("$item->backgroundImage"));
+            }
+
+            if ("$item->thumbnail" != '') {
+                $publisher->setThumbnail($this->getReference("$item->thumbnail"));
+            }
+
+            $manager->getRepository('AppBundle:Publisher')->save(
+                $publisher
+            );
+
+            $this->addReference('publisher-' . $publisher->getSlug(), $publisher);
+        }
 
         return null;
     }

@@ -5,7 +5,7 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
-use AppBundle\Entity\Role;
+use AppBundle\Entity\Category;
 use AppBundle\SimpleXMLExtended;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -14,32 +14,31 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class RoleFixtures
+ * Class CategoryFixtures
  */
-class RoleFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class CategoryFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     private $container;
 
     /**
-     * @param ObjectManager $manager Manager to save role.
+     * @param ObjectManager $manager Manager to save category.
      * @return null
      */
     public function load(ObjectManager $manager)
     {
-        $roles = \Nelmio\Alice\Fixtures::load(__DIR__.'/../../../../app/Resources/fixtures/roles/roles_dev.yml',$manager);
-//        $xml = new SimpleXMLExtended(file_get_contents('web/export/role.xml'));
-//
-//        foreach ($xml->item as $item) {
-//            $role = new Role();
-//            $role->setName("$item->name");
-//            $role->setRole("$item->role");
-//
-//            $manager->getRepository('AppBundle:Role')->save(
-//                $role
-//            );
-//
-//            $this->addReference('role-' . $role->getName(), $role);
-//        }
+        $xml = new SimpleXMLExtended(file_get_contents('web/export/category.xml'));
+
+        foreach ($xml->item as $item) {
+            $category = new Category();
+            $category->setName("$item->name");
+            $category->setPublished(intval("$item->published"));
+            $category->setPriority(intval("$item->priority"));
+
+            $manager->getRepository('AppBundle:Category')->save(
+                $category
+            );
+            $this->setReference('category-' . $category->getSlug(), $category);
+        }
 
         return null;
     }
@@ -60,6 +59,6 @@ class RoleFixtures extends AbstractFixture implements OrderedFixtureInterface, C
      */
     public function getOrder()
     {
-        return 1;
+        return 12;
     }
 }

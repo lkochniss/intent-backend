@@ -29,35 +29,35 @@ class PageFixtures extends AbstractFixture implements OrderedFixtureInterface, C
     public function load(ObjectManager $manager)
     {
         $xml = new SimpleXMLExtended(file_get_contents('web/export/page.xml'));
-//
-//        foreach ($xml->item as $item) {
-//            $page = new Page();
-//            $page->setTitle("$item->title");
-//            $page->setContent("$item->content");
-//            $page->setPublished(intval("$item->published"));
-//
-//            $manager->getRepository('AppBundle:Page')->save(
-//                $page,
-//                null
-//            );
-//        }
-//
-//        $dataDirectory = __DIR__ . '/../data/pages';
-//        $directory = opendir($dataDirectory);
-//
-//        $count = 0;
-//
-//        while (false !== $file = readdir($directory)) {
-//            if ('.' === substr($file, 0, 1)) {
-//                continue;
-//            }
-//
-//            if ($file != 'imported') {
-//                $count++;
-//                $this->saveWordpressPage($manager, $dataDirectory . DIRECTORY_SEPARATOR . $file, $count);
-//            }
-//        }
-//        $manager->flush();
+
+        foreach ($xml->item as $item) {
+            $page = new Page();
+            $page->setTitle("$item->title");
+            $page->setContent("$item->content");
+            $page->setPublished(intval("$item->published"));
+
+            $manager->getRepository('AppBundle:Page')->save(
+                $page,
+                null
+            );
+        }
+
+        $dataDirectory = __DIR__ . '/../data/pages';
+        $directory = opendir($dataDirectory);
+
+        $count = 0;
+
+        while (false !== $file = readdir($directory)) {
+            if ('.' === substr($file, 0, 1)) {
+                continue;
+            }
+
+            if ($file != 'imported') {
+                $count++;
+                $this->saveWordpressPage($manager, $dataDirectory . DIRECTORY_SEPARATOR . $file, $count);
+            }
+        }
+        $manager->flush();
 
         return null;
     }

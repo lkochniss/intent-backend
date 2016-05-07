@@ -26,29 +26,29 @@ class StudioFixtures extends AbstractFixture implements OrderedFixtureInterface,
      */
     public function load(ObjectManager $manager)
     {
-//        $xml = new SimpleXMLExtended(file_get_contents('web/export/studio.xml'));
-//
-//        foreach ($xml->item as $item) {
-//            $studio = new Studio();
-//            $studio->setName("$item->name");
-//            $studio->setDescription("$item->description");
-//            $studio->setPublished(intval("$item->published"));
-//            $studio->setBackgroundLink("$item->backgroundLink");
-//
-//            if ("$item->backgroundImage" != '') {
-//                $studio->setBackgroundImage($this->getReference("$item->backgroundImage"));
-//            }
-//
-//            if ("$item->thumbnail" != '') {
-//                $studio->setThumbnail($this->getReference("$item->thumbnail"));
-//            }
-//
-//            $manager->getRepository('AppBundle:Studio')->save(
-//                $studio
-//            );
-//
-//            $this->setReference('studio-' . $studio->getSlug(), $studio);
-//        }
+        $xml = new SimpleXMLExtended(file_get_contents('web/export/studio.xml'));
+
+        foreach ($xml->item as $item) {
+            $studio = new Studio();
+            $studio->setName("$item->name");
+            $studio->setDescription("$item->description");
+            $studio->setPublished(intval("$item->published"));
+            $studio->setBackgroundLink("$item->backgroundLink");
+
+            if ("$item->backgroundImage" != '') {
+                $studio->setBackgroundImage($this->getReference("$item->backgroundImage"));
+            }
+
+            if ("$item->thumbnail" != '') {
+                $studio->setThumbnail($this->getReference("$item->thumbnail"));
+            }
+
+            $manager->getRepository('AppBundle:Studio')->save(
+                $studio
+            );
+
+            $this->setReference('studio-' . $studio->getSlug(), $studio);
+        }
 
         return null;
     }

@@ -5,8 +5,7 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
-use AppBundle\Entity\Category;
-use AppBundle\Entity\Tag;
+use AppBundle\Entity\Role;
 use AppBundle\SimpleXMLExtended;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -15,30 +14,31 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class TagFixtures
+ * Class RoleFixtures
  */
-class TagFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class RoleFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     private $container;
 
     /**
-     * @param ObjectManager $manager Manager to save category.
+     * @param ObjectManager $manager Manager to save role.
      * @return null
      */
     public function load(ObjectManager $manager)
     {
-//        $xml = new SimpleXMLExtended(file_get_contents('web/export/tag.xml'));
-//
-//        foreach ($xml->item as $item) {
-//            $tag = new Tag();
-//            $tag->setName("$item->name");
-//            $tag->setPublished(intval("$item->published"));
-//
-//            $manager->getRepository('AppBundle:Tag')->save(
-//                $tag
-//            );
-//            $this->setReference('tag-' . $tag->getSlug(), $tag);
-//        }
+        $xml = new SimpleXMLExtended(file_get_contents('web/export/role.xml'));
+
+        foreach ($xml->item as $item) {
+            $role = new Role();
+            $role->setName("$item->name");
+            $role->setRole("$item->role");
+
+            $manager->getRepository('AppBundle:Role')->save(
+                $role
+            );
+
+            $this->addReference('role-' . $role->getName(), $role);
+        }
 
         return null;
     }
@@ -59,6 +59,6 @@ class TagFixtures extends AbstractFixture implements OrderedFixtureInterface, Co
      */
     public function getOrder()
     {
-        return 13;
+        return 1;
     }
 }
