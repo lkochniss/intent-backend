@@ -1,0 +1,57 @@
+AppBundle\Entity\AbstractArticleModel:
+    type: mappedSuperclass
+
+    fields:
+            title:
+                type: string
+                length: 255
+            slug:
+                type: string
+                length: 255
+            content:
+                type: text
+            publishAt:
+                column: publish_at
+                type: datetime
+                nullable: true
+            published:
+                type: boolean
+            slideshow:
+                type: boolean
+    manyToOne:
+        category:
+            targetEntity: Category
+            joinColumn:
+                name: category_id
+                referencedColumnName: id
+        createdBy:
+            targetEntity: User
+            joinColumn:
+                name: created_by_id
+                referencedColumnName: id
+        modifiedBy:
+            targetEntity: User
+            joinColumn:
+                name: modified_by_id
+                referencedColumnName: id
+        event:
+            targetEntity: Event
+            joinColumn:
+                name: event_id
+                referencedColumnName: id
+        related:
+            targetEntity: Related
+            joinColumn:
+                name: related_id
+                referencedColumnName: id
+        thumbnail:
+            targetEntity: Image
+            joinColumn:
+                name: thumbnail_id
+                referencedColumnName: id
+    lifecycleCallbacks:
+        prePersist:
+                - setModifiedAt
+                - setCreatedAt
+        preUpdate:
+                - setModifiedAt

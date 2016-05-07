@@ -47,7 +47,7 @@ class EventFixtures extends AbstractFixture implements OrderedFixtureInterface, 
             $manager->getRepository('AppBundle:Event')->save(
                 $event
             );
-            $this->addReference('event-' . $event->getSlug(), $event);
+            $this->setReference('event-' . $event->getSlug(), $event);
         }
 
         return null;

@@ -8,62 +8,10 @@ AppBundle\Entity\Article:
             id: true
             generator:
                 strategy: AUTO
-    fields:
-        title:
-            type: string
-            length: 255
-        slug:
-            type: string
-            length: 255
-        content:
-            type: text
-        publishAt:
-            column: publish_at
-            type: datetime
-            nullable: true
-        published:
-            type: boolean
-        slideshow:
-            type: boolean
     oneToMany:
         versions:
             targetEntity: ArticleVersion
             mappedBy: article
-    manyToOne:
-        category:
-            targetEntity: Category
-            inversedBy: articles
-            joinColumn:
-                name: category_id
-                referencedColumnName: id
-        createdBy:
-            targetEntity: User
-            inversedBy: articles
-            joinColumn:
-                name: created_by_id
-                referencedColumnName: id
-        modifiedBy:
-            targetEntity: User
-            joinColumn:
-                name: modified_by_id
-                referencedColumnName: id
-        event:
-            targetEntity: Event
-            inversedBy: articles
-            joinColumn:
-                name: event_id
-                referencedColumnName: id
-        related:
-            targetEntity: Related
-            inversedBy: articles
-            joinColumn:
-                name: related_id
-                referencedColumnName: id
-        thumbnail:
-            targetEntity: Image
-            joinColumn:
-                name: thumbnail_id
-                referencedColumnName: id
     manyToMany:
         tags:
             targetEntity: Tag

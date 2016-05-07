@@ -6,7 +6,6 @@
 namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Article
@@ -19,12 +18,18 @@ class Article extends AbstractArticleModel
     private $versions;
 
     /**
+     * @var ArrayCollection
+     */
+    private $tags;
+
+    /**
      * Add empty version array
      */
     public function __construct()
     {
         parent::__construct();
         $this->versions = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     /**
@@ -58,6 +63,51 @@ class Article extends AbstractArticleModel
     public function getVersions()
     {
         return $this->versions->toArray();
+    }
+
+    /**
+     * @param Tag $tag Add tag to array.
+     * @return $this
+     */
+    public function addTag(Tag $tag)
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags->add($tag);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Tag $tag Remove tag from array.
+     * @return $this
+     */
+    public function removeTag(Tag $tag)
+    {
+        $this->tags->removeElement($tag);
+
+        return $this;
+    }
+
+    /**
+     * @param array $tags Tags from article.
+     * @return null
+     */
+    public function setTags(array $tags)
+    {
+        foreach ($tags as $tag) {
+            $this->addTag($tag);
+        }
+
+        return null;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTags()
+    {
+        return $this->tags->toArray();
     }
 
     /**
