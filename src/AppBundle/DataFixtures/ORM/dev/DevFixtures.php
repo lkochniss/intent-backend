@@ -5,10 +5,8 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
-use AppBundle\Entity\Role;
-use AppBundle\SimpleXMLExtended;
 use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -16,7 +14,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Class RoleFixtures
  */
-class RoleFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class DevFixtures extends AbstractFixture implements FixtureInterface, ContainerAwareInterface
 {
     private $container;
 
@@ -26,7 +24,7 @@ class RoleFixtures extends AbstractFixture implements OrderedFixtureInterface, C
      */
     public function load(ObjectManager $manager)
     {
-        $roles = \Nelmio\Alice\Fixtures::load(__DIR__.'/../../../../../app/Resources/fixtures/roles/roles_dev.yml',$manager);
+        \Nelmio\Alice\Fixtures::load(__DIR__.'/../../../../../app/Resources/fixtures/fixtures_dev.yml',$manager);
 
         return null;
     }
@@ -40,13 +38,5 @@ class RoleFixtures extends AbstractFixture implements OrderedFixtureInterface, C
         $this->container = $containerInterface;
 
         return $this;
-    }
-
-    /**
-     * @return integer
-     */
-    public function getOrder()
-    {
-        return 1;
     }
 }

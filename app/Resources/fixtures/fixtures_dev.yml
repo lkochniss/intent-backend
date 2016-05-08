@@ -1,0 +1,37 @@
+AppBundle\Entity\Role:
+  role_admin:
+    name: 'Admin'
+    role: 'ROLE_ADMIN'
+  role_read_article:
+    name: 'Artikel lesen'
+    role: 'ROLE_READ_ARTICLE'
+  role_write_article:
+    name: 'Artikel schreiben'
+    role: 'ROLE_WRITE_ARTICLE'
+  role_publish_article:
+    name: 'Artikel veröffentlichen'
+    role: 'ROLE_PUBLISH_ARTICLE'
+  role_read_meata:
+    name: 'Meta lesen'
+    role: 'ROLE_READ_META'
+  role_write_meta:
+    name: 'Meta schreiben'
+    role: 'ROLE_WRITE_META'
+  role_publish_meta:
+    name: 'Meta veröffentlichen'
+    role: 'ROLE_PUBLISH_META'
+AppBundle\Entity\User:
+  user_admin:
+    username: 'Admin'
+    password: 'admin'
+    email: 'admin@int-ent.de'
+    isActive: 1
+    validUntil: <dateTimeBetween('+10 days', '+200 days')>
+    roles: [ '@role_admin' ]
+  user{1..5}:
+    username: <username()>
+    password: <word()>
+    email: <email()>
+    isActive: <numberBetween(0, 1)>
+    validUntil: <dateTimeBetween('-100 days', '+200 days')>
+    roles:  0..100%? [ '@role_admin', '@role_read_article', '@role_write_article', '@role_publish_article', '@role_read_meata', '@role_write_meta', '@role_publish_meta']
