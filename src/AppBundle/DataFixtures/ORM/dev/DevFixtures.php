@@ -10,6 +10,7 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Nelmio\Alice\Fixtures;
 
 /**
  * Class RoleFixtures
@@ -24,7 +25,9 @@ class DevFixtures extends AbstractFixture implements FixtureInterface, Container
      */
     public function load(ObjectManager $manager)
     {
-        \Nelmio\Alice\Fixtures::load(__DIR__.'/../../../../../app/Resources/fixtures/fixtures_dev.yml', $manager);
+        /** @var Fixtures $fixtureLoader */
+        $fixtureLoader = $this->container->get('alice.fixtures');
+        $fixtureLoader->loadFiles( __DIR__.'/../../../../../app/Resources/fixtures/fixtures_dev.yml');
 
         return null;
     }
