@@ -24,7 +24,7 @@ class DevFixtures extends AbstractFixture implements FixtureInterface, Container
      */
     public function load(ObjectManager $manager)
     {
-        \Nelmio\Alice\Fixtures::load(__DIR__.'/../../../../../app/Resources/fixtures/fixtures_dev.yml',$manager);
+        \Nelmio\Alice\Fixtures::load(__DIR__.'/../../../../../app/Resources/fixtures/fixtures_dev.yml', $manager);
 
         return null;
     }
