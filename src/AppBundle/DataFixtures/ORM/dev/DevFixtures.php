@@ -27,7 +27,7 @@ class DevFixtures extends AbstractFixture implements FixtureInterface, Container
     {
         /** @var Fixtures $fixtureLoader */
         $fixtureLoader = $this->container->get('alice.fixtures');
-        $fixtureLoader->loadFiles( __DIR__.'/../../../../../app/Resources/fixtures/fixtures_dev.yml');
+        $fixtureLoader->loadFiles(__DIR__.'/../../../../../app/Resources/fixtures/fixtures_dev.yml');
 
         return null;
     }
