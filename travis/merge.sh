@@ -9,14 +9,6 @@ if [ "${MERGE}" = "false" ] ; then
     exit 0;
 fi
 
-if [ ! -n $2 ] ; then
-    echo "Usage: merge.sh <username> <password>"
-    exit 1;
-fi
-
-GIT_USER = $1
-GIT_PASS = $2
-
 git checkout develop || exit
 git merge $TRAVIS_COMMIT || exit
 
@@ -27,7 +19,7 @@ export PAGER=cat
 # Create the URL to push merge to
 URL=$(git remote -v | head -n1 | cut -f2 | cut -d" " -f1)
 echo "Repo url is $URL"
-PUSH_URL="https://$GIT_USER:$GIT_PASS@${URL:6}"
+PUSH_URL="https://$USERNAME:$PASSWORD@${URL:6}"
 
 git checkout develop || exit
 git merge "$TRAVIS_COMMIT" || exit
