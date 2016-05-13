@@ -31,7 +31,7 @@ PUSH_URL="https://$GIT_USER:$GIT_PASS@${URL:6}"
 git log -n 1 | cat
 
 # Push changes back to remote vcs
-#echo "Pushing changes..." && \
-#git push $PUSH_URL && \
-#echo "Merge complete!" || \
-#echo "Error Occurred. Merge failed"
+echo "Pushing changes..." && \
+git push $PUSH_URL && \
+echo "Merge complete!" || \
+echo "Error Occurred. Merge failed"
