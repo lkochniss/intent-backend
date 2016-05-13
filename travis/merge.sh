@@ -25,6 +25,6 @@ git checkout develop || exit
 git merge "$TRAVIS_COMMIT"|| exit
 
 echo "Pushing changes..." && \
-git push $PUSH_URL&& \
+git push $PUSH_URL && \
 echo "Merge complete!" || \
 echo "Error Occurred. Merge failed"
