@@ -7,7 +7,7 @@ matrix:
   - php: 5.6
     env: CODECOV=true CODESNIFF=true MERGE=true
   - php: 7.0
-    env: CODECOV=false CODESNIFF=false MERGE=true
+    env: CODECOV=false CODESNIFF=false MERGE=false
 cache:
   directories:
   - vendor
