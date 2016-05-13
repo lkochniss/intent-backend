@@ -24,7 +24,7 @@ script:
 - ./travis/script.sh
 after_success:
 - ./travis/after-success.sh
-- ./travis/merge.sh $USERNAME $PASSWORD
+- ./travis/merge.sh
 
 env:
   global:
