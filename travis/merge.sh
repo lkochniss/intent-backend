@@ -18,13 +18,13 @@ export PAGER=cat
 
 # Create the URL to push merge to
 URL=$(git remote -v | head -n1 | cut -f2 | cut -d" " -f1)
-#echo "Repo url is $URL"
-#PUSH_URL="https://$USERNAME:$PASSWORD@${URL:6}"
+echo "Repo url is $URL"
+PUSH_URL="https://$USERNAME:GITHUB@${URL:6}"
 
 git checkout develop || exit
 git merge "$TRAVIS_COMMIT" || exit
 
 echo "Pushing changes..." && \
-git push $URL && \
+git push $PUSH_URL && \
 echo "Merge complete!" || \
 echo "Error Occurred. Merge failed"
