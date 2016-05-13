@@ -11,6 +11,10 @@ if [ "${TRAVIS_PULL_REQUEST}" = "false" ] ; then
     exit 0;
 fi
 
+if [ "${MERGE}" = "false" ] ; then
+    exit 0;
+fi
+
 GIT_USER="$1"
 GIT_PASS="$2"
 
@@ -24,7 +28,7 @@ URL=$(git remote -v | head -n1 | cut -f2 | cut -d" " -f1)
 echo "Repo url is $URL"
 PUSH_URL="https://$GIT_USER:$GIT_PASS@${URL:6}"
 
-git status
+git log -n 1 | cat
 
 # Push changes back to remote vcs
 #echo "Pushing changes..." && \
