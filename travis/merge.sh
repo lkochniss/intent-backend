@@ -14,8 +14,8 @@ if [ ! -n $2 ] ; then
     exit 1;
 fi
 
-$GIT_USER = $1
-$GIT_PASS = $2
+GIT_USER = $1
+GIT_PASS = $2
 
 git checkout develop || exit
 git merge $TRAVIS_COMMIT || exit
