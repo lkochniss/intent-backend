@@ -1,41 +1,33 @@
 language: php
-
 branches:
   except:
-    - book-branch
-
+  - book-branch
 matrix:
   include:
-    - php: 5.6
-      env: CODECOV=true CODESNIFF=true
-    - php: 7.0
-      env: CODECOV=true CODESNIFF=false
-
+  - php: 5.6
+    env: CODECOV=true CODESNIFF=true
+  - php: 7.0
+    env: CODECOV=true CODESNIFF=false
 cache:
   directories:
   - vendor
   - $HOME/.composer/cache
-
 before_install:
-- rm composer.lock
-- composer self-update -q
-- if [ "${CODECOV}" = "true" ]; then pip install --user codecov; fi;
-- if [ "${CODESNIFF}" = "true" ]; then pear install pear/PHP_CodeSniffer; pyrus install pear/PHP_CodeSniffer; fi;
-- phpenv rehash
-
+- ./travis/before-install.sh
+install:
+- ./travis/install.sh
+after_install:
+- ./travis/after-install.sh
 before_script:
-- if [ -n "GITHUB" ]; then composer config github-oauth.github.com ${GITHUB}; fi;
-- composer install -n
-- cp app/config/parameters.yml.dist app/config/parameters.yml
-- php bin/console ca:c --env=test
-
+- ./travis/before-script.sh
 script:
-- php bin/console security:check
-- if [ "${CODESNIFF}" = "true" ]; then phpcs --standard=PSR1,PSR2 src -s; fi;
-#- if [ "${CODECOV}" = "true" ]; then php ./vendor/bin/phpunit --coverage-clover=coverage.xml; else php ./vendor/bin/phpunit; fi;
+- ./travis/script.sh
+after_success:
+- ./travis/after-success.sh
+- ./travis/merge.sh $USERNAME $PASSWORD
 
-#after_success:
-#- codecov
 env:
   global:
-    secure: abzzQ10q6Hyzo0GxNLJ2LAdhjlxUW1XE/Xlr7E4Pw8S+PZy9zQogi7lDRAZBD00D1NhTUUP69pL4NZOdSXl0fG2WPEvZqQuKdNss4nmGdj5mNffE5zSLFwTtFEdSGy3t6EDhdZ7aT8EqhTNu/Hpob078uBNUR3wHktGRIeDCVV6pjjz6obgwtbGgbKBRBxn2Avg+2lWWJm3LjkzoHRUsQf3SDrxforhl9h5ob88xOaa2oF+N4qzlEuzxKK/iu8GtTrr6aFBw4hhQxuLOP1K5mi0AyrXKuhu84lRyzNlUEIWq7VOK6iDYeeVqeUdqxV/U7bYzj/hsASf3tt0vkaF4yqUNZNoM/q83w+CrXf2i5yazAo5rMkt2RSfE3v3ag5GFnCzhLDqzA4/WwifEZHpUIRDBpAViZtL9qa2R10irrPXqBCS2Xu88eLN/RP2+TtEaMQYdntcTbE+vcRC5fd7S5BY9raZe9outj4lSpDKzEw4bl6MiGZbTTau5gFxi0H1v7Tw61OMnKdnQ34hRqeRGoXPb7iNUooIhtazeqpR1zEdMRcVrhCep9CdgycJMbIDffpzfPpi9rGAqq/rxyT1YhnXJOe4IfM3nh1c+CFXLekiHG2vZx3x1qfA9xFSERqDxx86eK+bcuYzZ8qImnywPQhE4+iFkfhkjws+n+/55Voo=
+  - secure: abzzQ10q6Hyzo0GxNLJ2LAdhjlxUW1XE/Xlr7E4Pw8S+PZy9zQogi7lDRAZBD00D1NhTUUP69pL4NZOdSXl0fG2WPEvZqQuKdNss4nmGdj5mNffE5zSLFwTtFEdSGy3t6EDhdZ7aT8EqhTNu/Hpob078uBNUR3wHktGRIeDCVV6pjjz6obgwtbGgbKBRBxn2Avg+2lWWJm3LjkzoHRUsQf3SDrxforhl9h5ob88xOaa2oF+N4qzlEuzxKK/iu8GtTrr6aFBw4hhQxuLOP1K5mi0AyrXKuhu84lRyzNlUEIWq7VOK6iDYeeVqeUdqxV/U7bYzj/hsASf3tt0vkaF4yqUNZNoM/q83w+CrXf2i5yazAo5rMkt2RSfE3v3ag5GFnCzhLDqzA4/WwifEZHpUIRDBpAViZtL9qa2R10irrPXqBCS2Xu88eLN/RP2+TtEaMQYdntcTbE+vcRC5fd7S5BY9raZe9outj4lSpDKzEw4bl6MiGZbTTau5gFxi0H1v7Tw61OMnKdnQ34hRqeRGoXPb7iNUooIhtazeqpR1zEdMRcVrhCep9CdgycJMbIDffpzfPpi9rGAqq/rxyT1YhnXJOe4IfM3nh1c+CFXLekiHG2vZx3x1qfA9xFSERqDxx86eK+bcuYzZ8qImnywPQhE4+iFkfhkjws+n+/55Voo=
+  - secure: qR4Y6IKJzSKhPtkTusO5+B2GrG50lXMRgBJDula/3l2pAcha5w6JDk4oVnhiPrrzr1VHgJB3uB2tWZ0Dyhlc9YHDPy25m+It1hy0TarGzKren4xmkPKwQ0S9rxJAbLKSudpRdokr8jE6GUSCum15St4n9+re8wSEHiLYcNy7NgCLxciyPu1bM9/U9RZBU5ABWfSjyiR70Zlt1VjsRxg1UG4K8Ps6dp+wXyNkTJNw4Co+7wBAmuS8wePOHtsaj3fZ72HxppxudL8rOhyHuLoyBFj8kbtLR76hwMTPBq7cCeDzCw0nOANItGkxMa2fZuJuzPJ0DRSzVYHHmZV7IvzTqWfVi8XN/RaYYwIkvPoojqJsn4FqiZUh4an8nM+2hDV88wlZtlPeECPxvXO+e4BIGm5ulHVRq4qOh3yrJJSfE9m1xHT8veSXOzCTF2zOwsqri619Bjmep8kSB11xNoxcxMas6uaNLR5I+Pd6s1pWYJ8x0kg8FVhwrkuuDROu2iDImpNdYAhKi09NsY2FMexdoA9K2rEn/pLoKXa7PCUdJ1XkWgI6sDtahD8EkfVWjjXC/28H11MCHhrJpXPkkSpf9TSPJhOK2DFXzpkdEbhQdGhyDJlrjrzYJhihBXMqxtLqSBK52UHoGCoj4IijBI0RykKKxtY2mh/FEzSibEvpsis=
+  - secure: jOL9j8sR4gn7ctL5/r5oDwnYn9GeHvNbQkh4f6Ov5mFCVgFKN/Qc51T0wCLXIb8E6ghpStOBwgYWqLR00wholqHXcx5SrlbhcegkqhTM6/DcuUP66hfWwrnElqXcBlbpMwkwRkCSRRzOOGR7ySVniT4focqInQ1cz/k/qgD5g2lCOlKeSbhn2nLY5vIycMeBSYthWRl5z86qT1xlfAJOnczk+ii2GoEgRVP1IuUi68cjZVKuv/GDUr/Zk8Zr0TrVIyyG97fwDD3JXXtIVdRAf1JJXH7xXuJeHYOiUpxHqebBkCspE2E2yAdKPwXaYMUfGkEm4MMggzIA+3Tv37nVjOQfVeUQkl1jgGyuQU2gKX3rVcRWN2EIXNPSEPYNVBFNvKQeSC1uoa+7dRKlTzW5sGQsBAAsZ1g3Xo0mQzljo+bjBCIWkFrtz3PlIXZIF8Coy2Pm3wftAEOU/op6tMYvRu0IkOAjAhS1ZnaEsEyR/QdSxwlTXjbLSvS7WcGBoYuTTqqfxpHg8RFbA0ygBPitsRIIkyBGqzvwdVnGbZfhDU/cfpxZlCEv4ega+pDNiRvdIRZCp1H0uOcH5qbPrUDH+S6q9I5gSlO8kkLIT1AuG6IdlzYl8A6pr2D3slS6COCqMkn5+oMuSbigTtHHuyWpNaOuxh44aPaFLk+2QaJ+OYI=
