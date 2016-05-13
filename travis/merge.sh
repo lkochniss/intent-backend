@@ -22,9 +22,9 @@ echo "Repo url is $URL"
 PUSH_URL="https://$USERNAME:$PASSWORD@${URL:8}"
 
 git checkout develop || exit
-git merge "$TRAVIS_COMMIT" > /dev/null || exit
+git merge "$TRAVIS_COMMIT"|| exit
 
 echo "Pushing changes..." && \
-git push $PUSH_URL > /dev/null && \
+git push $PUSH_URL && \
 echo "Merge complete!" || \
 echo "Error Occurred. Merge failed"
