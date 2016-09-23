@@ -6,6 +6,9 @@
 namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -24,7 +27,7 @@ class CategoryType extends AbstractType
         $builder
             ->add(
                 'name',
-                'text',
+              TextType::class,
                 array(
                     'label' => 'category.name',
                     'translation_domain' => 'category',
@@ -32,7 +35,7 @@ class CategoryType extends AbstractType
             )
             ->add(
                 'priority',
-                'number',
+                NumberType::class,
                 array(
                     'label' => 'category.priority',
                     'translation_domain' => 'category',
@@ -40,7 +43,7 @@ class CategoryType extends AbstractType
             )
             ->add(
                 'save',
-                'submit',
+                SubmitType::class,
                 array(
                     'label' => 'category.submit',
                     'translation_domain' => 'category',
@@ -51,7 +54,7 @@ class CategoryType extends AbstractType
             )
             ->add(
                 'saveAndPublish',
-                'submit',
+                SubmitType::class,
                 array(
                     'label' => 'category.publish',
                     'translation_domain' => 'category',

@@ -109,6 +109,12 @@ AppBundle\Entity\Category:
     published: <numberBetween(0, 1)>
     priority(unique): <current()>
 
+AppBundle\Entity\Tag:
+  tag_{1..20}:
+    name(unique): <word()>
+    slug: <slugify(@self->name)>
+    published: <numberBetween(0, 1)>
+
 AppBundle\Entity\Article:
   article_{1..300}:
     title(unique): <word()> <word()> <word()> <word()>
@@ -116,6 +122,7 @@ AppBundle\Entity\Article:
     content: <sentence()><sentence()><sentence()><sentence()><sentence()>
     published: <numberBetween(0, 1)>
     slideshow: <numberBetween(0, 1)>
+    tags: ['@tag_<numberBetween(1, 20)>']
     category: '@category_<numberBetween(1, 5)>'
     related: '@game_<numberBetween(1, 100)>'
     related: '10%? @expansion_<numberBetween(1, 30)>'

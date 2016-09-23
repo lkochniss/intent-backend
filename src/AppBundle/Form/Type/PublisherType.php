@@ -6,6 +6,9 @@
 namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -24,7 +27,7 @@ class PublisherType extends AbstractType
         $builder
             ->add(
                 'name',
-                'text',
+                TextType::class,
                 array(
                     'label' => 'publisher.name',
                     'translation_domain' => 'publisher',
@@ -32,7 +35,7 @@ class PublisherType extends AbstractType
             )
             ->add(
                 'description',
-                'textarea',
+                TextareaType::class,
                 array(
                     'label' => 'publisher.description',
                     'translation_domain' => 'publisher',
@@ -45,35 +48,27 @@ class PublisherType extends AbstractType
             )
             ->add(
                 'background_image',
-                'entity',
+                UploadType::class,
                 array(
                     'label' => 'publisher.backgroundimage.label',
                     'translation_domain' => 'publisher',
-                    'class' => 'AppBundle\Entity\Image',
-                    'multiple' => false,
-                    'expanded' => false,
-                    'placeholder' => 'publisher.backgroundimage.select',
                     'empty_data' => null,
                     'required' => false,
                 )
             )
             ->add(
                 'thumbnail',
-                'entity',
+                UploadType::class,
                 array(
                     'label' => 'publisher.thumbnail.label',
                     'translation_domain' => 'publisher',
-                    'class' => 'AppBundle\Entity\Image',
-                    'multiple' => false,
-                    'expanded' => false,
-                    'placeholder' => 'publisher.thumbnail.select',
                     'empty_data' => null,
                     'required' => false,
                 )
             )
             ->add(
                 'save',
-                'submit',
+                SubmitType::class,
                 array(
                     'label' => 'publisher.submit',
                     'translation_domain' => 'publisher',
@@ -84,7 +79,7 @@ class PublisherType extends AbstractType
             )
             ->add(
                 'saveAndPublish',
-                'submit',
+                SubmitType::class,
                 array(
                     'label' => 'publisher.publish',
                     'translation_domain' => 'publisher',
