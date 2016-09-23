@@ -5,6 +5,7 @@
 
 namespace AppBundle\Form\Type;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -35,11 +36,13 @@ class UserDeleteType extends AbstractType
             )
             ->add(
                 'user',
-                UserType::class,
+                EntityType::class,
                 array(
+                    'class' => 'AppBundle:User',
+                    'choice_label' => 'username',
                     'label' => 'user.delete.user',
-                    'translation_domain' => 'user',
-                    'choices' => $options['users']
+                    'placeholder' => 'user.delete.select',
+                    'translation_domain' => 'user'
                 )
             )
             ->add(

@@ -85,6 +85,7 @@ class FranchiseType extends AbstractType
                     'class' => 'AppBundle:Image',
                     'choice_label' => 'name',
                     'label' => 'franchise.thumbnail.label',
+                    'placeholder' => 'franchise.thumbnail.select',
                     'translation_domain' => 'franchise'
                 )
             )

@@ -73,6 +73,7 @@ class EventType extends AbstractType
                     'class' => 'AppBundle:Image',
                     'choice_label' => 'name',
                     'label' => 'event.backgroundimage.label',
+                    'placeholder' => 'event.backgroundimage.select',
                     'translation_domain' => 'event'
                 )
             )
@@ -83,6 +84,7 @@ class EventType extends AbstractType
                     'class' => 'AppBundle:Image',
                     'choice_label' => 'name',
                     'label' => 'event.thumbnail.label',
+                    'placeholder' => 'event.thumbnail.select',
                     'translation_domain' => 'event'
                 )
             )

@@ -57,6 +57,16 @@ AppBundle\Entity\Profile:
     description: <sentence()>
     user: '@user_<current()>'
 
+AppBundle\Entity\Event:
+  event{1..10}:
+    name(unique): <word()>
+    slug: <slugify(@self->name)>
+    published: <numberBetween(0, 1)>
+    description: <sentence()>
+    backgroundLink: <url()>
+    startAt: <dateTimeBetween('-100 days', '+200 days')>
+    endAt: <dateTimeBetween('-100 days', '+200 days')>
+
 AppBundle\Entity\Publisher:
   publisher_{1..10}:
     name(unique): <word()>

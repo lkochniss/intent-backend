@@ -65,6 +65,7 @@ class ArticleType extends AbstractType
                     'class' => 'AppBundle:Category',
                     'choice_label' => 'name',
                     'label' => 'article.category.label',
+                    'placeholder' => 'article.category.select',
                     'translation_domain' => 'article'
                 )
             )
@@ -85,6 +86,7 @@ class ArticleType extends AbstractType
                     'class' => 'AppBundle:Event',
                     'choice_label' => 'name',
                     'label' => 'article.event.label',
+                    'placeholder' => 'article.event.select',
                     'translation_domain' => 'article'
                 )
             )
@@ -95,6 +97,7 @@ class ArticleType extends AbstractType
                     'class' => 'AppBundle:Tag',
                     'choice_label' => 'name',
                     'label' => 'article.tag.label',
+                    'placeholder' => 'article.tag.select',
                     'translation_domain' => 'article',
                     'multiple' => 'true'
                 )
@@ -106,6 +109,7 @@ class ArticleType extends AbstractType
                     'class' => 'AppBundle:Image',
                     'choice_label' => 'name',
                     'label' => 'article.thumbnail.label',
+                    'placeholder' => 'article.thumbnail.select',
                     'translation_domain' => 'article'
                 )
             )

@@ -5,6 +5,7 @@
 
 namespace AppBundle\Form\Type;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -48,22 +49,24 @@ class PublisherType extends AbstractType
             )
             ->add(
                 'background_image',
-                UploadType::class,
+                EntityType::class,
                 array(
+                    'class' => 'AppBundle:Image',
+                    'choice_label' => 'name',
                     'label' => 'publisher.backgroundimage.label',
-                    'translation_domain' => 'publisher',
-                    'empty_data' => null,
-                    'required' => false,
+                    'placeholder' => 'publisher.backgroundimage.select',
+                    'translation_domain' => 'publisher'
                 )
             )
             ->add(
                 'thumbnail',
-                UploadType::class,
+                EntityType::class,
                 array(
+                    'class' => 'AppBundle:Image',
+                    'choice_label' => 'name',
                     'label' => 'publisher.thumbnail.label',
-                    'translation_domain' => 'publisher',
-                    'empty_data' => null,
-                    'required' => false,
+                    'placeholder' => 'publisher.thumbnail.select',
+                    'translation_domain' => 'publisher'
                 )
             )
             ->add(

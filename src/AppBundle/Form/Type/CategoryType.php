@@ -27,7 +27,7 @@ class CategoryType extends AbstractType
         $builder
             ->add(
                 'name',
-              TextType::class,
+                TextType::class,
                 array(
                     'label' => 'category.name',
                     'translation_domain' => 'category',

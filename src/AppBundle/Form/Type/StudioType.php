@@ -54,6 +54,7 @@ class StudioType extends AbstractType
                     'class' => 'AppBundle:Image',
                     'choice_label' => 'name',
                     'label' => 'studio.backgroundimage.label',
+                    'placeholder' => 'studio.backgroundimage.select',
                     'translation_domain' => 'studio'
                 )
             )
@@ -64,6 +65,7 @@ class StudioType extends AbstractType
                     'class' => 'AppBundle:Image',
                     'choice_label' => 'name',
                     'label' => 'studio.thumbnail.label',
+                    'placeholder' => 'studio.thumbnail.select',
                     'translation_domain' => 'studio'
                 )
             )
