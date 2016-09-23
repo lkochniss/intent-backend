@@ -125,6 +125,11 @@ AppBundle\Entity\Tag:
     slug: <slugify(@self->name)>
     published: <numberBetween(0, 1)>
 
+AppBundle\Entity\Directory:
+  directory_1:
+    name(unique): ''
+    path: 'upload'
+
 AppBundle\Entity\Article:
   article_{1..300}:
     title(unique): <word()> <word()> <word()> <word()>
@@ -146,3 +151,10 @@ AppBundle\Entity\Article:
     modifiedBy: '30%? @user_editor'
     modifiedBy: '10%? @user_<numberBetween(1, 5)>'
     modifiedBy: '10%? @user_admin'
+
+AppBundle\Entity\Page:
+  page_{1..10}:
+    title(unique): <word()> <word()> <word()> <word()>
+    slug: <slugify(@self->title)>
+    content: <sentence()><sentence()><sentence()><sentence()><sentence()>
+    published: <numberBetween(0, 1)>

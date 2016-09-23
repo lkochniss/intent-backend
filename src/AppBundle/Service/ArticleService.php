@@ -58,7 +58,9 @@ class ArticleService
             $item->published->addCData($article->isPublished());
 
             $item->publishedAt = null;
-            $item->publishedAt->addCData($article->getPublishAt()->format('Y-M-d H:i:s'));
+            if(!is_null($article->getPublishAt())){
+                $item->publishedAt->addCData($article->getPublishAt()->format('Y-M-d H:i:s'));
+            }
 
             $item->author = null;
             $item->author->addCData($article->getCreatedBy()->getUsername());
