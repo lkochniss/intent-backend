@@ -60,17 +60,17 @@ class ExpansionService
 
             $item->game = null;
             if ($expansion->getGame()) {
-                $item->game->addCData('game-' . $expansion->getGame()->getSlug());
+                $item->game->addCData($expansion->getGame()->getSlug());
             }
 
             $item->backgroundImage = null;
             if ($expansion->getBackgroundImage()) {
-                $item->backgroundImage->addCData('image-' . $expansion->getBackgroundImage()->getFullPath());
+                $item->backgroundImage->addCData($expansion->getBackgroundImage()->getFullPath());
             }
 
             $item->thumbnail = null;
             if ($expansion->getThumbnail()) {
-                $item->thumbnail->addCData('image-' . $expansion->getThumbnail()->getFullPath());
+                $item->thumbnail->addCData($expansion->getThumbnail()->getFullPath());
             }
         }
 
