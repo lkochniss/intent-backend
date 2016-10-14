@@ -6,6 +6,8 @@
 namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -24,7 +26,7 @@ class TagType extends AbstractType
         $builder
             ->add(
                 'name',
-                'text',
+                TextType::class,
                 array(
                     'label' => 'tag.name',
                     'translation_domain' => 'tag',
@@ -32,7 +34,7 @@ class TagType extends AbstractType
             )
             ->add(
                 'save',
-                'submit',
+                SubmitType::class,
                 array(
                     'label' => 'tag.submit',
                     'translation_domain' => 'tag',
@@ -43,7 +45,7 @@ class TagType extends AbstractType
             )
             ->add(
                 'saveAndPublish',
-                'submit',
+                SubmitType::class,
                 array(
                     'label' => 'tag.publish',
                     'translation_domain' => 'tag',
