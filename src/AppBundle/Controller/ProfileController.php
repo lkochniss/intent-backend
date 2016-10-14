@@ -27,7 +27,7 @@ class ProfileController extends AbstractCrudController
      */
     protected function getFormType()
     {
-        return new ProfileType();
+        return ProfileType::class;
     }
 
     /**
