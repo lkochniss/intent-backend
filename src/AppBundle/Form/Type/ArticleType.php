@@ -87,7 +87,8 @@ class ArticleType extends AbstractType
                     'choice_label' => 'name',
                     'label' => 'article.event.label',
                     'placeholder' => 'article.event.select',
-                    'translation_domain' => 'article'
+                    'translation_domain' => 'article',
+                    'required' => false
                 )
             )
             ->add(
