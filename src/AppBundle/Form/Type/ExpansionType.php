@@ -5,7 +5,11 @@
 
 namespace AppBundle\Form\Type;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -24,7 +28,7 @@ class ExpansionType extends AbstractType
         $builder
             ->add(
                 'name',
-                'text',
+                TextType::class,
                 array(
                     'label' => 'expansion.name',
                     'translation_domain' => 'expansion',
@@ -32,7 +36,7 @@ class ExpansionType extends AbstractType
             )
             ->add(
                 'description',
-                'textarea',
+                TextareaType::class,
                 array(
                     'label' => 'expansion.description',
                     'translation_domain' => 'expansion',
@@ -45,49 +49,40 @@ class ExpansionType extends AbstractType
             )
             ->add(
                 'game',
-                'entity',
+                EntityType::class,
                 array(
+                    'class' => 'AppBundle:Game',
+                    'choice_label' => 'name',
                     'label' => 'expansion.game.name',
-                    'translation_domain' => 'expansion',
-                    'class' => 'AppBundle\Entity\Game',
-                    'multiple' => false,
-                    'expanded' => false,
                     'placeholder' => 'expansion.game.select',
-                    'empty_data' => null,
-                    'required' => false,
+                    'translation_domain' => 'expansion'
                 )
             )
             ->add(
                 'background_image',
-                'entity',
+                EntityType::class,
                 array(
+                    'class' => 'AppBundle:Image',
+                    'choice_label' => 'name',
                     'label' => 'expansion.backgroundimage.label',
-                    'translation_domain' => 'expansion',
-                    'class' => 'AppBundle\Entity\Image',
-                    'multiple' => false,
-                    'expanded' => false,
                     'placeholder' => 'expansion.backgroundimage.select',
-                    'empty_data' => null,
-                    'required' => false,
+                    'translation_domain' => 'expansion'
                 )
             )
             ->add(
                 'thumbnail',
-                'entity',
+                EntityType::class,
                 array(
+                    'class' => 'AppBundle:Image',
+                    'choice_label' => 'name',
                     'label' => 'expansion.thumbnail.label',
-                    'translation_domain' => 'expansion',
-                    'class' => 'AppBundle\Entity\Image',
-                    'multiple' => false,
-                    'expanded' => false,
                     'placeholder' => 'expansion.thumbnail.select',
-                    'empty_data' => null,
-                    'required' => false,
+                    'translation_domain' => 'expansion'
                 )
             )
             ->add(
                 'save',
-                'submit',
+                SubmitType::class,
                 array(
                     'label' => 'expansion.submit',
                     'translation_domain' => 'expansion',
@@ -98,7 +93,7 @@ class ExpansionType extends AbstractType
             )
             ->add(
                 'saveAndPublish',
-                'submit',
+                SubmitType::class,
                 array(
                     'label' => 'expansion.publish',
                     'translation_domain' => 'expansion',

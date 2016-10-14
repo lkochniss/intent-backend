@@ -6,6 +6,9 @@
 namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -24,7 +27,7 @@ class ProfileType extends AbstractType
         $builder
             ->add(
                 'name',
-                'text',
+                TextType::class,
                 array(
                     'label' => 'profile.name',
                     'translation_domain' => 'profile',
@@ -32,7 +35,7 @@ class ProfileType extends AbstractType
             )
             ->add(
                 'description',
-                'textarea',
+                TextareaType::class,
                 array(
                     'label' => 'profile.description',
                     'translation_domain' => 'profile',
@@ -45,7 +48,7 @@ class ProfileType extends AbstractType
             )
             ->add(
                 'submit',
-                'submit',
+                SubmitType::class,
                 array(
                     'label' => 'profile.submit',
                     'translation_domain' => 'profile',
