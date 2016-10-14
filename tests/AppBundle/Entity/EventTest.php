@@ -11,7 +11,6 @@ use AppBundle\Entity\Article;
 
 /**
  * Class EventTest
- * @package Test\AppBundle\Controller
  */
 class EventTest extends \PHPUnit_Framework_TestCase
 {
@@ -34,7 +33,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
         $event->setDescription($description);
         $this->assertEquals($event->getDescription(), $description);
 
-        $image = $this->getMock(Image::class);
+        $image = $this->getMockBuilder(Image::class)->getMock();
         $event->setThumbnail($image);
         $event->setBackgroundImage($image);
         $this->assertEquals($event->getThumbnail(), $image);
@@ -62,7 +61,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
         $event->setPublished($published);
         $this->assertEquals($event->isPublished(), $published);
 
-        $article = $this->getMock(Article::class);
+        $article = $this->getMockBuilder(Article::class)->getMock();
         $event->addArticle($article);
         $this->assertEquals($event->getArticles(), array($article));
 
