@@ -9,7 +9,6 @@ use AppBundle\Entity\Directory;
 
 /**
  * Class DirectoryTest
- * @package Test\AppBundle\Controller
  */
 class DirectoryTest extends \PHPUnit_Framework_TestCase
 {
