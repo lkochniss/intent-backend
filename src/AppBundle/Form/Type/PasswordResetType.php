@@ -6,6 +6,8 @@
 namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -23,7 +25,7 @@ class PasswordResetType extends AbstractType
         $builder
             ->add(
                 'username',
-                'text',
+                TextType::class,
                 array(
                     'label' => 'security.username',
                     'translation_domain' => 'security',
@@ -31,7 +33,7 @@ class PasswordResetType extends AbstractType
             )
             ->add(
                 'submit',
-                'submit',
+                SubmitType::class,
                 array(
                     'label' => 'security.reset',
                     'translation_domain' => 'security',
