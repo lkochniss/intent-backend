@@ -36,7 +36,6 @@ class FilemanagerControllerTest extends AbstractControllerTest
 
     /**
      * @return null
-     * @Sup
      */
     public function testCreatePage()
     {
