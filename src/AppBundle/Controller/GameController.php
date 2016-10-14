@@ -26,7 +26,7 @@ class GameController extends AbstractRelatedController
      */
     protected function getFormType()
     {
-        return new GameType();
+        return GameType::class;
     }
 
     /**

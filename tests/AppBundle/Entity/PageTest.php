@@ -9,7 +9,6 @@ use AppBundle\Entity\Page;
 
 /**
  * Class PageTest
- * @package Test\AppBundle\Controller
  */
 class PageTest extends \PHPUnit_Framework_TestCase
 {

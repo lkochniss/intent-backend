@@ -73,3 +73,24 @@ services:
         class: AppBundle\Service\UserService
         arguments:
             - '@doctrine.orm.entity_manager'
+
+    alice.fixtures:
+        class: Nelmio\Alice\Fixtures
+        arguments:
+            - '@alice.data.persister'
+            - {'providers': ['@alice.slugify_provider']}
+        calls:
+            - [addProcessor, ['@alice.user_processor']]
+
+    alice.data.persister:
+        class: Nelmio\Alice\Persister\Doctrine
+        arguments:
+            - '@doctrine.orm.entity_manager'
+
+    alice.user_processor:
+        class: AppBundle\DataFixtures\Alice\UserProcessor
+        arguments:
+            - '@security.password_encoder'
+
+    alice.slugify_provider:
+        class: AppBundle\DataFixtures\Alice\SlugifyProvider
