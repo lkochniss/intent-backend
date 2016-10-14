@@ -7,15 +7,12 @@ namespace Test\AppBundle\Entity;
 
 use AppBundle\Entity\Game;
 use AppBundle\Entity\Image;
-use AppBundle\Entity\Publisher;
 use AppBundle\Entity\Studio;
 use AppBundle\Entity\Franchise;
-use AppBundle\Entity\Expansion;
 use AppBundle\Entity\Article;
 
 /**
  * Class StudioTest
- * @package Test\AppBundle\Controller
  */
 class StudioTest extends \PHPUnit_Framework_TestCase
 {
@@ -44,7 +41,7 @@ class StudioTest extends \PHPUnit_Framework_TestCase
         $studio->setModifiedAt();
         $this->assertNotEmpty($studio->getModifiedAt());
 
-        $image = $this->getMock(Image::class);
+        $image = $this->getMockBuilder(Image::class)->getMock();
 
         $studio->setThumbnail($image);
         $this->assertEquals($studio->getThumbnail(), $image);
@@ -56,7 +53,7 @@ class StudioTest extends \PHPUnit_Framework_TestCase
         $studio->setBackgroundLink($link);
         $this->assertEquals($studio->getBackgroundLink(), $link);
 
-        $franchise = $this->getMock(Franchise::class);
+        $franchise = $this->getMockBuilder(Franchise::class)->getMock();
 
         $studio->addFranchise($franchise);
         $this->assertEquals($studio->getFranchises(), array($franchise));
@@ -64,7 +61,7 @@ class StudioTest extends \PHPUnit_Framework_TestCase
         $studio->removeFranchise($franchise);
         $this->assertEquals($studio->getFranchises(), array());
 
-        $game = $this->getMock(Game::class);
+        $game = $this->getMockBuilder(Game::class)->getMock();
 
         $studio->addGame($game);
         $this->assertEquals($studio->getGames(), array($game));
@@ -72,7 +69,7 @@ class StudioTest extends \PHPUnit_Framework_TestCase
         $studio->removeGame($game);
         $this->assertEquals($studio->getGames(), array());
 
-        $article = $this->getMock(Article::class);
+        $article = $this->getMockBuilder(Article::class)->getMock();
 
         $studio->addArticle($article);
         $this->assertEquals($studio->getArticles(), array($article));
