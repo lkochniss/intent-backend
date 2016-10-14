@@ -5,7 +5,6 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
-use AppBundle\Entity\Article;
 use AppBundle\Entity\Page;
 use AppBundle\SimpleXMLExtended;
 use Doctrine\Common\DataFixtures\AbstractFixture;

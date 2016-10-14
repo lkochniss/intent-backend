@@ -41,10 +41,10 @@ class ImageFixtures extends AbstractFixture implements OrderedFixtureInterface, 
             $image->resetFullPath();
 
             $manager->persist($image);
-            $manager->flush();
 
             $this->addReference('image-' . $image->getFullPath(), $image);
         }
+        $manager->flush();
 
         return null;
     }

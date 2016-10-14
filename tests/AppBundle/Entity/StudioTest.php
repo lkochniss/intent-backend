@@ -7,10 +7,8 @@ namespace Test\AppBundle\Entity;
 
 use AppBundle\Entity\Game;
 use AppBundle\Entity\Image;
-use AppBundle\Entity\Publisher;
 use AppBundle\Entity\Studio;
 use AppBundle\Entity\Franchise;
-use AppBundle\Entity\Expansion;
 use AppBundle\Entity\Article;
 
 /**

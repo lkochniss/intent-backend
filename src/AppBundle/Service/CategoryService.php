@@ -8,7 +8,6 @@ namespace AppBundle\Service;
 use AppBundle\Entity\Category;
 use AppBundle\SimpleXMLExtended;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityRepository;
 
 /**
  * Class CategoryService
