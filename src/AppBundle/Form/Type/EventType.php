@@ -5,7 +5,12 @@
 
 namespace AppBundle\Form\Type;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -24,7 +29,7 @@ class EventType extends AbstractType
         $builder
             ->add(
                 'name',
-                'text',
+                TextType::class,
                 array(
                     'label' => 'event.name',
                     'translation_domain' => 'event',
@@ -32,7 +37,7 @@ class EventType extends AbstractType
             )
             ->add(
                 'description',
-                'textarea',
+                TextareaType::class,
                 array(
                     'label' => 'event.description',
                     'translation_domain' => 'event',
@@ -45,7 +50,7 @@ class EventType extends AbstractType
             )
             ->add(
                 'startAt',
-                'date',
+                DateTimeType::class,
                 array(
                     'label' => 'event.startAt',
                     'translation_domain' => 'event',
@@ -54,7 +59,7 @@ class EventType extends AbstractType
             )
             ->add(
                 'endAt',
-                'date',
+                DateTimeType::class,
                 array(
                     'label' => 'event.endAt',
                     'translation_domain' => 'event',
@@ -63,35 +68,29 @@ class EventType extends AbstractType
             )
             ->add(
                 'background_image',
-                'entity',
+                EntityType::class,
                 array(
+                    'class' => 'AppBundle:Image',
+                    'choice_label' => 'name',
                     'label' => 'event.backgroundimage.label',
-                    'translation_domain' => 'event',
-                    'class' => 'AppBundle\Entity\Image',
-                    'multiple' => false,
-                    'expanded' => false,
                     'placeholder' => 'event.backgroundimage.select',
-                    'empty_data' => null,
-                    'required' => false,
+                    'translation_domain' => 'event'
                 )
             )
             ->add(
                 'thumbnail',
-                'entity',
+                EntityType::class,
                 array(
+                    'class' => 'AppBundle:Image',
+                    'choice_label' => 'name',
                     'label' => 'event.thumbnail.label',
-                    'translation_domain' => 'event',
-                    'class' => 'AppBundle\Entity\Image',
-                    'multiple' => false,
-                    'expanded' => false,
                     'placeholder' => 'event.thumbnail.select',
-                    'empty_data' => null,
-                    'required' => false,
+                    'translation_domain' => 'event'
                 )
             )
             ->add(
                 'save',
-                'submit',
+                SubmitType::class,
                 array(
                     'label' => 'event.submit',
                     'translation_domain' => 'event',
@@ -102,7 +101,7 @@ class EventType extends AbstractType
             )
             ->add(
                 'saveAndPublish',
-                'submit',
+                SubmitType::class,
                 array(
                     'label' => 'event.publish',
                     'translation_domain' => 'event',
