@@ -59,4 +59,24 @@ class PageService
 
         return true;
     }
+
+    /**
+     * @param string $path The import path.
+     * @return boolean
+     */
+    public function importEntities($path = 'web/export/page.xml')
+    {
+        $xml = new SimpleXMLExtended(file_get_contents($path));
+
+        foreach ($xml->item as $item) {
+            $page = new Page();
+            $page->setTitle("$item->title");
+            $page->setContent(intval("$item->content"));
+            $page->setPublished(intval("$item->published"));
+
+            $this->repository->save($page);
+        }
+
+        return true;
+    }
 }

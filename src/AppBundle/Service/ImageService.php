@@ -58,9 +58,9 @@ class ImageService
             $item->fullpath = null;
             $item->fullpath->addCData($image->getFullPath());
 
-            $item->parent = null;
+            $item->parentDirectory = null;
             if ($image->getParentDirectory()) {
-                $item->parent->addCData($image->getParentDirectory()->getName());
+                $item->parentDirectory->addCData($image->getParentDirectory()->getName());
             }
 
             $filesystem = new Filesystem();
@@ -68,6 +68,40 @@ class ImageService
         }
 
         $xml->saveXML('web/export/image.xml');
+
+        return true;
+    }
+
+    /**
+     * @param string $path The import path.
+     * @return boolean
+     */
+    public function importEntities($path = 'web/export/image.xml')
+    {
+        $xml = new SimpleXMLExtended(file_get_contents($path));
+
+        foreach ($xml->item as $item) {
+            $image = new Image();
+            $image->setName("$item->name");
+            $image->setDescription("$item->description");
+            $image->setPath("$item->path");
+
+            $image->resetFullPath();
+
+            if ("$item->parent" != '') {
+                $image->setParentDirectory(
+                    $this->manager->getRepository('AppBundle:Directory')->findOneBy(
+                        array(
+                            'name' => "$item->setParentDirectory"
+                        )
+                    )
+                );
+            }
+            $filesystem = new Filesystem();
+            $filesystem->copy('web/export/images/' . $image->getFullPath(), 'web/' . $image->getFullPath());
+
+            $this->repository->save($image);
+        }
 
         return true;
     }

@@ -73,4 +73,45 @@ class StudioService
 
         return true;
     }
+
+    /**
+     * @param string $path The import path.
+     * @return boolean
+     */
+    public function importEntities($path = 'web/export/studio.xml')
+    {
+        $xml = new SimpleXMLExtended(file_get_contents($path));
+
+        foreach ($xml->item as $item) {
+            $studio = new Studio();
+            $studio->setName("$item->name");
+            $studio->setDescription("$item->description");
+            $studio->setPublished(intval("$item->published"));
+            $studio->setBackgroundLink(intval("$item->backgroundLink"));
+
+            if ("$item->backgroundImage" != '') {
+                $studio->setBackgroundImage(
+                    $this->manager->getRepository('AppBundle:Image')->findOneBy(
+                        array(
+                            'fullPath' => "$item->backgroundImage"
+                        )
+                    )
+                );
+            }
+
+            if ("$item->thumbnail" != '') {
+                $studio->setBackgroundImage(
+                    $this->manager->getRepository('AppBundle:Image')->findOneBy(
+                        array(
+                            'fullPath' => "$item->thumbnail"
+                        )
+                    )
+                );
+            }
+
+            $this->repository->save($studio);
+        }
+
+        return true;
+    }
 }

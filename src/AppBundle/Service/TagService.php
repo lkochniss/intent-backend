@@ -5,7 +5,7 @@
 
 namespace AppBundle\Service;
 
-use AppBundle\Entity\Category;
+use AppBundle\Entity\Tag;
 use AppBundle\SimpleXMLExtended;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
@@ -35,24 +35,57 @@ class TagService
      */
     public function exportEntities()
     {
-        $categories = $this->repository->findAll();
+        $tags = $this->repository->findAll();
 
         $xml = new SimpleXMLExtended('<xml />');
 
         /**
-         * @var Category $category
+         * @var Tag $tag
          */
-        foreach ($categories as $category) {
+        foreach ($tags as $tag) {
             $item = $xml->addChild('item');
 
             $item->name = null;
-            $item->name->addCData($category->getName());
+            $item->name->addCData($tag->getName());
 
             $item->published = null;
-            $item->published->addCData($category->isPublished());
+            $item->published->addCData($tag->isPublished());
+
+            foreach ($tag->getArticles() as $article) {
+                $item->addChild('article', $article->getSlug());
+            }
         }
 
         $xml->saveXML('web/export/tag.xml');
+
+        return true;
+    }
+
+    /**
+     * @param string $path The import path.
+     * @return boolean
+     */
+    public function importEntities($path = 'web/export/tag.xml')
+    {
+        $xml = new SimpleXMLExtended(file_get_contents($path));
+
+        foreach ($xml->item as $item) {
+            $tag = new Tag();
+            $tag->setName("$item->name");
+            $tag->setPublished(intval("$item->published"));
+
+            foreach ($item->article as $article) {
+                $taggedArticle = $this->manager->getRepository('AppBundle:Article')->findOneBy(
+                    array(
+                        'slug' => "$article"
+                    )
+                );
+
+                $tag->addArticle($taggedArticle);
+            }
+
+            $this->repository->save($tag);
+        }
 
         return true;
     }

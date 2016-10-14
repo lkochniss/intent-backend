@@ -87,9 +87,8 @@ class ArticleService
                 $item->thumbnail->addCData('image-' . $article->getThumbnail()->getFullPath());
             }
 
-            $item->tag = null;
             foreach ($article->getTags() as $tag) {
-                $item->addChild('tag', 'tag-' . $tag->getSlug());
+                $item->addChild('tag', $tag->getSlug());
             }
         }
 
@@ -161,9 +160,7 @@ class ArticleService
                     )
                 );
 
-                if (!is_null($articleTag)){
-                    $article->addTag($articleTag);
-                }
+                $article->addTag($articleTag);
             }
 
             $this->repository->save(

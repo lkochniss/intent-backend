@@ -72,4 +72,44 @@ class PublisherService
 
         return true;
     }
+
+    /**
+     * @param string $path The import path.
+     * @return boolean
+     */
+    public function importEntities($path = 'web/export/publisher.xml')
+    {
+        $xml = new SimpleXMLExtended(file_get_contents($path));
+
+        foreach ($xml->item as $item) {
+            $publisher = new Publisher();
+            $publisher->setName("$item->name");
+            $publisher->setDescription("$item->description");
+            $publisher->setPublished(intval("$item->published"));
+
+            if ("$item->backgroundImage" != '') {
+                $publisher->setBackgroundImage(
+                    $this->manager->getRepository('AppBundle:Image')->findOneBy(
+                        array(
+                            'fullPath' => "$item->backgroundImage"
+                        )
+                    )
+                );
+            }
+
+            if ("$item->thumbnail" != '') {
+                $publisher->setBackgroundImage(
+                    $this->manager->getRepository('AppBundle:Image')->findOneBy(
+                        array(
+                            'fullPath' => "$item->thumbnail"
+                        )
+                    )
+                );
+            }
+
+            $this->repository->save($publisher);
+        }
+
+        return true;
+    }
 }

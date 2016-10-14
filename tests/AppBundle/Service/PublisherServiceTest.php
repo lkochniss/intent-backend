@@ -22,4 +22,15 @@ class PublisherServiceTest extends WebTestCase
 
         return null;
     }
+
+    /**
+     * @return null
+     */
+    public function testImport()
+    {
+        $status = $this->getContainer()->get('app.publisher.service')->importEntities();
+        $this->assertTrue($status);
+
+        return null;
+    }
 }

@@ -58,15 +58,53 @@ class UserService
             $item->active = null;
             $item->active->addCData($user->isActive());
 
-            if (is_null($user->getRoles())) {
-                $item->role = null;
-            }
             foreach ($user->getRoles() as $role) {
-                $item->addChild('role', 'role-' . $role->getName());
+                $item->addChild('role', $role->getName());
             }
         }
 
         $xml->saveXML('web/export/user.xml');
+
+        return true;
+    }
+
+    /**
+     * @param string $path The import path.
+     * @return boolean
+     */
+    public function importEntities($path = 'web/export/user.xml')
+    {
+        $xml = new SimpleXMLExtended(file_get_contents($path));
+
+        foreach ($xml->item as $item) {
+            $user = new User();
+            $user->setUsername("$item->username");
+            $user->setEmail("$item->email");
+            $user->setPassword("$item->password");
+            $user->setActive(intval("$item->active"));
+
+            $profile = $this->manager->getRepository('AppBundle:Profile')->findOneBy(
+                array(
+                    'user' => $user
+                )
+            );
+
+            if (!is_null($profile)){
+                $user->setProfile($profile);
+            }
+
+            foreach ($item->role as $role) {
+                $assignedRole = $this->manager->getRepository('AppBundle:Role')->findOneBy(
+                    array(
+                        'name' => "$role"
+                    )
+                );
+
+                $user->addRole($assignedRole);
+            }
+
+            $this->repository->save($user);
+        }
 
         return true;
     }

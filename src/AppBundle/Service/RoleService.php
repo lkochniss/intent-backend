@@ -56,4 +56,23 @@ class RoleService
 
         return true;
     }
+
+    /**
+     * @param string $path The import path.
+     * @return boolean
+     */
+    public function importEntities($path = 'web/export/role.xml')
+    {
+        $xml = new SimpleXMLExtended(file_get_contents($path));
+
+        foreach ($xml->item as $item) {
+            $role = new Role();
+            $role->setName("$item->name");
+            $role->setRole("$item->role");
+
+            $this->repository->save($role);
+        }
+
+        return true;
+    }
 }
