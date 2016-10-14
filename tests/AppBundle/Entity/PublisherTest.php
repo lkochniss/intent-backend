@@ -40,7 +40,7 @@ class PublisherTest extends \PHPUnit_Framework_TestCase
         $publisher->setModifiedAt();
         $this->assertNotEmpty($publisher->getModifiedAt());
 
-        $image = $this->getMock(Image::class);
+        $image = $this->getMockBuilder(Image::class)->getMock();
 
         $publisher->setThumbnail($image);
         $this->assertEquals($publisher->getThumbnail(), $image);
@@ -52,7 +52,7 @@ class PublisherTest extends \PHPUnit_Framework_TestCase
         $publisher->setBackgroundLink($link);
         $this->assertEquals($publisher->getBackgroundLink(), $link);
 
-        $franchise = $this->getMock(Franchise::class);
+        $franchise = $this->getMockBuilder(Franchise::class)->getMock();
 
         $publisher->addFranchise($franchise);
         $this->assertEquals($publisher->getFranchises(), array($franchise));
@@ -60,7 +60,7 @@ class PublisherTest extends \PHPUnit_Framework_TestCase
         $publisher->removeFranchise($franchise);
         $this->assertEquals($publisher->getFranchises(), array());
 
-        $article = $this->getMock(Article::class);
+        $article = $this->getMockBuilder(Article::class)->getMock();
 
         $publisher->addArticle($article);
         $this->assertEquals($publisher->getArticles(), array($article));

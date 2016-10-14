@@ -42,7 +42,7 @@ class GameTest extends \PHPUnit_Framework_TestCase
         $game->setModifiedAt();
         $this->assertNotEmpty($game->getModifiedAt());
 
-        $image = $this->getMock(Image::class);
+        $image = $this->getMockBuilder(Image::class)->getMock();
 
         $game->setThumbnail($image);
         $this->assertEquals($game->getThumbnail(), $image);
@@ -54,15 +54,15 @@ class GameTest extends \PHPUnit_Framework_TestCase
         $game->setBackgroundLink($link);
         $this->assertEquals($game->getBackgroundLink(), $link);
 
-        $studio = $this->getMock(Studio::class);
+        $studio = $this->getMockBuilder(Studio::class)->getMock();
         $game->setStudio($studio);
         $this->assertEquals($game->getStudio(), $studio);
 
-        $franchise = $this->getMock(Franchise::class);
+        $franchise = $this->getMockBuilder(Franchise::class)->getMock();
         $game->setFranchise($franchise);
         $this->assertEquals($game->getFranchise(), $franchise);
 
-        $expansion = $this->getMock(Expansion::class);
+        $expansion = $this->getMockBuilder(Expansion::class)->getMock();
 
         $game->addExpansion($expansion);
         $this->assertEquals($game->getExpansions(), array($expansion));
@@ -70,7 +70,7 @@ class GameTest extends \PHPUnit_Framework_TestCase
         $game->removeExpansion($expansion);
         $this->assertEquals($game->getExpansions(), array());
 
-        $article = $this->getMock(Article::class);
+        $article = $this->getMockBuilder(Article::class)->getMock();
 
         $game->addArticle($article);
         $this->assertEquals($game->getArticles(), array($article));

@@ -34,7 +34,7 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
         $profile->setModifiedAt();
         $this->assertNotNull($profile->getModifiedAt());
 
-        $user = $this->getMock(User::class);
+        $user = $this->getMockBuilder(User::class)->getMock();
         $profile->setUser($user);
         $this->assertEquals($profile->getUser(), $user);
 

@@ -42,7 +42,7 @@ class FranchiseTest extends \PHPUnit_Framework_TestCase
         $franchise->setModifiedAt();
         $this->assertNotEmpty($franchise->getModifiedAt());
 
-        $image = $this->getMock(Image::class);
+        $image = $this->getMockBuilder(Image::class)->getMock();
 
         $franchise->setThumbnail($image);
         $this->assertEquals($franchise->getThumbnail(), $image);
@@ -54,15 +54,15 @@ class FranchiseTest extends \PHPUnit_Framework_TestCase
         $franchise->setBackgroundLink($link);
         $this->assertEquals($franchise->getBackgroundLink(), $link);
 
-        $publisher = $this->getMock(Publisher::class);
+        $publisher = $this->getMockBuilder(Publisher::class)->getMock();
         $franchise->setPublisher($publisher);
         $this->assertEquals($franchise->getPublisher(), $publisher);
 
-        $studio = $this->getMock(Studio::class);
+        $studio = $this->getMockBuilder(Studio::class)->getMock();
         $franchise->setStudio($studio);
         $this->assertEquals($franchise->getStudio(), $studio);
 
-        $game = $this->getMock(Game::class);
+        $game = $this->getMockBuilder(Game::class)->getMock();
 
         $franchise->addGame($game);
         $this->assertEquals($franchise->getGames(), array($game));
@@ -70,7 +70,7 @@ class FranchiseTest extends \PHPUnit_Framework_TestCase
         $franchise->removeGame($game);
         $this->assertEquals($franchise->getGames(), array());
 
-        $article = $this->getMock(Article::class);
+        $article = $this->getMockBuilder(Article::class)->getMock();
 
         $franchise->addArticle($article);
         $this->assertEquals($franchise->getArticles(), array($article));

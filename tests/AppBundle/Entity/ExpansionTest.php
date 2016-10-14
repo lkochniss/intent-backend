@@ -40,7 +40,7 @@ class ExpansionTest extends \PHPUnit_Framework_TestCase
         $expansion->setModifiedAt();
         $this->assertNotEmpty($expansion->getModifiedAt());
 
-        $image = $this->getMock(Image::class);
+        $image = $this->getMockBuilder(Image::class)->getMock();
 
         $expansion->setThumbnail($image);
         $this->assertEquals($expansion->getThumbnail(), $image);
@@ -52,11 +52,11 @@ class ExpansionTest extends \PHPUnit_Framework_TestCase
         $expansion->setBackgroundLink($link);
         $this->assertEquals($expansion->getBackgroundLink(), $link);
 
-        $game = $this->getMock(Game::class);
+        $game = $this->getMockBuilder(Game::class)->getMock();
         $expansion->setGame($game);
         $this->assertEquals($expansion->getGame(), $game);
 
-        $article = $this->getMock(Article::class);
+        $article = $this->getMockBuilder(Article::class)->getMock();
 
         $expansion->addArticle($article);
         $this->assertEquals($expansion->getArticles(), array($article));
