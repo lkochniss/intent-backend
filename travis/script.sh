@@ -6,10 +6,10 @@ cd ..
 
 php bin/console security:check
 
-if [ "${CODEANALYSE=true}" = "true" ] ; then
+if [ "${CODEANALYSE}" = "true" ] ; then
    phpcs --standard=PSR1,PSR2 -s src;
    phpcs --standard=PSR1,PSR2 -s tests;
-   bin/phpunit --coverage-clover=coverage.xml;
+   vendor/bin/phpunit --coverage-clover=coverage.xml;
 else
-   bin/phpunit;
+   vendor/bin/phpunit;
 fi
