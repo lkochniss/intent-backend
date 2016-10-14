@@ -10,7 +10,6 @@ use AppBundle\Entity\Image;
 
 /**
  * Class ImageTest
- * @package Test\AppBundle\Controller
  */
 class ImageTest extends \PHPUnit_Framework_TestCase
 {
