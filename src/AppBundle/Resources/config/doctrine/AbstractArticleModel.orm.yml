@@ -2,22 +2,22 @@ AppBundle\Entity\AbstractArticleModel:
     type: mappedSuperclass
 
     fields:
-            title:
-                type: string
-                length: 255
-            slug:
-                type: string
-                length: 255
-            content:
-                type: text
-            publishAt:
-                column: publish_at
-                type: datetime
-                nullable: true
-            published:
-                type: boolean
-            slideshow:
-                type: boolean
+        title:
+            type: string
+            length: 255
+        slug:
+            type: string
+            length: 255
+        content:
+            type: text
+        publishAt:
+            column: publish_at
+            type: datetime
+            nullable: true
+        published:
+            type: boolean
+        slideshow:
+            type: boolean
     manyToOne:
         category:
             targetEntity: Category
