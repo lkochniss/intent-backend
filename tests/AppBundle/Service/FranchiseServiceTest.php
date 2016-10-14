@@ -5,12 +5,12 @@
 
 namespace AppBundle\Service;
 
-use Test\AppBundle\Controller\AbstractControllerTest;
+use Liip\FunctionalTestBundle\Test\WebTestCase;
 
 /**
  * Class FranchiseServiceTest
  */
-class FranchiseServiceTest extends AbstractControllerTest
+class FranchiseServiceTest extends WebTestCase
 {
     /**
      * @return null

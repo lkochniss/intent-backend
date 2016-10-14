@@ -63,7 +63,7 @@ class ArticleFixtures extends AbstractFixture implements OrderedFixtureInterface
             );
         }
 
-        $dataDirectory = __DIR__ . '/../data/articles';
+        $dataDirectory = __DIR__ . '/../../data/articles';
         $directory = opendir($dataDirectory);
 
         $count = 0;

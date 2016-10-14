@@ -47,15 +47,15 @@ class ArticleTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($article->isSlideshow(), $slideshow);
 
 
-        $category = $this->getMock(Category::class);
+        $category = $this->getMockBuilder(Category::class)->getMock();
         $article->setCategory($category);
         $this->assertEquals($article->getCategory(), $category);
 
-        $event = $this->getMock(Event::class);
+        $event = $this->getMockBuilder(Event::class)->getMock();
         $article->setEvent($event);
         $this->assertEquals($article->getEvent(), $event);
 
-        $user = $this->getMock(User::class);
+        $user = $this->getMockBuilder(User::class)->getMock();
 
         $article->setCreatedBy($user);
         $this->assertEquals($article->getCreatedBy(), $user);
@@ -77,11 +77,11 @@ class ArticleTest extends \PHPUnit_Framework_TestCase
         $article->setPublishAt($now);
         $this->assertEquals($article->getPublishAt(), $now);
 
-        $image = $this->getMock(Image::class);
+        $image = $this->getMockBuilder(Image::class)->getMock();
         $article->setThumbnail($image);
         $this->assertEquals($article->getThumbnail(), $image);
 
-        $tag = $this->getMock(Tag::class);
+        $tag = $this->getMockBuilder(Tag::class)->getMock();
         $article->addTag($tag);
         $this->assertEquals($article->getTags(), array($tag));
 
@@ -98,23 +98,23 @@ class ArticleTest extends \PHPUnit_Framework_TestCase
     {
         $article = new Article();
 
-        $publisher = $this->getMock(Publisher::class);
+        $publisher = $this->getMockBuilder(Publisher::class)->getMock();
         $article->setRelated($publisher);
         $this->assertEquals($article->getRelated(), $publisher);
 
-        $studio = $this->getMock(Studio::class);
+        $studio = $this->getMockBuilder(Studio::class)->getMock();
         $article->setRelated($studio);
         $this->assertEquals($article->getRelated(), $studio);
 
-        $franchise = $this->getMock(Franchise::class);
+        $franchise = $this->getMockBuilder(Franchise::class)->getMock();
         $article->setRelated($franchise);
         $this->assertEquals($article->getRelated(), $franchise);
 
-        $game = $this->getMock(Game::class);
+        $game = $this->getMockBuilder(Game::class)->getMock();
         $article->setRelated($game);
         $this->assertEquals($article->getRelated(), $game);
 
-        $expansion = $this->getMock(Expansion::class);
+        $expansion = $this->getMockBuilder(Expansion::class)->getMock();
         $article->setRelated($expansion);
         $this->assertEquals($article->getRelated(), $expansion);
 
