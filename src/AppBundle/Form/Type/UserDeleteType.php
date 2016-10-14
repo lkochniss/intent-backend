@@ -5,7 +5,10 @@
 
 namespace AppBundle\Form\Type;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -24,7 +27,7 @@ class UserDeleteType extends AbstractType
         $builder
             ->add(
                 'confirm',
-                'checkbox',
+                CheckboxType::class,
                 array(
                     'label' => 'user.delete.confirm',
                     'translation_domain' => 'user',
@@ -33,20 +36,18 @@ class UserDeleteType extends AbstractType
             )
             ->add(
                 'user',
-                'entity',
+                EntityType::class,
                 array(
+                    'class' => 'AppBundle:User',
+                    'choice_label' => 'username',
                     'label' => 'user.delete.user',
-                    'translation_domain' => 'user',
-                    'class' => 'AppBundle\Entity\User',
-                    'required' => false,
-                    'multiple' => false,
                     'placeholder' => 'user.delete.select',
-                    'choices' => $options['users']
+                    'translation_domain' => 'user'
                 )
             )
             ->add(
                 'submit',
-                'submit',
+                SubmitType::class,
                 array(
                     'label' => 'user.delete.submit',
                     'translation_domain' => 'user',
