@@ -36,7 +36,7 @@ class UserController extends AbstractCrudController
         );
 
         $user = new User();
-        $form = $this->createForm(new UserType(), $user);
+        $form = $this->createForm(UserType::class, $user);
 
         if (in_array($request->getMethod(), ['POST'])) {
             $form->handleRequest($request);
@@ -117,7 +117,7 @@ class UserController extends AbstractCrudController
         $userRepository = $this->getDoctrine()->getRepository('AppBundle:User');
         $users = $userRepository->findAllUsersBut($user);
 
-        $form = $this->createForm(new UserDeleteType(), null, array('users' => $users));
+        $form = $this->createForm(UserDeleteType::class, null, array('users' => $users));
 
         if (in_array($request->getMethod(), ['POST'])) {
             $form->handleRequest($request);
@@ -163,7 +163,7 @@ class UserController extends AbstractCrudController
     public function passwordAction($id, Request $request)
     {
         $user = $this->getDoctrine()->getRepository('AppBundle:User')->find($id);
-        $form = $this->createForm(new UserPasswordType(), $user);
+        $form = $this->createForm(UserPasswordType::class, $user);
 
         if (in_array($request->getMethod(), ['POST'])) {
             $form->handleRequest($request);
@@ -202,7 +202,7 @@ class UserController extends AbstractCrudController
      */
     protected function getFormType()
     {
-        return new UserType();
+        return UserType::class;
     }
 
     /**

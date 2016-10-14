@@ -5,7 +5,13 @@
 
 namespace AppBundle\Form\Type;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -24,7 +30,7 @@ class ArticleType extends AbstractType
         $builder
             ->add(
                 'title',
-                'text',
+                TextType::class,
                 array(
                     'label' => 'article.title',
                     'translation_domain' => 'article',
@@ -32,7 +38,7 @@ class ArticleType extends AbstractType
             )
             ->add(
                 'content',
-                'textarea',
+                TextareaType::class,
                 array(
                     'label' => 'article.content',
                     'translation_domain' => 'article',
@@ -45,7 +51,7 @@ class ArticleType extends AbstractType
             )
             ->add(
                 'slideshow',
-                'checkbox',
+                CheckboxType::class,
                 array(
                     'label' => 'article.slideshow',
                     'translation_domain' => 'article',
@@ -54,73 +60,63 @@ class ArticleType extends AbstractType
             )
             ->add(
                 'category',
-                'entity',
+                EntityType::class,
                 array(
+                    'class' => 'AppBundle:Category',
+                    'choice_label' => 'name',
                     'label' => 'article.category.label',
-                    'translation_domain' => 'article',
-                    'class' => 'AppBundle\Entity\Category',
-                    'multiple' => false,
-                    'expanded' => false,
                     'placeholder' => 'article.category.select',
-                    'empty_data' => null
+                    'translation_domain' => 'article'
                 )
             )
             ->add(
                 'related',
-                'entity',
+                EntityType::class,
                 array(
+                    'class' => 'AppBundle:Related',
+                    'choice_label' => 'name',
                     'label' => 'article.related.label',
-                    'translation_domain' => 'article',
-                    'class' => 'AppBundle\Entity\Related',
-                    'placeholder' => 'article.related.select',
-                    'empty_data' => null
+                    'translation_domain' => 'article'
                 )
             )
             ->add(
                 'event',
-                'entity',
+                EntityType::class,
                 array(
+                    'class' => 'AppBundle:Event',
+                    'choice_label' => 'name',
                     'label' => 'article.event.label',
-                    'translation_domain' => 'article',
-                    'class' => 'AppBundle\Entity\Event',
-                    'multiple' => false,
-                    'expanded' => false,
                     'placeholder' => 'article.event.select',
-                    'empty_data' => null,
-                    'required' => false,
+                    'translation_domain' => 'article',
+                    'required' => false
                 )
             )
             ->add(
                 'tags',
-                'entity',
+                EntityType::class,
                 array(
+                    'class' => 'AppBundle:Tag',
+                    'choice_label' => 'name',
                     'label' => 'article.tag.label',
-                    'translation_domain' => 'article',
-                    'class' => 'AppBundle\Entity\Tag',
-                    'multiple' => true,
-                    'expanded' => false,
                     'placeholder' => 'article.tag.select',
-                    'empty_data' => null,
-                    'required' => false,
+                    'translation_domain' => 'article',
+                    'multiple' => 'true'
                 )
             )
             ->add(
                 'thumbnail',
-                'entity',
+                EntityType::class,
                 array(
+                    'class' => 'AppBundle:Image',
+                    'choice_label' => 'name',
                     'label' => 'article.thumbnail.label',
-                    'translation_domain' => 'article',
-                    'class' => 'AppBundle\Entity\Image',
-                    'multiple' => false,
-                    'expanded' => false,
                     'placeholder' => 'article.thumbnail.select',
-                    'empty_data' => null,
-                    'required' => false,
+                    'translation_domain' => 'article'
                 )
             )
             ->add(
                 'publishAt',
-                'datetime',
+                DateTimeType::class,
                 array(
                     'label' => 'article.published.at',
                     'translation_domain' => 'article',
@@ -128,7 +124,7 @@ class ArticleType extends AbstractType
             )
             ->add(
                 'save',
-                'submit',
+                SubmitType::class,
                 array(
                     'label' => 'article.submit',
                     'translation_domain' => 'article',
@@ -139,7 +135,7 @@ class ArticleType extends AbstractType
             )
             ->add(
                 'saveAndPublish',
-                'submit',
+                SubmitType::class,
                 array(
                     'label' => 'article.publish',
                     'translation_domain' => 'article',

@@ -5,7 +5,11 @@
 
 namespace AppBundle\Form\Type;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -24,7 +28,7 @@ class StudioType extends AbstractType
         $builder
             ->add(
                 'name',
-                'text',
+                TextType::class,
                 array(
                     'label' => 'studio.name',
                     'translation_domain' => 'studio',
@@ -32,7 +36,7 @@ class StudioType extends AbstractType
             )
             ->add(
                 'description',
-                'textarea',
+                TextareaType::class,
                 array(
                     'label' => 'studio.description',
                     'translation_domain' => 'studio',
@@ -45,35 +49,29 @@ class StudioType extends AbstractType
             )
             ->add(
                 'background_image',
-                'entity',
+                EntityType::class,
                 array(
+                    'class' => 'AppBundle:Image',
+                    'choice_label' => 'name',
                     'label' => 'studio.backgroundimage.label',
-                    'translation_domain' => 'studio',
-                    'class' => 'AppBundle\Entity\Image',
-                    'multiple' => false,
-                    'expanded' => false,
                     'placeholder' => 'studio.backgroundimage.select',
-                    'empty_data' => null,
-                    'required' => false,
+                    'translation_domain' => 'studio'
                 )
             )
             ->add(
                 'thumbnail',
-                'entity',
+                EntityType::class,
                 array(
+                    'class' => 'AppBundle:Image',
+                    'choice_label' => 'name',
                     'label' => 'studio.thumbnail.label',
-                    'translation_domain' => 'studio',
-                    'class' => 'AppBundle\Entity\Image',
-                    'multiple' => false,
-                    'expanded' => false,
                     'placeholder' => 'studio.thumbnail.select',
-                    'empty_data' => null,
-                    'required' => false,
+                    'translation_domain' => 'studio'
                 )
             )
             ->add(
                 'save',
-                'submit',
+                SubmitType::class,
                 array(
                     'label' => 'studio.submit',
                     'translation_domain' => 'studio',
@@ -84,7 +82,7 @@ class StudioType extends AbstractType
             )
             ->add(
                 'saveAndPublish',
-                'submit',
+                SubmitType::class,
                 array(
                     'label' => 'studio.publish',
                     'translation_domain' => 'studio',

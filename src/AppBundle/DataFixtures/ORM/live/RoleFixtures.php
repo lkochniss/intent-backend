@@ -5,8 +5,7 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
-use AppBundle\Entity\Directory;
-use AppBundle\Entity\Profile;
+use AppBundle\Entity\Role;
 use AppBundle\SimpleXMLExtended;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -15,36 +14,33 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class ProfileFixtures
+ * Class RoleFixtures
  */
-class ProfileFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class RoleFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     private $container;
 
     /**
-     * @param ObjectManager $manager Manager to save profile.
-     * @return boolean
+     * @param ObjectManager $manager Manager to save role.
+     * @return null
      */
     public function load(ObjectManager $manager)
     {
-        $xml = new SimpleXMLExtended(file_get_contents('web/export/profile.xml'));
+        $xml = new SimpleXMLExtended(file_get_contents('web/export/role.xml'));
 
         foreach ($xml->item as $item) {
-            $profile = new Profile();
-            $profile->setName("$item->name");
-            $profile->setDescription("$item->description");
+            $role = new Role();
+            $role->setName("$item->name");
+            $role->setRole("$item->role");
 
-            if ("$item->user" != '') {
-                $profile->setUser($this->getReference('user-' . "$item->user"));
-            }
-
-            $manager->getRepository('AppBundle:Profile')->save(
-                $profile
+            $manager->getRepository('AppBundle:Role')->save(
+                $role
             );
-            $this->addReference('profile-' . $profile->getName(), $profile);
+
+            $this->addReference('role-' . $role->getName(), $role);
         }
 
-        return true;
+        return null;
     }
 
     /**
@@ -63,6 +59,6 @@ class ProfileFixtures extends AbstractFixture implements OrderedFixtureInterface
      */
     public function getOrder()
     {
-        return 3;
+        return 1;
     }
 }
