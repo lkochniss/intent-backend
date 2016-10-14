@@ -5,7 +5,11 @@
 
 namespace AppBundle\Form\Type;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -24,7 +28,7 @@ class FranchiseType extends AbstractType
         $builder
             ->add(
                 'name',
-                'text',
+                TextType::class,
                 array(
                     'label' => 'franchise.name',
                     'translation_domain' => 'franchise',
@@ -32,7 +36,7 @@ class FranchiseType extends AbstractType
             )
             ->add(
                 'description',
-                'textarea',
+                TextareaType::class,
                 array(
                     'label' => 'franchise.description',
                     'translation_domain' => 'franchise',
@@ -45,63 +49,49 @@ class FranchiseType extends AbstractType
             )
             ->add(
                 'publisher',
-                'entity',
+                EntityType::class,
                 array(
+                    'class' => 'AppBundle:Publisher',
+                    'choice_label' => 'name',
                     'label' => 'franchise.publisher.name',
-                    'translation_domain' => 'franchise',
-                    'class' => 'AppBundle\Entity\Publisher',
-                    'multiple' => false,
-                    'expanded' => false,
-                    'placeholder' => 'franchise.publisher.select',
-                    'empty_data' => null,
-                    'required' => false,
+                    'translation_domain' => 'franchise'
                 )
             )
             ->add(
                 'studio',
-                'entity',
+                EntityType::class,
                 array(
+                    'class' => 'AppBundle:Studio',
+                    'choice_label' => 'name',
                     'label' => 'franchise.studio.name',
-                    'translation_domain' => 'franchise',
-                    'class' => 'AppBundle\Entity\Studio',
-                    'multiple' => false,
-                    'expanded' => false,
-                    'placeholder' => 'franchise.studio.select',
-                    'empty_data' => null,
-                    'required' => false,
+                    'translation_domain' => 'franchise'
                 )
             )
             ->add(
                 'background_image',
-                'entity',
+                EntityType::class,
                 array(
+                    'class' => 'AppBundle:Image',
+                    'choice_label' => 'name',
                     'label' => 'franchise.backgroundimage.label',
-                    'translation_domain' => 'franchise',
-                    'class' => 'AppBundle\Entity\Image',
-                    'multiple' => false,
-                    'expanded' => false,
                     'placeholder' => 'franchise.backgroundimage.select',
-                    'empty_data' => null,
-                    'required' => false,
+                    'translation_domain' => 'franchise'
                 )
             )
             ->add(
                 'thumbnail',
-                'entity',
+                EntityType::class,
                 array(
+                    'class' => 'AppBundle:Image',
+                    'choice_label' => 'name',
                     'label' => 'franchise.thumbnail.label',
-                    'translation_domain' => 'franchise',
-                    'class' => 'AppBundle\Entity\Image',
-                    'multiple' => false,
-                    'expanded' => false,
                     'placeholder' => 'franchise.thumbnail.select',
-                    'empty_data' => null,
-                    'required' => false,
+                    'translation_domain' => 'franchise'
                 )
             )
             ->add(
                 'save',
-                'submit',
+                SubmitType::class,
                 array(
                     'label' => 'franchise.submit',
                     'translation_domain' => 'franchise',
@@ -112,7 +102,7 @@ class FranchiseType extends AbstractType
             )
             ->add(
                 'saveAndPublish',
-                'submit',
+                SubmitType::class,
                 array(
                     'label' => 'franchise.publish',
                     'translation_domain' => 'franchise',

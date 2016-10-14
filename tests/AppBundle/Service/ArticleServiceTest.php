@@ -1,16 +1,16 @@
 <?php
 /**
- * @package AppBundle\Service
+ * @package Test\AppBundle\Service
  */
 
-namespace AppBundle\Service;
+namespace Test\AppBundle\Service;
 
-use Test\AppBundle\Controller\AbstractControllerTest;
+use Liip\FunctionalTestBundle\Test\WebTestCase;
 
 /**
  * Class ArticleServiceTest
  */
-class ArticleServiceTest extends AbstractControllerTest
+class ArticleServiceTest extends WebTestCase
 {
     /**
      * @return null

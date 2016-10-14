@@ -10,7 +10,6 @@ use AppBundle\Entity\Tag;
 
 /**
  * Class TagTest
- * @package Test\AppBundle\Controller
  */
 class TagTest extends \PHPUnit_Framework_TestCase
 {
@@ -39,7 +38,7 @@ class TagTest extends \PHPUnit_Framework_TestCase
         $tag->setModifiedAt();
         $this->assertNotEmpty($tag->getModifiedAt());
 
-        $article = $this->getMock(Article::class);
+        $article = $this->getMockBuilder(Article::class)->getMock();
 
         $tag->addArticle($article);
         $this->assertEquals($tag->getArticles(), array($article));
