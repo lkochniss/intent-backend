@@ -7,6 +7,7 @@ namespace AppBundle\Service;
 
 use AppBundle\Entity\Publisher;
 use AppBundle\SimpleXMLExtended;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -14,8 +15,20 @@ use Doctrine\ORM\EntityRepository;
  */
 class PublisherService
 {
+    /** @var  EntityManager */
+    private $manager;
+
     /** @var  EntityRepository */
     private $repository;
+
+    /**
+     * @param EntityManager $manager Get the entityManager.
+     */
+    public function __construct(EntityManager $manager)
+    {
+        $this->manager = $manager;
+        $this->repository = $manager->getRepository('AppBundle:Publisher');
+    }
 
     /**
      * @return boolean
@@ -46,16 +59,56 @@ class PublisherService
 
             $item->backgroundImage = null;
             if ($publisher->getBackgroundImage()) {
-                $item->backgroundImage->addCData('image-' . $publisher->getBackgroundImage()->getFullPath());
+                $item->backgroundImage->addCData($publisher->getBackgroundImage()->getFullPath());
             }
 
             $item->thumbnail = null;
             if ($publisher->getThumbnail()) {
-                $item->thumbnail->addCData('image-' . $publisher->getThumbnail()->getFullPath());
+                $item->thumbnail->addCData($publisher->getThumbnail()->getFullPath());
             }
         }
 
         $xml->saveXML('web/export/publisher.xml');
+
+        return true;
+    }
+
+    /**
+     * @param string $path The import path.
+     * @return boolean
+     */
+    public function importEntities($path = 'web/export/publisher.xml')
+    {
+        $xml = new SimpleXMLExtended(file_get_contents($path));
+
+        foreach ($xml->item as $item) {
+            $publisher = new Publisher();
+            $publisher->setName("$item->name");
+            $publisher->setDescription("$item->description");
+            $publisher->setPublished(intval("$item->published"));
+
+            if ("$item->backgroundImage" != '') {
+                $publisher->setBackgroundImage(
+                    $this->manager->getRepository('AppBundle:Image')->findOneBy(
+                        array(
+                            'fullPath' => "$item->backgroundImage"
+                        )
+                    )
+                );
+            }
+
+            if ("$item->thumbnail" != '') {
+                $publisher->setBackgroundImage(
+                    $this->manager->getRepository('AppBundle:Image')->findOneBy(
+                        array(
+                            'fullPath' => "$item->thumbnail"
+                        )
+                    )
+                );
+            }
+
+            $this->repository->save($publisher);
+        }
 
         return true;
     }
