@@ -87,9 +87,7 @@ class ArticleService
                 $item->thumbnail->addCData('image-' . $article->getThumbnail()->getFullPath());
             }
 
-            if (is_null($article->getTags())) {
-                $item->tag = null;
-            }
+            $item->tag = null;
             foreach ($article->getTags() as $tag) {
                 $item->addChild('tag', 'tag-' . $tag->getSlug());
             }
@@ -150,20 +148,22 @@ class ArticleService
                 $article->setThumbnail(
                     $this->manager->getRepository('AppBundle:Image')->findOneBy(
                         array(
-                            'slug' => "$item->thumbnail"
+                            'fullPath' => "$item->thumbnail"
                         )
                     )
                 );
             }
 
             foreach ($item->tag as $tag) {
-                $article->addTag(
-                    $this->manager->getRepository('AppBundle:Tag')->findOneBy(
-                        array(
-                            'slug' => "$tag"
-                        )
+                $articleTag = $this->manager->getRepository('AppBundle:Tag')->findOneBy(
+                    array(
+                        'slug' => "$tag"
                     )
                 );
+
+                if (!is_null($articleTag)){
+                    $article->addTag($articleTag);
+                }
             }
 
             $this->repository->save(

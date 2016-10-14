@@ -5,12 +5,12 @@
 
 namespace AppBundle\Service;
 
-use Test\AppBundle\Controller\AbstractControllerTest;
+use Liip\FunctionalTestBundle\Test\WebTestCase;
 
 /**
  * Class ProfileServiceTest
  */
-class ProfileServiceTest extends AbstractControllerTest
+class ProfileServiceTest extends WebTestCase
 {
     /**
      * @return null

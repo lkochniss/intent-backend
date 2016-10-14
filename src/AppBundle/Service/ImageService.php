@@ -7,6 +7,7 @@ namespace AppBundle\Service;
 
 use AppBundle\Entity\Image;
 use AppBundle\SimpleXMLExtended;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -15,8 +16,20 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 class ImageService
 {
+    /** @var  EntityManager */
+    private $manager;
+
     /** @var  EntityRepository */
     private $repository;
+
+    /**
+     * @param EntityManager $manager Get the entityManager.
+     */
+    public function __construct(EntityManager $manager)
+    {
+        $this->manager = $manager;
+        $this->repository = $manager->getRepository('AppBundle:Image');
+    }
 
     /**
      * @return boolean

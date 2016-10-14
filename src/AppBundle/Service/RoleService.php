@@ -7,6 +7,7 @@ namespace AppBundle\Service;
 
 use AppBundle\Entity\Role;
 use AppBundle\SimpleXMLExtended;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -14,8 +15,20 @@ use Doctrine\ORM\EntityRepository;
  */
 class RoleService
 {
+    /** @var  EntityManager */
+    private $manager;
+
     /** @var  EntityRepository */
     private $repository;
+
+    /**
+     * @param EntityManager $manager Get the entityManager.
+     */
+    public function __construct(EntityManager $manager)
+    {
+        $this->manager = $manager;
+        $this->repository = $manager->getRepository('AppBundle:Role');
+    }
 
     /**
      * @return boolean

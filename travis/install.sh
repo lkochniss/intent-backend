@@ -1,10 +1,7 @@
 #!/bin/bash -e
 
-if [ "${CODECOV}" = "true" ] ; then
+if [ "${CODEANALYSE}" = "true" ] ; then
     pip install --user codecov;
-fi
-
-if [ "${CODESNIFF}" = "true" ] ; then
     pyrus install pear/PHP_CodeSniffer
     phpenv rehash
 fi

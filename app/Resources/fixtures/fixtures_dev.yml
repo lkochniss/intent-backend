@@ -58,7 +58,7 @@ AppBundle\Entity\Profile:
     user: '@user_<current()>'
 
 AppBundle\Entity\Event:
-  event{1..10}:
+  event{1..5}:
     name(unique): <word()>
     slug: <slugify(@self->name)>
     published: <numberBetween(0, 1)>
@@ -68,7 +68,7 @@ AppBundle\Entity\Event:
     endAt: <dateTimeBetween('-100 days', '+200 days')>
 
 AppBundle\Entity\Publisher:
-  publisher_{1..10}:
+  publisher_{1..5}:
     name(unique): <word()>
     slug: <slugify(@self->name)>
     published: <numberBetween(0, 1)>
@@ -76,7 +76,7 @@ AppBundle\Entity\Publisher:
     backgroundLink: <url()>
 
 AppBundle\Entity\Studio:
-  studio_{1..20}:
+  studio_{1..5}:
     name(unique): <word()>
     slug: <slugify(@self->name)>
     published: <numberBetween(0, 1)>
@@ -84,7 +84,7 @@ AppBundle\Entity\Studio:
     backgroundLink: <url()>
 
 AppBundle\Entity\Franchise:
-  franchise_{1..30}:
+  franchise_{1..10}:
     name(unique): <word()>
     slug: <slugify(@self->name)>
     published: <numberBetween(0, 1)>
@@ -94,7 +94,7 @@ AppBundle\Entity\Franchise:
     studio: '70%? @studio_<numberBetween(1, 20)>'
 
 AppBundle\Entity\Game:
-  game_{1..100}:
+  game_{1..20}:
     name(unique): <word()>
     slug: <slugify(@self->name)>
     published: <numberBetween(0, 1)>
@@ -104,7 +104,7 @@ AppBundle\Entity\Game:
     franchise: '60%? @franchise_<numberBetween(1, 30)>'
 
 AppBundle\Entity\Expansion:
-  expansion_{1..30}:
+  expansion_{1..20}:
     name(unique): <word()>
     slug: <slugify(@self->name)>
     published: <numberBetween(0, 1)>
@@ -131,7 +131,7 @@ AppBundle\Entity\Directory:
     path: 'upload'
 
 AppBundle\Entity\Article:
-  article_{1..300}:
+  article_{1..20}:
     title(unique): <word()> <word()> <word()> <word()>
     slug: <slugify(@self->title)>
     content: <sentence()><sentence()><sentence()><sentence()><sentence()>
@@ -153,7 +153,7 @@ AppBundle\Entity\Article:
     modifiedBy: '10%? @user_admin'
 
 AppBundle\Entity\Page:
-  page_{1..10}:
+  page_{1..5}:
     title(unique): <word()> <word()> <word()> <word()>
     slug: <slugify(@self->title)>
     content: <sentence()><sentence()><sentence()><sentence()><sentence()>

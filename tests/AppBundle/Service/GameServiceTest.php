@@ -5,12 +5,12 @@
 
 namespace AppBundle\Service;
 
-use Test\AppBundle\Controller\AbstractControllerTest;
+use Liip\FunctionalTestBundle\Test\WebTestCase;
 
 /**
  * Class GameServiceTest
  */
-class GameServiceTest extends AbstractControllerTest
+class GameServiceTest extends WebTestCase
 {
     /**
      * @return null
