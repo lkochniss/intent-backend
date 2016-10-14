@@ -15,9 +15,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserService
 {
-    /**
-     * @var \AppBundle\Repository\UserRepository
-     */
+    /** @var  EntityManager */
+    private $manager;
+
+    /** @var  EntityRepository */
     private $repository;
 
     /**
@@ -25,6 +26,7 @@ class UserService
      */
     public function __construct(EntityManager $manager)
     {
+        $this->manager = $manager;
         $this->repository = $manager->getRepository('AppBundle:User');
     }
 

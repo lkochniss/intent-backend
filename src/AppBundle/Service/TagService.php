@@ -15,16 +15,18 @@ use Doctrine\ORM\EntityRepository;
  */
 class TagService
 {
-    /**
-     * @var \AppBundle\Repository\TagRepository
-     */
+    /** @var  EntityManager */
+    private $manager;
+
+    /** @var  EntityRepository */
     private $repository;
-    
+
     /**
      * @param EntityManager $manager Get the entityManager.
      */
     public function __construct(EntityManager $manager)
     {
+        $this->manager = $manager;
         $this->repository = $manager->getRepository('AppBundle:Tag');
     }
 

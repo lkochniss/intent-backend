@@ -15,9 +15,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class ExpansionService
 {
-    /**
-     * @var \AppBundle\Repository\ExpansionRepository
-     */
+    /** @var  EntityManager */
+    private $manager;
+
+    /** @var  EntityRepository */
     private $repository;
 
     /**
@@ -25,6 +26,7 @@ class ExpansionService
      */
     public function __construct(EntityManager $manager)
     {
+        $this->manager = $manager;
         $this->repository = $manager->getRepository('AppBundle:Expansion');
     }
 

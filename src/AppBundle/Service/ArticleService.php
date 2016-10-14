@@ -15,9 +15,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class ArticleService
 {
-    /**
-     * @var \AppBundle\Repository\ArticleRepository
-     */
+    /** @var  EntityManager */
+    private $manager;
+
+    /** @var  EntityRepository */
     private $repository;
 
     /**
@@ -25,6 +26,7 @@ class ArticleService
      */
     public function __construct(EntityManager $manager)
     {
+        $this->manager = $manager;
         $this->repository = $manager->getRepository('AppBundle:Article');
     }
 

@@ -15,9 +15,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class EventService
 {
-    /**
-     * @var \AppBundle\Repository\EventRepository
-     */
+    /** @var  EntityManager */
+    private $manager;
+
+    /** @var  EntityRepository */
     private $repository;
 
     /**
@@ -25,6 +26,7 @@ class EventService
      */
     public function __construct(EntityManager $manager)
     {
+        $this->manager = $manager;
         $this->repository = $manager->getRepository('AppBundle:Event');
     }
 
