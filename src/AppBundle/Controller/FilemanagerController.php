@@ -28,7 +28,7 @@ class FilemanagerController extends Controller
     {
         $directory = new Directory();
         $parentDirectory = $this->getDoctrine()->getRepository('AppBundle:Directory')->find($id);
-        $form = $this->createForm(new DirectoryType(), $directory);
+        $form = $this->createForm(DirectoryType::class, $directory);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -66,7 +66,7 @@ class FilemanagerController extends Controller
     public function uploadAction(Request $request, $popup = 0, $id = 0)
     {
         $image = new Image();
-        $form = $this->createForm(new UploadType(), $image);
+        $form = $this->createForm(UploadType::class, $image);
         $form->handleRequest($request);
 
         $directory = $this->getDoctrine()->getRepository('AppBundle:Directory')->find($id);
