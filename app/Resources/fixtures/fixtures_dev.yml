@@ -90,8 +90,8 @@ AppBundle\Entity\Franchise:
     published: <numberBetween(0, 1)>
     description: <sentence()>
     backgroundLink: <url()>
-    publisher: '70%? @publisher_<numberBetween(1, 10)>'
-    studio: '70%? @studio_<numberBetween(1, 20)>'
+    publisher: '70%? @publisher_<numberBetween(1, 5)>'
+    studio: '70%? @studio_<numberBetween(1, 5)>'
 
 AppBundle\Entity\Game:
   game_{1..20}:
@@ -100,8 +100,8 @@ AppBundle\Entity\Game:
     published: <numberBetween(0, 1)>
     description: <sentence()>
     backgroundLink: <url()>
-    studio: '70%? @studio_<numberBetween(1, 20)>'
-    franchise: '60%? @franchise_<numberBetween(1, 30)>'
+    studio: '70%? @studio_<numberBetween(1, 5)>'
+    franchise: '60%? @franchise_<numberBetween(1, 10)>'
 
 AppBundle\Entity\Expansion:
   expansion_{1..20}:
@@ -110,7 +110,7 @@ AppBundle\Entity\Expansion:
     published: <numberBetween(0, 1)>
     description: <sentence()>
     backgroundLink: <url()>
-    game: '@game_<numberBetween(1, 30)>'
+    game: '@game_<numberBetween(1, 20)>'
 
 AppBundle\Entity\Category:
   category_{1..5}:
@@ -139,11 +139,11 @@ AppBundle\Entity\Article:
     slideshow: <numberBetween(0, 1)>
     tags: ['@tag_<numberBetween(1, 20)>']
     category: '@category_<numberBetween(1, 5)>'
-    related: '@game_<numberBetween(1, 100)>'
-    related: '10%? @expansion_<numberBetween(1, 30)>'
-    related: '10%? @franchise_<numberBetween(1, 30)>'
-    related: '10%? @studio_<numberBetween(1, 20)>'
-    related: '10%? @publisher_<numberBetween(1, 10)>'
+    related: '@game_<numberBetween(1, 20)>'
+    related: '10%? @expansion_<numberBetween(1, 20)>'
+    related: '10%? @franchise_<numberBetween(1, 10)>'
+    related: '10%? @studio_<numberBetween(1, 5)>'
+    related: '10%? @publisher_<numberBetween(1, 5)>'
     createdBy: '@user_editor'
     createdBy: '30%? @user_<numberBetween(1, 5)>'
     createdBy: '10%? @user_admin'
