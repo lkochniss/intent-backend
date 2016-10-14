@@ -4,8 +4,9 @@ category:
     count:      Anzahl der Artikel
     delete:     Kategorie löschen
     edit:       Kategorie bearbeiten
+    label:      Kategorie
     list:       Kategorieübersicht
-    name:       Kategorie
+    name:       Name der Kategorie
     not_found:  Kategorie nicht gefunden
     priority:   Priorität
     publish:    Kategorie veröffentlichen
