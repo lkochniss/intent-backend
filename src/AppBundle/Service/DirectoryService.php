@@ -7,6 +7,7 @@ namespace AppBundle\Service;
 
 use AppBundle\Entity\Directory;
 use AppBundle\SimpleXMLExtended;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -14,8 +15,20 @@ use Doctrine\ORM\EntityRepository;
  */
 class DirectoryService
 {
+    /** @var  EntityManager */
+    private $manager;
+
     /** @var  EntityRepository */
     private $repository;
+
+    /**
+     * @param EntityManager $manager Get the entityManager.
+     */
+    public function __construct(EntityManager $manager)
+    {
+        $this->manager = $manager;
+        $this->repository = $manager->getRepository('AppBundle:Directory');
+    }
 
     /**
      * @param string $path The export path.
@@ -41,7 +54,7 @@ class DirectoryService
 
             $item->parent = null;
             if ($directory->getParentDirectory()) {
-                $item->parent->addCData($directory->getParentDirectory()->getName());
+                $item->parent->addCData($directory->getParentDirectory()->getFullPath());
             }
         }
 
@@ -64,7 +77,13 @@ class DirectoryService
             $directory->setPath("$item->path");
 
             if ("$item->parent" != '') {
-                $directory->setParentDirectory($this->getReference('directory-' . "$item->parent"));
+                $directory->setParentDirectory(
+                    $this->manager->getRepository('AppBundle:Directory')->findOneBy(
+                        array(
+                        'fullPath' => "$item->parent"
+                        )
+                    )
+                );
             }
 
             $this->repository->save($directory);
