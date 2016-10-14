@@ -4,7 +4,7 @@
 
 {% block content %}
     <div class="col-md-12">
-        <h3 class="col-md-3">{{ currentDirectory }}</h3>
+        <h3 class="col-md-3">{{ currentDirectory.fullPath }}</h3>
         <a href="{{ path('intent_backend_filemanager_create', {'popup' : 0, 'id': currentDirectory.id }) }}"
             class="btn btn-default pull-right">{% trans from "filemanager" %}filemanager.create{% endtrans %}
         </a>

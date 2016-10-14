@@ -26,7 +26,7 @@ class ArticleController extends AbstractMetaController
      */
     protected function getFormType()
     {
-        return new ArticleType();
+        return ArticleType::class;
     }
 
     /**

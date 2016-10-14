@@ -7,16 +7,25 @@ namespace AppBundle\Service;
 
 use AppBundle\Entity\Category;
 use AppBundle\SimpleXMLExtended;
-use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\EntityManager;
 
 /**
  * Class CategoryService
  */
 class CategoryService
 {
-
-    /** @var  EntityRepository */
+    /**
+     * @var \AppBundle\Repository\CategoryRepository
+     */
     private $repository;
+
+    /**
+     * @param EntityManager $manager Get the entityManager.
+     */
+    public function __construct(EntityManager $manager)
+    {
+        $this->repository = $manager->getRepository('AppBundle:Category');
+    }
 
     /**
      * @param string $path The export path.
