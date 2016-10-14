@@ -5,7 +5,11 @@
 
 namespace AppBundle\Form\Type;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -24,7 +28,7 @@ class GameType extends AbstractType
         $builder
             ->add(
                 'name',
-                'text',
+                TextType::class,
                 array(
                     'label' => 'game.name',
                     'translation_domain' => 'game',
@@ -32,7 +36,7 @@ class GameType extends AbstractType
             )
             ->add(
                 'description',
-                'textarea',
+                TextareaType::class,
                 array(
                     'label' => 'game.description',
                     'translation_domain' => 'game',
@@ -45,63 +49,51 @@ class GameType extends AbstractType
             )
             ->add(
                 'studio',
-                'entity',
+                EntityType::class,
                 array(
+                    'class' => 'AppBundle:Studio',
+                    'choice_label' => 'name',
                     'label' => 'game.studio.name',
-                    'translation_domain' => 'game',
-                    'class' => 'AppBundle\Entity\Studio',
-                    'multiple' => false,
-                    'expanded' => false,
                     'placeholder' => 'game.studio.select',
-                    'empty_data' => null,
-                    'required' => false,
+                    'translation_domain' => 'game'
                 )
             )
             ->add(
                 'franchise',
-                'entity',
+                EntityType::class,
                 array(
+                    'class' => 'AppBundle:Franchise',
+                    'choice_label' => 'name',
                     'label' => 'game.franchise.name',
-                    'translation_domain' => 'game',
-                    'class' => 'AppBundle\Entity\Franchise',
-                    'multiple' => false,
-                    'expanded' => false,
                     'placeholder' => 'game.franchise.select',
-                    'empty_data' => null,
-                    'required' => false,
+                    'translation_domain' => 'game'
                 )
             )
             ->add(
                 'background_image',
-                'entity',
+                EntityType::class,
                 array(
+                    'class' => 'AppBundle:Image',
+                    'choice_label' => 'name',
                     'label' => 'game.backgroundimage.label',
-                    'translation_domain' => 'game',
-                    'class' => 'AppBundle\Entity\Image',
-                    'multiple' => false,
-                    'expanded' => false,
                     'placeholder' => 'game.backgroundimage.select',
-                    'empty_data' => null,
-                    'required' => false,
+                    'translation_domain' => 'game'
                 )
             )
             ->add(
                 'thumbnail',
-                'entity',
+                EntityType::class,
                 array(
+                    'class' => 'AppBundle:Image',
+                    'choice_label' => 'name',
                     'label' => 'game.thumbnail.label',
-                    'translation_domain' => 'game',
-                    'class' => 'AppBundle\Entity\Image',
-                    'multiple' => false,
-                    'expanded' => false,
                     'placeholder' => 'game.thumbnail.select',
-                    'empty_data' => null,
-                    'required' => false,
+                    'translation_domain' => 'game'
                 )
             )
             ->add(
                 'save',
-                'submit',
+                SubmitType::class,
                 array(
                     'label' => 'game.submit',
                     'translation_domain' => 'game',
@@ -112,7 +104,7 @@ class GameType extends AbstractType
             )
             ->add(
                 'saveAndPublish',
-                'submit',
+                SubmitType::class,
                 array(
                     'label' => 'game.publish',
                     'translation_domain' => 'game',
