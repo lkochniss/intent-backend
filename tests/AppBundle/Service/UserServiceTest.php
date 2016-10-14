@@ -5,12 +5,12 @@
 
 namespace AppBundle\Service;
 
-use Test\AppBundle\Controller\AbstractControllerTest;
+use Liip\FunctionalTestBundle\Test\WebTestCase;
 
 /**
  * Class UserServiceTest
  */
-class UserServiceTest extends AbstractControllerTest
+class UserServiceTest extends WebTestCase
 {
     /**
      * @return null
@@ -18,6 +18,17 @@ class UserServiceTest extends AbstractControllerTest
     public function testExport()
     {
         $status = $this->getContainer()->get('app.user.service')->exportEntities();
+        $this->assertTrue($status);
+
+        return null;
+    }
+
+    /**
+     * @return null
+     */
+    public function testImport()
+    {
+        $status = $this->getContainer()->get('app.user.service')->importEntities();
         $this->assertTrue($status);
 
         return null;
