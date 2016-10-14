@@ -10,7 +10,7 @@ event:
     edit:               Event bearbeiten
     endAt:              Enddatum
     list:               Eventübersicht
-    name:               Event
+    name:               Name des Events
     not_found:          Event nicht gefunden
     publish:            Event veröffentlichen
     published:
