@@ -6,6 +6,9 @@
 namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -24,7 +27,7 @@ class PageType extends AbstractType
         $builder
             ->add(
                 'title',
-                'text',
+                TextType::class,
                 array(
                     'label' => 'page.title',
                     'translation_domain' => 'page',
@@ -32,7 +35,7 @@ class PageType extends AbstractType
             )
             ->add(
                 'content',
-                'textarea',
+                TextareaType::class,
                 array(
                     'label' => 'page.content',
                     'translation_domain' => 'page',
@@ -45,7 +48,7 @@ class PageType extends AbstractType
             )
             ->add(
                 'save',
-                'submit',
+                SubmitType::class,
                 array(
                     'label' => 'page.submit',
                     'translation_domain' => 'page',
@@ -56,7 +59,7 @@ class PageType extends AbstractType
             )
             ->add(
                 'saveAndPublish',
-                'submit',
+                SubmitType::class,
                 array(
                     'label' => 'page.publish',
                     'translation_domain' => 'page',
