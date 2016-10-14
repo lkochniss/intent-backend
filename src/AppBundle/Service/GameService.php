@@ -60,22 +60,22 @@ class GameService
 
             $item->franchise = null;
             if ($game->getFranchise()) {
-                $item->franchise->addCData('franchise-' . $game->getFranchise()->getSlug());
+                $item->franchise->addCData($game->getFranchise()->getSlug());
             }
 
             $item->studio = null;
             if ($game->getStudio()) {
-                $item->studio->addCData('studio-' . $game->getStudio()->getSlug());
+                $item->studio->addCData($game->getStudio()->getSlug());
             }
 
             $item->backgroundImage = null;
             if ($game->getBackgroundImage()) {
-                $item->backgroundImage->addCData('image-' . $game->getBackgroundImage()->getFullPath());
+                $item->backgroundImage->addCData($game->getBackgroundImage()->getFullPath());
             }
 
             $item->thumbnail = null;
             if ($game->getThumbnail()) {
-                $item->thumbnail->addCData('image-' . $game->getThumbnail()->getFullPath());
+                $item->thumbnail->addCData($game->getThumbnail()->getFullPath());
             }
         }
 
