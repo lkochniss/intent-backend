@@ -58,7 +58,9 @@ class ArticleService
             $item->published->addCData($article->isPublished());
 
             $item->publishedAt = null;
-            $item->publishedAt->addCData($article->getPublishAt()->format('Y-M-d H:i:s'));
+            if (!is_null($article->getPublishAt())) {
+                $item->publishedAt->addCData($article->getPublishAt()->format('Y-M-d H:i:s'));
+            }
 
             $item->author = null;
             $item->author->addCData($article->getCreatedBy()->getUsername());
@@ -72,24 +74,21 @@ class ArticleService
 
             $item->category = null;
             if ($article->getCategory()) {
-                $item->category->addCData('category-' . $article->getCategory()->getSlug());
+                $item->category->addCData($article->getCategory()->getSlug());
             }
 
             $item->event = null;
             if ($article->getEvent()) {
-                $item->event->addCData('event-' . $article->getEvent()->getSlug());
+                $item->event->addCData($article->getEvent()->getSlug());
             }
 
             $item->thumbnail = null;
             if ($article->getThumbnail()) {
-                $item->thumbnail->addCData('image-' . $article->getThumbnail()->getFullPath());
+                $item->thumbnail->addCData($article->getThumbnail()->getFullPath());
             }
 
-            if (is_null($article->getTags())) {
-                $item->tag = null;
-            }
             foreach ($article->getTags() as $tag) {
-                $item->addChild('tag', 'tag-' . $tag->getSlug());
+                $item->addChild('tag', $tag->getSlug());
             }
         }
 
@@ -148,20 +147,20 @@ class ArticleService
                 $article->setThumbnail(
                     $this->manager->getRepository('AppBundle:Image')->findOneBy(
                         array(
-                            'slug' => "$item->thumbnail"
+                            'fullPath' => "$item->thumbnail"
                         )
                     )
                 );
             }
 
             foreach ($item->tag as $tag) {
-                $article->addTag(
-                    $this->manager->getRepository('AppBundle:Tag')->findOneBy(
-                        array(
-                            'slug' => "$tag"
-                        )
+                $articleTag = $this->manager->getRepository('AppBundle:Tag')->findOneBy(
+                    array(
+                        'slug' => "$tag"
                     )
                 );
+
+                $article->addTag($articleTag);
             }
 
             $this->repository->save(
