@@ -6,9 +6,9 @@ cd ..
 
 php bin/console security:check
 
-if [ "${CODEANALYSE}" = "true" ] ; then
-   phpcs --standard=PSR1,PSR2 -s src;
-   phpcs --standard=PSR1,PSR2 -s tests;
+if [ "${CODEANALYSIS}" = "true" ] ; then
+   vendor/bin/phpcs --standard=PSR1,PSR2 -s src;
+   vendor/bin/phpcs --standard=PSR1,PSR2 -s tests;
    vendor/bin/phpunit --coverage-clover=coverage.xml;
 else
    vendor/bin/phpunit;

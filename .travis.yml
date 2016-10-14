@@ -5,9 +5,9 @@ branches:
 matrix:
   include:
   - php: 5.6
-    env: CODEANALYSE=true
+    env: CODEANALYSIS=true
   - php: 7.0
-    env: CODEANALYSE=false
+    env: CODEANALYSIS=false
 cache:
   directories:
   - vendor

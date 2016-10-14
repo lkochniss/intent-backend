@@ -4,9 +4,8 @@ pushd "$(dirname $0)" > /dev/null
 
 cd ..
 
-if [ "${CODEANALYSE}" = "true" ] ; then
+if [ "${CODEANALYSIS}" = "true" ] ; then
     pip install --user codecov;
-    pyrus install pear/PHP_CodeSniffer
     phpenv rehash
 fi
 
