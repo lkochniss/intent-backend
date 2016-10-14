@@ -1,4 +1,8 @@
-#! /bin/bash
+#!/bin/bash -e
+
+pushd "$(dirname $0)" > /dev/null
+
+cd ..
 
 if [ "${TRAVIS_PULL_REQUEST}" = "false" ] ; then
     echo "This is no pullrequest"

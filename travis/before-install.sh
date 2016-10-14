@@ -1,5 +1,9 @@
 #!/bin/bash -e
 
+pushd "$(dirname $0)" > /dev/null
+
+cd ..
+
 rm composer.lock
 composer self-update -q
 
