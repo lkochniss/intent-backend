@@ -1,9 +1,9 @@
 <?php
 /**
- * @package AppBundle\Service
+ * @package Test\AppBundle\Service
  */
 
-namespace AppBundle\Service;
+namespace Test\AppBundle\Service;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
 

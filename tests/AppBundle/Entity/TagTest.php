@@ -10,8 +10,6 @@ use AppBundle\Entity\Tag;
 
 /**
  * Class TagTest
- *
- * @package Test\AppBundle\Controller
  */
 class TagTest extends \PHPUnit_Framework_TestCase
 {

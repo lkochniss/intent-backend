@@ -19,7 +19,6 @@ use AppBundle\Entity\User;
 
 /**
  * Class ArticleTest
- * @package Test\AppBundle\Controller
  */
 class ArticleTest extends \PHPUnit_Framework_TestCase
 {
