@@ -60,12 +60,12 @@ class StudioService
 
             $item->backgroundImage = null;
             if ($studio->getBackgroundImage()) {
-                $item->backgroundImage->addCData('image-' . $studio->getBackgroundImage()->getFullPath());
+                $item->backgroundImage->addCData($studio->getBackgroundImage()->getFullPath());
             }
 
             $item->thumbnail = null;
             if ($studio->getThumbnail()) {
-                $item->thumbnail->addCData('image-' . $studio->getThumbnail()->getFullPath());
+                $item->thumbnail->addCData($studio->getThumbnail()->getFullPath());
             }
         }
 

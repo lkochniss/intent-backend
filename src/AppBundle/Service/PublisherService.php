@@ -59,12 +59,12 @@ class PublisherService
 
             $item->backgroundImage = null;
             if ($publisher->getBackgroundImage()) {
-                $item->backgroundImage->addCData('image-' . $publisher->getBackgroundImage()->getFullPath());
+                $item->backgroundImage->addCData($publisher->getBackgroundImage()->getFullPath());
             }
 
             $item->thumbnail = null;
             if ($publisher->getThumbnail()) {
-                $item->thumbnail->addCData('image-' . $publisher->getThumbnail()->getFullPath());
+                $item->thumbnail->addCData($publisher->getThumbnail()->getFullPath());
             }
         }
 
