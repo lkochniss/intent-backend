@@ -7,15 +7,25 @@ namespace AppBundle\Service;
 
 use AppBundle\Entity\Page;
 use AppBundle\SimpleXMLExtended;
-use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\EntityManager;
 
 /**
  * Class PageService
  */
 class PageService
 {
-    /** @var  EntityRepository */
+    /**
+     * @var \AppBundle\Repository\PageRepository
+     */
     private $repository;
+
+    /**
+     * @param EntityManager $manager Get the entityManager.
+     */
+    public function __construct(EntityManager $manager)
+    {
+        $this->repository = $manager->getRepository('AppBundle:Page');
+    }
 
     /**
      * @return boolean
@@ -43,6 +53,26 @@ class PageService
         }
 
         $xml->saveXML('web/export/page.xml');
+
+        return true;
+    }
+
+    /**
+     * @param string $path The import path.
+     * @return boolean
+     */
+    public function importEntities($path = 'web/export/page.xml')
+    {
+        $xml = new SimpleXMLExtended(file_get_contents($path));
+
+        foreach ($xml->item as $item) {
+            $page = new Page();
+            $page->setTitle("$item->title");
+            $page->setContent(intval("$item->content"));
+            $page->setPublished(intval("$item->published"));
+
+            $this->repository->save($page);
+        }
 
         return true;
     }
