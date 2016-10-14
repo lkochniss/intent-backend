@@ -26,7 +26,7 @@ class ExpansionController extends AbstractRelatedController
      */
     protected function getFormType()
     {
-        return new ExpansionType();
+        return ExpansionType::class;
     }
 
     /**
