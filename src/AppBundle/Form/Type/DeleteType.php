@@ -6,6 +6,8 @@
 namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -23,7 +25,7 @@ class DeleteType extends AbstractType
         $builder
             ->add(
                 'confirm',
-                'checkbox',
+                CheckboxType::class,
                 array(
                     'label' => 'delete.confirm',
                     'translation_domain' => 'delete',
@@ -31,7 +33,7 @@ class DeleteType extends AbstractType
             )
             ->add(
                 'submit',
-                'submit',
+                SubmitType::class,
                 array(
                     'label' => 'delete.submit',
                     'translation_domain' => 'delete',
