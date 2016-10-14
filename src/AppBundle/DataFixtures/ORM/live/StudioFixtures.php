@@ -22,7 +22,7 @@ class StudioFixtures extends AbstractFixture implements OrderedFixtureInterface,
 
     /**
      * @param ObjectManager $manager Manager to save studio.
-     * @return boolean
+     * @return null
      */
     public function load(ObjectManager $manager)
     {
@@ -50,7 +50,7 @@ class StudioFixtures extends AbstractFixture implements OrderedFixtureInterface,
             $this->setReference('studio-' . $studio->getSlug(), $studio);
         }
 
-        return true;
+        return null;
     }
 
     /**
