@@ -1,0 +1,161 @@
+AppBundle\Entity\Role:
+  role_admin:
+    name: 'Admin'
+    role: 'ROLE_ADMIN'
+  role_read_article:
+    name: 'Artikel lesen'
+    role: 'ROLE_READ_ARTICLE'
+  role_write_article:
+    name: 'Artikel schreiben'
+    role: 'ROLE_WRITE_ARTICLE'
+  role_publish_article:
+    name: 'Artikel veröffentlichen'
+    role: 'ROLE_PUBLISH_ARTICLE'
+  role_read_meata:
+    name: 'Meta lesen'
+    role: 'ROLE_READ_META'
+  role_write_meta:
+    name: 'Meta schreiben'
+    role: 'ROLE_WRITE_META'
+  role_publish_meta:
+    name: 'Meta veröffentlichen'
+    role: 'ROLE_PUBLISH_META'
+
+AppBundle\Entity\User:
+  user_admin:
+    username(unique): 'Admin'
+    password: 'admin'
+    email(unique): 'admin@int-ent.de'
+    isActive: 1
+    validUntil: <dateTimeBetween('+10 days', '+200 days')>
+    roles: [ '@role_admin' ]
+  user_editor:
+    username(unique): 'Editor'
+    password: 'editor'
+    email(unique): 'editor@int-ent.de'
+    isActive: 1
+    validUntil: <dateTimeBetween('+10 days', '+200 days')>
+    roles: [ '@role_read_article', '@role_write_article', '@role_read_meata', '@role_write_meta' ]
+  user_{1..5}:
+    username: <username()>
+    password: <word()>
+    email: <email()>
+    isActive: <numberBetween(0, 1)>
+    validUntil: <dateTimeBetween('-100 days', '+200 days')>
+
+AppBundle\Entity\Profile:
+  profile_admin:
+    name: <name()>
+    description: <sentence()>
+    user: '@user_admin'
+  profile_editor:
+    name: <name()>
+    description: <sentence()>
+    user: '@user_editor'
+  profile_{1..5}:
+    name: <name()>
+    description: <sentence()>
+    user: '@user_<current()>'
+
+AppBundle\Entity\Event:
+  event_{1..5}:
+    name(unique): <word()>
+    slug: <slugify(@self->name)>
+    published: <numberBetween(0, 1)>
+    description: <sentence()>
+    backgroundLink: <url()>
+    startAt: <dateTimeBetween('-100 days', '+200 days')>
+    endAt: <dateTimeBetween('-100 days', '+200 days')>
+
+AppBundle\Entity\Publisher:
+  publisher_{1..5}:
+    name(unique): <word()>
+    slug: <slugify(@self->name)>
+    published: <numberBetween(0, 1)>
+    description: <sentence()>
+    backgroundLink: <url()>
+
+AppBundle\Entity\Studio:
+  studio_{1..5}:
+    name(unique): <word()>
+    slug: <slugify(@self->name)>
+    published: <numberBetween(0, 1)>
+    description: <sentence()>
+    backgroundLink: <url()>
+
+AppBundle\Entity\Franchise:
+  franchise_{1..10}:
+    name(unique): <word()>
+    slug: <slugify(@self->name)>
+    published: <numberBetween(0, 1)>
+    description: <sentence()>
+    backgroundLink: <url()>
+    publisher: '70%? @publisher_<numberBetween(1, 5)>'
+    studio: '70%? @studio_<numberBetween(1, 5)>'
+
+AppBundle\Entity\Game:
+  game_{1..20}:
+    name(unique): <word()>
+    slug: <slugify(@self->name)>
+    published: <numberBetween(0, 1)>
+    description: <sentence()>
+    backgroundLink: <url()>
+    studio: '70%? @studio_<numberBetween(1, 5)>'
+    franchise: '60%? @franchise_<numberBetween(1, 10)>'
+
+AppBundle\Entity\Expansion:
+  expansion_{1..20}:
+    name(unique): <word()>
+    slug: <slugify(@self->name)>
+    published: <numberBetween(0, 1)>
+    description: <sentence()>
+    backgroundLink: <url()>
+    game: '@game_<numberBetween(1, 20)>'
+
+AppBundle\Entity\Category:
+  category_{1..5}:
+    name(unique): <word()>
+    slug: <slugify(@self->name)>
+    published: <numberBetween(0, 1)>
+    priority(unique): <current()>
+
+AppBundle\Entity\Tag:
+  tag_{1..20}:
+    name(unique): <word()>
+    slug: <slugify(@self->name)>
+    published: <numberBetween(0, 1)>
+
+AppBundle\Entity\Directory:
+  directory_1:
+    name(unique): ''
+    path: 'upload'
+
+AppBundle\Entity\Article:
+  article_{1..20}:
+    title(unique): <word()> <word()> <word()> <word()>
+    slug: <slugify(@self->title)>
+    content: <sentence()><sentence()><sentence()><sentence()><sentence()>
+    published: <numberBetween(0, 1)>
+    slideshow: <numberBetween(0, 1)>
+    tags: ['@tag_<numberBetween(1, 20)>']
+    event: '20%? @event_<numberBetween(1, 5)>'
+    category: '@category_<numberBetween(1, 5)>'
+    related: '@game_<numberBetween(1, 20)>'
+    related: '10%? @expansion_<numberBetween(1, 20)>'
+    related: '10%? @franchise_<numberBetween(1, 10)>'
+    related: '10%? @studio_<numberBetween(1, 5)>'
+    related: '10%? @publisher_<numberBetween(1, 5)>'
+    createdBy: '@user_editor'
+    createdBy: '30%? @user_<numberBetween(1, 5)>'
+    createdBy: '10%? @user_admin'
+    modifiedBy: '@self->createdBy'
+    modifiedBy: '30%? @user_editor'
+    modifiedBy: '10%? @user_<numberBetween(1, 5)>'
+    modifiedBy: '10%? @user_admin'
+
+AppBundle\Entity\Page:
+  page_{1..5}:
+    title(unique): <word()> <word()> <word()> <word()>
+    slug: <slugify(@self->title)>
+    content: <sentence()><sentence()><sentence()><sentence()><sentence()>
+    published: <numberBetween(0, 1)>

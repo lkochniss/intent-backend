@@ -5,42 +5,31 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
-use AppBundle\Entity\Role;
-use AppBundle\SimpleXMLExtended;
 use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Nelmio\Alice\Fixtures;
 
 /**
  * Class RoleFixtures
  */
-class RoleFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class DevFixtures extends AbstractFixture implements FixtureInterface, ContainerAwareInterface
 {
     private $container;
 
     /**
      * @param ObjectManager $manager Manager to save role.
-     * @return boolean
+     * @return null
      */
     public function load(ObjectManager $manager)
     {
-        $xml = new SimpleXMLExtended(file_get_contents('web/export/role.xml'));
+        /** @var Fixtures $fixtureLoader */
+        $fixtureLoader = $this->container->get('alice.fixtures');
+        $fixtureLoader->loadFiles(__DIR__.'/../../../../../app/Resources/fixtures/fixtures_dev.yml');
 
-        foreach ($xml->item as $item) {
-            $role = new Role();
-            $role->setName("$item->name");
-            $role->setRole("$item->role");
-
-            $manager->getRepository('AppBundle:Role')->save(
-                $role
-            );
-
-            $this->addReference('role-' . $role->getName(), $role);
-        }
-
-        return true;
+        return null;
     }
 
     /**
@@ -52,13 +41,5 @@ class RoleFixtures extends AbstractFixture implements OrderedFixtureInterface, C
         $this->container = $containerInterface;
 
         return $this;
-    }
-
-    /**
-     * @return integer
-     */
-    public function getOrder()
-    {
-        return 1;
     }
 }
