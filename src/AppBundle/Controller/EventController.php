@@ -26,7 +26,7 @@ class EventController extends AbstractMetaController
      */
     protected function getFormType()
     {
-        return new EventType();
+        return EventType::class;
     }
 
     /**
