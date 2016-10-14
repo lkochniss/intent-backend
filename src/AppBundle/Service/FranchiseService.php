@@ -60,22 +60,22 @@ class FranchiseService
 
             $item->publisher = null;
             if ($franchise->getPublisher()) {
-                $item->publisher->addCData('publisher-' . $franchise->getPublisher()->getSlug());
+                $item->publisher->addCData($franchise->getPublisher()->getSlug());
             }
 
             $item->studio = null;
             if ($franchise->getStudio()) {
-                $item->studio->addCData('studio-' . $franchise->getStudio()->getSlug());
+                $item->studio->addCData($franchise->getStudio()->getSlug());
             }
 
             $item->backgroundImage = null;
             if ($franchise->getBackgroundImage()) {
-                $item->backgroundImage->addCData('image-' . $franchise->getBackgroundImage()->getFullPath());
+                $item->backgroundImage->addCData($franchise->getBackgroundImage()->getFullPath());
             }
 
             $item->thumbnail = null;
             if ($franchise->getThumbnail()) {
-                $item->thumbnail->addCData('image-' . $franchise->getThumbnail()->getFullPath());
+                $item->thumbnail->addCData($franchise->getThumbnail()->getFullPath());
             }
         }
 

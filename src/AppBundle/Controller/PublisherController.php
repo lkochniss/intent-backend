@@ -26,7 +26,7 @@ class PublisherController extends AbstractRelatedController
      */
     protected function getFormType()
     {
-        return new PublisherType();
+        return PublisherType::class;
     }
 
     /**
