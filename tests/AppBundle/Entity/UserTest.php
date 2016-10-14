@@ -12,7 +12,6 @@ use AppBundle\Entity\Article;
 
 /**
  * Class UserTest
- * @package Test\AppBundle\Controller
  */
 class UserTest extends \PHPUnit_Framework_TestCase
 {
@@ -49,11 +48,11 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $user->setModifiedAt();
         $this->assertNotEmpty($user->getModifiedAt());
 
-        $profile = $this->getMock(Profile::class);
+        $profile = $this->getMockBuilder(Profile::class)->getMock();
         $user->setProfile($profile);
         $this->assertEquals($user->getProfile(), $profile);
 
-        $role = $this->getMock(Role::class);
+        $role = $this->getMockBuilder(Role::class)->getMock();
 
         $user->addRole($role);
         $this->assertEquals($user->getRoles(), array($role));
@@ -61,7 +60,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $user->removeRole($role);
         $this->assertEquals($user->getRoles(), array());
 
-        $article = $this->getMock(Article::class);
+        $article = $this->getMockBuilder(Article::class)->getMock();
 
         $user->addArticle($article);
         $this->assertEquals($user->getArticles(), array($article));
