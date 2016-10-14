@@ -26,7 +26,7 @@ class CategoryController extends AbstractMetaController
      */
     protected function getFormType()
     {
-        return new CategoryType();
+        return CategoryType::class;
     }
 
     /**
