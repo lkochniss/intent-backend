@@ -26,7 +26,7 @@ class PageController extends AbstractMetaController
      */
     protected function getFormType()
     {
-        return new PageType();
+        return PageType::class;
     }
 
     /**
