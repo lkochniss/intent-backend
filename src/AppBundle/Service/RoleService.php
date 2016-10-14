@@ -16,13 +16,8 @@ use Doctrine\ORM\EntityRepository;
 class RoleService
 {
     /**
- * @var  EntityManager
-*/
-    private $manager;
-
-    /**
- * @var  EntityRepository
-*/
+     * @var \AppBundle\Repository\RoleRepository
+     */
     private $repository;
 
     /**
@@ -30,7 +25,6 @@ class RoleService
      */
     public function __construct(EntityManager $manager)
     {
-        $this->manager = $manager;
         $this->repository = $manager->getRepository('AppBundle:Role');
     }
 

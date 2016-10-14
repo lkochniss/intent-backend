@@ -15,10 +15,9 @@ use Doctrine\ORM\EntityRepository;
  */
 class StudioService
 {
-    /** @var  EntityManager */
-    private $manager;
-
-    /** @var  EntityRepository */
+    /**
+     * @var \AppBundle\Repository\StudioRepository
+     */
     private $repository;
 
     /**
@@ -26,7 +25,6 @@ class StudioService
      */
     public function __construct(EntityManager $manager)
     {
-        $this->manager = $manager;
         $this->repository = $manager->getRepository('AppBundle:Studio');
     }
 

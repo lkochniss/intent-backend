@@ -15,10 +15,9 @@ use Doctrine\ORM\EntityRepository;
  */
 class DirectoryService
 {
-    /** @var  EntityManager */
-    private $manager;
-
-    /** @var  EntityRepository */
+    /**
+     * @var \AppBundle\Repository\DirectoryRepository
+     */
     private $repository;
 
     /**
@@ -26,7 +25,6 @@ class DirectoryService
      */
     public function __construct(EntityManager $manager)
     {
-        $this->manager = $manager;
         $this->repository = $manager->getRepository('AppBundle:Directory');
     }
 

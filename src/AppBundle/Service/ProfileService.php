@@ -15,10 +15,9 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProfileService
 {
-    /** @var  EntityManager */
-    private $manager;
-
-    /** @var  EntityRepository */
+    /**
+     * @var \AppBundle\Repository\ProfileRepository
+     */
     private $repository;
 
     /**
@@ -26,7 +25,6 @@ class ProfileService
      */
     public function __construct(EntityManager $manager)
     {
-        $this->manager = $manager;
         $this->repository = $manager->getRepository('AppBundle:Profile');
     }
 

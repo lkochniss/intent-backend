@@ -15,10 +15,9 @@ use Doctrine\ORM\EntityRepository;
  */
 class GameService
 {
-    /** @var  EntityManager */
-    private $manager;
-
-    /** @var  EntityRepository */
+    /**
+     * @var \AppBundle\Repository\GameRepository
+     */
     private $repository;
 
     /**
@@ -26,7 +25,6 @@ class GameService
      */
     public function __construct(EntityManager $manager)
     {
-        $this->manager = $manager;
         $this->repository = $manager->getRepository('AppBundle:Game');
     }
 

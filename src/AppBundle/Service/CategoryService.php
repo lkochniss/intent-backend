@@ -15,11 +15,9 @@ use Doctrine\ORM\EntityRepository;
  */
 class CategoryService
 {
-
-    /** @var  EntityManager */
-    private $manager;
-
-    /** @var  EntityRepository */
+    /**
+     * @var \AppBundle\Repository\CategoryRepository
+     */
     private $repository;
 
     /**
@@ -27,7 +25,6 @@ class CategoryService
      */
     public function __construct(EntityManager $manager)
     {
-        $this->manager = $manager;
         $this->repository = $manager->getRepository('AppBundle:Category');
     }
 

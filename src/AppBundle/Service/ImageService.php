@@ -16,10 +16,9 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 class ImageService
 {
-    /** @var  EntityManager */
-    private $manager;
-
-    /** @var  EntityRepository */
+    /**
+     * @var \AppBundle\Repository\ImageRepository
+     */
     private $repository;
 
     /**
@@ -27,7 +26,6 @@ class ImageService
      */
     public function __construct(EntityManager $manager)
     {
-        $this->manager = $manager;
         $this->repository = $manager->getRepository('AppBundle:Image');
     }
 
