@@ -26,7 +26,7 @@ class TagController extends AbstractMetaController
      */
     protected function getFormType()
     {
-        return new TagType();
+        return TagType::class;
     }
 
     /**

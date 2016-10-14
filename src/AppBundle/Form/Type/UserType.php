@@ -5,7 +5,12 @@
 
 namespace AppBundle\Form\Type;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -24,7 +29,7 @@ class UserType extends AbstractType
         $builder
             ->add(
                 'username',
-                'text',
+                TextType::class,
                 array(
                     'label' => 'user.name',
                     'translation_domain' => 'user',
@@ -32,7 +37,7 @@ class UserType extends AbstractType
             )
             ->add(
                 'email',
-                'email',
+                EmailType::class,
                 array(
                     'label' => 'user.email',
                     'translation_domain' => 'user',
@@ -41,16 +46,18 @@ class UserType extends AbstractType
             )
             ->add(
                 'roles',
-                'entity',
+                EntityType::class,
                 array(
-                    'class' => 'AppBundle\Entity\Role',
-                    'required' => true,
-                    'multiple' => true,
+                    'class' => 'AppBundle:Role',
+                    'choice_label' => 'name',
+                    'label' => 'user.role',
+                    'translation_domain' => 'user',
+                    'multiple' => 'true'
                 )
             )
             ->add(
                 'isActive',
-                'checkbox',
+                CheckboxType::class,
                 array(
                     'label' => 'user.active',
                     'translation_domain' => 'user'
@@ -58,7 +65,7 @@ class UserType extends AbstractType
             )
             ->add(
                 'submit',
-                'submit',
+                SubmitType::class,
                 array(
                     'label' => 'user.submit',
                     'translation_domain' => 'user',
