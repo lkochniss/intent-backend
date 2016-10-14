@@ -58,7 +58,7 @@ class ArticleService
             $item->published->addCData($article->isPublished());
 
             $item->publishedAt = null;
-            if(!is_null($article->getPublishAt())){
+            if (!is_null($article->getPublishAt())) {
                 $item->publishedAt->addCData($article->getPublishAt()->format('Y-M-d H:i:s'));
             }
 

@@ -15,10 +15,14 @@ use Doctrine\ORM\EntityRepository;
  */
 class RoleService
 {
-    /** @var  EntityManager */
+    /**
+ * @var  EntityManager
+*/
     private $manager;
 
-    /** @var  EntityRepository */
+    /**
+ * @var  EntityRepository
+*/
     private $repository;
 
     /**

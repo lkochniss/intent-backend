@@ -11,7 +11,6 @@ use AppBundle\Entity\Article;
 
 /**
  * Class EventTest
- * @package Test\AppBundle\Controller
  */
 class EventTest extends \PHPUnit_Framework_TestCase
 {

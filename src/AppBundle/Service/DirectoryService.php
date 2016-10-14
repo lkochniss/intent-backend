@@ -54,7 +54,7 @@ class DirectoryService
 
             $item->parent = null;
             if ($directory->getParentDirectory()) {
-                $item->parent->addCData($directory->getParentDirectory()->getName());
+                $item->parent->addCData($directory->getParentDirectory()->getFullPath());
             }
         }
 
@@ -77,7 +77,13 @@ class DirectoryService
             $directory->setPath("$item->path");
 
             if ("$item->parent" != '') {
-                $directory->setParentDirectory($this->getReference('directory-' . "$item->parent"));
+                $directory->setParentDirectory(
+                    $this->manager->getRepository('AppBundle:Directory')->findOneBy(
+                        array(
+                        'fullPath' => "$item->parent"
+                        )
+                    )
+                );
             }
 
             $this->repository->save($directory);

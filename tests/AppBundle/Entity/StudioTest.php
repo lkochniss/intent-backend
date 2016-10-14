@@ -15,7 +15,6 @@ use AppBundle\Entity\Article;
 
 /**
  * Class StudioTest
- * @package Test\AppBundle\Controller
  */
 class StudioTest extends \PHPUnit_Framework_TestCase
 {

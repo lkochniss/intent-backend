@@ -11,6 +11,7 @@ class UserProcessor implements ProcessorInterface
 
     /**
      * UserProcessor constructor.
+     *
      * @param \Symfony\Component\Security\Core\Encoder\UserPasswordEncoder $encoder
      */
     public function __construct($encoder)

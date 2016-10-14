@@ -14,7 +14,6 @@ use AppBundle\Entity\Article;
 
 /**
  * Class GameTest
- * @package Test\AppBundle\Controller
  */
 class GameTest extends \PHPUnit_Framework_TestCase
 {

@@ -71,7 +71,6 @@ class ProfileService
         $xml = new SimpleXMLExtended(file_get_contents($path));
 
         foreach ($xml->item as $item) {
-
             $user = $this->manager->getRepository('AppBundle:User')->findOneBy(
                 array(
                     'username' => "$item->user"

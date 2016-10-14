@@ -1,6 +1,5 @@
 <?php
 /**
- * Class UserService
  * @package AppBundle\Service
  */
 
@@ -89,7 +88,7 @@ class UserService
                 )
             );
 
-            if (!is_null($profile)){
+            if (!is_null($profile)) {
                 $user->setProfile($profile);
             }
 

@@ -12,7 +12,6 @@ use AppBundle\Entity\Article;
 
 /**
  * Class ExpansionTest
- * @package Test\AppBundle\Controller
  */
 class ExpansionTest extends \PHPUnit_Framework_TestCase
 {

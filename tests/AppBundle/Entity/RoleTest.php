@@ -10,7 +10,6 @@ use AppBundle\Entity\User;
 
 /**
  * Class RoleTest
- * @package Test\AppBundle\Controller
  */
 class RoleTest extends \PHPUnit_Framework_TestCase
 {

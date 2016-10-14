@@ -10,7 +10,6 @@ use AppBundle\Entity\User;
 
 /**
  * Class ProfileTest
- * @package Test\AppBundle\Controller
  */
 class ProfileTest extends \PHPUnit_Framework_TestCase
 {

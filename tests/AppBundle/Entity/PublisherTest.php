@@ -12,7 +12,6 @@ use AppBundle\Entity\Article;
 
 /**
  * Class PublisherTest
- * @package Test\AppBundle\Controller
  */
 class PublisherTest extends \PHPUnit_Framework_TestCase
 {

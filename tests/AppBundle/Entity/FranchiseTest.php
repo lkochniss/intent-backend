@@ -14,7 +14,6 @@ use AppBundle\Entity\Article;
 
 /**
  * Class FranchiseTest
- * @package Test\AppBundle\Controller
  */
 class FranchiseTest extends \PHPUnit_Framework_TestCase
 {
