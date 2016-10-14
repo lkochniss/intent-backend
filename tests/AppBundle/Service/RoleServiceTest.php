@@ -1,16 +1,16 @@
 <?php
 /**
- * @package AppBundle\Service
+ * @package Test\AppBundle\Service
  */
 
-namespace AppBundle\Service;
+namespace Test\AppBundle\Service;
 
-use Test\AppBundle\Controller\AbstractControllerTest;
+use Liip\FunctionalTestBundle\Test\WebTestCase;
 
 /**
  * Class RoleServiceTest
  */
-class RoleServiceTest extends AbstractControllerTest
+class RoleServiceTest extends WebTestCase
 {
     /**
      * @return null
@@ -18,6 +18,17 @@ class RoleServiceTest extends AbstractControllerTest
     public function testExport()
     {
         $status = $this->getContainer()->get('app.role.service')->exportEntities();
+        $this->assertTrue($status);
+
+        return null;
+    }
+
+    /**
+     * @return null
+     */
+    public function testImport()
+    {
+        $status = $this->getContainer()->get('app.role.service')->importEntities();
         $this->assertTrue($status);
 
         return null;
