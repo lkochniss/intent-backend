@@ -66,12 +66,12 @@ class EventService
 
             $item->backgroundImage = null;
             if ($event->getBackgroundImage()) {
-                $item->backgroundImage->addCData('image-' . $event->getBackgroundImage()->getFullPath());
+                $item->backgroundImage->addCData($event->getBackgroundImage()->getFullPath());
             }
 
             $item->thumbnail = null;
             if ($event->getThumbnail()) {
-                $item->thumbnail->addCData('image-' . $event->getThumbnail()->getFullPath());
+                $item->thumbnail->addCData($event->getThumbnail()->getFullPath());
             }
         }
 
