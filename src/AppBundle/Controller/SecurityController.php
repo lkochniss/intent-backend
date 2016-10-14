@@ -34,7 +34,7 @@ class SecurityController extends Controller
 
     /**
      * @param Request $request HTTP Request.
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\redirectresponse|\Symfony\Component\HttpFoundation\Response
      */
     public function resetPasswordAction(Request $request)
     {

@@ -26,7 +26,7 @@ class FranchiseController extends AbstractRelatedController
      */
     protected function getFormType()
     {
-        return new FranchiseType();
+        return FranchiseType::class;
     }
 
     /**
