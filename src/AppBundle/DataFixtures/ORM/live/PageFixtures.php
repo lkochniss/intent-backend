@@ -42,7 +42,7 @@ class PageFixtures extends AbstractFixture implements OrderedFixtureInterface, C
             );
         }
 
-        $dataDirectory = __DIR__ . '/../data/pages';
+        $dataDirectory = __DIR__ . '/../../data/pages';
         $directory = opendir($dataDirectory);
 
         $count = 0;
