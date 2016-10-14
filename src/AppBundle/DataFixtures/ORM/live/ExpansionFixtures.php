@@ -6,7 +6,6 @@
 namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Expansion;
-use AppBundle\Entity\Game;
 use AppBundle\SimpleXMLExtended;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;

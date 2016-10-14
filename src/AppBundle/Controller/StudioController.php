@@ -26,7 +26,7 @@ class StudioController extends AbstractRelatedController
      */
     protected function getFormType()
     {
-        return new StudioType();
+        return StudioType::class;
     }
 
     /**
