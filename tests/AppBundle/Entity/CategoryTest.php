@@ -9,7 +9,6 @@ use AppBundle\Entity\Category;
 
 /**
  * Class CategoryTest
- * @package Test\AppBundle\Controller
  */
 class CategoryTest extends \PHPUnit_Framework_TestCase
 {
