@@ -4,7 +4,7 @@
 parameters:
     database_host:          $DB_HOST
     database_port:          $DB_PORT
-    database_name:          $DB_NAME-$GIT_BRANCH
+    database_name:          $DB_NAME-$BRANCH_NAME
     database_user:          $DB_USER
     database_password:      $DB_PASS
     mailer_transport:       smtp
