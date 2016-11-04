@@ -25,6 +25,11 @@ node {
         sh '/opt/plesk/php/7.0/bin/php composer install'
    }
 
+   stage('Code Analysis'){
+        sh '/opt/plesk/php/7.0/bin/php vendor/bin/phpcs --standard=PSR1,PSR2 -s src;'
+        sh '/opt/plesk/php/7.0/bin/php vendor/bin/phpcs --standard=PSR1,PSR2 -s tests;'
+   }
+
    stage('Prepare Test Database') {
         sh '/opt/plesk/php/7.0/bin/php bin/console do:da:dr --force --if-exists'
         sh '/opt/plesk/php/7.0/bin/php bin/console do:da:cr'
@@ -32,4 +37,8 @@ node {
         sh '/opt/plesk/php/7.0/bin/php bin/console do:fi:lo --append --fixtures src/AppBundle/DataFixtures/ORM/dev/ -n'
         sh '/opt/plesk/php/7.0/bin/php bin/console ca:c --env=test'
    }
+
+   stage('Unit Tests with CodeCoverage') {
+           sh '/opt/plesk/php/7.0/bin/php vendor/bin/phpunit --coverage-clover=coverage.xml'
+      }
 }
