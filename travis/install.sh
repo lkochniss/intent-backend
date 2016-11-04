@@ -9,4 +9,5 @@ if [ "${CODEANALYSIS}" = "true" ] ; then
     phpenv rehash
 fi
 
+./scripts/replace-parameters.sh
 composer install -n
