@@ -17,7 +17,6 @@ node {
                 'DB_NAME=jenkins_intentbackend',
                 'DB_USER=jenkins',
                 'LOCALE=de',
-                'BRANCH_NAME=env.BRANCH_NAME'
             ]) {
                 sh './scripts/replace-parameters.sh'
             }
