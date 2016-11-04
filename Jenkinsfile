@@ -1,6 +1,10 @@
 node {
    def mvnHome
 
+   stage ('Checkout'){
+        checkout scm
+   }
+
    stage('Composer Install') {
         sh './scripts/replace-parameters.sh'
         sh '/opt/plesk/php/7.0/bin/php composer selfupdate'
