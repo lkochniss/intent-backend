@@ -7,7 +7,7 @@ cd ..
 sed -e "s/\$DB_HOST/$DB_HOST/" \
     -e "s/\$DB_PORT/$DB_PORT/" \
     -e "s/\$DB_NAME/$DB_NAME/" \
-    -e "s/\$GIT_BRANCH/$GIT_BRANCH/" \
+    -e "s/\$GIT_BRANCH/$env.GIT_BRANCH/" \
     -e "s/\$DB_USER/$DB_USER/" \
     -e "s/\$DB_PASS/$DB_PASS/" \
     -e "s/\$LOCALE/$LOCALE/" \
