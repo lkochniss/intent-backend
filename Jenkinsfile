@@ -29,7 +29,7 @@ node {
         sh '/opt/plesk/php/7.0/bin/php bin/console do:da:dr --force --if-exists'
         sh '/opt/plesk/php/7.0/bin/php bin/console do:da:cr'
         sh '/opt/plesk/php/7.0/bin/php bin/console do:mi:mi -n'
-        sh '/opt/plesk/php/7.0/bin/php bin/console do:fi:lo --fixtures src/AppBundle/DataFixtures/ORM/dev/ -n'
+        sh '/opt/plesk/php/7.0/bin/php bin/console do:fi:lo --append --fixtures src/AppBundle/DataFixtures/ORM/dev/ -n'
         sh '/opt/plesk/php/7.0/bin/php bin/console ca:c --env=test'
    }
 }
