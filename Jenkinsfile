@@ -6,8 +6,18 @@ node {
    }
 
    stage('Composer Install') {
-        withCredentials([[$class: 'StringBinding', credentialsId: 'DB_PASS', variable: 'DB_PASS'], [$class: 'StringBinding', credentialsId: 'SECRET', variable: 'SECRET'], [$class: 'StringBinding', credentialsId: 'SESSIO', variable: 'SESSIO']]) {
-            withEnv(['DB_HOST=127.0.0.1', 'DB_PORT=null', 'DB_NAME=jenkins_intentbackend', 'DB_USER=jenkins', 'LOCALE=de']) {
+        withCredentials([
+            [$class: 'StringBinding', credentialsId: 'DB_PASS', variable: 'DB_PASS'],
+            [$class: 'StringBinding', credentialsId: 'SECRET', variable: 'SECRET'],
+            [$class: 'StringBinding', credentialsId: 'SESSION', variable: 'SESSION']
+        ]) {
+            withEnv([
+                'DB_HOST=127.0.0.1',
+                'DB_PORT=null',
+                'DB_NAME=jenkins_intentbackend',
+                'DB_USER=jenkins',
+                'LOCALE=de']
+            ) {
                 sh './scripts/replace-parameters.sh'
             }
         }
