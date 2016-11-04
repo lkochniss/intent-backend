@@ -40,5 +40,9 @@ node {
 
    stage('Unit Tests with CodeCoverage') {
            sh '/opt/plesk/php/7.0/bin/php vendor/bin/phpunit --coverage-clover=coverage.xml'
-      }
+   }
+
+   stage('Clean-Up') {
+        sh '/opt/plesk/php/7.0/bin/php bin/console do:da:dr --force --if-exists'
+   }
 }
