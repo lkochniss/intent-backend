@@ -35,6 +35,7 @@ AppBundle\Entity\Article:
                 referencedColumnName: id
         createdBy:
             targetEntity: User
+            inversedBy: articles
             joinColumn:
                 name: created_by_id
                 referencedColumnName: id
@@ -57,7 +58,6 @@ AppBundle\Entity\Article:
                 referencedColumnName: id
         thumbnail:
             targetEntity: Image
-            inversedBy: articles
             joinColumn:
                 name: thumbnail_id
                 referencedColumnName: id
