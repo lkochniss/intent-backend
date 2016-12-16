@@ -9,7 +9,7 @@ game:
     delete:             Game löschen
     edit:               Game bearbeiten
     event:              aktive Events
-    expansion:          Expansion/ DLC
+    expansions:         Erweiterungen
     franchise:
         name:           Franchise
         select:         Franchise auswählen

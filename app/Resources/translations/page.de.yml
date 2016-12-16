@@ -1,16 +1,17 @@
 page:
-    actions:    Aktionen
-    create:     Seite erstellen
-    content:    Inhalt
-    delete:     Seite löschen
-    edit:       Seite bearbeiten
-    list:       Seitenübersicht
-    name:       Seite
-    not_found:  Seite nicht gefunden
-    publish:    Seite veröffentlichen
+    access_denied:  Zugriff verweigert
+    actions:        Aktionen
+    create:         Seite erstellen
+    content:        Inhalt
+    delete:         Seite löschen
+    edit:           Seite bearbeiten
+    list:           Seitenübersicht
+    name:           Seite
+    not_found:      Seite nicht gefunden
+    publish:        Seite veröffentlichen
     published:
-        at:     Veröffentlicht am
-        by:     Veröffentlicht von
-    show:       Seitenvorschau
-    submit:     Seite speichern
-    title:      Titel
+        at:         Veröffentlicht am
+        by:         Veröffentlicht von
+    show:           Seitenvorschau
+    submit:         Seite speichern
+    title:          Titel

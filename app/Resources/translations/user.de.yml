@@ -1,4 +1,5 @@
 user:
+    access_denied:  Zugriff verweigert
     actions:        Aktionen
     active:         Login aktiv
     access_denied:  kein Zugriff
@@ -20,7 +21,7 @@ user:
         password:   Dein Passwort lautet
         regards:    Grüße, dein int.ent Team
         reset:      Wir senden dir dein neues Passwort. Es ist 2 Stunden gültig. Dein Passwort lautet
-        role:       Folgende Rechte wurden dir erteilt:
+        role:       Folgende Rechte wurden dir erteilt
         subject:    Neuer Benutzer
         url:        Zum Login
     invite:         Benutzer einladen

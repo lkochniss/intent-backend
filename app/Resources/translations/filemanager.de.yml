@@ -1,4 +1,5 @@
 filemanager:
+    access_denied:      Zugriff verweigert
     actions:            Aktionen
     create:             Ordner erstellen
     directory:          Ordnername

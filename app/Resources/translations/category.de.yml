@@ -1,13 +1,15 @@
 category:
-    actions:    Aktionen
-    create:     Kategorie erstellen
-    count:      Anzahl der Artikel
-    delete:     Kategorie löschen
-    edit:       Kategorie bearbeiten
-    label:      Kategorie
-    list:       Kategorieübersicht
-    name:       Name der Kategorie
-    not_found:  Kategorie nicht gefunden
-    priority:   Priorität
-    publish:    Kategorie veröffentlichen
-    submit:     Kategorie speichern
+    access_denied:  Zugriff verweigert
+    actions:        Aktionen
+    create:         Kategorie erstellen
+    count:          Anzahl der Artikel
+    delete:         Kategorie löschen
+    edit:           Kategorie bearbeiten
+    label:          Kategorie
+    list:           Kategorieübersicht
+    name:           Name der Kategorie
+    not_found:      Kategorie nicht gefunden
+    priority:       Priorität
+    publish:        Kategorie veröffentlichen
+    show:           Kategorie anzeigen
+    submit:         Kategorie speichern
