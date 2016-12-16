@@ -6,7 +6,6 @@
 namespace AppBundle\Repository;
 
 use AppBundle\Entity\Article;
-use AppBundle\Entity\ArticleVersion;
 use AppBundle\Entity\User;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -15,29 +14,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  */
 class ArticleRepository extends AbstractRepository
 {
-    /**
-     * @param Article $article Article to version.
-     * @return ArticleVersion
-     */
-    public function saveVersion(Article $article)
-    {
-        $version = new ArticleVersion();
-        $version->setTitle($article->getTitle());
-        $version->setSlug($article->getSlug());
-        $version->setContent($article->getContent());
-        $version->setPublishAt($article->getPublishAt());
-        $version->setPublished($article->isPublished());
-        $version->setSlideshow($article->isSlideshow());
-        $version->setCategory($article->getCategory());
-        $version->setCreatedBy($article->getModifiedBy());
-        $version->setEvent($article->getEvent());
-        $version->setRelated($article->getRelated());
-        $version->setThumbnail($article->getThumbnail());
 
-        $this->getEntityManager()->getRepository('AppBundle:ArticleVersion')->save($version);
-
-        return $version;
-    }
     /**
      * @param Article $article Persist article.
      * @param User    $user    Set author to user.
@@ -53,8 +30,6 @@ class ArticleRepository extends AbstractRepository
         }
 
         $article->setModifiedBy($user);
-
-        $article->addVersion($this->saveVersion($article));
 
         $this->getEntityManager()->persist($article);
         $this->getEntityManager()->flush();
