@@ -26,6 +26,7 @@ AppBundle\Entity\AbstractArticleModel:
                 referencedColumnName: id
         createdBy:
             targetEntity: User
+            inversedBy: articles
             joinColumn:
                 name: created_by_id
                 referencedColumnName: id
