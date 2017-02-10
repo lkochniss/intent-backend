@@ -51,10 +51,8 @@ node {
         sh "${php} bin/console ca:c --env=test"
    }
 
-   stage('Unit Tests with CodeCoverage') {
-           sh "${php} -d xdebug.profiler_enable=On vendor/bin/phpunit --coverage-clover=build/coverage.xml --coverage-html=build/html --coverage-crap4j=build/crap.xml"
-           publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'build', reportFiles: 'index.html', reportName: 'HTML Report'])
-           junit 'build/*.xml'
+   stage('Unit Tests without') {
+           sh "${php} vendor/bin/phpunit"
    }
 
    post {
