@@ -14,6 +14,7 @@ class FranchiseServiceTest extends WebTestCase
 {
     /**
      * @group service
+     * @group franchise
      * @return null
      */
     public function testExport()
@@ -26,6 +27,7 @@ class FranchiseServiceTest extends WebTestCase
 
     /**
      * @group service
+     * @group franchise
      * @return null
      */
     public function testImport()

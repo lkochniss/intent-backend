@@ -18,6 +18,7 @@ class StudioTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @group entity
+     * @group studio
      * @return null
      */
     public function testEntity()

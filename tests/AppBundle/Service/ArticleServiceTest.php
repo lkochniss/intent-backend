@@ -14,6 +14,7 @@ class ArticleServiceTest extends WebTestCase
 {
     /**
      * @group service
+     * @group article
      * @return null
      */
     public function testExport()
@@ -26,6 +27,7 @@ class ArticleServiceTest extends WebTestCase
 
     /**
      * @group service
+     * @group article
      * @return null
      */
     public function testImport()

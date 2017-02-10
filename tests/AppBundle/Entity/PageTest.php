@@ -14,6 +14,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @group entity
+     * @group page
      * @return null
      */
     public function testEntity()

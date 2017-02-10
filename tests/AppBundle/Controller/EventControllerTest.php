@@ -18,7 +18,6 @@ class EventControllerTest extends AbstractControllerTest
     protected $event;
 
     /**
-     * @group controller
      * @return $this
      */
     public function setUp()
@@ -37,6 +36,7 @@ class EventControllerTest extends AbstractControllerTest
 
     /**
      * @group controller
+     * @group event
      * @return null
      */
     public function testCreatePage()
@@ -57,6 +57,7 @@ class EventControllerTest extends AbstractControllerTest
 
     /**
      * @group controller
+     * @group event
      * @return null
      */
     public function testEditPage()
@@ -79,6 +80,7 @@ class EventControllerTest extends AbstractControllerTest
 
     /**
      * @group controller
+     * @group event
      * @return null
      */
     public function testShowPage()
@@ -92,6 +94,7 @@ class EventControllerTest extends AbstractControllerTest
 
     /**
      * @group controller
+     * @group event
      * @return null
      */
     public function testListPage()

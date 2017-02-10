@@ -14,6 +14,7 @@ class DirectoryTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @group entity
+     * @group image
      * @return null
      */
     public function testEntity()

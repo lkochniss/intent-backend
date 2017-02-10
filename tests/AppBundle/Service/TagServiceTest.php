@@ -14,6 +14,7 @@ class TagServiceTest extends WebTestCase
 {
     /**
      * @group service
+     * @group tag
      * @return null
      */
     public function testExport()
@@ -26,6 +27,7 @@ class TagServiceTest extends WebTestCase
 
     /**
      * @group service
+     * @group tag
      * @return null
      */
     public function testImport()

@@ -18,7 +18,6 @@ class GameControllerTest extends AbstractControllerTest
     protected $game;
 
     /**
-     * @group controller
      * @return $this
      */
     public function setUp()
@@ -37,6 +36,7 @@ class GameControllerTest extends AbstractControllerTest
 
     /**
      * @group controller
+     * @group game
      * @return null
      */
     public function testCreatePage()
@@ -57,6 +57,7 @@ class GameControllerTest extends AbstractControllerTest
 
     /**
      * @group controller
+     * @group game
      * @return null
      */
     public function testEditPage()
@@ -79,6 +80,7 @@ class GameControllerTest extends AbstractControllerTest
 
     /**
      * @group controller
+     * @group game
      * @return null
      */
     public function testShowPage()
@@ -92,6 +94,7 @@ class GameControllerTest extends AbstractControllerTest
 
     /**
      * @group controller
+     * @group game
      * @return null
      */
     public function testListPage()

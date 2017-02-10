@@ -17,7 +17,8 @@ class PublisherTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @group entity
-     * @return null
+     * @group entity
+     * @return publisher
      */
     public function testEntity()
     {

@@ -60,15 +60,35 @@ node {
    }
 
    stage('Unit Tests') {
-        parallel commandTests: {
-            sh "${php} vendor/bin/phpunit --group=command"
-        }, controllerTests: {
-            sh "${php} vendor/bin/phpunit --group=controller"
-        }, entityTests: {
-            sh "${php} vendor/bin/phpunit --group=entity"
-        }, serviceTests: {
-            sh "${php} vendor/bin/phpunit --group=service"
-        },
+        parallel articleTests: {
+            sh "${php} vendor/bin/phpunit --group=article"
+        }, categoryTests: {
+            sh "${php} vendor/bin/phpunit --group=category"
+        },  eventTests: {
+            sh "${php} vendor/bin/phpunit --group=event"
+        }, expansionTests: {
+            sh "${php} vendor/bin/phpunit --group=expansion"
+        }, franchiseTests: {
+            sh "${php} vendor/bin/phpunit --group=franchise"
+        }, gameTests: {
+            sh "${php} vendor/bin/phpunit --group=game"
+        }, imageTests: {
+            sh "${php} vendor/bin/phpunit --group=image"
+        }, pageTests: {
+            sh "${php} vendor/bin/phpunit --group=page"
+        }, profileTests: {
+            sh "${php} vendor/bin/phpunit --group=profile"
+        }, publisherTests: {
+            sh "${php} vendor/bin/phpunit --group=publisher"
+        }, studioTests: {
+            sh "${php} vendor/bin/phpunit --group=studio"
+        }, tagTests: {
+            sh "${php} vendor/bin/phpunit --group=tag"
+        }, userTests: {
+            sh "${php} vendor/bin/phpunit --group=user"
+        }, otherTests: {
+            sh "${php} vendor/bin/phpunit --group=other"
+        }
         failFast: false
    }
 

@@ -18,7 +18,6 @@ class FilemanagerControllerTest extends AbstractControllerTest
     protected $directory;
 
     /**
-     * @group controller
      * @return $this
      */
     public function setUp()
@@ -37,6 +36,7 @@ class FilemanagerControllerTest extends AbstractControllerTest
 
     /**
      * @group controller
+     * @group image
      * @return null
      */
     public function testCreatePage()
@@ -56,6 +56,7 @@ class FilemanagerControllerTest extends AbstractControllerTest
 
     /**
      * @group controller
+     * @group image
      * @return null
      */
     public function testUploadPage()
@@ -80,6 +81,7 @@ class FilemanagerControllerTest extends AbstractControllerTest
 
     /**
      * @group controller
+     * @group image
      * @return null
      */
     public function testListPage()

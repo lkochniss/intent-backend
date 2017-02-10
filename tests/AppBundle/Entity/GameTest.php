@@ -19,6 +19,7 @@ class GameTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @group entity
+     * @group game
      * @return null
      */
     public function testEntity()

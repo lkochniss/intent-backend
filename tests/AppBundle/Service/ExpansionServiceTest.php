@@ -14,6 +14,7 @@ class ExpansionServiceTest extends WebTestCase
 {
     /**
      * @group service
+     * @group expansion
      * @return null
      */
     public function testExport()
@@ -26,6 +27,7 @@ class ExpansionServiceTest extends WebTestCase
 
     /**
      * @group service
+     * @group expansion
      * @return null
      */
     public function testImport()

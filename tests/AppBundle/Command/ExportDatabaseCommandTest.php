@@ -39,6 +39,7 @@ class ExportDatabaseCommandTest extends WebTestCase
 
     /**
      * @group command
+     * @group other
      * @return null
      */
     public function testAllParameter()
@@ -52,6 +53,7 @@ class ExportDatabaseCommandTest extends WebTestCase
 
     /**
      * @group command
+     * @group article
      * @return null
      */
     public function testArtParameter()
@@ -64,6 +66,7 @@ class ExportDatabaseCommandTest extends WebTestCase
 
     /**
      * @group command
+     * @group category
      * @return null
      */
     public function testCatParameter()
@@ -76,6 +79,7 @@ class ExportDatabaseCommandTest extends WebTestCase
 
     /**
      * @group command
+     * @group image
      * @return null
      */
     public function testDirParameter()

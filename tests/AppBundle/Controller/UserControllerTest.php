@@ -18,7 +18,6 @@ class UserControllerTest extends AbstractControllerTest
     protected $user;
 
     /**
-     * @group controller
      * @return $this
      */
     public function setUp()
@@ -37,6 +36,7 @@ class UserControllerTest extends AbstractControllerTest
 
     /**
      * @group controller
+     * @group user
      * @return null
      */
     public function testCreatePage()
@@ -54,6 +54,7 @@ class UserControllerTest extends AbstractControllerTest
 
     /**
      * @group controller
+     * @group user
      * @return null
      */
     public function testEditPage()
@@ -71,6 +72,7 @@ class UserControllerTest extends AbstractControllerTest
 
     /**
      * @group controller
+     * @group user
      * @return null
      */
     public function testResetPassword()
@@ -86,6 +88,7 @@ class UserControllerTest extends AbstractControllerTest
 
     /**
      * @group controller
+     * @group user
      * @return null
      */
     public function testListPage()

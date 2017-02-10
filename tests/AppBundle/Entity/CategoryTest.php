@@ -14,6 +14,7 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @group entity
+     * @group category
      * @return null
      */
     public function testEntity()

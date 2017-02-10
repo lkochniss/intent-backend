@@ -14,6 +14,7 @@ class CategoryServiceTest extends WebTestCase
 {
     /**
      * @group service
+     * @group category
      * @return null
      */
     public function testExport()
@@ -26,6 +27,7 @@ class CategoryServiceTest extends WebTestCase
 
     /**
      * @group service
+     * @group category
      * @return null
      */
     public function testImport()

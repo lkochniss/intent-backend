@@ -15,6 +15,7 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @group entity
+     * @group profile
      * @return null
      */
     public function testEntity()

@@ -16,6 +16,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @group entity
+     * @group event
      * @return null
      */
     public function testEntity()

@@ -18,7 +18,6 @@ class ProfileControllerTest extends AbstractControllerTest
     protected $profile;
 
     /**
-     * @group controller
      * @return $this
      */
     public function setUp()
@@ -37,6 +36,7 @@ class ProfileControllerTest extends AbstractControllerTest
 
     /**
      * @group controller
+     * @group profile
      * @return null
      */
     public function testCreatePage()
@@ -52,6 +52,7 @@ class ProfileControllerTest extends AbstractControllerTest
 
     /**
      * @group controller
+     * @group profile
      * @return null
      */
     public function testEditPage()
@@ -67,6 +68,7 @@ class ProfileControllerTest extends AbstractControllerTest
 
     /**
      * @group controller
+     * @group profile
      * @return null
      */
     public function testListPage()
