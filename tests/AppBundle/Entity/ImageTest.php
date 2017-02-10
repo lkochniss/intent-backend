@@ -14,6 +14,8 @@ use AppBundle\Entity\Image;
 class ImageTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @group entity
+     * @group image
      * @return null
      */
     public function testEntity()

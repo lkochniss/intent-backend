@@ -13,6 +13,8 @@ use Liip\FunctionalTestBundle\Test\WebTestCase;
 class RoleServiceTest extends WebTestCase
 {
     /**
+     * @group service
+     * @group user
      * @return null
      */
     public function testExport()
@@ -24,6 +26,8 @@ class RoleServiceTest extends WebTestCase
     }
 
     /**
+     * @group service
+     * @group user
      * @return null
      */
     public function testImport()

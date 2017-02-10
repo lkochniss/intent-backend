@@ -35,6 +35,8 @@ class TagControllerTest extends AbstractControllerTest
     }
 
     /**
+     * @group controller
+     * @group tag
      * @return null
      */
     public function testCreatePage()
@@ -49,6 +51,8 @@ class TagControllerTest extends AbstractControllerTest
     }
 
     /**
+     * @group controller
+     * @group tag
      * @return null
      */
     public function testEditPage()
@@ -65,6 +69,8 @@ class TagControllerTest extends AbstractControllerTest
     }
 
     /**
+     * @group controller
+     * @group tag
      * @return null
      */
     public function testShowPage()
@@ -77,6 +83,8 @@ class TagControllerTest extends AbstractControllerTest
     }
 
     /**
+     * @group controller
+     * @group tag
      * @return null
      */
     public function testListPage()

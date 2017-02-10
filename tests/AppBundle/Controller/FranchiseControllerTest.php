@@ -35,6 +35,8 @@ class FranchiseControllerTest extends AbstractControllerTest
     }
 
     /**
+     * @group controller
+     * @group franchise
      * @return null
      */
     public function testCreatePage()
@@ -54,6 +56,8 @@ class FranchiseControllerTest extends AbstractControllerTest
     }
 
     /**
+     * @group controller
+     * @group franchise
      * @return null
      */
     public function testEditPage()
@@ -75,6 +79,8 @@ class FranchiseControllerTest extends AbstractControllerTest
     }
 
     /**
+     * @group controller
+     * @group franchise
      * @return null
      */
     public function testShowPage()
@@ -87,6 +93,8 @@ class FranchiseControllerTest extends AbstractControllerTest
     }
 
     /**
+     * @group controller
+     * @group franchise
      * @return null
      */
     public function testListPage()

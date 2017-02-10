@@ -42,7 +42,7 @@ class SecurityController extends Controller
         if (in_array($request->getMethod(), ['POST'])) {
             $form->handleRequest($request);
 
-            if ($form->isValid()) {
+            if ($form->isSubmitted() && $form->isValid()) {
                 $username = $form->getData()['username'];
                 $repository = $this->getDoctrine()->getRepository('AppBundle:User');
                 /**

@@ -1,4 +1,5 @@
 event:
+    access_denied:      Zugriff verweigert
     actions:            Aktionen
     active:             Event aktiv
     backgroundimage:

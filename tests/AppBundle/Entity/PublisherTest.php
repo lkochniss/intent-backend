@@ -16,7 +16,9 @@ use AppBundle\Entity\Article;
 class PublisherTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @return null
+     * @group entity
+     * @group entity
+     * @return publisher
      */
     public function testEntity()
     {

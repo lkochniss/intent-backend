@@ -16,6 +16,8 @@ use AppBundle\Entity\Article;
 class ExpansionTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @group entity
+     * @group expansion
      * @return null
      */
     public function testEntity()

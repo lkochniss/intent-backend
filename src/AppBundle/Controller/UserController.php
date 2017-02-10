@@ -41,7 +41,7 @@ class UserController extends AbstractCrudController
         if (in_array($request->getMethod(), ['POST'])) {
             $form->handleRequest($request);
 
-            if ($form->isValid()) {
+            if ($form->isSubmitted() && $form->isValid()) {
                 $password = md5(uniqid(rand(), true));
 
                 $encoder = $this->container->get('security.password_encoder');
@@ -122,7 +122,7 @@ class UserController extends AbstractCrudController
         if (in_array($request->getMethod(), ['POST'])) {
             $form->handleRequest($request);
 
-            if ($form->isValid()) {
+            if ($form->isSubmitted() && $form->isValid()) {
                 $data = $form->getData();
                 $articleRepository = $this->getDoctrine()->getRepository('AppBundle:Article');
 
@@ -168,7 +168,7 @@ class UserController extends AbstractCrudController
         if (in_array($request->getMethod(), ['POST'])) {
             $form->handleRequest($request);
 
-            if ($form->isValid()) {
+            if ($form->isSubmitted() && $form->isValid()) {
                 $encoder = $this->container->get('security.password_encoder');
                 $encodedPassword = $encoder->encodePassword($user, $user->getPassword());
                 $user->setPassword($encodedPassword);

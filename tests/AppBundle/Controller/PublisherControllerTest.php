@@ -35,6 +35,8 @@ class PublisherControllerTest extends AbstractControllerTest
     }
 
     /**
+     * @group controller
+     * @group publisher
      * @return null
      */
     public function testCreatePage()
@@ -52,6 +54,8 @@ class PublisherControllerTest extends AbstractControllerTest
     }
 
     /**
+     * @group controller
+     * @group publisher
      * @return null
      */
     public function testEditPage()
@@ -71,6 +75,8 @@ class PublisherControllerTest extends AbstractControllerTest
     }
 
     /**
+     * @group controller
+     * @group publisher
      * @return null
      */
     public function testShowPage()
@@ -83,6 +89,8 @@ class PublisherControllerTest extends AbstractControllerTest
     }
 
     /**
+     * @group controller
+     * @group publisher
      * @return null
      */
     public function testListPage()

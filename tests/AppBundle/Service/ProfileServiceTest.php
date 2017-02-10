@@ -13,6 +13,8 @@ use Liip\FunctionalTestBundle\Test\WebTestCase;
 class ProfileServiceTest extends WebTestCase
 {
     /**
+     * @group service
+     * @group profile
      * @return null
      */
     public function testExport()
@@ -24,6 +26,8 @@ class ProfileServiceTest extends WebTestCase
     }
 
     /**
+     * @group service
+     * @group profile
      * @return null
      */
     public function testImport()

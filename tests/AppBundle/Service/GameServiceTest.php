@@ -13,6 +13,8 @@ use Liip\FunctionalTestBundle\Test\WebTestCase;
 class GameServiceTest extends WebTestCase
 {
     /**
+     * @group service
+     * @group game
      * @return null
      */
     public function testExport()
@@ -24,6 +26,8 @@ class GameServiceTest extends WebTestCase
     }
 
     /**
+     * @group service
+     * @group game
      * @return null
      */
     public function testImport()
