@@ -64,9 +64,9 @@ node {
             sh "${php} vendor/bin/phpunit --group=command"
         }, controllerTests: {
             sh "${php} vendor/bin/phpunit --group=controller"
-        },commandTests: {
+        }, entityTests: {
             sh "${php} vendor/bin/phpunit --group=entity"
-        },commandTests: {
+        }, serviceTests: {
             sh "${php} vendor/bin/phpunit --group=service"
         },
         failFast: false

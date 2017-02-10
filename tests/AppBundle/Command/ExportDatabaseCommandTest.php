@@ -22,7 +22,6 @@ class ExportDatabaseCommandTest extends WebTestCase
     public $command;
 
     /**
-     * @group command
      * @return null
      */
     public function setUp()
