@@ -34,28 +34,28 @@ node {
                 sh './scripts/replace-parameters.sh'
             }
         }
-        echo "${php} composer selfupdate"
-        sh '${php} composer install'
+        sh "${php} composer selfupdate"
+        sh "${php} composer install"
    }
 
    stage('Code Analysis'){
-        sh '${php} vendor/bin/phpcs --standard=PSR1,PSR2 -s src;'
-        sh '${php} vendor/bin/phpcs --standard=PSR1,PSR2 -s tests;'
+        sh "${php} vendor/bin/phpcs --standard=PSR1,PSR2 -s src;"
+        sh "${php} vendor/bin/phpcs --standard=PSR1,PSR2 -s tests;"
    }
 
    stage('Prepare Test Database') {
-        sh '${php} bin/console do:da:dr --force --if-exists'
-        sh '${php} bin/console do:da:cr'
-        sh '${php} bin/console do:mi:mi -n'
-        sh '${php} bin/console do:fi:lo --append --fixtures src/AppBundle/DataFixtures/ORM/dev/ -n'
-        sh '${php} bin/console ca:c --env=test'
+        sh "${php} bin/console do:da:dr --force --if-exists"
+        sh "${php} bin/console do:da:cr"
+        sh '${php} bin/console do:mi:mi -n"
+        sh "${php} bin/console do:fi:lo --append --fixtures src/AppBundle/DataFixtures/ORM/dev/ -n"
+        sh "${php} bin/console ca:c --env=test"
    }
 
    stage('Unit Tests with CodeCoverage') {
-           sh '${php} vendor/bin/phpunit --coverage-clover=coverage.xml'
+           sh "${php} vendor/bin/phpunit --coverage-clover=coverage.xml"
    }
 
    stage('Clean-Up') {
-        sh '${php} bin/console do:da:dr --force --if-exists'
+        sh "${php} bin/console do:da:dr --force --if-exists"
    }
 }
