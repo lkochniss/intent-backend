@@ -34,6 +34,7 @@ node {
                 sh './scripts/replace-parameters.sh'
             }
         }
+        echo "${php}"
         sh '${php} composer selfupdate'
         sh php 'composer install'
    }
