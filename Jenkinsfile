@@ -12,7 +12,7 @@ properties(
 
 node {
    def mvnHome
-   def php = "/opt/plesk/php/7.1/bin/php "
+   def php = '/opt/plesk/php/7.1/bin/php'
 
    stage ('Checkout'){
         checkout scm
@@ -34,13 +34,13 @@ node {
                 sh './scripts/replace-parameters.sh'
             }
         }
-        sh php 'composer selfupdate'
+        sh '${php} composer selfupdate'
         sh php 'composer install'
    }
 
    stage('Code Analysis'){
-        sh php 'vendor/bin/phpcs --standard=PSR1,PSR2 -s src;'
-        sh php 'vendor/bin/phpcs --standard=PSR1,PSR2 -s tests;'
+        sh '${php} vendor/bin/phpcs --standard=PSR1,PSR2 -s src;'
+        sh '${php} vendor/bin/phpcs --standard=PSR1,PSR2 -s tests;'
    }
 
    stage('Prepare Test Database') {
