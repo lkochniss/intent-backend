@@ -31,7 +31,7 @@ class FilemanagerController extends Controller
         $form = $this->createForm(DirectoryType::class, $directory);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $directory->setParentDirectory($parentDirectory);
             $this->getDoctrine()->getRepository('AppBundle:Directory')->save($directory);
             $filesystem = new Filesystem();
@@ -76,7 +76,7 @@ class FilemanagerController extends Controller
             );
         }
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $image->setParentDirectory($directory);
             $this->getDoctrine()->getRepository('AppBundle:Image')->save($image);
 
