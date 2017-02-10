@@ -39,10 +39,10 @@ node {
    }
 
    stages('Code Analysis'){
-        stage(){
+        stage('Analyse Src'){
             sh "${php} vendor/bin/phpcs --standard=PSR1,PSR2 -s src;"
         }
-        stage(){
+        stage('Analyse Tests'){
             sh "${php} vendor/bin/phpcs --standard=PSR1,PSR2 -s tests;"
         }
    }
@@ -56,12 +56,10 @@ node {
    }
 
    stage('Unit Tests') {
-           sh "${php} vendor/bin/phpunit"
+        sh "${php} vendor/bin/phpunit"
    }
 
-   post {
-        always {
-            sh "${php} bin/console do:da:dr --force --if-exists"
-        }
-   }
+   stage('Clean Up') {
+        sh "${php} bin/console do:da:dr --force --if-exists"
+  }
 }
