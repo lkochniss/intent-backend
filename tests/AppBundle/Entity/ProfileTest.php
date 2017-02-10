@@ -14,6 +14,7 @@ use AppBundle\Entity\User;
 class ProfileTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @group entity
      * @return null
      */
     public function testEntity()

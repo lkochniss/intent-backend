@@ -20,6 +20,7 @@ class ImportDatabaseCommandTest extends ExportDatabaseCommandTest
     public $command;
 
     /**
+     * @group command
      * @return null
      */
     public function setUp()

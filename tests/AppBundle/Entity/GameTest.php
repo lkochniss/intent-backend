@@ -18,6 +18,7 @@ use AppBundle\Entity\Article;
 class GameTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @group entity
      * @return null
      */
     public function testEntity()

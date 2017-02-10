@@ -18,6 +18,7 @@ class ArticleControllerTest extends AbstractControllerTest
     protected $article;
 
     /**
+     * @group controller
      * @return $this
      */
     public function setUp()
@@ -35,6 +36,7 @@ class ArticleControllerTest extends AbstractControllerTest
     }
 
     /**
+     * @group controller
      * @return null
      */
     public function testCreatePage()
@@ -57,6 +59,7 @@ class ArticleControllerTest extends AbstractControllerTest
     }
 
     /**
+     * @group controller
      * @return null
      */
     public function testEditPage()
@@ -81,6 +84,7 @@ class ArticleControllerTest extends AbstractControllerTest
     }
 
     /**
+     * @group controller
      * @return null
      */
     public function testShowPage()
@@ -93,6 +97,7 @@ class ArticleControllerTest extends AbstractControllerTest
     }
 
     /**
+     * @group controller
      * @return null
      */
     public function testListPage()

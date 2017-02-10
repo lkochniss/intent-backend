@@ -16,6 +16,7 @@ use AppBundle\Entity\Article;
 class UserTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @group entity
      * @return null
      */
     public function testEntity()

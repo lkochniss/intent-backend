@@ -37,7 +37,8 @@ node {
             }
         }, composerSelfupdate: {
             sh "${php} composer selfupdate"
-        }
+        },
+        failFast: false
         sh "${php} composer install"
    }
 
@@ -59,7 +60,16 @@ node {
    }
 
    stage('Unit Tests') {
-        sh "${php} vendor/bin/phpunit"
+        parallel commandTests: {
+            sh "${php} vendor/bin/phpunit --group=command"
+        }, controllerTests: {
+            sh "${php} vendor/bin/phpunit --group=controller"
+        },commandTests: {
+            sh "${php} vendor/bin/phpunit --group=entity"
+        },commandTests: {
+            sh "${php} vendor/bin/phpunit --group=service"
+        },
+        failFast: false
    }
 
    stage('Clean Up') {

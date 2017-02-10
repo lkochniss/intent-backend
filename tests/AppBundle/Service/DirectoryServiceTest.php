@@ -13,6 +13,7 @@ use Liip\FunctionalTestBundle\Test\WebTestCase;
 class DirectoryServiceTest extends WebTestCase
 {
     /**
+     * @group service
      * @return null
      */
     public function testExport()
@@ -24,6 +25,7 @@ class DirectoryServiceTest extends WebTestCase
     }
 
     /**
+     * @group service
      * @return null
      */
     public function testImport()

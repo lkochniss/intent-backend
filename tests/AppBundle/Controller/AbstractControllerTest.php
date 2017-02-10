@@ -28,6 +28,7 @@ class AbstractControllerTest extends WebTestCase
     protected $entityManager;
 
     /**
+     * @group controller
      * @return $this
      */
     public function setUp()
@@ -49,6 +50,7 @@ class AbstractControllerTest extends WebTestCase
     }
 
     /**
+     * @group controller
      * @return null
      */
     public function testIsGeneralReachable()

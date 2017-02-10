@@ -13,6 +13,7 @@ use Liip\FunctionalTestBundle\Test\WebTestCase;
 class ImageServiceTest extends WebTestCase
 {
     /**
+     * @group service
      * @return null
      */
     public function testExport()

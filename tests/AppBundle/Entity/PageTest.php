@@ -13,6 +13,7 @@ use AppBundle\Entity\Page;
 class PageTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @group entity
      * @return null
      */
     public function testEntity()

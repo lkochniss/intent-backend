@@ -18,6 +18,7 @@ class StudioControllerTest extends AbstractControllerTest
     protected $studio;
 
     /**
+     * @group controller
      * @return $this
      */
     public function setUp()
@@ -35,6 +36,7 @@ class StudioControllerTest extends AbstractControllerTest
     }
 
     /**
+     * @group controller
      * @return null
      */
     public function testCreatePage()
@@ -52,6 +54,7 @@ class StudioControllerTest extends AbstractControllerTest
     }
 
     /**
+     * @group controller
      * @return null
      */
     public function testEditPage()
@@ -71,6 +74,7 @@ class StudioControllerTest extends AbstractControllerTest
     }
 
     /**
+     * @group controller
      * @return null
      */
     public function testShowPage()
@@ -83,6 +87,7 @@ class StudioControllerTest extends AbstractControllerTest
     }
 
     /**
+     * @group controller
      * @return null
      */
     public function testListPage()

@@ -18,6 +18,7 @@ class ExpansionControllerTest extends AbstractControllerTest
     protected $expansion;
 
     /**
+     * @group controller
      * @return $this
      */
     public function setUp()
@@ -35,6 +36,7 @@ class ExpansionControllerTest extends AbstractControllerTest
     }
 
     /**
+     * @group controller
      * @return null
      */
     public function testCreatePage()
@@ -53,6 +55,7 @@ class ExpansionControllerTest extends AbstractControllerTest
     }
 
     /**
+     * @group controller
      * @return null
      */
     public function testEditPage()
@@ -73,6 +76,7 @@ class ExpansionControllerTest extends AbstractControllerTest
     }
 
     /**
+     * @group controller
      * @return null
      */
     public function testShowPage()
@@ -85,6 +89,7 @@ class ExpansionControllerTest extends AbstractControllerTest
     }
 
     /**
+     * @group controller
      * @return null
      */
     public function testListPage()

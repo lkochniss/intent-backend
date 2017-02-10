@@ -13,6 +13,7 @@ use Liip\FunctionalTestBundle\Test\WebTestCase;
 class TagServiceTest extends WebTestCase
 {
     /**
+     * @group service
      * @return null
      */
     public function testExport()
@@ -24,6 +25,7 @@ class TagServiceTest extends WebTestCase
     }
 
     /**
+     * @group service
      * @return null
      */
     public function testImport()

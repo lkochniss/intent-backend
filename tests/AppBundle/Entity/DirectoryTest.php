@@ -13,6 +13,7 @@ use AppBundle\Entity\Directory;
 class DirectoryTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @group entity
      * @return null
      */
     public function testEntity()

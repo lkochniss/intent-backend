@@ -22,6 +22,7 @@ class ExportDatabaseCommandTest extends WebTestCase
     public $command;
 
     /**
+     * @group command
      * @return null
      */
     public function setUp()
@@ -38,6 +39,7 @@ class ExportDatabaseCommandTest extends WebTestCase
     }
 
     /**
+     * @group command
      * @return null
      */
     public function testAllParameter()
@@ -50,6 +52,7 @@ class ExportDatabaseCommandTest extends WebTestCase
     }
 
     /**
+     * @group command
      * @return null
      */
     public function testArtParameter()
@@ -61,6 +64,7 @@ class ExportDatabaseCommandTest extends WebTestCase
     }
 
     /**
+     * @group command
      * @return null
      */
     public function testCatParameter()
@@ -72,6 +76,7 @@ class ExportDatabaseCommandTest extends WebTestCase
     }
 
     /**
+     * @group command
      * @return null
      */
     public function testDirParameter()
@@ -83,6 +88,7 @@ class ExportDatabaseCommandTest extends WebTestCase
     }
 
     /**
+     * @group command
      * @return null
      */
     public function testEvtParameter()
@@ -94,6 +100,7 @@ class ExportDatabaseCommandTest extends WebTestCase
     }
 
     /**
+     * @group command
      * @return null
      */
     public function testExpParameter()
@@ -105,6 +112,7 @@ class ExportDatabaseCommandTest extends WebTestCase
     }
 
     /**
+     * @group command
      * @return null
      */
     public function testFraParameter()
@@ -116,6 +124,7 @@ class ExportDatabaseCommandTest extends WebTestCase
     }
 
     /**
+     * @group command
      * @return null
      */
     public function testGamParameter()
@@ -127,6 +136,7 @@ class ExportDatabaseCommandTest extends WebTestCase
     }
 
     /**
+     * @group command
      * @return null
      */
     public function testImgParameter()
@@ -138,6 +148,7 @@ class ExportDatabaseCommandTest extends WebTestCase
     }
 
     /**
+     * @group command
      * @return null
      */
     public function testPagParameter()
@@ -149,6 +160,7 @@ class ExportDatabaseCommandTest extends WebTestCase
     }
 
     /**
+     * @group command
      * @return null
      */
     public function testProParameter()
@@ -160,6 +172,7 @@ class ExportDatabaseCommandTest extends WebTestCase
     }
 
     /**
+     * @group command
      * @return null
      */
     public function testPubParameter()
@@ -171,6 +184,7 @@ class ExportDatabaseCommandTest extends WebTestCase
     }
 
     /**
+     * @group command
      * @return null
      */
     public function testRolParameter()
@@ -182,6 +196,7 @@ class ExportDatabaseCommandTest extends WebTestCase
     }
 
     /**
+     * @group command
      * @return null
      */
     public function testStuParameter()
@@ -193,6 +208,7 @@ class ExportDatabaseCommandTest extends WebTestCase
     }
 
     /**
+     * @group command
      * @return null
      */
     public function testTagParameter()
@@ -204,6 +220,7 @@ class ExportDatabaseCommandTest extends WebTestCase
     }
 
     /**
+     * @group command
      * @return null
      */
     public function testUsrParameter()
