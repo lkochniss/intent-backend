@@ -38,7 +38,7 @@ node {
         sh "${php} composer install"
    }
 
-   stages('Code Analysis'){
+   stage('Code Analysis'){
         stage('Analyse Src'){
             sh "${php} vendor/bin/phpcs --standard=PSR1,PSR2 -s src;"
         }
