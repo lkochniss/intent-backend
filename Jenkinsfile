@@ -52,7 +52,9 @@ node {
    }
 
    stage('Unit Tests with CodeCoverage') {
-           sh "${php} vendor/bin/phpunit --coverage-clover=coverage.xml"
+           sh "${php} vendor/bin/phpunit --coverage-clover=build/coverage.xml --coverage-html=build/html --coverage-crap4j=build/crap.xml"
+           junit 'build/*.xml'
+           publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'build', reportFiles: 'index.html', reportName: 'HTML Report'])
    }
 
    stage('Clean-Up') {
