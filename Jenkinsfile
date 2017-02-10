@@ -91,10 +91,11 @@ node {
             }
             failFast: false
         }
-    }catch (exc) {
-         emailext attachLog: true, body: 'Build failed. See log.', subject: 'Build Failed', to: '${env.CHANGE_AUTHOR_EMAIL}'
-     }
+    }
+    catch (exc) {
+        emailext attachLog: true, body: 'Build failed. See log.', subject: 'Build Failed', to: '${env.CHANGE_AUTHOR_EMAIL}'
+    }
     finally {
-          sh "${php} bin/console do:da:dr --force --if-exists"
+        sh "${php} bin/console do:da:dr --force --if-exists"
     }
 }
