@@ -38,9 +38,13 @@ node {
         sh "${php} composer install"
    }
 
-   stage('Code Analysis'){
-        sh "${php} vendor/bin/phpcs --standard=PSR1,PSR2 -s src;"
-        sh "${php} vendor/bin/phpcs --standard=PSR1,PSR2 -s tests;"
+   stages('Code Analysis'){
+        stage(){
+            sh "${php} vendor/bin/phpcs --standard=PSR1,PSR2 -s src;"
+        }
+        stage(){
+            sh "${php} vendor/bin/phpcs --standard=PSR1,PSR2 -s tests;"
+        }
    }
 
    stage('Prepare Test Database') {
@@ -51,7 +55,7 @@ node {
         sh "${php} bin/console ca:c --env=test"
    }
 
-   stage('Unit Tests without') {
+   stage('Unit Tests') {
            sh "${php} vendor/bin/phpunit"
    }
 
