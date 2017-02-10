@@ -53,11 +53,12 @@ node {
 
    stage('Unit Tests with CodeCoverage') {
            sh "${php} vendor/bin/phpunit --coverage-clover=build/coverage.xml --coverage-html=build/html --coverage-crap4j=build/crap.xml"
-           junit 'build/*.xml'
            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'build', reportFiles: 'index.html', reportName: 'HTML Report'])
    }
 
-   stage('Clean-Up') {
-        sh "${php} bin/console do:da:dr --force --if-exists"
+   post {
+        always {
+            sh "${php} bin/console do:da:dr --force --if-exists"
+        }
    }
 }
