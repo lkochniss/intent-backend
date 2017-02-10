@@ -39,12 +39,12 @@ node {
    }
 
    stage('Code Analysis'){
-        stage('Analyse Src'){
+        parallel srcAnalysis: {
             sh "${php} vendor/bin/phpcs --standard=PSR1,PSR2 -s src;"
-        }
-        stage('Analyse Tests'){
+        }, testAnalysis: {
             sh "${php} vendor/bin/phpcs --standard=PSR1,PSR2 -s tests;"
-        }
+        },
+        failFast: true
    }
 
    stage('Prepare Test Database') {
