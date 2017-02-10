@@ -23,6 +23,8 @@ use AppBundle\Entity\User;
 class ArticleTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @group entity
+     * @group article
      * @return null
      */
     public function testEntity()
@@ -91,6 +93,8 @@ class ArticleTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group entity
+     * @group article
      * @return null
      */
     public function testPossibleRelatedEntities()

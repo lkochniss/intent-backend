@@ -13,6 +13,8 @@ use Liip\FunctionalTestBundle\Test\WebTestCase;
 class EventServiceTest extends WebTestCase
 {
     /**
+     * @group service
+     * @group event
      * @return null
      */
     public function testExport()
@@ -24,6 +26,8 @@ class EventServiceTest extends WebTestCase
     }
 
     /**
+     * @group service
+     * @group event
      * @return null
      */
     public function testImport()

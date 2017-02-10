@@ -18,6 +18,8 @@ use AppBundle\Entity\Article;
 class FranchiseTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @group entity
+     * @group franchise
      * @return null
      */
     public function testEntity()

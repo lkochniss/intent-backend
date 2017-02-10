@@ -14,6 +14,8 @@ use AppBundle\Entity\User;
 class RoleTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @group entity
+     * @group user
      * @return null
      */
     public function testEntity()

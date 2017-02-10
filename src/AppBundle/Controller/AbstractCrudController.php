@@ -173,7 +173,7 @@ abstract class AbstractCrudController extends Controller
         if (in_array($request->getMethod(), ['POST'])) {
             $form->handleRequest($request);
 
-            if ($form->isValid()) {
+            if ($form->isSubmitted() && $form->isValid()) {
                 if ($form->get('saveAndPublish')->isClicked()) {
                     $entity->setPublished(1);
                 }

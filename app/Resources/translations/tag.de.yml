@@ -1,11 +1,12 @@
 tag:
-    actions:    Aktionen
-    create:     Tag erstellen
-    delete:     Tag löschen
-    edit:       Tag bearbeiten
-    label:      Tag
-    list:       Tagübersicht
-    name:       Name des Tags
-    not_found:  Tag nicht gefunden
-    show:       Tag anzeigen
-    submit:     Tag speichern
+    access_denied:  Zugriff verweigert
+    actions:        Aktionen
+    create:         Tag erstellen
+    delete:         Tag löschen
+    edit:           Tag bearbeiten
+    label:          Tag
+    list:           Tagübersicht
+    name:           Name des Tags
+    not_found:      Tag nicht gefunden
+    show:           Tag anzeigen
+    submit:         Tag speichern

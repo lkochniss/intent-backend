@@ -14,6 +14,8 @@ use AppBundle\Entity\Tag;
 class TagTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @group entity
+     * @group tag
      * @return null
      */
     public function testEntity()

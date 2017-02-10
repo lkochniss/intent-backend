@@ -1,4 +1,5 @@
 profile:
+    access_denied:  Zugriff verweigert
     actions:        Aktionen
     create:         Profil erstellen
     description:    Vorstellung

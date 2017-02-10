@@ -13,6 +13,8 @@ use Liip\FunctionalTestBundle\Test\WebTestCase;
 class PublisherServiceTest extends WebTestCase
 {
     /**
+     * @group service
+     * @group publisher
      * @return null
      */
     public function testExport()
@@ -24,6 +26,8 @@ class PublisherServiceTest extends WebTestCase
     }
 
     /**
+     * @group service
+     * @group publisher
      * @return null
      */
     public function testImport()
