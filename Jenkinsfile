@@ -29,7 +29,7 @@ node {
                 withEnv([
                     'DB_HOST=127.0.0.1',
                     'DB_PORT=null',
-                    "DB_NAME=${database}",
+                    'DB_NAME='${database},
                     'DB_USER=jenkins',
                     'LOCALE=de',
                 ]) {
