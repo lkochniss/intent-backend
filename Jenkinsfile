@@ -35,10 +35,10 @@ node {
                     sh './scripts/replace-parameters.sh'
                 }
             }
-        }, composer: {
+        }, composerSelfupdate: {
             sh "${php} composer selfupdate"
-            sh "${php} composer install"
         }
+        sh "${php} composer install"
    }
 
    stage('Code Analysis'){
