@@ -6,7 +6,7 @@ properties(
             $class: 'BuildDiscarderProperty',
             strategy: [$class: 'LogRotator', numToKeepStr: '10']
         ],
-        pipelineTriggers([cron('H * * * *')]),
+        pipelineTriggers([[$class: 'PeriodicFolderTrigger', interval: '12h']]),
     ]
 )
 
