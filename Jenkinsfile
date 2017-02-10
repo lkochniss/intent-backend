@@ -34,9 +34,8 @@ node {
                 sh './scripts/replace-parameters.sh'
             }
         }
-        echo "${php}"
-        sh '${php} composer selfupdate'
-        sh php 'composer install'
+        echo '${php} composer selfupdate'
+        sh '${php} composer install'
    }
 
    stage('Code Analysis'){
@@ -45,18 +44,18 @@ node {
    }
 
    stage('Prepare Test Database') {
-        sh php 'bin/console do:da:dr --force --if-exists'
-        sh php 'bin/console do:da:cr'
-        sh php 'bin/console do:mi:mi -n'
-        sh php 'bin/console do:fi:lo --append --fixtures src/AppBundle/DataFixtures/ORM/dev/ -n'
-        sh php 'bin/console ca:c --env=test'
+        sh '${php} bin/console do:da:dr --force --if-exists'
+        sh '${php} bin/console do:da:cr'
+        sh '${php} bin/console do:mi:mi -n'
+        sh '${php} bin/console do:fi:lo --append --fixtures src/AppBundle/DataFixtures/ORM/dev/ -n'
+        sh '${php} bin/console ca:c --env=test'
    }
 
    stage('Unit Tests with CodeCoverage') {
-           sh php 'vendor/bin/phpunit --coverage-clover=coverage.xml'
+           sh '${php} vendor/bin/phpunit --coverage-clover=coverage.xml'
    }
 
    stage('Clean-Up') {
-        sh php 'bin/console do:da:dr --force --if-exists'
+        sh '${php} bin/console do:da:dr --force --if-exists'
    }
 }
