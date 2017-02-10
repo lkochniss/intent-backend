@@ -28,7 +28,7 @@ node {
                 withEnv([
                     'DB_HOST=127.0.0.1',
                     'DB_PORT=null',
-                    'DB_NAME=jenkins_intentbackend_${env.BRANCH_NAME}',
+                    'DB_NAME=jenkins_intentbackend_'${env.BRANCH_NAME},
                     'DB_USER=jenkins',
                     'LOCALE=de',
                 ]) {
