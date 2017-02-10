@@ -46,7 +46,7 @@ node {
    stage('Prepare Test Database') {
         sh "${php} bin/console do:da:dr --force --if-exists"
         sh "${php} bin/console do:da:cr"
-        sh '${php} bin/console do:mi:mi -n"
+        sh "${php} bin/console do:mi:mi -n"
         sh "${php} bin/console do:fi:lo --append --fixtures src/AppBundle/DataFixtures/ORM/dev/ -n"
         sh "${php} bin/console ca:c --env=test"
    }
