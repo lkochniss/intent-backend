@@ -15,8 +15,6 @@ node {
    def php = '/opt/plesk/php/7.1/bin/php'
    def database = "jenkins_${env.JOB_NAME}_${env.BRANCH_NAME}"
 
-   echo ${database}
-
    stage ('Checkout'){
         checkout scm
    }
@@ -29,11 +27,11 @@ node {
                 [$class: 'StringBinding', credentialsId: 'SESSION', variable: 'SESSION']
             ]) {
                 withEnv([
-                    'DB_HOST=127.0.0.1',
-                    'DB_PORT=null',
+                    "DB_HOST=127.0.0.1",
+                    "DB_PORT=null",
                     "DB_NAME=${database}",
-                    'DB_USER=jenkins',
-                    'LOCALE=de',
+                    "DB_USER=jenkins",
+                    "LOCALE=de",
                 ]) {
                     sh './scripts/replace-parameters.sh'
                 }
