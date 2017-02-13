@@ -4,6 +4,8 @@ pushd "$(dirname $0)" > /dev/null
 
 cd ..
 
+echo $DB_NAME
+
 sed -e "s/\$DB_HOST/$DB_HOST/" \
     -e "s/\$DB_PORT/$DB_PORT/" \
     -e "s/\$DB_NAME/$DB_NAME/" \
