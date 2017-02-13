@@ -15,6 +15,8 @@ node {
    def php = '/opt/plesk/php/7.1/bin/php'
    def database = "jenkins_${env.JOB_NAME}_${env.BRANCH_NAME}"
 
+   echo $database
+
    stage ('Checkout'){
         checkout scm
    }
