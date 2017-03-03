@@ -10,15 +10,16 @@ properties(
     ]
 )
 
+def mvnHome
+def String php = '/opt/plesk/php/7.1/bin/php'
+def String database = "jenkins_${env.JOB_BASE_NAME}_${env.BRANCH_NAME}"
+
+stage "Checkout"
+node{
+    checkout scm
+}
+
 node {
-   def mvnHome
-   def String php = '/opt/plesk/php/7.1/bin/php'
-   def String database = "jenkins_${env.JOB_BASE_NAME}_${env.BRANCH_NAME}"
-
-   stage ('Checkout'){
-        checkout scm
-   }
-
    stage('Composer Install') {
         parallel setupParameters: {
             withCredentials([
