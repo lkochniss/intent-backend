@@ -50,7 +50,7 @@ class AbstractControllerTest extends WebTestCase
 
     /**
      * @group controller
-     * @group other
+     * @group misc
      * @return null
      */
     public function testIsGeneralReachable()

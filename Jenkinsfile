@@ -21,7 +21,8 @@ node{
 
 stage "Composer Install"
 node{
-    parallel setupParameters: {
+parallel
+    setupParameters: {
         withCredentials([
             [$class: 'StringBinding', credentialsId: 'DB_PASS', variable: 'DB_PASS'],
             [$class: 'StringBinding', credentialsId: 'SECRET', variable: 'SECRET'],
@@ -37,7 +38,8 @@ node{
                 sh './scripts/replace-parameters.sh'
             }
         }
-    }, composerSelfupdate: {
+    },
+    composerSelfupdate: {
         sh "${php} composer selfupdate"
     },
     failFast: false
@@ -47,9 +49,11 @@ node{
 
 stage "Code Analysis"
 node {
-    parallel srcAnalysis: {
+parallel
+    srcAnalysis: {
         sh "${php} vendor/bin/phpcs --standard=PSR1,PSR2 -s src;"
-    }, testAnalysis: {
+    },
+    testAnalysis: {
         sh "${php} vendor/bin/phpcs --standard=PSR1,PSR2 -s tests;"
     },
     failFast: true
@@ -66,34 +70,48 @@ node {
 
 stage "Unit Tests"
 node {
-    parallel articleTests: {
+parallel
+    articleTests: {
         sh "${php} vendor/bin/phpunit --group=article"
-    }, categoryTests: {
+    },
+    categoryTests: {
         sh "${php} vendor/bin/phpunit --group=category"
-    },  eventTests: {
+    },
+    eventTests: {
         sh "${php} vendor/bin/phpunit --group=event"
-    }, expansionTests: {
+    },
+    expansionTests: {
         sh "${php} vendor/bin/phpunit --group=expansion"
-    }, franchiseTests: {
+    },
+    franchiseTests: {
         sh "${php} vendor/bin/phpunit --group=franchise"
-    }, gameTests: {
+    },
+    gameTests: {
         sh "${php} vendor/bin/phpunit --group=game"
-    }, imageTests: {
+    },
+    imageTests: {
         sh "${php} vendor/bin/phpunit --group=image"
-    }, pageTests: {
+    },
+    pageTests: {
         sh "${php} vendor/bin/phpunit --group=page"
-    }, profileTests: {
+    },
+    profileTests: {
         sh "${php} vendor/bin/phpunit --group=profile"
-    }, publisherTests: {
+    },
+    publisherTests: {
         sh "${php} vendor/bin/phpunit --group=publisher"
-    }, studioTests: {
+    },
+    studioTests: {
         sh "${php} vendor/bin/phpunit --group=studio"
-    }, tagTests: {
+    },
+    tagTests: {
         sh "${php} vendor/bin/phpunit --group=tag"
-    }, userTests: {
+    },
+    userTests: {
         sh "${php} vendor/bin/phpunit --group=user"
-    }, otherTests: {
-        sh "${php} vendor/bin/phpunit --group=other"
+    },
+    miscTests: {
+        sh "${php} vendor/bin/phpunit --group=misc"
     }
     failFast: false
 }
