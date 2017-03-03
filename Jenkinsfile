@@ -44,58 +44,61 @@ node{
     sh "${php} composer install"
 }
 
+
+stage "Code Analysis"
 node {
-   stage('Code Analysis'){
-        parallel srcAnalysis: {
-            sh "${php} vendor/bin/phpcs --standard=PSR1,PSR2 -s src;"
-        }, testAnalysis: {
-            sh "${php} vendor/bin/phpcs --standard=PSR1,PSR2 -s tests;"
-        },
-        failFast: true
-   }
+    parallel srcAnalysis: {
+        sh "${php} vendor/bin/phpcs --standard=PSR1,PSR2 -s src;"
+    }, testAnalysis: {
+        sh "${php} vendor/bin/phpcs --standard=PSR1,PSR2 -s tests;"
+    },
+    failFast: true
+}
 
-   stage('Prepare Test Database') {
-        sh "${php} bin/console do:da:dr --force --if-exists"
-        sh "${php} bin/console do:da:cr"
-        sh "${php} bin/console do:sc:up --force"
-        sh "${php} bin/console do:fi:lo --append --fixtures src/AppBundle/DataFixtures/ORM/dev/ -n"
-        sh "${php} bin/console ca:c --env=test"
-   }
+stage "Prepare Test Database"
+node {
+    sh "${php} bin/console do:da:dr --force --if-exists"
+    sh "${php} bin/console do:da:cr"
+    sh "${php} bin/console do:sc:up --force"
+    sh "${php} bin/console do:fi:lo --append --fixtures src/AppBundle/DataFixtures/ORM/dev/ -n"
+    sh "${php} bin/console ca:c --env=test"
+}
 
-   stage('Unit Tests') {
-        parallel articleTests: {
-            sh "${php} vendor/bin/phpunit --group=article"
-        }, categoryTests: {
-            sh "${php} vendor/bin/phpunit --group=category"
-        },  eventTests: {
-            sh "${php} vendor/bin/phpunit --group=event"
-        }, expansionTests: {
-            sh "${php} vendor/bin/phpunit --group=expansion"
-        }, franchiseTests: {
-            sh "${php} vendor/bin/phpunit --group=franchise"
-        }, gameTests: {
-            sh "${php} vendor/bin/phpunit --group=game"
-        }, imageTests: {
-            sh "${php} vendor/bin/phpunit --group=image"
-        }, pageTests: {
-            sh "${php} vendor/bin/phpunit --group=page"
-        }, profileTests: {
-            sh "${php} vendor/bin/phpunit --group=profile"
-        }, publisherTests: {
-            sh "${php} vendor/bin/phpunit --group=publisher"
-        }, studioTests: {
-            sh "${php} vendor/bin/phpunit --group=studio"
-        }, tagTests: {
-            sh "${php} vendor/bin/phpunit --group=tag"
-        }, userTests: {
-            sh "${php} vendor/bin/phpunit --group=user"
-        }, otherTests: {
-            sh "${php} vendor/bin/phpunit --group=other"
-        }
-        failFast: false
-   }
+stage "Unit Tests"
+node {
+    parallel articleTests: {
+        sh "${php} vendor/bin/phpunit --group=article"
+    }, categoryTests: {
+        sh "${php} vendor/bin/phpunit --group=category"
+    },  eventTests: {
+        sh "${php} vendor/bin/phpunit --group=event"
+    }, expansionTests: {
+        sh "${php} vendor/bin/phpunit --group=expansion"
+    }, franchiseTests: {
+        sh "${php} vendor/bin/phpunit --group=franchise"
+    }, gameTests: {
+        sh "${php} vendor/bin/phpunit --group=game"
+    }, imageTests: {
+        sh "${php} vendor/bin/phpunit --group=image"
+    }, pageTests: {
+        sh "${php} vendor/bin/phpunit --group=page"
+    }, profileTests: {
+        sh "${php} vendor/bin/phpunit --group=profile"
+    }, publisherTests: {
+        sh "${php} vendor/bin/phpunit --group=publisher"
+    }, studioTests: {
+        sh "${php} vendor/bin/phpunit --group=studio"
+    }, tagTests: {
+        sh "${php} vendor/bin/phpunit --group=tag"
+    }, userTests: {
+        sh "${php} vendor/bin/phpunit --group=user"
+    }, otherTests: {
+        sh "${php} vendor/bin/phpunit --group=other"
+    }
+    failFast: false
+}
 
-   stage('Clean Up') {
-        sh "${php} bin/console do:da:dr --force --if-exists"
-  }
+stage "Clean Up"
+node{
+    sh "${php} bin/console do:da:dr --force --if-exists"
 }
