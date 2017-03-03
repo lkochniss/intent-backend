@@ -39,7 +39,7 @@ class ExportDatabaseCommandTest extends WebTestCase
 
     /**
      * @group command
-     * @group other
+     * @group misc
      * @return null
      */
     public function testAllParameter()
