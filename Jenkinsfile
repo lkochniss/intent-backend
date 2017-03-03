@@ -12,8 +12,8 @@ properties(
 
 node {
    def mvnHome
-   def php = '/opt/plesk/php/7.1/bin/php'
-   def database = "jenkins_${env.JOB_BASE_NAME}_${env.BRANCH_NAME}"
+   def String php = '/opt/plesk/php/7.1/bin/php'
+   def String database = "jenkins_${env.JOB_BASE_NAME}_${env.BRANCH_NAME}"
 
    stage ('Checkout'){
         checkout scm
