@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Class AbstractRelatedController
  */
-abstract class AbstractRelatedController extends AbstractMetaController
+abstract class AbstractRelatedController extends AbstractCrudController
 {
     /**
      * @param integer $id      Id of entity.

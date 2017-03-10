@@ -37,6 +37,12 @@ abstract class AbstractCrudController extends Controller
      */
     public function editAction($id, Request $request)
     {
+        $this->denyAccessUnlessGranted(
+            $this->getReadAccessLevel(),
+            null,
+            $this->getAccessDeniedMessage()
+        );
+
         $entity = $this->getDoctrine()->getRepository($this->getEntityName())->find($id);
 
         if (is_null($entity)) {
@@ -60,6 +66,12 @@ abstract class AbstractCrudController extends Controller
      */
     public function showAction($id, Request $request)
     {
+        $this->denyAccessUnlessGranted(
+            $this->getReadAccessLevel(),
+            null,
+            $this->getAccessDeniedMessage()
+        );
+
         $entity = $this->getDoctrine()->getRepository($this->getEntityName())->find($id);
 
         if (is_null($entity)) {
@@ -85,6 +97,12 @@ abstract class AbstractCrudController extends Controller
      */
     public function listAction()
     {
+        $this->denyAccessUnlessGranted(
+            $this->getReadAccessLevel(),
+            null,
+            $this->getAccessDeniedMessage()
+        );
+
         $entities = $this->getDoctrine()->getRepository($this->getEntityName())->findAll();
 
         return $this->render(
@@ -151,6 +169,33 @@ abstract class AbstractCrudController extends Controller
      * @return string
      */
     abstract protected function getTranslationDomain();
+
+    /**
+     * @return string
+     */
+    abstract protected function getReadAccessLevel();
+
+    /**
+     * @return string
+     */
+    abstract protected function getWriteAccessLevel();
+
+    /**
+     * @return string
+     */
+    abstract protected function getPublishAccessLevel();
+
+    /**
+     * @return string
+     */
+    protected function getAccessDeniedMessage()
+    {
+        return $this->get('translator')->trans(
+            $this->getTranslationDomain() . '.access_denied',
+            array(),
+            $this->getTranslationDomain()
+        );
+    }
 
     /**
      * @param AbstractModel $entity  Entity for form.

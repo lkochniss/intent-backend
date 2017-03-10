@@ -78,4 +78,28 @@ class ProfileController extends AbstractCrudController
 
         return null;
     }
+
+    /**
+     * @return string
+     */
+    protected function getReadAccessLevel()
+    {
+        return 'ROLE_USER';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getWriteAccessLevel()
+    {
+        return 'ROLE_USER';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getPublishAccessLevel()
+    {
+        return 'ROLE_USER';
+    }
 }

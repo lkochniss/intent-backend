@@ -2,6 +2,9 @@ AppBundle\Entity\Role:
   role_admin:
     name: 'Admin'
     role: 'ROLE_ADMIN'
+  role_user:
+    name: 'User'
+    role: 'ROLE_USER'
   role_read_article:
     name: 'Artikel lesen'
     role: 'ROLE_READ_ARTICLE'

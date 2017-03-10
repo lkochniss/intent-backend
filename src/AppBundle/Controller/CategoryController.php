@@ -11,7 +11,7 @@ use AppBundle\Form\Type\CategoryType;
 /**
  * Class CategoryController
  */
-class CategoryController extends AbstractMetaController
+class CategoryController extends AbstractCrudController
 {
     /**
      * @return Category
