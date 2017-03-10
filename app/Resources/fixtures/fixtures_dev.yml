@@ -14,7 +14,7 @@ AppBundle\Entity\Role:
   role_publish_article:
     name: 'Artikel veröffentlichen'
     role: 'ROLE_PUBLISH_ARTICLE'
-  role_read_meata:
+  role_read_meta:
     name: 'Meta lesen'
     role: 'ROLE_READ_META'
   role_write_meta:
@@ -32,25 +32,37 @@ AppBundle\Entity\User:
     isActive: 1
     validUntil: <dateTimeBetween('+10 days', '+200 days')>
     roles: [ '@role_admin' ]
+  user_publishing_editor:
+    username(unique): 'Publishing Editor'
+    password: 'editor'
+    email(unique): 'publishing-editor@int-ent.de'
+    isActive: 1
+    validUntil: <dateTimeBetween('+10 days', '+200 days')>
+    roles: [ '@role_user', '@role_read_article', '@role_write_article','@role_publish_article', '@role_read_meta', '@role_write_meta' , '@role_publish_meta' ]
   user_editor:
     username(unique): 'Editor'
     password: 'editor'
     email(unique): 'editor@int-ent.de'
     isActive: 1
     validUntil: <dateTimeBetween('+10 days', '+200 days')>
-    roles: [ '@role_read_article', '@role_write_article', '@role_read_meata', '@role_write_meta' ]
+    roles: [ '@role_user', '@role_read_article', '@role_write_article', '@role_read_meta', '@role_write_meta' ]
   user_{1..5}:
     username: <username()>
     password: <word()>
     email: <email()>
     isActive: <numberBetween(0, 1)>
     validUntil: <dateTimeBetween('-100 days', '+200 days')>
+    roles: [ '@role_user' ]
 
 AppBundle\Entity\Profile:
   profile_admin:
     name: <name()>
     description: <sentence()>
     user: '@user_admin'
+  profile_publishing_editor:
+    name: <name()>
+    description: <sentence()>
+    user: '@user_publishing_editor'
   profile_editor:
     name: <name()>
     description: <sentence()>
@@ -150,7 +162,7 @@ AppBundle\Entity\Article:
     related: '10%? @publisher_<numberBetween(1, 5)>'
     createdBy: '@user_editor'
     createdBy: '30%? @user_<numberBetween(1, 5)>'
-    createdBy: '10%? @user_admin'
+    createdBy: '10%? @user_publising_editor'
     modifiedBy: '@self->createdBy'
     modifiedBy: '30%? @user_editor'
     modifiedBy: '10%? @user_<numberBetween(1, 5)>'
