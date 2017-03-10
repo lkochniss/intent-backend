@@ -25,52 +25,57 @@ AppBundle\Entity\Role:
     role: 'ROLE_PUBLISH_META'
 
 AppBundle\Entity\User:
-  user_admin:
+  user (template):
+    username(unique): <username()>
+    password: <word()>
+    email: <email()>
+    isActive: 1
+    validUntil: <dateTimeBetween('+10 days', '+200 days')>
+    roles: [ '@role_user' ]
+  user_admin (extends user):
     username(unique): 'Admin'
     password: 'admin'
     email(unique): 'admin@int-ent.de'
-    isActive: 1
-    validUntil: <dateTimeBetween('+10 days', '+200 days')>
     roles: [ '@role_admin' ]
-  user_publishing_editor:
+  user_publishing_editor (extends user):
     username(unique): 'Publishing Editor'
-    password: 'editor'
+    password: 'publishing'
     email(unique): 'publishing-editor@int-ent.de'
-    isActive: 1
-    validUntil: <dateTimeBetween('+10 days', '+200 days')>
     roles: [ '@role_user', '@role_read_article', '@role_write_article','@role_publish_article', '@role_read_meta', '@role_write_meta' , '@role_publish_meta' ]
-  user_editor:
-    username(unique): 'Editor'
-    password: 'editor'
-    email(unique): 'editor@int-ent.de'
-    isActive: 1
-    validUntil: <dateTimeBetween('+10 days', '+200 days')>
+  user_writing_editor (extends user):
+    username(unique): 'Writing-Editor'
+    password: 'writing'
+    email(unique): 'writing-editor@int-ent.de'
     roles: [ '@role_user', '@role_read_article', '@role_write_article', '@role_read_meta', '@role_write_meta' ]
-  user_{1..5}:
-    username: <username()>
-    password: <word()>
-    email: <email()>
-    isActive: <numberBetween(0, 1)>
-    validUntil: <dateTimeBetween('-100 days', '+200 days')>
-    roles: [ '@role_user' ]
+  user_reading_editor (extends user):
+    username(unique): 'Reading-Editor'
+    password: 'reading'
+    email(unique): 'editor@int-ent.de'
+    roles: [ '@role_user', '@role_read_article', '@role_read_meta']
+  user_inactive (extends user):
+    username(unique): 'Inactive-User'
+    password: 'inactive'
+    isActive: 0
+  user_invalid (extends user):
+    username(unique): 'Invalid-User'
+    password: 'invalid'
+    validUntil: <dateTimeBetween('-100 days', '-10 days')>
+  user_{1..5} (extends user):
 
 AppBundle\Entity\Profile:
-  profile_admin:
+  profile (template):
     name: <name()>
     description: <sentence()>
-    user: '@user_admin'
-  profile_publishing_editor:
-    name: <name()>
-    description: <sentence()>
-    user: '@user_publishing_editor'
-  profile_editor:
-    name: <name()>
-    description: <sentence()>
-    user: '@user_editor'
-  profile_{1..5}:
-    name: <name()>
-    description: <sentence()>
-    user: '@user_<current()>'
+  profile_admin (extends profile):
+    user(unique): '@user_admin'
+  profile_publishing_editor (extends profile):
+    user(unique): '@user_publishing_editor'
+  profile_writing_editor (extends profile):
+    user(unique): '@user_writing_editor'
+  profile_reading_editor (extends profile):
+    user(unique): '@user_reading_editor'
+  profile_{1..5} (extends profile):
+    user(unique): '@user_<current()>'
 
 AppBundle\Entity\Event:
   event_{1..5}:
@@ -146,26 +151,32 @@ AppBundle\Entity\Directory:
     path: 'upload'
 
 AppBundle\Entity\Article:
-  article_{1..20}:
+  article (template):
     title(unique): <word()> <word()> <word()> <word()>
     slug: <slugify(@self->title)>
-    content: <sentence()><sentence()><sentence()><sentence()><sentence()>
-    published: <numberBetween(0, 1)>
+    content: <sentence()>
     slideshow: <numberBetween(0, 1)>
     tags: ['@tag_<numberBetween(1, 20)>']
-    event: '20%? @event_<numberBetween(1, 5)>'
+    event: '10%? @event_<numberBetween(1, 5)>'
     category: '@category_<numberBetween(1, 5)>'
     related: '@game_<numberBetween(1, 20)>'
     related: '10%? @expansion_<numberBetween(1, 20)>'
     related: '10%? @franchise_<numberBetween(1, 10)>'
     related: '10%? @studio_<numberBetween(1, 5)>'
     related: '10%? @publisher_<numberBetween(1, 5)>'
-    createdBy: '@user_editor'
-    createdBy: '30%? @user_<numberBetween(1, 5)>'
-    createdBy: '10%? @user_publising_editor'
+  article_{1..10} (extends article):
+    published: 0
+    slideshow: <numberBetween(0, 1)>
+    createdBy: '@user_writing_editor'
+    createdBy: '30%? @user_publishing_editor'
     modifiedBy: '@self->createdBy'
-    modifiedBy: '30%? @user_editor'
-    modifiedBy: '10%? @user_<numberBetween(1, 5)>'
+    modifiedBy: '30%? @user_writing_editor'
+    modifiedBy: '10%? @user_admin'
+  article_{11..20} (extends article):
+    published: 1
+    createdBy: '@user_writing_editor'
+    createdBy: '30%? @user_publishing_editor'
+    modifiedBy: '@user_publishing_editor'
     modifiedBy: '10%? @user_admin'
 
 AppBundle\Entity\Page:
