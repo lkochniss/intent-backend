@@ -3,9 +3,10 @@
  * @package Test\AppBundle\Controller
  */
 
-namespace Test\AppBundle\Controller;
+namespace Test\AppBundle\Controller\AccessAllowed;
 
 use AppBundle\Entity\User;
+use Test\AppBundle\Controller\AbstractControllerTest;
 
 /**
  * Class UserControllerTest
@@ -43,12 +44,6 @@ class UserControllerTest extends AbstractControllerTest
     {
         $crawler = $this->pageResponse('GET', '/user/create');
 
-        $this->checkIfOneContentExist($crawler, 'input[id="user_username"]');
-        $this->checkIfOneContentExist($crawler, 'input[id="user_email"]');
-        $this->checkIfOneContentExist($crawler, 'select[id="user_roles"]');
-        $this->checkIfOneContentExist($crawler, 'input[id="user_isActive"]');
-        $this->checkIfOneContentExist($crawler, 'button[id="user_submit"]');
-
         return null;
     }
 
@@ -60,12 +55,6 @@ class UserControllerTest extends AbstractControllerTest
     public function testEditPage()
     {
         $crawler = $this->pageResponse('GET', sprintf('/user/%s/edit', $this->user->getId()));
-
-        $this->checkIfOneContentExist($crawler, 'input[id="user_username"]');
-        $this->checkIfOneContentExist($crawler, 'input[id="user_email"]');
-        $this->checkIfOneContentExist($crawler, 'select[id="user_roles"]');
-        $this->checkIfOneContentExist($crawler, 'input[id="user_isActive"]');
-        $this->checkIfOneContentExist($crawler, 'button[id="user_submit"]');
 
         return null;
     }
@@ -79,10 +68,6 @@ class UserControllerTest extends AbstractControllerTest
     {
         $crawler = $this->pageResponse('GET', sprintf('/user/%s/password', $this->user->getId()));
 
-        $this->checkIfOneContentExist($crawler, 'input[id="user_password_password_first"]');
-        $this->checkIfOneContentExist($crawler, 'input[id="user_password_password_second"]');
-        $this->checkIfOneContentExist($crawler, 'button[id="user_password_submit"]');
-
         return null;
     }
 
@@ -95,11 +80,21 @@ class UserControllerTest extends AbstractControllerTest
     {
         $crawler = $this->pageResponse('GET', '/user/');
 
-        $this->checkIfOneContentExist($crawler, 'table[id="entity_list"]');
-        $this->checkIfOneContentExist($crawler, 'a[href="/user/create"]');
-        $this->checkIfOneContentExist($crawler, sprintf('a[href="/user/%s/edit"]', $this->user->getId()));
-        $this->checkIfOneContentExist($crawler, sprintf('a[href="/user/%s/delete"]', $this->user->getId()));
-
         return null;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getUsername()
+    {
+        return 'Publishing Editor';
+    }
+    /**
+     * @return string
+     */
+    protected function getPassword()
+    {
+        return 'publishing';
     }
 }

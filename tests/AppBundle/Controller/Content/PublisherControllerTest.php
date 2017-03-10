@@ -3,9 +3,10 @@
  * @package Test\AppBundle\Controller
  */
 
-namespace Test\AppBundle\Controller;
+namespace Test\AppBundle\Controller\Content;
 
 use AppBundle\Entity\Publisher;
+use Test\AppBundle\Controller\AbstractControllerTest;
 
 /**
  * Class PublisherControllerTest
@@ -103,5 +104,21 @@ class PublisherControllerTest extends AbstractControllerTest
         $this->checkIfOneContentExist($crawler, sprintf('a[href="/publisher/%s/show"]', $this->publisher->getId()));
 
         return null;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getUsername()
+    {
+        return 'admin';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getPassword()
+    {
+        return 'admin';
     }
 }

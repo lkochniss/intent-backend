@@ -3,9 +3,10 @@
  * @package Test\AppBundle\Controller
  */
 
-namespace Test\AppBundle\Controller;
+namespace Test\AppBundle\Controller\Content;
 
 use AppBundle\Entity\Expansion;
+use Test\AppBundle\Controller\AbstractControllerTest;
 
 /**
  * Class ExpansionControllerTest
@@ -105,5 +106,21 @@ class ExpansionControllerTest extends AbstractControllerTest
         $this->checkIfOneContentExist($crawler, sprintf('a[href="/expansion/%s/show"]', $this->expansion->getId()));
 
         return null;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getUsername()
+    {
+        return 'admin';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getPassword()
+    {
+        return 'admin';
     }
 }

@@ -60,6 +60,9 @@ AppBundle\Entity\User:
     username(unique): 'Invalid-User'
     password: 'invalid'
     validUntil: <dateTimeBetween('-100 days', '-10 days')>
+  user_without_permissions (extends user):
+    username(unique): '0-Permission-User'
+    password: 'no permission'
   user_{1..5} (extends user):
 
 AppBundle\Entity\Profile:

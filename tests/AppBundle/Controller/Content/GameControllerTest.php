@@ -3,9 +3,10 @@
  * @package Test\AppBundle\Controller
  */
 
-namespace Test\AppBundle\Controller;
+namespace Test\AppBundle\Controller\Content;
 
 use AppBundle\Entity\Game;
+use Test\AppBundle\Controller\AbstractControllerTest;
 
 /**
  * Class GameControllerTest
@@ -107,5 +108,21 @@ class GameControllerTest extends AbstractControllerTest
         $this->checkIfOneContentExist($crawler, sprintf('a[href="/game/%s/show"]', $this->game->getId()));
 
         return null;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getUsername()
+    {
+        return 'admin';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getPassword()
+    {
+        return 'admin';
     }
 }

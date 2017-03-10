@@ -3,9 +3,10 @@
  * @package Test\AppBundle\Controller
  */
 
-namespace Test\AppBundle\Controller;
+namespace Test\AppBundle\Controller\Content;
 
 use AppBundle\Entity\Studio;
+use Test\AppBundle\Controller\AbstractControllerTest;
 
 /**
  * Class StudioControllerTest
@@ -103,5 +104,21 @@ class StudioControllerTest extends AbstractControllerTest
         $this->checkIfOneContentExist($crawler, sprintf('a[href="/studio/%s/show"]', $this->studio->getId()));
 
         return null;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getUsername()
+    {
+        return 'admin';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getPassword()
+    {
+        return 'admin';
     }
 }

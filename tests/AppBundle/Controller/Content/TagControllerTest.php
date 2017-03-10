@@ -3,9 +3,10 @@
  * @package Test\AppBundle\Controller
  */
 
-namespace Test\AppBundle\Controller;
+namespace Test\AppBundle\Controller\Content;
 
 use AppBundle\Entity\Tag;
+use Test\AppBundle\Controller\AbstractControllerTest;
 
 /**
  * Class TagControllerTest
@@ -97,5 +98,21 @@ class TagControllerTest extends AbstractControllerTest
         $this->checkIfOneContentExist($crawler, sprintf('a[href="/tag/%s/show"]', $this->tag->getId()));
 
         return null;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getUsername()
+    {
+        return 'admin';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getPassword()
+    {
+        return 'admin';
     }
 }

@@ -24,6 +24,12 @@ abstract class AbstractCrudController extends Controller
      */
     public function createAction(Request $request)
     {
+        $this->denyAccessUnlessGranted(
+            $this->getWriteAccessLevel(),
+            null,
+            $this->getAccessDeniedMessage()
+        );
+
         $entity = $this->createNewEntity();
 
         return $this->createAndHandleForm($entity, $request, 'create');

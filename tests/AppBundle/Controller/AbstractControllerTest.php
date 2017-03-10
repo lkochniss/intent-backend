@@ -15,7 +15,7 @@ use Symfony\Component\DomCrawler\Crawler;
  *
  * @group legacy
  */
-class AbstractControllerTest extends WebTestCase
+abstract class AbstractControllerTest extends WebTestCase
 {
     /**
      * @var Client
@@ -32,7 +32,14 @@ class AbstractControllerTest extends WebTestCase
      */
     public function setUp()
     {
-        $this->doLogin('admin', 'admin');
+        $this->client = static::createClient(
+            array(),
+            array(
+                'PHP_AUTH_USER' => $this->getUsername(),
+                'PHP_AUTH_PW' => $this->getPassword(),
+            )
+        );
+
         $this->entityManager = static::$kernel
             ->getContainer()
             ->get('doctrine')
@@ -98,10 +105,10 @@ class AbstractControllerTest extends WebTestCase
      * @param string $url    Which url should be checked.
      * @return Crawler
      */
-    protected function pageResponse($method, $url)
+    protected function pageResponse($method, $url, $statusCode = 200)
     {
         $crawler = $this->client->request($method, $url);
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals($statusCode, $this->client->getResponse()->getStatusCode());
 
         return $crawler;
     }
@@ -161,14 +168,13 @@ class AbstractControllerTest extends WebTestCase
         return null;
     }
 
-    protected function doLogin($username, $password)
-    {
-        $this->client = static::createClient(
-            array(),
-            array(
-                'PHP_AUTH_USER' => 'admin',
-                'PHP_AUTH_PW' => 'admin',
-            )
-        );
-    }
+    /**
+     * @return string
+     */
+    abstract protected function getUsername();
+
+    /**
+     * @return string
+     */
+    abstract protected function getPassword();
 }
