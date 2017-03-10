@@ -88,13 +88,13 @@ class PageControllerTest extends AbstractControllerTest
      */
     protected function getUsername()
     {
-        return 'Publishing Editor';
+        return 'admin';
     }
     /**
      * @return string
      */
     protected function getPassword()
     {
-        return 'publishing';
+        return 'admin';
     }
 }

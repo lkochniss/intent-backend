@@ -92,8 +92,6 @@ node {
         sh "${php} vendor/bin/phpunit --group=tag"
     }, userTests: {
         sh "${php} vendor/bin/phpunit --group=user"
-    }, otherTests: {
-        sh "${php} vendor/bin/phpunit --group=misc"
     }
     failFast: false
 }

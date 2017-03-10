@@ -28,6 +28,12 @@ abstract class AbstractRelatedController extends AbstractCrudController
      */
     public function showAction($id, Request $request)
     {
+        $this->denyAccessUnlessGranted(
+            $this->getWriteAccessLevel(),
+            null,
+            $this->getAccessDeniedMessage()
+        );
+
         $this->denyAccessUnlessGranted($this->getReadAccessLevel(), null, $this->getAccessDeniedMessage());
         $entity = $this->getDoctrine()->getRepository($this->getEntityName())->find($id);
 
