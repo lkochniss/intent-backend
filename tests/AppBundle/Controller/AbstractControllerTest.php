@@ -32,14 +32,7 @@ class AbstractControllerTest extends WebTestCase
      */
     public function setUp()
     {
-        $this->client = static::createClient(
-            array(),
-            array(
-                'PHP_AUTH_USER' => 'admin',
-                'PHP_AUTH_PW' => 'admin',
-            )
-        );
-
+        $this->doLogin('admin', 'admin');
         $this->entityManager = static::$kernel
             ->getContainer()
             ->get('doctrine')
@@ -166,5 +159,16 @@ class AbstractControllerTest extends WebTestCase
         );
 
         return null;
+    }
+
+    protected function doLogin($username, $password)
+    {
+        $this->client = static::createClient(
+            array(),
+            array(
+                'PHP_AUTH_USER' => 'admin',
+                'PHP_AUTH_PW' => 'admin',
+            )
+        );
     }
 }
