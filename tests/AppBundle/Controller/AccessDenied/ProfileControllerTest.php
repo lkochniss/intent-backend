@@ -1,9 +1,9 @@
 <?php
 /**
- * @package Test\AppBundle\Controller\AccessAllowed
+ * @package Test\AppBundle\Controller\AccessDenied
  */
 
-namespace Test\AppBundle\Controller\AccessAllowed;
+namespace Test\AppBundle\Controller\AccessDenied;
 
 use AppBundle\Entity\Profile;
 use Test\AppBundle\AbstractWebTest;
@@ -23,7 +23,7 @@ class ProfileControllerTest extends AbstractWebTest
      */
     public function setUp()
     {
-        $this->setClient('Publishing Editor', 'publishing');
+        $this->setClient('0-Permission-User', 'no permission');
         $this->setEntityManager();
 
         $user = $this->getEntityManager()->getRepository('AppBundle:User')->findOneBy(
@@ -54,7 +54,7 @@ class ProfileControllerTest extends AbstractWebTest
      */
     public function testEditPage()
     {
-        $crawler = $this->pageResponse('GET', sprintf('/profile/%s/edit', $this->profile->getId()));
+        $crawler = $this->pageResponse('GET', sprintf('/profile/%s/edit', $this->profile->getId()), 403);
 
         return null;
     }

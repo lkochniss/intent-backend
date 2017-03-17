@@ -165,7 +165,7 @@ class UserController extends AbstractCrudController
     {
         $user = $this->getDoctrine()->getRepository('AppBundle:User')->find($id);
 
-        if ($this->get('security.token_storage')->getToken()->getUser() != $user){
+        if ($this->get('security.token_storage')->getToken()->getUser() != $user) {
             throw new AccessDeniedException($this->getAccessDeniedMessage());
         }
 
