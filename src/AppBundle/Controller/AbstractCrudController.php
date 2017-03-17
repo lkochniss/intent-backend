@@ -97,7 +97,7 @@ abstract class AbstractCrudController extends Controller
         }
 
         $categories = null;
-        if ($entity instanceof Related){
+        if ($entity instanceof Related) {
             $categories = $this->loopRelated($entity);
         }
 
@@ -345,5 +345,4 @@ abstract class AbstractCrudController extends Controller
         }
         return $articlesInCategory;
     }
-
 }
