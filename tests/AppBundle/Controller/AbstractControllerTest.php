@@ -25,64 +25,7 @@ abstract class AbstractControllerTest extends WebTestCase
     /**
      * @var EntityManager
      */
-    protected $entityManager;
-
-    /**
-     * @return $this
-     */
-    public function setUp()
-    {
-        $this->client = static::createClient(
-            array(),
-            array(
-                'PHP_AUTH_USER' => $this->getUsername(),
-                'PHP_AUTH_PW' => $this->getPassword(),
-            )
-        );
-
-        $this->entityManager = static::$kernel
-            ->getContainer()
-            ->get('doctrine')
-            ->getManager();
-
-        return $this;
-    }
-
-    /**
-     * @group controller
-     * @group misc
-     * @return null
-     */
-    public function testIsGeneralReachable()
-    {
-        $crawler = $this->pageResponse('GET', '');
-
-        /**
-         * Adminbar
-         */
-        $this->checkIfOneContentExist($crawler, 'a[href="/"]');
-        $this->checkIfOneContentExist($crawler, 'a[href="/article/create"]');
-        $this->checkIfOneContentExist($crawler, 'a[href="/logout"]');
-
-        /**
-         * Sidebar
-         */
-        $this->checkIfOneContentExist($crawler, 'a[href="/article/"]');
-        $this->checkIfOneContentExist($crawler, 'a[href="/page/"]');
-        $this->checkIfOneContentExist($crawler, 'a[href="/category/"]');
-        $this->checkIfOneContentExist($crawler, 'a[href="/tag/"]');
-        $this->checkIfOneContentExist($crawler, 'a[href="/event/"]');
-        $this->checkIfOneContentExist($crawler, 'a[href="/publisher/"]');
-        $this->checkIfOneContentExist($crawler, 'a[href="/studio/"]');
-        $this->checkIfOneContentExist($crawler, 'a[href="/franchise/"]');
-        $this->checkIfOneContentExist($crawler, 'a[href="/game/"]');
-        $this->checkIfOneContentExist($crawler, 'a[href="/expansion/"]');
-        $this->checkIfOneContentExist($crawler, 'a[href="/filemanager"]');
-        $this->checkIfOneContentExist($crawler, 'a[href="/user/"]');
-        $this->checkIfOneContentExist($crawler, 'a[href="/profile/"]');
-
-        return null;
-    }
+    private $entityManager;
 
     /**
      * @return Client
@@ -93,10 +36,41 @@ abstract class AbstractControllerTest extends WebTestCase
     }
 
     /**
+     * @param $username
+     * @param $password
+     * @return Client
+     */
+    protected function setClient($username, $password)
+    {
+        $this->client = static::createClient(
+            array(),
+            array(
+                'PHP_AUTH_USER' => $username,
+                'PHP_AUTH_PW' => $password,
+            )
+        );
+
+        return $this->client;
+    }
+
+    /**
      * @return EntityManager
      */
     protected function getEntityManager()
     {
+        return $this->entityManager;
+    }
+
+    /**
+     * @return \Doctrine\Common\Persistence\ObjectManager|EntityManager|object
+     */
+    protected function setEntityManager()
+    {
+        $this->entityManager = static::$kernel
+            ->getContainer()
+            ->get('doctrine')
+            ->getManager();
+
         return $this->entityManager;
     }
 
@@ -157,7 +131,7 @@ abstract class AbstractControllerTest extends WebTestCase
      */
     protected function checkIfNumberOfContentExist(Crawler $crawler, $needle, $number)
     {
-        $this->assertGreaterThanOrEqual(
+        $this->assertEquals(
             $number,
             $crawler
                 ->filter($needle)
@@ -167,14 +141,4 @@ abstract class AbstractControllerTest extends WebTestCase
 
         return null;
     }
-
-    /**
-     * @return string
-     */
-    abstract protected function getUsername();
-
-    /**
-     * @return string
-     */
-    abstract protected function getPassword();
 }

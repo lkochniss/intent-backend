@@ -1,6 +1,6 @@
 <?php
 /**
- * @package Test\AppBundle\Controller
+ * @package Test\AppBundle\Controller\Content
  */
 
 namespace Test\AppBundle\Controller\Content;
@@ -23,7 +23,8 @@ class FranchiseControllerTest extends AbstractControllerTest
      */
     public function setUp()
     {
-        parent::setUp();
+        $this->setClient('admin', 'admin');
+        $this->setEntityManager();
 
         $repository = $this->getEntityManager()->getRepository('AppBundle:Franchise');
         $this->franchise = $repository->findBy(
@@ -108,21 +109,5 @@ class FranchiseControllerTest extends AbstractControllerTest
         $this->checkIfOneContentExist($crawler, sprintf('a[href="/franchise/%s/show"]', $this->franchise->getId()));
 
         return null;
-    }
-
-    /**
-     * @return string
-     */
-    protected function getUsername()
-    {
-        return 'admin';
-    }
-
-    /**
-     * @return string
-     */
-    protected function getPassword()
-    {
-        return 'admin';
     }
 }

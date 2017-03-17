@@ -1,6 +1,6 @@
 <?php
 /**
- * @package Test\AppBundle\Controller
+ * @package Test\AppBundle\Controller\Content
  */
 
 namespace Test\AppBundle\Controller\Content;
@@ -23,7 +23,8 @@ class FilemanagerControllerTest extends AbstractControllerTest
      */
     public function setUp()
     {
-        parent::setUp();
+        $this->setClient('admin', 'admin');
+        $this->setEntityManager();
 
         $repository = $this->getEntityManager()->getRepository('AppBundle:Directory');
         $this->directory = $repository->findBy(
@@ -118,21 +119,5 @@ class FilemanagerControllerTest extends AbstractControllerTest
         );
 
         return null;
-    }
-
-    /**
-     * @return string
-     */
-    protected function getUsername()
-    {
-        return 'admin';
-    }
-
-    /**
-     * @return string
-     */
-    protected function getPassword()
-    {
-        return 'admin';
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * @package Test\AppBundle\Controller
+ * @package Test\AppBundle\Controller\Content
  */
 
 namespace Test\AppBundle\Controller\Content;
@@ -23,7 +23,8 @@ class PageControllerTest extends AbstractControllerTest
      */
     public function setUp()
     {
-        parent::setUp();
+        $this->setClient('admin', 'admin');
+        $this->setEntityManager();
 
         $repository = $this->getEntityManager()->getRepository('AppBundle:Page');
         $this->page = $repository->findBy(
@@ -99,21 +100,5 @@ class PageControllerTest extends AbstractControllerTest
         $this->checkIfOneContentExist($crawler, sprintf('a[href="/page/%s/show"]', $this->page->getId()));
 
         return null;
-    }
-
-    /**
-     * @return string
-     */
-    protected function getUsername()
-    {
-        return 'admin';
-    }
-
-    /**
-     * @return string
-     */
-    protected function getPassword()
-    {
-        return 'admin';
     }
 }

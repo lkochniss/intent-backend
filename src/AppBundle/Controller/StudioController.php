@@ -11,7 +11,7 @@ use AppBundle\Form\Type\StudioType;
 /**
  * Class StudioController
  */
-class StudioController extends AbstractRelatedController
+class StudioController extends AbstractCrudController
 {
     /**
      * @return Studio

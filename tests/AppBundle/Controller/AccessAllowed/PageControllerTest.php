@@ -1,6 +1,6 @@
 <?php
 /**
- * @package Test\AppBundle\Controller
+ * @package Test\AppBundle\Controller\AccessAllowed
  */
 
 namespace Test\AppBundle\Controller\AccessAllowed;
@@ -23,7 +23,8 @@ class PageControllerTest extends AbstractControllerTest
      */
     public function setUp()
     {
-        parent::setUp();
+        $this->setClient('Publishing Editor', 'publishing');
+        $this->setEntityManager();
 
         $repository = $this->getEntityManager()->getRepository('AppBundle:Page');
         $this->page = $repository->findBy(
@@ -81,20 +82,5 @@ class PageControllerTest extends AbstractControllerTest
         $crawler = $this->pageResponse('GET', '/page/');
 
         return null;
-    }
-
-    /**
-     * @return string
-     */
-    protected function getUsername()
-    {
-        return 'admin';
-    }
-    /**
-     * @return string
-     */
-    protected function getPassword()
-    {
-        return 'admin';
     }
 }

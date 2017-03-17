@@ -1,6 +1,6 @@
 <?php
 /**
- * @package Test\AppBundle\Controller
+ * @package Test\AppBundle\Controller\AccessAllowed
  */
 
 namespace Test\AppBundle\Controller\AccessAllowed;
@@ -23,7 +23,8 @@ class FilemanagerControllerTest extends AbstractControllerTest
      */
     public function setUp()
     {
-        parent::setUp();
+        $this->setClient('Publishing Editor', 'publishing');
+        $this->setEntityManager();
 
         $repository = $this->getEntityManager()->getRepository('AppBundle:Directory');
         $this->directory = $repository->findBy(

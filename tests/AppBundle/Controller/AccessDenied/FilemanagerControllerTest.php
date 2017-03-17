@@ -1,6 +1,6 @@
 <?php
 /**
- * @package Test\AppBundle\Controller
+ * @package Test\AppBundle\Controller\AccessDenied
  */
 
 namespace Test\AppBundle\Controller\AccessDenied;
@@ -23,7 +23,8 @@ class FilemanagerControllerAccessDeniedTest extends AbstractControllerTest
      */
     public function setUp()
     {
-        parent::setUp();
+        $this->setClient('0-Permission-User', 'no permission');
+        $this->setEntityManager();
 
         $repository = $this->getEntityManager()->getRepository('AppBundle:Directory');
         $this->directory = $repository->findBy(
@@ -81,20 +82,5 @@ class FilemanagerControllerAccessDeniedTest extends AbstractControllerTest
         $crawler = $this->pageResponse('GET', '/filemanager/1', 403);
 
         return null;
-    }
-
-    /**
-     * @return string
-     */
-    protected function getUsername()
-    {
-        return '0-Permission-User';
-    }
-    /**
-     * @return string
-     */
-    protected function getPassword()
-    {
-        return 'no permission';
     }
 }

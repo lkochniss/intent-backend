@@ -1,6 +1,6 @@
 <?php
 /**
- * @package Test\AppBundle\Controller
+ * @package Test\AppBundle\Controller\Content
  */
 
 namespace Test\AppBundle\Controller\Content;
@@ -23,7 +23,8 @@ class ExpansionControllerTest extends AbstractControllerTest
      */
     public function setUp()
     {
-        parent::setUp();
+        $this->setClient('admin', 'admin');
+        $this->setEntityManager();
 
         $repository = $this->getEntityManager()->getRepository('AppBundle:Expansion');
         $this->expansion = $repository->findBy(
@@ -106,21 +107,5 @@ class ExpansionControllerTest extends AbstractControllerTest
         $this->checkIfOneContentExist($crawler, sprintf('a[href="/expansion/%s/show"]', $this->expansion->getId()));
 
         return null;
-    }
-
-    /**
-     * @return string
-     */
-    protected function getUsername()
-    {
-        return 'admin';
-    }
-
-    /**
-     * @return string
-     */
-    protected function getPassword()
-    {
-        return 'admin';
     }
 }

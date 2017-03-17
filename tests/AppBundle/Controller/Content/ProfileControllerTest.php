@@ -1,6 +1,6 @@
 <?php
 /**
- * @package Test\AppBundle\Controller
+ * @package Test\AppBundle\Controller\Content
  */
 
 namespace Test\AppBundle\Controller\Content;
@@ -23,7 +23,8 @@ class ProfileControllerTest extends AbstractControllerTest
      */
     public function setUp()
     {
-        parent::setUp();
+        $this->setClient('admin', 'admin');
+        $this->setEntityManager();
 
         $repository = $this->getEntityManager()->getRepository('AppBundle:Profile');
         $this->profile = $repository->findBy(
@@ -80,21 +81,5 @@ class ProfileControllerTest extends AbstractControllerTest
         $this->checkIfContentExist($crawler, sprintf('a[href="/profile/%s/edit"]', $this->profile->getId()));
 
         return null;
-    }
-
-    /**
-     * @return string
-     */
-    protected function getUsername()
-    {
-        return 'admin';
-    }
-
-    /**
-     * @return string
-     */
-    protected function getPassword()
-    {
-        return 'admin';
     }
 }

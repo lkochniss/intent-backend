@@ -8,5 +8,6 @@ tag:
     list:           Tagübersicht
     name:           Name des Tags
     not_found:      Tag nicht gefunden
+    publish:        Tag veröffentlichen
     show:           Tag anzeigen
     submit:         Tag speichern

@@ -1,6 +1,6 @@
 <?php
 /**
- * @package Test\AppBundle\Controller
+ * @package Test\AppBundle\Controller\AccessAllowed
  */
 
 namespace Test\AppBundle\Controller\AccessAllowed;
@@ -23,7 +23,8 @@ class ExpansionControllerTest extends AbstractControllerTest
      */
     public function setUp()
     {
-        parent::setUp();
+        $this->setClient('Publishing Editor', 'publishing');
+        $this->setEntityManager();
 
         $repository = $this->getEntityManager()->getRepository('AppBundle:Expansion');
         $this->expansion = $repository->findBy(
@@ -80,20 +81,5 @@ class ExpansionControllerTest extends AbstractControllerTest
         $crawler = $this->pageResponse('GET', '/expansion/');
 
         return null;
-    }
-
-    /**
-     * @return string
-     */
-    protected function getUsername()
-    {
-        return 'Publishing Editor';
-    }
-    /**
-     * @return string
-     */
-    protected function getPassword()
-    {
-        return 'publishing';
     }
 }
