@@ -1,16 +1,17 @@
 <?php
 /**
- * @package Test\AppBundle\Controller
+ * @package Test\AppBundle\Controller\Content
  */
 
-namespace Test\AppBundle\Controller;
+namespace Test\AppBundle\Controller\Content;
 
 use AppBundle\Entity\Franchise;
+use Test\AppBundle\AbstractWebTest;
 
 /**
  * Class FranchiseControllerTest
  */
-class FranchiseControllerTest extends AbstractControllerTest
+class FranchiseControllerTest extends AbstractWebTest
 {
     /**
      * @var Franchise
@@ -22,7 +23,8 @@ class FranchiseControllerTest extends AbstractControllerTest
      */
     public function setUp()
     {
-        parent::setUp();
+        $this->setClient('admin', 'admin');
+        $this->setEntityManager();
 
         $repository = $this->getEntityManager()->getRepository('AppBundle:Franchise');
         $this->franchise = $repository->findBy(

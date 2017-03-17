@@ -1,16 +1,17 @@
 <?php
 /**
- * @package Test\AppBundle\Controller
+ * @package Test\AppBundle\Controller\Content
  */
 
-namespace Test\AppBundle\Controller;
+namespace Test\AppBundle\Controller\Content;
 
 use AppBundle\Entity\Profile;
+use Test\AppBundle\AbstractWebTest;
 
 /**
  * Class ProfileControllerTest
  */
-class ProfileControllerTest extends AbstractControllerTest
+class ProfileControllerTest extends AbstractWebTest
 {
     /**
      * @var Profile
@@ -22,7 +23,8 @@ class ProfileControllerTest extends AbstractControllerTest
      */
     public function setUp()
     {
-        parent::setUp();
+        $this->setClient('admin', 'admin');
+        $this->setEntityManager();
 
         $repository = $this->getEntityManager()->getRepository('AppBundle:Profile');
         $this->profile = $repository->findBy(

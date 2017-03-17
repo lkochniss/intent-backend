@@ -11,7 +11,7 @@ use AppBundle\Form\Type\TagType;
 /**
  * Class TagController
  */
-class TagController extends AbstractMetaController
+class TagController extends AbstractCrudController
 {
     /**
      * @return Tag

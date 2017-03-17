@@ -8,7 +8,7 @@ security:
             entity: { class: AppBundle:User, property: username}
 
     role_hierarchy:
-        ROLE_ADMIN : [ ROLE_READ_ARTICLE, ROLE_WRITE_ARTICLE, ROLE_PUBLISH_ARTICLE, ROLE_READ_META, ROLE_WRITE_META, ROLE_PUBLISH_META ]
+        ROLE_ADMIN : [ ROLE_USER, ROLE_READ_ARTICLE, ROLE_WRITE_ARTICLE, ROLE_PUBLISH_ARTICLE, ROLE_READ_META, ROLE_WRITE_META, ROLE_PUBLISH_META ]
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -30,4 +30,4 @@ security:
         - { path: ^/reset, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: http }
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: http }
         - { path: ^/login_check, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: http }
-        - { path: ^/, roles: [ROLE_ADMIN, ROLE_READ_ARTICLE, ROLE_WRITE_ARTICLE, ROLE_PUBLISH_ARTICLE, ROLE_READ_META, ROLE_WRITE_META, ROLE_PUBLISH_META ], requires_channel: http }
+        - { path: ^/, roles: [ ROLE_USER ], requires_channel: http }

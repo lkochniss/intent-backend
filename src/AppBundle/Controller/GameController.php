@@ -11,7 +11,7 @@ use AppBundle\Form\Type\GameType;
 /**
  * Class GameController
  */
-class GameController extends AbstractRelatedController
+class GameController extends AbstractCrudController
 {
     /**
      * @return Game

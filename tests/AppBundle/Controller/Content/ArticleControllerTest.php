@@ -1,16 +1,17 @@
 <?php
 /**
- * @package Test\AppBundle\Controller
+ * @package Test\AppBundle\Controller\Content
  */
 
-namespace Test\AppBundle\Controller;
+namespace Test\AppBundle\Controller\Content;
 
 use AppBundle\Entity\Article;
+use Test\AppBundle\AbstractWebTest;
 
 /**
  * Class ArticleControllerTest
  */
-class ArticleControllerTest extends AbstractControllerTest
+class ArticleControllerTest extends AbstractWebTest
 {
     /**
      * @var Article
@@ -22,7 +23,8 @@ class ArticleControllerTest extends AbstractControllerTest
      */
     public function setUp()
     {
-        parent::setUp();
+        $this->setClient('admin', 'admin');
+        $this->setEntityManager();
 
         $repository = $this->getEntityManager()->getRepository('AppBundle:Article');
         $this->article = $repository->findBy(

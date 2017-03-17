@@ -11,7 +11,7 @@ use AppBundle\Form\Type\ArticleType;
 /**
  * Class ArticleController
  */
-class ArticleController extends AbstractMetaController
+class ArticleController extends AbstractCrudController
 {
     /**
      * @return Article

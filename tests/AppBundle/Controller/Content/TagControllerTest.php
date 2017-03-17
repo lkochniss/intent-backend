@@ -1,16 +1,17 @@
 <?php
 /**
- * @package Test\AppBundle\Controller
+ * @package Test\AppBundle\Controller\Content
  */
 
-namespace Test\AppBundle\Controller;
+namespace Test\AppBundle\Controller\Content;
 
 use AppBundle\Entity\Tag;
+use Test\AppBundle\AbstractWebTest;
 
 /**
  * Class TagControllerTest
  */
-class TagControllerTest extends AbstractControllerTest
+class TagControllerTest extends AbstractWebTest
 {
     /**
      * @var Tag
@@ -22,7 +23,8 @@ class TagControllerTest extends AbstractControllerTest
      */
     public function setUp()
     {
-        parent::setUp();
+        $this->setClient('admin', 'admin');
+        $this->setEntityManager();
 
         $repository = $this->getEntityManager()->getRepository('AppBundle:Tag');
         $this->tag = $repository->findBy(

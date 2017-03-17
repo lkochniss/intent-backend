@@ -11,7 +11,7 @@ use AppBundle\Form\Type\FranchiseType;
 /**
  * Class FranchiseController
  */
-class FranchiseController extends AbstractRelatedController
+class FranchiseController extends AbstractCrudController
 {
     /**
      * @return Franchise

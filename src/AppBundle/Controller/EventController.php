@@ -11,7 +11,7 @@ use AppBundle\Form\Type\EventType;
 /**
  * Class EventController
  */
-class EventController extends AbstractMetaController
+class EventController extends AbstractCrudController
 {
     /**
      * @return Event

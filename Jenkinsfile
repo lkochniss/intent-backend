@@ -90,10 +90,10 @@ node {
         sh "${php} vendor/bin/phpunit --group=studio"
     }, tagTests: {
         sh "${php} vendor/bin/phpunit --group=tag"
+    }, twigTests: {
+        sh "${php} vendor/bin/phpunit --group=twig"
     }, userTests: {
         sh "${php} vendor/bin/phpunit --group=user"
-    }, otherTests: {
-        sh "${php} vendor/bin/phpunit --group=misc"
     }
     failFast: false
 }

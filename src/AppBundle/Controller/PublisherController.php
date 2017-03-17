@@ -11,7 +11,7 @@ use AppBundle\Form\Type\PublisherType;
 /**
  * Class PublisherController
  */
-class PublisherController extends AbstractRelatedController
+class PublisherController extends AbstractCrudController
 {
     /**
      * @return Publisher

@@ -1,16 +1,17 @@
 <?php
 /**
- * @package Test\AppBundle\Controller
+ * @package Test\AppBundle\Controller\Content
  */
 
-namespace Test\AppBundle\Controller;
+namespace Test\AppBundle\Controller\Content;
 
 use AppBundle\Entity\Game;
+use Test\AppBundle\AbstractWebTest;
 
 /**
  * Class GameControllerTest
  */
-class GameControllerTest extends AbstractControllerTest
+class GameControllerTest extends AbstractWebTest
 {
     /**
      * @var Game
@@ -22,7 +23,8 @@ class GameControllerTest extends AbstractControllerTest
      */
     public function setUp()
     {
-        parent::setUp();
+        $this->setClient('admin', 'admin');
+        $this->setEntityManager();
 
         $repository = $this->getEntityManager()->getRepository('AppBundle:Game');
         $this->game = $repository->findBy(

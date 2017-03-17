@@ -1,16 +1,17 @@
 <?php
 /**
- * @package Test\AppBundle\Controller
+ * @package Test\AppBundle\Controller\Content
  */
 
-namespace Test\AppBundle\Controller;
+namespace Test\AppBundle\Controller\Content;
 
 use AppBundle\Entity\Expansion;
+use Test\AppBundle\AbstractWebTest;
 
 /**
  * Class ExpansionControllerTest
  */
-class ExpansionControllerTest extends AbstractControllerTest
+class ExpansionControllerTest extends AbstractWebTest
 {
     /**
      * @var Expansion
@@ -22,7 +23,8 @@ class ExpansionControllerTest extends AbstractControllerTest
      */
     public function setUp()
     {
-        parent::setUp();
+        $this->setClient('admin', 'admin');
+        $this->setEntityManager();
 
         $repository = $this->getEntityManager()->getRepository('AppBundle:Expansion');
         $this->expansion = $repository->findBy(

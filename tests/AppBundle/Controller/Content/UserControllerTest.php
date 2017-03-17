@@ -1,16 +1,17 @@
 <?php
 /**
- * @package Test\AppBundle\Controller
+ * @package Test\AppBundle\Controller\Content
  */
 
-namespace Test\AppBundle\Controller;
+namespace Test\AppBundle\Controller\Content;
 
 use AppBundle\Entity\User;
+use Test\AppBundle\AbstractWebTest;
 
 /**
  * Class UserControllerTest
  */
-class UserControllerTest extends AbstractControllerTest
+class UserControllerTest extends AbstractWebTest
 {
     /**
      * @var User
@@ -22,7 +23,8 @@ class UserControllerTest extends AbstractControllerTest
      */
     public function setUp()
     {
-        parent::setUp();
+        $this->setClient('admin', 'admin');
+        $this->setEntityManager();
 
         $repository = $this->getEntityManager()->getRepository('AppBundle:User');
         $this->user = $repository->findBy(

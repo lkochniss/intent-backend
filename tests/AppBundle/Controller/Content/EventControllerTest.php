@@ -1,16 +1,17 @@
 <?php
 /**
- * @package Test\AppBundle\Controller
+ * @package Test\AppBundle\Controller\Content
  */
 
-namespace Test\AppBundle\Controller;
+namespace Test\AppBundle\Controller\Content;
 
 use AppBundle\Entity\Event;
+use Test\AppBundle\AbstractWebTest;
 
 /**
  * Class EventControllerTest
  */
-class EventControllerTest extends AbstractControllerTest
+class EventControllerTest extends AbstractWebTest
 {
     /**
      * @var Event
@@ -22,7 +23,8 @@ class EventControllerTest extends AbstractControllerTest
      */
     public function setUp()
     {
-        parent::setUp();
+        $this->setClient('admin', 'admin');
+        $this->setEntityManager();
 
         $repository = $this->getEntityManager()->getRepository('AppBundle:Event');
         $this->event = $repository->findBy(

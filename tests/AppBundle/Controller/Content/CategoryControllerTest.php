@@ -1,16 +1,17 @@
 <?php
 /**
- * @package Test\AppBundle\Controller
+ * @package Test\AppBundle\Controller\Content
  */
 
-namespace Test\AppBundle\Controller;
+namespace Test\AppBundle\Controller\Content;
 
 use AppBundle\Entity\Category;
+use Test\AppBundle\AbstractWebTest;
 
 /**
  * Class CategoryControllerTest
  */
-class CategoryControllerTest extends AbstractControllerTest
+class CategoryControllerTest extends AbstractWebTest
 {
     /**
      * @var Category
@@ -22,7 +23,8 @@ class CategoryControllerTest extends AbstractControllerTest
      */
     public function setUp()
     {
-        parent::setUp();
+        $this->setClient('admin', 'admin');
+        $this->setEntityManager();
 
         $repository = $this->getEntityManager()->getRepository('AppBundle:Category');
         $this->category = $repository->findBy(

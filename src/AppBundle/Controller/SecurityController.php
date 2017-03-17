@@ -60,7 +60,7 @@ class SecurityController extends Controller
 
                     $user->setValidUntil(new \DateTime('+2 hours'));
 
-                    $this->getDoctrine()->getRepository('AppBundle:User')->save($user);
+                    $repository->save($user);
                 }
 
                 return $this->redirectToRoute('intent_backend_login');

@@ -1,16 +1,17 @@
 <?php
 /**
- * @package Test\AppBundle\Controller
+ * @package Test\AppBundle\Controller\Content
  */
 
-namespace Test\AppBundle\Controller;
+namespace Test\AppBundle\Controller\Content;
 
 use AppBundle\Entity\Page;
+use Test\AppBundle\AbstractWebTest;
 
 /**
  * Class PageControllerTest
  */
-class PageControllerTest extends AbstractControllerTest
+class PageControllerTest extends AbstractWebTest
 {
     /**
      * @var Page
@@ -22,7 +23,8 @@ class PageControllerTest extends AbstractControllerTest
      */
     public function setUp()
     {
-        parent::setUp();
+        $this->setClient('admin', 'admin');
+        $this->setEntityManager();
 
         $repository = $this->getEntityManager()->getRepository('AppBundle:Page');
         $this->page = $repository->findBy(

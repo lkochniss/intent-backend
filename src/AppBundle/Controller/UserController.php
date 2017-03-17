@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Class UserController
@@ -163,6 +164,11 @@ class UserController extends AbstractCrudController
     public function passwordAction($id, Request $request)
     {
         $user = $this->getDoctrine()->getRepository('AppBundle:User')->find($id);
+
+        if ($this->get('security.token_storage')->getToken()->getUser() != $user) {
+            throw new AccessDeniedException($this->getAccessDeniedMessage());
+        }
+
         $form = $this->createForm(UserPasswordType::class, $user);
 
         if (in_array($request->getMethod(), ['POST'])) {
@@ -235,5 +241,29 @@ class UserController extends AbstractCrudController
     protected function getTranslationDomain()
     {
         return 'user';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getReadAccessLevel()
+    {
+        return 'ROLE_ADMIN';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getWriteAccessLevel()
+    {
+        return 'ROLE_ADMIN';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getPublishAccessLevel()
+    {
+        return 'ROLE_ADMIN';
     }
 }

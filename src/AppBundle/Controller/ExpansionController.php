@@ -7,11 +7,14 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Expansion;
 use AppBundle\Form\Type\ExpansionType;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class ExpansionController
  */
-class ExpansionController extends AbstractRelatedController
+class ExpansionController extends AbstractCrudController
 {
     /**
      * @return Expansion

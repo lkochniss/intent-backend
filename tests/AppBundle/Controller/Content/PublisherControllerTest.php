@@ -1,16 +1,17 @@
 <?php
 /**
- * @package Test\AppBundle\Controller
+ * @package Test\AppBundle\Controller\Content
  */
 
-namespace Test\AppBundle\Controller;
+namespace Test\AppBundle\Controller\Content;
 
 use AppBundle\Entity\Publisher;
+use Test\AppBundle\AbstractWebTest;
 
 /**
  * Class PublisherControllerTest
  */
-class PublisherControllerTest extends AbstractControllerTest
+class PublisherControllerTest extends AbstractWebTest
 {
     /**
      * @var Publisher
@@ -22,7 +23,8 @@ class PublisherControllerTest extends AbstractControllerTest
      */
     public function setUp()
     {
-        parent::setUp();
+        $this->setClient('admin', 'admin');
+        $this->setEntityManager();
 
         $repository = $this->getEntityManager()->getRepository('AppBundle:Publisher');
         $this->publisher = $repository->findBy(

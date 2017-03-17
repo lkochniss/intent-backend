@@ -1,16 +1,17 @@
 <?php
 /**
- * @package Test\AppBundle\Controller
+ * @package Test\AppBundle\Controller\Content
  */
 
-namespace Test\AppBundle\Controller;
+namespace Test\AppBundle\Controller\Content;
 
 use AppBundle\Entity\Directory;
+use Test\AppBundle\AbstractWebTest;
 
 /**
  * Class FilemanagerControllerTest
  */
-class FilemanagerControllerTest extends AbstractControllerTest
+class FilemanagerControllerTest extends AbstractWebTest
 {
     /**
      * @var Directory
@@ -22,7 +23,8 @@ class FilemanagerControllerTest extends AbstractControllerTest
      */
     public function setUp()
     {
-        parent::setUp();
+        $this->setClient('admin', 'admin');
+        $this->setEntityManager();
 
         $repository = $this->getEntityManager()->getRepository('AppBundle:Directory');
         $this->directory = $repository->findBy(
