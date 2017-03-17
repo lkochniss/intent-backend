@@ -1,9 +1,9 @@
 <?php
 /**
- * @package Test\AppBundle\Controller
+ * @package Test\AppBundle
  */
 
-namespace Test\AppBundle\Controller;
+namespace Test\AppBundle;
 
 use Doctrine\ORM\EntityManager;
 use Liip\FunctionalTestBundle\Test\WebTestCase;
@@ -11,11 +11,11 @@ use Symfony\Component\HttpKernel\Client;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
- * Class AbstractControllerTest
+ * Class AbstractWebTest
  *
  * @group legacy
  */
-abstract class AbstractControllerTest extends WebTestCase
+abstract class AbstractWebTest extends WebTestCase
 {
     /**
      * @var Client

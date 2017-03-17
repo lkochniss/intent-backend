@@ -6,12 +6,12 @@
 namespace Test\AppBundle\Controller\AccessDenied;
 
 use AppBundle\Entity\Directory;
-use Test\AppBundle\Controller\AbstractControllerTest;
+use Test\AppBundle\AbstractWebTest;
 
 /**
  * Class FilemanagerControllerAccessDeniedTest
  */
-class FilemanagerControllerAccessDeniedTest extends AbstractControllerTest
+class FilemanagerControllerAccessDeniedTest extends AbstractWebTest
 {
     /**
      * @var Directory

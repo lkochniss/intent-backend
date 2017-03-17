@@ -6,12 +6,12 @@
 namespace Test\AppBundle\Controller\Content;
 
 use AppBundle\Entity\User;
-use Test\AppBundle\Controller\AbstractControllerTest;
+use Test\AppBundle\AbstractWebTest;
 
 /**
  * Class UserControllerTest
  */
-class UserControllerTest extends AbstractControllerTest
+class UserControllerTest extends AbstractWebTest
 {
     /**
      * @var User

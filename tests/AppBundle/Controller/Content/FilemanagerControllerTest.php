@@ -6,12 +6,12 @@
 namespace Test\AppBundle\Controller\Content;
 
 use AppBundle\Entity\Directory;
-use Test\AppBundle\Controller\AbstractControllerTest;
+use Test\AppBundle\AbstractWebTest;
 
 /**
  * Class FilemanagerControllerTest
  */
-class FilemanagerControllerTest extends AbstractControllerTest
+class FilemanagerControllerTest extends AbstractWebTest
 {
     /**
      * @var Directory

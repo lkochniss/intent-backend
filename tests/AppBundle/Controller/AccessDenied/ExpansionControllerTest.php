@@ -6,12 +6,12 @@
 namespace Test\AppBundle\Controller\AccessDenied;
 
 use AppBundle\Entity\Expansion;
-use Test\AppBundle\Controller\AbstractControllerTest;
+use Test\AppBundle\AbstractWebTest;
 
 /**
  * Class ExpansionControllerAccessDeniedTest
  */
-class ExpansionControllerAccessDeniedTest extends AbstractControllerTest
+class ExpansionControllerAccessDeniedTest extends AbstractWebTest
 {
     /**
      * @var Expansion

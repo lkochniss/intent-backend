@@ -6,12 +6,12 @@
 namespace Test\AppBundle\Controller\AccessAllowed;
 
 use AppBundle\Entity\Franchise;
-use Test\AppBundle\Controller\AbstractControllerTest;
+use Test\AppBundle\AbstractWebTest;
 
 /**
  * Class FranchiseControllerTest
  */
-class FranchiseControllerTest extends AbstractControllerTest
+class FranchiseControllerTest extends AbstractWebTest
 {
     /**
      * @var Franchise

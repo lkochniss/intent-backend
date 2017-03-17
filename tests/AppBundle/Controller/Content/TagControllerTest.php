@@ -6,12 +6,12 @@
 namespace Test\AppBundle\Controller\Content;
 
 use AppBundle\Entity\Tag;
-use Test\AppBundle\Controller\AbstractControllerTest;
+use Test\AppBundle\AbstractWebTest;
 
 /**
  * Class TagControllerTest
  */
-class TagControllerTest extends AbstractControllerTest
+class TagControllerTest extends AbstractWebTest
 {
     /**
      * @var Tag

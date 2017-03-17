@@ -6,12 +6,12 @@
 namespace Test\AppBundle\Controller\AccessDenied;
 
 use AppBundle\Entity\Page;
-use Test\AppBundle\Controller\AbstractControllerTest;
+use Test\AppBundle\AbstractWebTest;
 
 /**
  * Class PageControllerTest
  */
-class PageControllerTest extends AbstractControllerTest
+class PageControllerTest extends AbstractWebTest
 {
     /**
      * @var Page

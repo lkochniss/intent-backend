@@ -6,12 +6,12 @@
 namespace Test\AppBundle\Controller\AccessDenied;
 
 use AppBundle\Entity\Category;
-use Test\AppBundle\Controller\AbstractControllerTest;
+use Test\AppBundle\AbstractWebTest;
 
 /**
  * Class CategoryControllerAccessDeniedTest
  */
-class CategoryControllerAccessDeniedTest extends AbstractControllerTest
+class CategoryControllerAccessDeniedTest extends AbstractWebTest
 {
     /**
      * @var Category

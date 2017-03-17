@@ -6,12 +6,12 @@
 namespace Test\AppBundle\Controller\Content;
 
 use AppBundle\Entity\Profile;
-use Test\AppBundle\Controller\AbstractControllerTest;
+use Test\AppBundle\AbstractWebTest;
 
 /**
  * Class ProfileControllerTest
  */
-class ProfileControllerTest extends AbstractControllerTest
+class ProfileControllerTest extends AbstractWebTest
 {
     /**
      * @var Profile

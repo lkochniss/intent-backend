@@ -6,12 +6,12 @@
 namespace Test\AppBundle\Controller\AccessAllowed;
 
 use AppBundle\Entity\Event;
-use Test\AppBundle\Controller\AbstractControllerTest;
+use Test\AppBundle\AbstractWebTest;
 
 /**
  * Class EventControllerAccessDeniedTest
  */
-class EventControllerTest extends AbstractControllerTest
+class EventControllerTest extends AbstractWebTest
 {
     /**
      * @var Event

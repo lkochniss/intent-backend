@@ -6,12 +6,12 @@
 namespace Test\AppBundle\Controller\AccessAllowed;
 
 use AppBundle\Entity\Category;
-use Test\AppBundle\Controller\AbstractControllerTest;
+use Test\AppBundle\AbstractWebTest;
 
 /**
  * Class CategoryControllerTest
  */
-class CategoryControllerTest extends AbstractControllerTest
+class CategoryControllerTest extends AbstractWebTest
 {
     /**
      * @var Category

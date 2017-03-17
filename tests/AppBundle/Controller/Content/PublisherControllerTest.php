@@ -6,12 +6,12 @@
 namespace Test\AppBundle\Controller\Content;
 
 use AppBundle\Entity\Publisher;
-use Test\AppBundle\Controller\AbstractControllerTest;
+use Test\AppBundle\AbstractWebTest;
 
 /**
  * Class PublisherControllerTest
  */
-class PublisherControllerTest extends AbstractControllerTest
+class PublisherControllerTest extends AbstractWebTest
 {
     /**
      * @var Publisher

@@ -6,12 +6,12 @@
 namespace Test\AppBundle\Controller\AccessDenied;
 
 use AppBundle\Entity\Game;
-use Test\AppBundle\Controller\AbstractControllerTest;
+use Test\AppBundle\AbstractWebTest;
 
 /**
  * Class GameControllerAccessDeniedTest
  */
-class GameControllerAccessDeniedTest extends AbstractControllerTest
+class GameControllerAccessDeniedTest extends AbstractWebTest
 {
     /**
      * @var Game

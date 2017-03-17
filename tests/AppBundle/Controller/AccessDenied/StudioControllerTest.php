@@ -6,12 +6,12 @@
 namespace Test\AppBundle\Controller\AccessDenied;
 
 use AppBundle\Entity\Studio;
-use Test\AppBundle\Controller\AbstractControllerTest;
+use Test\AppBundle\AbstractWebTest;
 
 /**
  * Class StudioControllerTest
  */
-class StudioControllerTest extends AbstractControllerTest
+class StudioControllerTest extends AbstractWebTest
 {
     /**
      * @var Studio

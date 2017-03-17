@@ -6,12 +6,12 @@
 namespace Test\AppBundle\Controller\Content;
 
 use AppBundle\Entity\Page;
-use Test\AppBundle\Controller\AbstractControllerTest;
+use Test\AppBundle\AbstractWebTest;
 
 /**
  * Class PageControllerTest
  */
-class PageControllerTest extends AbstractControllerTest
+class PageControllerTest extends AbstractWebTest
 {
     /**
      * @var Page

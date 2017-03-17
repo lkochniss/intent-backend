@@ -6,12 +6,12 @@
 namespace Test\AppBundle\Controller\Content;
 
 use AppBundle\Entity\Event;
-use Test\AppBundle\Controller\AbstractControllerTest;
+use Test\AppBundle\AbstractWebTest;
 
 /**
  * Class EventControllerTest
  */
-class EventControllerTest extends AbstractControllerTest
+class EventControllerTest extends AbstractWebTest
 {
     /**
      * @var Event

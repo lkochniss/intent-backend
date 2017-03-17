@@ -6,12 +6,12 @@
 namespace Test\AppBundle\Controller\Content;
 
 use AppBundle\Entity\Game;
-use Test\AppBundle\Controller\AbstractControllerTest;
+use Test\AppBundle\AbstractWebTest;
 
 /**
  * Class GameControllerTest
  */
-class GameControllerTest extends AbstractControllerTest
+class GameControllerTest extends AbstractWebTest
 {
     /**
      * @var Game
