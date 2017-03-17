@@ -10,3 +10,8 @@ intent-backend
 I wanted to get rid of my WordPress app by building a Symfony solution. I quickly realized, that this 
 might be impossible and then I stopped working on the WordPress app. So instead of deleting or abandoning
 the whole project I decided to use it for testing some of my ideas.
+
+## Wiki
+
+Use the [Wiki](https://github.com/lkochniss/intent-backend/wiki) for more information like installation, status of the 
+application or upcoming features.
