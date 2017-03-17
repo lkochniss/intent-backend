@@ -16,7 +16,7 @@ class AccessUserTest extends AbstractWebTest
     /**
      * @var User $user
      */
-    var $user;
+    protected $user;
 
     /**
      * @return $this
@@ -26,7 +26,9 @@ class AccessUserTest extends AbstractWebTest
         $this->setClient('Publishing Editor', 'publishing');
         $this->setEntityManager();
 
-        $this->user = $this->getEntityManager()->getRepository('AppBundle:User')->findOneBy(array('username' => 'Publishing Editor'));
+        $this->user = $this->getEntityManager()->getRepository('AppBundle:User')->findOneBy(
+            array('username' => 'Publishing Editor')
+        );
 
         return $this;
     }

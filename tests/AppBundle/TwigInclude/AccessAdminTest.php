@@ -17,7 +17,7 @@ class AccessAdminTest extends AbstractWebTest
     /**
      * @var User $user
      */
-    var $user;
+    protected $user;
 
     /**
      * @return $this
@@ -27,7 +27,9 @@ class AccessAdminTest extends AbstractWebTest
         $this->setClient('admin', 'admin');
         $this->setEntityManager();
 
-        $this->user = $this->getEntityManager()->getRepository('AppBundle:User')->findOneBy(array('username' => 'admin'));
+        $this->user = $this->getEntityManager()->getRepository('AppBundle:User')->findOneBy(
+            array('username' => 'admin')
+        );
 
         return $this;
     }
