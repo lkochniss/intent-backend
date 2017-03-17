@@ -6,6 +6,12 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\AbstractModel;
+use AppBundle\Entity\Franchise;
+use AppBundle\Entity\Game;
+use AppBundle\Entity\Publisher;
+use AppBundle\Entity\Related;
+use AppBundle\Entity\Studio;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -90,10 +96,16 @@ abstract class AbstractCrudController extends Controller
             );
         }
 
+        $categories = null;
+        if ($entity instanceof Related){
+            $categories = $this->loopRelated($entity);
+        }
+
         return $this->render(
             sprintf('%s/show.html.twig', $this->getTemplateBasePath()),
             array(
                 'entity' => $entity,
+                'categories' => $categories
             )
         );
     }
@@ -243,4 +255,95 @@ abstract class AbstractCrudController extends Controller
             )
         );
     }
+
+    /**
+     * @param Related $entity Related entity.
+     * @return array
+     */
+    private function loopRelated(Related $entity)
+    {
+        $franchises = null;
+        $games = null;
+        $expansions = null;
+        $resultList = $this->getRelatedArticles($entity);
+        if ($entity instanceof Publisher) {
+            $franchises = $entity->getFranchises();
+        } elseif ($entity instanceof Franchise) {
+            $games = $entity->getGames();
+        } elseif ($entity instanceof Studio) {
+            $franchises = $entity->getFranchises();
+            $games = $entity->getGames();
+        } elseif ($entity instanceof Game) {
+            $expansions = $entity->getExpansions();
+        }
+        if (!is_null($franchises)) {
+            foreach ($franchises as $franchise) {
+                $resultList = array_merge($resultList, $this->getRelatedArticles($franchise));
+                if (!is_null($franchise->getGames())) {
+                    if (!is_null($games)) {
+                        $games = array_merge($games, $franchise->getGames());
+                    } else {
+                        $games = $franchise->getGames();
+                    }
+                }
+            }
+        }
+        if (!is_null($games)) {
+            foreach ($games as $game) {
+                $resultList = array_merge($resultList, $this->getRelatedArticles($game));
+                if (!is_null($game->getExpansions())) {
+                    if (!is_null($expansions)) {
+                        $expansions = array_merge($expansions, $game->getExpansions());
+                    } else {
+                        $expansions = $game->getExpansions();
+                    }
+                }
+            }
+        }
+        if (!is_null($expansions)) {
+            foreach ($expansions as $expansion) {
+                $resultList = array_merge($resultList, $this->getRelatedArticles($expansion));
+            }
+        }
+        return $this->mapArticlesToCategories($resultList);
+    }
+    /**
+     * @param Related $entity Related entity.
+     * @return \AppBundle\Entity\Article[]|array
+     */
+    private function getRelatedArticles(Related $entity)
+    {
+        return $this->getDoctrine()->getRepository('AppBundle:Article')->findBy(
+            array('related' => $entity),
+            array('publishAt' => 'DESC')
+        );
+    }
+    /**
+     * @param array $articles Array of articles.
+     * @return array
+     */
+    private function mapArticlesToCategories(array $articles)
+    {
+        $categories = $this->getDoctrine()->getRepository('AppBundle:Category')->findBy(
+            array(),
+            array('priority' => 'ASC')
+        );
+        $articlesInCategory = array();
+        foreach ($categories as $category) {
+            $result = new ArrayCollection();
+            foreach ($articles as $article) {
+                if ($article->getCategory() == $category) {
+                    $result->add($article);
+                }
+                if ($result->count() == 5) {
+                    break;
+                }
+            }
+            if ($result->count() > 0) {
+                $articlesInCategory[$category->getName()] = $result->toArray();
+            }
+        }
+        return $articlesInCategory;
+    }
+
 }

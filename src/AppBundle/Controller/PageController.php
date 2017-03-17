@@ -66,7 +66,7 @@ class PageController extends AbstractCrudController
      */
     protected function getReadAccessLevel()
     {
-        return 'ROLE_ADMIN';
+        return 'ROLE_READ_ARTICLE';
     }
 
     /**
@@ -74,7 +74,7 @@ class PageController extends AbstractCrudController
      */
     protected function getWriteAccessLevel()
     {
-        return 'ROLE_ADMIN';
+        return 'ROLE_WRITE_ARTICLE';
     }
 
     /**
@@ -82,6 +82,6 @@ class PageController extends AbstractCrudController
      */
     protected function getPublishAccessLevel()
     {
-        return 'ROLE_ADMIN';
+        return 'ROLE_PUBLISH_ARTICLE';
     }
 }
