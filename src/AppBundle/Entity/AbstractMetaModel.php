@@ -76,7 +76,7 @@ abstract class AbstractMetaModel extends AbstractModel
     /**
      * @return string
      */
-    public function getSlug()
+    public function getSlug() : string
     {
         return $this->slug;
     }
@@ -95,7 +95,7 @@ abstract class AbstractMetaModel extends AbstractModel
     /**
      * @return boolean
      */
-    public function isPublished()
+    public function isPublished() : bool
     {
         return $this->published;
     }

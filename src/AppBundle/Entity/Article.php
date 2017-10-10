@@ -102,276 +102,231 @@ class Article extends AbstractModel
     }
 
     /**
-     * @param String $title The title of the entity.
-     * @return $this
+     * @param String $title
      */
     public function setTitle($title)
     {
         $this->title = $title;
-
-        return $this;
     }
 
     /**
      * @return string
      */
-    public function getTitle()
+    public function getTitle() : string
     {
         return $this->title;
     }
 
     /**
-     * @param String $slug The automatic generated slug.
-     * @return $this
+     * @param String $slug
      */
     public function setSlug($slug)
     {
         $this->slug = $slug;
-
-        return $this;
     }
 
     /**
      * @return string
      */
-    public function getSlug()
+    public function getSlug() : string
     {
         return $this->slug;
     }
 
     /**
-     * @param String $content Set the written content.
-     * @return $this
+     * @param String $content
      */
     public function setContent($content)
     {
         $this->content = $content;
-
-        return $this;
     }
 
     /**
      * @return string
      */
-    public function getContent()
+    public function getContent() : string
     {
         return $this->content;
     }
 
     /**
-     * @param \DateTime $publishAt Set the date when the entity should be published.
-     * @return $this
+     * @param \DateTime $publishAt
      */
     public function setPublishAt(\DateTime $publishAt)
     {
         $this->publishAt = $publishAt;
-
-        return $this;
     }
 
     /**
      * @return \DateTime
      */
-    public function getPublishAt()
+    public function getPublishAt() : \DateTime
     {
         return $this->publishAt;
     }
 
     /**
-     * @param boolean $published Set true when publishing to frontend returns true.
-     * @return $this
+     * @param boolean $published
      */
     public function setPublished($published)
     {
         $this->published = $published;
-
-        return $this;
     }
 
     /**
      * @return boolean
      */
-    public function isPublished()
+    public function isPublished() : bool
     {
         return $this->published;
     }
 
     /**
-     * @param string $slideshow Set slideshow.
-     * @return $this
+     * @param string $slideshow
      */
     public function setSlideshow($slideshow)
     {
         $this->slideshow = $slideshow;
-
-        return $this;
     }
 
     /**
      * @return boolean
      */
-    public function isSlideshow()
+    public function isSlideshow() : bool
     {
         return $this->slideshow;
     }
 
     /**
-     * @param Category $category Set category.
-     * @return $this
+     * @param Category $category
      */
     public function setCategory(Category $category = null)
     {
         $this->category = $category;
-
-        return $this;
     }
 
     /**
      * @return Category
      */
-    public function getCategory()
+    public function getCategory() : Category
     {
         return $this->category;
     }
 
     /**
-     * @param User|null $user Set createdBy user.
-     * @return $this
+     * @param User|null $user
      */
     public function setCreatedBy(User $user = null)
     {
         $this->createdBy = $user;
-
-        return $this;
     }
 
     /**
      * @return User
      */
-    public function getCreatedBy()
+    public function getCreatedBy() : User
     {
         return $this->createdBy;
     }
 
     /**
-     * @param User|null $user Set modifiedBy user.
-     * @return $this
+     * @param User|null $user
      */
     public function setModifiedBy(User $user = null)
     {
         $this->modifiedBy = $user;
-
-        return $this;
     }
 
     /**
      * @return User
      */
-    public function getModifiedBy()
+    public function getModifiedBy() : User
     {
         return $this->modifiedBy;
     }
 
     /**
-     * @param Event|null $event Set event.
-     * @return $this
+     * @param Event|null $event
      */
     public function setEvent(Event $event = null)
     {
         $this->event = $event;
-
-        return $this;
     }
 
     /**
      * @return Event
      */
-    public function getEvent()
+    public function getEvent() : Event
     {
 
         return $this->event;
     }
 
     /**
-     * @param Related|null $related Set Related.
-     * @return $this
+     * @param Related|null
      */
     public function setRelated(Related $related = null)
     {
         $this->related = $related;
-
-        return $this;
     }
 
     /**
      * @return Related
      */
-    public function getRelated()
+    public function getRelated() : Related
     {
 
         return $this->related;
     }
 
     /**
-     * @param Image|null $thumbnail Set Thumbnail.
-     * @return $this
+     * @param Image|null $thumbnail
      */
     public function setThumbnail(Image $thumbnail = null)
     {
         $this->thumbnail = $thumbnail;
-
-        return $this;
     }
 
     /**
      * @return Image
      */
-    public function getThumbnail()
+    public function getThumbnail() : Image
     {
         return $this->thumbnail;
     }
 
     /**
-     * @param Tag $tag Add tag to array.
-     * @return $this
+     * @param Tag $tag
      */
     public function addTag(Tag $tag)
     {
         if (!$this->tags->contains($tag)) {
             $this->tags->add($tag);
         }
-
-        return $this;
     }
 
     /**
-     * @param Tag $tag Remove tag from array.
-     * @return $this
+     * @param Tag $tag
      */
     public function removeTag(Tag $tag)
     {
         $this->tags->removeElement($tag);
-
-        return $this;
     }
 
     /**
-     * @param array $tags Tags from article.
-     * @return null
+     * @param array $tags
      */
     public function setTags(array $tags)
     {
         foreach ($tags as $tag) {
             $this->addTag($tag);
         }
-
-        return null;
     }
 
     /**
      * @return array
      */
-    public function getTags()
+    public function getTags() : array
     {
         return $this->tags->toArray();
     }
@@ -379,7 +334,7 @@ class Article extends AbstractModel
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString() : string
     {
         return $this->getTitle();
     }

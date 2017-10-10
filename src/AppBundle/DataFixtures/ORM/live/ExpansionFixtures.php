@@ -60,9 +60,9 @@ class ExpansionFixtures extends AbstractFixture implements OrderedFixtureInterfa
 
     /**
      * @param ContainerInterface|null $containerInterface ContainerInterface.
-     * @return $this
+     * @return ExpansionFixtures
      */
-    public function setContainer(ContainerInterface $containerInterface = null)
+    public function setContainer(ContainerInterface $containerInterface = null) : ExpansionFixtures
     {
         $this->container = $containerInterface;
 
@@ -72,7 +72,7 @@ class ExpansionFixtures extends AbstractFixture implements OrderedFixtureInterfa
     /**
      * @return integer
      */
-    public function getOrder()
+    public function getOrder() : int
     {
         return 10;
     }

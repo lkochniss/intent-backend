@@ -5,11 +5,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\AbstractModel;
 use AppBundle\Entity\Expansion;
 use AppBundle\Form\Type\ExpansionType;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class ExpansionController
@@ -19,15 +17,15 @@ class ExpansionController extends AbstractCrudController
     /**
      * @return Expansion
      */
-    protected function createNewEntity()
+    protected function createNewEntity() : AbstractModel
     {
         return new Expansion();
     }
 
     /**
-     * @return ExpansionType
+     * @return string
      */
-    protected function getFormType()
+    protected function getFormType()  : string
     {
         return ExpansionType::class;
     }
@@ -35,7 +33,7 @@ class ExpansionController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getTemplateBasePath()
+    protected function getTemplateBasePath() : string
     {
         return 'Expansion';
     }
@@ -43,7 +41,7 @@ class ExpansionController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getEntityName()
+    protected function getEntityName() : string
     {
         return 'AppBundle\Entity\Expansion';
     }
@@ -51,7 +49,7 @@ class ExpansionController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getRoutePrefix()
+    protected function getRoutePrefix() : string
     {
         return 'intent_backend_expansion';
     }
@@ -59,7 +57,7 @@ class ExpansionController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getTranslationDomain()
+    protected function getTranslationDomain() : string
     {
         return 'expansion';
     }
@@ -67,7 +65,7 @@ class ExpansionController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getReadAccessLevel()
+    protected function getReadAccessLevel() : string
     {
         return 'ROLE_READ_META';
     }
@@ -75,7 +73,7 @@ class ExpansionController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getWriteAccessLevel()
+    protected function getWriteAccessLevel() : string
     {
         return 'ROLE_WRITE_META';
     }
@@ -83,7 +81,7 @@ class ExpansionController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getPublishAccessLevel()
+    protected function getPublishAccessLevel() : string
     {
         return 'ROLE_PUBLISH_META';
     }

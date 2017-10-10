@@ -44,9 +44,9 @@ class TagFixtures extends AbstractFixture implements OrderedFixtureInterface, Co
 
     /**
      * @param ContainerInterface|null $containerInterface ContainerInterface.
-     * @return $this
+     * @return TagFixtures
      */
-    public function setContainer(ContainerInterface $containerInterface = null)
+    public function setContainer(ContainerInterface $containerInterface = null) : TagFixtures
     {
         $this->container = $containerInterface;
 
@@ -56,7 +56,7 @@ class TagFixtures extends AbstractFixture implements OrderedFixtureInterface, Co
     /**
      * @return integer
      */
-    public function getOrder()
+    public function getOrder() : int
     {
         return 13;
     }

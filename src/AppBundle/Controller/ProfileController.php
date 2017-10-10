@@ -8,9 +8,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\AbstractModel;
 use AppBundle\Entity\Profile;
 use AppBundle\Form\Type\ProfileType;
-use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -20,12 +20,12 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class ProfileController extends AbstractCrudController
 {
     /**
-     * @param integer $id      Id of entity.
-     * @param Request $request HTTP Request.
-     * @throws NotFoundHttpException Throw exception if entity not found.
+     * @param integer $id
+     * @param Request $request
+     * @throws NotFoundHttpException
      * @return RedirectResponse|Response
      */
-    public function editAction($id, Request $request)
+    public function editAction($id, Request $request) : Response
     {
         $entity = $this->getDoctrine()->getRepository($this->getEntityName())->find($id);
 
@@ -49,15 +49,15 @@ class ProfileController extends AbstractCrudController
     /**
      * @return Profile
      */
-    protected function createNewEntity()
+    protected function createNewEntity() : AbstractModel
     {
         return new Profile();
     }
 
     /**
-     * @return ProfileType
+     * @return string
      */
-    protected function getFormType()
+    protected function getFormType() : string
     {
         return ProfileType::class;
     }
@@ -65,7 +65,7 @@ class ProfileController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getTemplateBasePath()
+    protected function getTemplateBasePath() : string
     {
         return 'Profile';
     }
@@ -73,7 +73,7 @@ class ProfileController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getEntityName()
+    protected function getEntityName() : string
     {
         return 'AppBundle\Entity\Profile';
     }
@@ -81,7 +81,7 @@ class ProfileController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getRoutePrefix()
+    protected function getRoutePrefix() : string
     {
         return 'intent_backend_profile';
     }
@@ -89,13 +89,13 @@ class ProfileController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getTranslationDomain()
+    protected function getTranslationDomain() : string
     {
         return 'profile';
     }
 
     /**
-     * @param AbstractModel $entity Abstract model of entity.
+     * @param AbstractModel $entity
      * @return null
      */
     protected function handleValidForm(AbstractModel $entity)
@@ -114,7 +114,7 @@ class ProfileController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getReadAccessLevel()
+    protected function getReadAccessLevel() : string
     {
         return 'ROLE_USER';
     }
@@ -122,7 +122,7 @@ class ProfileController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getWriteAccessLevel()
+    protected function getWriteAccessLevel() : string
     {
         return 'ROLE_USER';
     }
@@ -130,7 +130,7 @@ class ProfileController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getPublishAccessLevel()
+    protected function getPublishAccessLevel() : string
     {
         return 'ROLE_USER';
     }

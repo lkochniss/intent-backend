@@ -51,9 +51,9 @@ class ImageFixtures extends AbstractFixture implements OrderedFixtureInterface, 
 
     /**
      * @param ContainerInterface|null $containerInterface ContainerInterface.
-     * @return $this
+     * @return ImageFixtures
      */
-    public function setContainer(ContainerInterface $containerInterface = null)
+    public function setContainer(ContainerInterface $containerInterface = null) : ImageFixtures
     {
         $this->container = $containerInterface;
 
@@ -63,7 +63,7 @@ class ImageFixtures extends AbstractFixture implements OrderedFixtureInterface, 
     /**
      * @return integer
      */
-    public function getOrder()
+    public function getOrder() : int
     {
         return 5;
     }

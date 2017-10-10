@@ -5,6 +5,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\AbstractModel;
 use AppBundle\Entity\Article;
 use AppBundle\Form\Type\ArticleType;
 
@@ -16,15 +17,15 @@ class ArticleController extends AbstractCrudController
     /**
      * @return Article
      */
-    protected function createNewEntity()
+    protected function createNewEntity() : AbstractModel
     {
         return new Article();
     }
 
     /**
-     * @return ArticleType
+     * @return string
      */
-    protected function getFormType()
+    protected function getFormType() : string
     {
         return ArticleType::class;
     }
@@ -32,7 +33,7 @@ class ArticleController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getTemplateBasePath()
+    protected function getTemplateBasePath() : string
     {
         return 'Article';
     }
@@ -40,7 +41,7 @@ class ArticleController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getEntityName()
+    protected function getEntityName() : string
     {
         return 'AppBundle\Entity\Article';
     }
@@ -48,7 +49,7 @@ class ArticleController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getRoutePrefix()
+    protected function getRoutePrefix() : string
     {
         return 'intent_backend_article';
     }
@@ -56,7 +57,7 @@ class ArticleController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getTranslationDomain()
+    protected function getTranslationDomain() : string
     {
         return 'article';
     }
@@ -64,7 +65,7 @@ class ArticleController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getReadAccessLevel()
+    protected function getReadAccessLevel() : string
     {
         return 'ROLE_READ_ARTICLE';
     }
@@ -72,7 +73,7 @@ class ArticleController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getWriteAccessLevel()
+    protected function getWriteAccessLevel() : string
     {
         return 'ROLE_WRITE_ARTICLE';
     }
@@ -80,7 +81,7 @@ class ArticleController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getPublishAccessLevel()
+    protected function getPublishAccessLevel() : string
     {
         return 'ROLE_PUBLISH_ARTICLE';
     }

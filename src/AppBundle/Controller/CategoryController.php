@@ -5,6 +5,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\AbstractModel;
 use AppBundle\Entity\Category;
 use AppBundle\Form\Type\CategoryType;
 
@@ -16,15 +17,15 @@ class CategoryController extends AbstractCrudController
     /**
      * @return Category
      */
-    protected function createNewEntity()
+    protected function createNewEntity() : AbstractModel
     {
         return new Category();
     }
 
     /**
-     * @return CategoryType
+     * @return string
      */
-    protected function getFormType()
+    protected function getFormType() : string
     {
         return CategoryType::class;
     }
@@ -32,7 +33,7 @@ class CategoryController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getTemplateBasePath()
+    protected function getTemplateBasePath() : string
     {
         return 'Category';
     }
@@ -40,7 +41,7 @@ class CategoryController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getEntityName()
+    protected function getEntityName() : string
     {
         return 'AppBundle\Entity\Category';
     }
@@ -48,7 +49,7 @@ class CategoryController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getRoutePrefix()
+    protected function getRoutePrefix() : string
     {
         return 'intent_backend_category';
     }
@@ -56,7 +57,7 @@ class CategoryController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getTranslationDomain()
+    protected function getTranslationDomain() : string
     {
         return 'category';
     }
@@ -64,7 +65,7 @@ class CategoryController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getReadAccessLevel()
+    protected function getReadAccessLevel() : string
     {
         return 'ROLE_READ_META';
     }
@@ -72,7 +73,7 @@ class CategoryController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getWriteAccessLevel()
+    protected function getWriteAccessLevel() : string
     {
         return 'ROLE_WRITE_META';
     }
@@ -80,7 +81,7 @@ class CategoryController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getPublishAccessLevel()
+    protected function getPublishAccessLevel() : string
     {
         return 'ROLE_PUBLISH_META';
     }

@@ -91,9 +91,9 @@ class PageFixtures extends AbstractFixture implements OrderedFixtureInterface, C
 
     /**
      * @param ContainerInterface|null $containerInterface ContainerInterface.
-     * @return $this
+     * @return PageFixtures
      */
-    public function setContainer(ContainerInterface $containerInterface = null)
+    public function setContainer(ContainerInterface $containerInterface = null) : PageFixtures
     {
         $this->container = $containerInterface;
 
@@ -103,7 +103,7 @@ class PageFixtures extends AbstractFixture implements OrderedFixtureInterface, C
     /**
      * @return integer
      */
-    public function getOrder()
+    public function getOrder() : int
     {
         return 15;
     }

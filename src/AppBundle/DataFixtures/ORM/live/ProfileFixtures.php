@@ -48,9 +48,9 @@ class ProfileFixtures extends AbstractFixture implements OrderedFixtureInterface
 
     /**
      * @param ContainerInterface|null $containerInterface ContainerInterface.
-     * @return $this
+     * @return ProfileFixtures
      */
-    public function setContainer(ContainerInterface $containerInterface = null)
+    public function setContainer(ContainerInterface $containerInterface = null) : ProfileFixtures
     {
         $this->container = $containerInterface;
 
@@ -60,7 +60,7 @@ class ProfileFixtures extends AbstractFixture implements OrderedFixtureInterface
     /**
      * @return integer
      */
-    public function getOrder()
+    public function getOrder() : int
     {
         return 3;
     }

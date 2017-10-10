@@ -16,7 +16,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class ImportDatabaseCommand extends ContainerAwareCommand
 {
     /**
-     * @return null
+     * Add some command options to import data by entity type or all at once
      */
     protected function configure()
     {
@@ -38,8 +38,6 @@ class ImportDatabaseCommand extends ContainerAwareCommand
         $this->addOption('stu', '', InputOption::VALUE_NONE, 'Import studio entities.');
         $this->addOption('tag', '', InputOption::VALUE_NONE, 'Import tag entities.');
         $this->addOption('usr', '', InputOption::VALUE_NONE, 'Import user entities. Mind the dependecies.');
-
-        return null;
     }
 
     /**
@@ -47,7 +45,7 @@ class ImportDatabaseCommand extends ContainerAwareCommand
      * @param OutputInterface $output Output of command.
      * @return boolean
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output) : bool
     {
         if ($input->getOption('all') || $input->getOption('art')) {
             $this->getContainer()->get('app.article.service')->importEntities();

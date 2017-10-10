@@ -5,6 +5,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\AbstractModel;
 use AppBundle\Entity\User;
 use AppBundle\Form\Type\UserType;
 use AppBundle\Form\Type\UserDeleteType;
@@ -21,10 +22,10 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class UserController extends AbstractCrudController
 {
     /**
-     * @param Request $request HTTP Request.
+     * @param Request $request
      * @return RedirectResponse|Response
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request): Response
     {
         $this->denyAccessUnlessGranted(
             'ROLE_ADMIN',
@@ -87,12 +88,12 @@ class UserController extends AbstractCrudController
     }
 
     /**
-     * @param integer $id      The user id.
-     * @param Request $request HTTP Request.
-     * @throws NotFoundHttpException Throws error if user not found.
+     * @param integer $id
+     * @param Request $request
+     * @throws NotFoundHttpException
      * @return RedirectResponse|Response
      */
-    public function deleteAction($id, Request $request)
+    public function deleteAction($id, Request $request): Response
     {
         $this->denyAccessUnlessGranted(
             'ROLE_ADMIN',
@@ -157,11 +158,11 @@ class UserController extends AbstractCrudController
     }
 
     /**
-     * @param integer $id      UserID.
-     * @param Request $request HTTP Request.
+     * @param integer $id
+     * @param Request $request
      * @return RedirectResponse|Response
      */
-    public function passwordAction($id, Request $request)
+    public function passwordAction($id, Request $request): Response
     {
         $user = $this->getDoctrine()->getRepository('AppBundle:User')->find($id);
 
@@ -198,15 +199,15 @@ class UserController extends AbstractCrudController
     /**
      * @return User
      */
-    protected function createNewEntity()
+    protected function createNewEntity(): AbstractModel
     {
         return new User();
     }
 
     /**
-     * @return UserType
+     * @return string
      */
-    protected function getFormType()
+    protected function getFormType(): string
     {
         return UserType::class;
     }
@@ -214,7 +215,7 @@ class UserController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getTemplateBasePath()
+    protected function getTemplateBasePath() : string
     {
         return 'User';
     }
@@ -222,7 +223,7 @@ class UserController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getEntityName()
+    protected function getEntityName() : string
     {
         return 'AppBundle\Entity\User';
     }
@@ -230,7 +231,7 @@ class UserController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getRoutePrefix()
+    protected function getRoutePrefix() : string
     {
         return 'intent_backend_user';
     }
@@ -238,7 +239,7 @@ class UserController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getTranslationDomain()
+    protected function getTranslationDomain() : string
     {
         return 'user';
     }
@@ -246,7 +247,7 @@ class UserController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getReadAccessLevel()
+    protected function getReadAccessLevel() : string
     {
         return 'ROLE_ADMIN';
     }
@@ -254,7 +255,7 @@ class UserController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getWriteAccessLevel()
+    protected function getWriteAccessLevel() : string
     {
         return 'ROLE_ADMIN';
     }
@@ -262,7 +263,7 @@ class UserController extends AbstractCrudController
     /**
      * @return string
      */
-    protected function getPublishAccessLevel()
+    protected function getPublishAccessLevel() : string
     {
         return 'ROLE_ADMIN';
     }

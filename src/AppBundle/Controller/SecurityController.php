@@ -9,6 +9,7 @@ use AppBundle\Entity\User;
 use AppBundle\Form\Type\PasswordResetType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Util\SecureRandom;
 
 /**
@@ -17,9 +18,9 @@ use Symfony\Component\Security\Core\Util\SecureRandom;
 class SecurityController extends Controller
 {
     /**
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
-    public function loginAction()
+    public function loginAction() : Response
     {
         $authenticationUtils = $this->get('security.authentication_utils');
 
@@ -33,10 +34,10 @@ class SecurityController extends Controller
     }
 
     /**
-     * @param Request $request HTTP Request.
-     * @return \Symfony\Component\HttpFoundation\redirectresponse|\Symfony\Component\HttpFoundation\Response
+     * @param Request $request
+     * @return Response
      */
-    public function resetPasswordAction(Request $request)
+    public function resetPasswordAction(Request $request) : Response
     {
         $form = $this->createForm(new PasswordResetType());
         if (in_array($request->getMethod(), ['POST'])) {

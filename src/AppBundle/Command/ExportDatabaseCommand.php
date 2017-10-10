@@ -16,7 +16,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class ExportDatabaseCommand extends ContainerAwareCommand
 {
     /**
-     * @return null
+     * Add some command options to export data by entity type or all at once
      */
     protected function configure()
     {
@@ -38,16 +38,14 @@ class ExportDatabaseCommand extends ContainerAwareCommand
         $this->addOption('stu', '', InputOption::VALUE_NONE, 'Export studio entities.');
         $this->addOption('tag', '', InputOption::VALUE_NONE, 'Export tag entities.');
         $this->addOption('usr', '', InputOption::VALUE_NONE, 'Export user entities. Mind the dependecies.');
-
-        return null;
     }
 
     /**
-     * @param InputInterface  $input  Input of command.
-     * @param OutputInterface $output Output of command.
+     * @param InputInterface  $input
+     * @param OutputInterface $output
      * @return boolean
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output) : bool
     {
         if ($input->getOption('all') || $input->getOption('art')) {
             $this->getContainer()->get('app.article.service')->exportEntities();

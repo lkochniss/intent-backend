@@ -11,7 +11,7 @@ class SlugifyProvider
      * @param String $string
      * @return String $string
      */
-    public function slugify($string)
+    public function slugify($string) : string
     {
         $string = strtolower($string);
 

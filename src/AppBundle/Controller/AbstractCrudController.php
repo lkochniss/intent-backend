@@ -13,7 +13,6 @@ use AppBundle\Entity\Related;
 use AppBundle\Entity\Studio;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,10 +24,10 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 abstract class AbstractCrudController extends Controller
 {
     /**
-     * @param Request $request HTTP Request.
+     * @param Request $request
      * @return RedirectResponse|Response
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request) : Response
     {
         $this->denyAccessUnlessGranted(
             $this->getWriteAccessLevel(),
@@ -42,12 +41,12 @@ abstract class AbstractCrudController extends Controller
     }
 
     /**
-     * @param integer $id      Id of entity.
-     * @param Request $request HTTP Request.
-     * @throws NotFoundHttpException Throw exception if entity not found.
+     * @param integer $id
+     * @param Request $request
+     * @throws NotFoundHttpException
      * @return RedirectResponse|Response
      */
-    public function editAction($id, Request $request)
+    public function editAction($id, Request $request) : Response
     {
         $this->denyAccessUnlessGranted(
             $this->getReadAccessLevel(),
@@ -71,12 +70,12 @@ abstract class AbstractCrudController extends Controller
     }
 
     /**
-     * @param integer $id      Id of entity.
-     * @param Request $request HTTP Request.
-     * @throws NotFoundHttpException Throw exception if entity not found.
+     * @param integer $id
+     * @param Request $request
+     * @throws NotFoundHttpException
      * @return Response
      */
-    public function showAction($id, Request $request)
+    public function showAction($id, Request $request) : Response
     {
         $this->denyAccessUnlessGranted(
             $this->getReadAccessLevel(),
@@ -113,7 +112,7 @@ abstract class AbstractCrudController extends Controller
     /**
      * @return Response
      */
-    public function listAction()
+    public function listAction() : Response
     {
         $this->denyAccessUnlessGranted(
             $this->getReadAccessLevel(),
@@ -132,11 +131,11 @@ abstract class AbstractCrudController extends Controller
     }
 
     /**
-     * @param string $action  Type of action.
-     * @param array  $options Optionarray.
+     * @param string $action
+     * @param array  $options
      * @return string
      */
-    protected function generateUrlForAction($action, array $options = array())
+    protected function generateUrlForAction($action, array $options = array()) : string
     {
         return $this->generateUrl(
             sprintf('%s_%s', $this->getRoutePrefix(), $action),
@@ -145,7 +144,7 @@ abstract class AbstractCrudController extends Controller
     }
 
     /**
-     * @param AbstractModel $entity Entity for form.
+     * @param AbstractModel $entity
      * @return null;
      */
     protected function handleValidForm(AbstractModel $entity)
@@ -161,52 +160,52 @@ abstract class AbstractCrudController extends Controller
     /**
      * @return AbstractModel
      */
-    abstract protected function createNewEntity();
-
-    /**
-     * @return AbstractType
-     */
-    abstract protected function getFormType();
+    abstract protected function createNewEntity() : AbstractModel;
 
     /**
      * @return string
      */
-    abstract protected function getTemplateBasePath();
+    abstract protected function getFormType() : string;
 
     /**
      * @return string
      */
-    abstract protected function getEntityName();
+    abstract protected function getTemplateBasePath() : string;
 
     /**
      * @return string
      */
-    abstract protected function getRoutePrefix();
+    abstract protected function getEntityName() : string;
 
     /**
      * @return string
      */
-    abstract protected function getTranslationDomain();
+    abstract protected function getRoutePrefix() : string;
 
     /**
      * @return string
      */
-    abstract protected function getReadAccessLevel();
+    abstract protected function getTranslationDomain() : string;
 
     /**
      * @return string
      */
-    abstract protected function getWriteAccessLevel();
+    abstract protected function getReadAccessLevel() : string;
 
     /**
      * @return string
      */
-    abstract protected function getPublishAccessLevel();
+    abstract protected function getWriteAccessLevel() : string;
 
     /**
      * @return string
      */
-    protected function getAccessDeniedMessage()
+    abstract protected function getPublishAccessLevel() : string;
+
+    /**
+     * @return string
+     */
+    protected function getAccessDeniedMessage() : string
     {
         return $this->get('translator')->trans(
             $this->getTranslationDomain() . '.access_denied',
@@ -216,14 +215,19 @@ abstract class AbstractCrudController extends Controller
     }
 
     /**
-     * @param AbstractModel $entity  Entity for form.
-     * @param Request       $request HTTP Request.
-     * @param string        $action  Type of action.
-     * @param array         $options Options for twig render.
+     * @param AbstractModel $entity
+     * @param Request       $request
+     * @param string        $action
+     * @param array         $options
      * @return RedirectResponse|Response
      */
-    protected function createAndHandleForm(AbstractModel $entity, Request $request, $action, array $options = array())
-    {
+    protected function createAndHandleForm(
+        AbstractModel $entity,
+        Request $request,
+        $action,
+        array $options = array()
+    ) : Response {
+    
         $form = $this->createForm(
             $this->getFormType(),
             $entity,
@@ -257,10 +261,10 @@ abstract class AbstractCrudController extends Controller
     }
 
     /**
-     * @param Related $entity Related entity.
+     * @param Related $entity
      * @return array
      */
-    private function loopRelated(Related $entity)
+    private function loopRelated(Related $entity) : array
     {
         $franchises = null;
         $games = null;
@@ -307,22 +311,24 @@ abstract class AbstractCrudController extends Controller
         }
         return $this->mapArticlesToCategories($resultList);
     }
+
     /**
-     * @param Related $entity Related entity.
+     * @param Related $entity
      * @return \AppBundle\Entity\Article[]|array
      */
-    private function getRelatedArticles(Related $entity)
+    private function getRelatedArticles(Related $entity) : array
     {
         return $this->getDoctrine()->getRepository('AppBundle:Article')->findBy(
             array('related' => $entity),
             array('publishAt' => 'DESC')
         );
     }
+
     /**
-     * @param array $articles Array of articles.
+     * @param array $articles
      * @return array
      */
-    private function mapArticlesToCategories(array $articles)
+    private function mapArticlesToCategories(array $articles) : array
     {
         $categories = $this->getDoctrine()->getRepository('AppBundle:Category')->findBy(
             array(),

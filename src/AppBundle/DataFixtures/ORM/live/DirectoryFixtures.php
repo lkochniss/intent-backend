@@ -48,9 +48,9 @@ class DirectoryFixtures extends AbstractFixture implements OrderedFixtureInterfa
 
     /**
      * @param ContainerInterface|null $containerInterface ContainerInterface.
-     * @return $this
+     * @return DirectoryFixtures
      */
-    public function setContainer(ContainerInterface $containerInterface = null)
+    public function setContainer(ContainerInterface $containerInterface = null) : DirectoryFixtures
     {
         $this->container = $containerInterface;
 
@@ -60,7 +60,7 @@ class DirectoryFixtures extends AbstractFixture implements OrderedFixtureInterfa
     /**
      * @return integer
      */
-    public function getOrder()
+    public function getOrder() : int
     {
         return 4;
     }

@@ -45,9 +45,9 @@ class CategoryFixtures extends AbstractFixture implements OrderedFixtureInterfac
 
     /**
      * @param ContainerInterface|null $containerInterface ContainerInterface.
-     * @return $this
+     * @return CategoryFixtures
      */
-    public function setContainer(ContainerInterface $containerInterface = null)
+    public function setContainer(ContainerInterface $containerInterface = null) : CategoryFixtures
     {
         $this->container = $containerInterface;
 
@@ -57,7 +57,7 @@ class CategoryFixtures extends AbstractFixture implements OrderedFixtureInterfac
     /**
      * @return integer
      */
-    public function getOrder()
+    public function getOrder() : int
     {
         return 12;
     }

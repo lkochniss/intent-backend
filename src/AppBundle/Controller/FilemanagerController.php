@@ -12,6 +12,7 @@ use AppBundle\Form\Type\UploadType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class FilemanagerController
@@ -19,12 +20,12 @@ use Symfony\Component\HttpFoundation\Request;
 class FilemanagerController extends Controller
 {
     /**
-     * @param Request $request Request.
-     * @param int     $popup   Check if page is a popup.
-     * @param int     $id      Get id of current directory.
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @param Request $request
+     * @param int     $popup
+     * @param int     $id
+     * @return Response
      */
-    public function createAction(Request $request, $popup = 0, $id = 0)
+    public function createAction(Request $request, $popup = 0, $id = 0) : Response
     {
         $this->denyAccessUnlessGranted(
             $this->getReadAccessLevel(),
@@ -64,10 +65,10 @@ class FilemanagerController extends Controller
     }
 
     /**
-     * @param Request $request Request.
-     * @param int     $popup   Check if page is a popup.
-     * @param int     $id      Get id of current directory.
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @param Request $request
+     * @param int     $popup
+     * @param int     $id
+     * @return Response
      */
     public function uploadAction(Request $request, $popup = 0, $id = 0)
     {
@@ -113,9 +114,9 @@ class FilemanagerController extends Controller
     }
 
     /**
-     * @param int $popup Check if page is a popup.
-     * @param int $id    Get id of current directory.
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param int $popup
+     * @param int $id
+     * @return Response
      */
     public function listAction($popup = 0, $id = 0)
     {

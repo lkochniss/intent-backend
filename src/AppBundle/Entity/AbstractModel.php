@@ -52,7 +52,7 @@ abstract class AbstractModel
     /**
      * @return \DateTime
      */
-    public function getModifiedAt()
+    public function getModifiedAt() : \DateTime
     {
         return $this->modifiedAt;
     }
@@ -70,7 +70,7 @@ abstract class AbstractModel
     /**
      * @return \DateTime
      */
-    public function getCreatedAt()
+    public function getCreatedAt() : \DateTime
     {
         return $this->createdAt;
     }

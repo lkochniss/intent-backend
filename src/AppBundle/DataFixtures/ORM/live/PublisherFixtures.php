@@ -55,9 +55,9 @@ class PublisherFixtures extends AbstractFixture implements OrderedFixtureInterfa
 
     /**
      * @param ContainerInterface|null $containerInterface ContainerInterface.
-     * @return $this
+     * @return PublisherFixtures
      */
-    public function setContainer(ContainerInterface $containerInterface = null)
+    public function setContainer(ContainerInterface $containerInterface = null) : PublisherFixtures
     {
         $this->container = $containerInterface;
 
@@ -67,7 +67,7 @@ class PublisherFixtures extends AbstractFixture implements OrderedFixtureInterfa
     /**
      * @return integer
      */
-    public function getOrder()
+    public function getOrder() : int
     {
         return 6;
     }

@@ -45,9 +45,9 @@ class RoleFixtures extends AbstractFixture implements OrderedFixtureInterface, C
 
     /**
      * @param ContainerInterface|null $containerInterface ContainerInterface.
-     * @return $this
+     * @return RoleFixtures
      */
-    public function setContainer(ContainerInterface $containerInterface = null)
+    public function setContainer(ContainerInterface $containerInterface = null) : RoleFixtures
     {
         $this->container = $containerInterface;
 
@@ -57,7 +57,7 @@ class RoleFixtures extends AbstractFixture implements OrderedFixtureInterface, C
     /**
      * @return integer
      */
-    public function getOrder()
+    public function getOrder() : int
     {
         return 1;
     }

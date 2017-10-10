@@ -64,9 +64,9 @@ class FranchiseFixtures extends AbstractFixture implements OrderedFixtureInterfa
 
     /**
      * @param ContainerInterface|null $containerInterface ContainerInterface.
-     * @return $this
+     * @return FranchiseFixtures
      */
-    public function setContainer(ContainerInterface $containerInterface = null)
+    public function setContainer(ContainerInterface $containerInterface = null) : FranchiseFixtures
     {
         $this->container = $containerInterface;
 
@@ -76,7 +76,7 @@ class FranchiseFixtures extends AbstractFixture implements OrderedFixtureInterfa
     /**
      * @return integer
      */
-    public function getOrder()
+    public function getOrder() : int
     {
         return 8;
     }

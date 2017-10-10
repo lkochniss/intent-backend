@@ -23,7 +23,7 @@ class ArticleFixtures extends AbstractFixture implements OrderedFixtureInterface
     private $container;
 
     /**
-     * @param ObjectManager $manager Manager to save article.
+     * @param ObjectManager $manager
      * @return null
      */
     public function load(ObjectManager $manager)
@@ -85,9 +85,8 @@ class ArticleFixtures extends AbstractFixture implements OrderedFixtureInterface
 
 
     /**
-     * @param ObjectManager $manager Manager to save article.
-     * @param string        $path    Path to xml.
-     * @return null
+     * @param ObjectManager $manager
+     * @param string        $path
      */
     public function saveWordpressArticles(ObjectManager $manager, $path)
     {
@@ -137,15 +136,13 @@ class ArticleFixtures extends AbstractFixture implements OrderedFixtureInterface
 
         $file = new File($path);
         $file->move(__DIR__ . '/../data/articles/imported');
-
-        return null;
     }
 
     /**
-     * @param ContainerInterface|null $containerInterface ContainerInterface.
-     * @return $this
+     * @param ContainerInterface|null $containerInterface
+     * @return ArticleFixtures
      */
-    public function setContainer(ContainerInterface $containerInterface = null)
+    public function setContainer(ContainerInterface $containerInterface = null) : ArticleFixtures
     {
         $this->container = $containerInterface;
 
@@ -155,7 +152,7 @@ class ArticleFixtures extends AbstractFixture implements OrderedFixtureInterface
     /**
      * @return integer
      */
-    public function getOrder()
+    public function getOrder() : int
     {
         return 14;
     }

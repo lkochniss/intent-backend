@@ -55,9 +55,9 @@ class EventFixtures extends AbstractFixture implements OrderedFixtureInterface, 
 
     /**
      * @param ContainerInterface|null $containerInterface ContainerInterface.
-     * @return $this
+     * @return EventFixtures
      */
-    public function setContainer(ContainerInterface $containerInterface = null)
+    public function setContainer(ContainerInterface $containerInterface = null) : EventFixtures
     {
         $this->container = $containerInterface;
 
@@ -67,7 +67,7 @@ class EventFixtures extends AbstractFixture implements OrderedFixtureInterface, 
     /**
      * @return integer
      */
-    public function getOrder()
+    public function getOrder() : int
     {
         return 11;
     }
