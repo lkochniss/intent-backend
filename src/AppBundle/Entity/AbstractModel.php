@@ -74,4 +74,22 @@ abstract class AbstractModel
     {
         return $this->createdAt;
     }
+
+    /**
+     * @param String|null $value
+     * @return String
+     */
+    protected function stringTransform($value) : ?String
+    {
+        return $value ?: '';
+    }
+
+    /**
+     * @param \DateTime $value
+     * @return \DateTime
+     */
+    protected function datetimeTransform($value) : ?\DateTime
+    {
+        return $value ?: new \DateTime();
+    }
 }

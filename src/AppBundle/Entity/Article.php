@@ -114,7 +114,7 @@ class Article extends AbstractModel
      */
     public function getTitle() : string
     {
-        return $this->title;
+        return $this->stringTransform($this->title);
     }
 
     /**
@@ -130,7 +130,7 @@ class Article extends AbstractModel
      */
     public function getSlug() : string
     {
-        return $this->slug;
+        return $this->stringTransform($this->slug);
     }
 
     /**
@@ -146,7 +146,7 @@ class Article extends AbstractModel
      */
     public function getContent() : string
     {
-        return $this->content;
+        return $this->stringTransform($this->content);
     }
 
     /**
@@ -162,9 +162,10 @@ class Article extends AbstractModel
      */
     public function getPublishAt() : \DateTime
     {
-        return $this->publishAt;
+        return $this->datetimeTransform($this->publishAt);
     }
 
+    // TODO: Switch setPublished with functions entity->publish and entity->unpublish instead of bool parameter
     /**
      * @param boolean $published
      */
@@ -208,7 +209,7 @@ class Article extends AbstractModel
     /**
      * @return Category
      */
-    public function getCategory() : Category
+    public function getCategory() : ?Category
     {
         return $this->category;
     }
@@ -254,9 +255,9 @@ class Article extends AbstractModel
     }
 
     /**
-     * @return Event
+     * @return Event|null
      */
-    public function getEvent() : Event
+    public function getEvent() : ?Event
     {
 
         return $this->event;
@@ -273,7 +274,7 @@ class Article extends AbstractModel
     /**
      * @return Related
      */
-    public function getRelated() : Related
+    public function getRelated() : ?Related
     {
 
         return $this->related;
@@ -290,7 +291,7 @@ class Article extends AbstractModel
     /**
      * @return Image
      */
-    public function getThumbnail() : Image
+    public function getThumbnail() : ?Image
     {
         return $this->thumbnail;
     }
