@@ -44,33 +44,27 @@ abstract class AbstractMetaModel extends AbstractModel
     }
 
     /**
-     * @param string $name Set name.
-     * @return $this
+     * @param string $name
      */
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
      * @return string
      */
-    public function getName()
+    public function getName() : string
     {
-        return $this->name;
+        return $this->stringTransform($this->name);
     }
 
     /**
-     * @param string $slug Set auto generated slug.
-     * @return $this
+     * @param string $slug
      */
     public function setSlug($slug)
     {
         $this->slug = $slug;
-
-        return $this;
     }
 
     /**
@@ -78,18 +72,15 @@ abstract class AbstractMetaModel extends AbstractModel
      */
     public function getSlug() : string
     {
-        return $this->slug;
+        return $this->stringTransform($this->slug);
     }
 
     /**
-     * @param boolean $published Set published.
-     * @return $this
+     * @param boolean $published
      */
     public function setPublished($published)
     {
         $this->published = $published;
-
-        return $this;
     }
 
     /**

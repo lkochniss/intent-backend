@@ -50,14 +50,13 @@ class Category extends AbstractMetaModel
     /**
      * @return integer
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return $this->priority;
     }
 
     /**
-     * @param Article $article Add article to array.
-     * @return $this
+     * @param Article $article
      */
     public function addArticle(Article $article)
     {
@@ -65,19 +64,14 @@ class Category extends AbstractMetaModel
             $this->articles->add($article);
             $article->setCategory($this);
         }
-
-        return $this;
     }
 
     /**
-     * @param Article $article Remove article from array.
-     * @return $this
+     * @param Article $article
      */
     public function removeArticle(Article $article)
     {
         $this->articles->remove($article);
-
-        return $this;
     }
 
     /**
@@ -91,7 +85,7 @@ class Category extends AbstractMetaModel
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString() : string
     {
         return $this->getName();
     }

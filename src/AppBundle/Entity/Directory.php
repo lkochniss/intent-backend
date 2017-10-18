@@ -59,20 +59,17 @@ class Directory extends AbstractModel
     }
 
     /**
-     * @param string $name Set name.
-     * @return $this
+     * @param string $name
      */
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
      * @return string
      */
-    public function getName()
+    public function getName() : string
     {
         return $this->name;
     }
@@ -80,38 +77,18 @@ class Directory extends AbstractModel
     /**
      * @return string
      */
-    public function getPath()
+    public function getPath() : string
     {
         return $this->path;
     }
 
     /**
-     * @param string $path Set path.
-     * @return $this
+     * @param string $path
      */
     public function setPath($path)
     {
         $this->path = $path;
         $this->updateFullpath();
-
-        return $this;
-    }
-
-    /**
-     * @return null
-     */
-    public function updateFullpath()
-    {
-        $this->resetFullPath();
-        foreach ($this->childDirectories as $childDirectory) {
-            $childDirectory->resetFullPath();
-        }
-
-        foreach ($this->images as $image) {
-            $image->resetFullPath();
-        }
-
-        return null;
     }
 
     /**
@@ -121,13 +98,9 @@ class Directory extends AbstractModel
     {
         if ($this->isRootNode()) {
             $this->fullPath = $this->path;
-
-            return $this;
         }
 
         $this->fullPath = $this->parentDirectory->getFullPath() . '/' . $this->path;
-
-        return $this;
     }
 
     /**
@@ -139,27 +112,23 @@ class Directory extends AbstractModel
     }
 
     /**
-     * @param Directory|null $parentDirectory Set parentDirectory.
-     * @return $this
+     * @param Directory|null $parentDirectory
      */
     public function setParentDirectory(Directory $parentDirectory = null)
     {
         $this->parentDirectory = $parentDirectory;
-
-        return $this;
     }
 
     /**
      * @return Directory
      */
-    public function getParentDirectory()
+    public function getParentDirectory() : Directory
     {
         return $this->parentDirectory;
     }
 
     /**
-     * @param Directory $directory Add childDirectory to array.
-     * @return $this
+     * @param Directory $directory
      */
     public function addChildDirectory(Directory $directory)
     {
@@ -168,32 +137,27 @@ class Directory extends AbstractModel
 
             $directory->setParentDirectory($this);
         }
-
-        return $this;
     }
 
     /**
-     * @param Directory $directory Remove childDirectory from array.
+     * @param Directory $directory
      * @return $this
      */
     public function removeChildDirectory(Directory $directory)
     {
         $this->childDirectories->removeElement($directory);
-
-        return $this;
     }
 
     /**
      * @return array
      */
-    public function getChildDirectories()
+    public function getChildDirectories() : array
     {
         return $this->childDirectories->toArray();
     }
 
     /**
-     * @param Image $image Add image to array.
-     * @return $this
+     * @param Image $image
      */
     public function addImage(Image $image)
     {
@@ -202,19 +166,14 @@ class Directory extends AbstractModel
 
             $image->setParentDirectory($this);
         }
-
-        return $this;
     }
 
     /**
-     * @param Image $image Remove image from array.
-     * @return $this
+     * @param Image $image
      */
     public function removeImages(Image $image)
     {
         $this->images->removeElement($image);
-
-        return $this;
     }
 
     /**
@@ -243,5 +202,17 @@ class Directory extends AbstractModel
     public function __toString()
     {
         return $this->fullPath . $this->name;
+    }
+
+    private function updateFullpath()
+    {
+        $this->resetFullPath();
+        foreach ($this->childDirectories as $childDirectory) {
+            $childDirectory->resetFullPath();
+        }
+
+        foreach ($this->images as $image) {
+            $image->resetFullPath();
+        }
     }
 }

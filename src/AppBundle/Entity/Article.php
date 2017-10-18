@@ -225,7 +225,7 @@ class Article extends AbstractModel
     /**
      * @return User
      */
-    public function getCreatedBy() : User
+    public function getCreatedBy() : ?User
     {
         return $this->createdBy;
     }
