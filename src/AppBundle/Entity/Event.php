@@ -64,89 +64,75 @@ class Event extends AbstractMetaModel
     public function __construct()
     {
         parent::__construct();
-        $this->startAt = new \DateTime();
-        $this->endAt = new \DateTime();
         $this->articles = new ArrayCollection();
     }
 
     /**
-     * @param string $description Set description.
-     * @return $this
+     * @param string $description
      */
     public function setDescription($description)
     {
         $this->description = $description;
-
-        return $this;
     }
 
     /**
      * @return string
      */
-    public function getDescription()
+    public function getDescription() : string
     {
-        return $this->description;
+        return $this->stringTransform($this->description);
     }
 
     /**
-     * @param string $backgroundLink Set background link.
-     * @return $this
+     * @param string $backgroundLink
      */
     public function setBackgroundLink($backgroundLink)
     {
         $this->backgroundLink = $backgroundLink;
-
-        return $this;
     }
 
     /**
      * @return string
      */
-    public function getBackgroundLink()
+    public function getBackgroundLink() : ?string
     {
         return $this->backgroundLink;
     }
 
     /**
-     * @param \DateTime $startAt Set startAt.
-     * @return $this
+     * @param \DateTime $startAt
      */
     public function setStartAt(\DateTime $startAt)
     {
         $this->startAt = $startAt;
-
-        return $this;
     }
 
     /**
      * @return \DateTime
      */
-    public function getStartAt()
+    public function getStartAt() : \DateTime
     {
-        return $this->startAt;
+        return $this->datetimeTransform($this->startAt);
     }
 
     /**
-     * @param \DateTime $endAt Set endAt.
-     * @return $this
+     * @param \DateTime $endAt
      */
     public function setEndAt(\DateTime $endAt)
     {
         $this->endAt = $endAt;
-
-        return $this;
     }
 
     /**
      * @return \DateTime
      */
-    public function getEndAt()
+    public function getEndAt() : \DateTime
     {
-        return $this->endAt;
+        return $this->datetimeTransform($this->endAt);
     }
 
     /**
-     * @param Image $backgroundImage Set background image.
+     * @param Image $backgroundImage
      * @return $this
      */
     public function setBackgroundImage(Image $backgroundImage)
@@ -159,33 +145,29 @@ class Event extends AbstractMetaModel
     /**
      * @return Image
      */
-    public function getBackgroundImage()
+    public function getBackgroundImage() : ?Image
     {
         return $this->backgroundImage;
     }
 
     /**
-     * @param Image $thumbnail Set thumbnail.
-     * @return $this
+     * @param Image $thumbnail
      */
     public function setThumbnail(Image $thumbnail)
     {
         $this->thumbnail = $thumbnail;
-
-        return $this;
     }
 
     /**
      * @return Image
      */
-    public function getThumbnail()
+    public function getThumbnail() : ?Image
     {
         return $this->thumbnail;
     }
 
     /**
-     * @param Article $article Add article to array.
-     * @return $this
+     * @param Article $article
      */
     public function addArticle(Article $article)
     {
@@ -193,25 +175,21 @@ class Event extends AbstractMetaModel
             $this->articles->add($article);
             $article->setEvent($this);
         }
-
-        return $this;
     }
 
     /**
-     * @param Article $article Remove article from array.
+     * @param Article $article
      * @return $this
      */
     public function removeArticle(Article $article)
     {
         $this->articles->removeElement($article);
-
-        return $this;
     }
 
     /**
      * @return array
      */
-    public function getArticles()
+    public function getArticles() : array
     {
         return $this->articles->toArray();
     }
@@ -219,7 +197,7 @@ class Event extends AbstractMetaModel
     /**
      * @return boolean
      */
-    public function isActive()
+    public function isActive() : bool
     {
         $now = new \DateTime();
 
@@ -229,7 +207,7 @@ class Event extends AbstractMetaModel
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString() : string
     {
         return $this->getName();
     }

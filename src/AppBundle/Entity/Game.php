@@ -38,46 +38,39 @@ class Game extends Related
 
 
     /**
-     * @param Studio $studio Set studio for game.
-     * @return $this
+     * @param Studio $studio
      */
     public function setStudio(Studio $studio = null)
     {
         $this->studio = $studio;
-
-        return $this;
     }
 
     /**
      * @return Studio
      */
-    public function getStudio()
+    public function getStudio() : ?Studio
     {
         return $this->studio;
     }
 
     /**
-     * @param Franchise $franchise Set franchise for game.
-     * @return $this
+     * @param Franchise $franchise
      */
     public function setFranchise(Franchise $franchise = null)
     {
         $this->franchise = $franchise;
-
-        return $this;
     }
 
     /**
      * @return Franchise
      */
-    public function getFranchise()
+    public function getFranchise() : ?Franchise
     {
         return $this->franchise;
     }
 
     /**
-     * @param Expansion $expansion Add expansion to array.
-     * @return $this
+     * @param Expansion $expansion
      */
     public function addExpansion(Expansion $expansion)
     {
@@ -85,25 +78,21 @@ class Game extends Related
             $this->expansions->add($expansion);
             $expansion->setGame($this);
         }
-
-        return $this;
     }
 
     /**
-     * @param Expansion $expansion Remove expansion from array.
+     * @param Expansion $expansion
      * @return $this
      */
     public function removeExpansion(Expansion $expansion)
     {
         $this->expansions->removeElement($expansion);
-
-        return $this;
     }
 
     /**
      * @return array
      */
-    public function getExpansions()
+    public function getExpansions() : array
     {
         return $this->expansions->toArray();
     }
@@ -111,7 +100,7 @@ class Game extends Related
     /**
      * @return string
      */
-    public function getType()
+    public function getType() : string
     {
         return 'game';
     }

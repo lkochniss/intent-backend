@@ -52,53 +52,45 @@ class Image extends AbstractModel
     private $file;
 
     /**
-     * @param string $name Set name.
+     * @param string $name
      * @return $this
      */
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
      * @return string
      */
-    public function getName()
+    public function getName() : string
     {
-        return $this->name;
+        return $this->stringTransform($this->name);
     }
 
     /**
-     * @param string $description Set description.
-     * @return $this;
+     * @param string $description
      */
     public function setDescription($description)
     {
         $this->description = $description;
-
-        return $this;
     }
 
     /**
      * @return string
      */
-    public function getDescription()
+    public function getDescription() : string
     {
         return $this->description;
     }
 
     /**
-     * @param string $path Set path.
-     * @return $this
+     * @param string $path
      */
     public function setPath($path)
     {
         $this->path = $path;
         $this->resetFullPath();
-
-        return $this;
     }
 
     /**
@@ -112,7 +104,7 @@ class Image extends AbstractModel
     /**
      * @return Directory
      */
-    public function getParentDirectory()
+    public function getParentDirectory() : Directory
     {
         return $this->parentDirectory;
     }
@@ -120,14 +112,11 @@ class Image extends AbstractModel
     /**
      * @return string
      */
-    public function getFullPath()
+    public function getFullPath() : string
     {
         return $this->fullPath;
     }
 
-    /**
-     * @return string
-     */
     public function resetFullPath()
     {
         if (is_null($this->parentDirectory)) {
@@ -135,36 +124,29 @@ class Image extends AbstractModel
         } else {
             $this->fullPath = $this->parentDirectory->getFullPath() . '/' . $this->path;
         }
-
-        return $this;
     }
 
     /**
-     * @param Directory $parentDirectory Set parentDirectory.
-     * @return $this
+     * @param Directory $parentDirectory
      */
     public function setParentDirectory(Directory $parentDirectory)
     {
         $this->parentDirectory = $parentDirectory;
-
-        return $this;
     }
 
     /**
-     * @param UploadedFile|null $file Set UploadFile.
+     * @param UploadedFile|null $file
      * @return $this
      */
     public function setFile(UploadedFile $file = null)
     {
         $this->file = $file;
-
-        return $this;
     }
 
     /**
      * @return UploadedFile
      */
-    public function getFile()
+    public function getFile() : UploadedFile
     {
         return $this->file;
     }
@@ -177,9 +159,6 @@ class Image extends AbstractModel
         return '/' . $this->getFullPath();
     }
 
-    /**
-     * @return null|void
-     */
     public function upload()
     {
         if (null === $this->getFile()) {
@@ -194,14 +173,12 @@ class Image extends AbstractModel
         );
 
         $this->file = null;
-
-        return null;
     }
 
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString() : string
     {
         return $this->name . ' ( ' . $this->fullPath . ' )';
     }

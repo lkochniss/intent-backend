@@ -16,7 +16,7 @@ class Expansion extends Related
     private $game;
 
     /**
-     * @param Game $game Set Game.
+     * @param Game $game
      * @return $this
      */
     public function setGame(Game $game = null)
@@ -29,7 +29,7 @@ class Expansion extends Related
     /**
      * @return Game
      */
-    public function getGame()
+    public function getGame() : ?Game
     {
         return $this->game;
     }
@@ -37,7 +37,7 @@ class Expansion extends Related
     /**
      * @return string
      */
-    public function getType()
+    public function getType() : string
     {
         return 'dlc/expansion';
     }

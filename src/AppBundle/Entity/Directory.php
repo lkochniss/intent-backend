@@ -106,7 +106,7 @@ class Directory extends AbstractModel
     /**
      * @return string
      */
-    public function getFullPath()
+    public function getFullPath() : string
     {
         return $this->fullPath;
     }
@@ -179,7 +179,7 @@ class Directory extends AbstractModel
     /**
      * @return array
      */
-    public function getImages()
+    public function getImages() : array
     {
         return $this->images->toArray();
     }
@@ -187,7 +187,7 @@ class Directory extends AbstractModel
     /**
      * @return boolean
      */
-    public function isRootNode()
+    public function isRootNode() : bool
     {
         if (is_null($this->parentDirectory)) {
             return true;
@@ -199,7 +199,7 @@ class Directory extends AbstractModel
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString() : string
     {
         return $this->fullPath . $this->name;
     }

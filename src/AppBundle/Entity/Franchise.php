@@ -37,14 +37,11 @@ class Franchise extends Related
     }
 
     /**
-     * @param Publisher $publisher Set Publisher for franchise.
-     * @return $this
+     * @param Publisher $publisher
      */
     public function setPublisher(Publisher $publisher = null)
     {
         $this->publisher = $publisher;
-
-        return $this;
     }
 
     /**
@@ -56,27 +53,23 @@ class Franchise extends Related
     }
 
     /**
-     * @param Studio $studio Set studio for franchise.
-     * @return $this
+     * @param Studio $studio
      */
     public function setStudio(Studio $studio = null)
     {
         $this->studio = $studio;
-
-        return $this;
     }
 
     /**
      * @return Studio
      */
-    public function getStudio()
+    public function getStudio() : ?Studio
     {
         return $this->studio;
     }
 
     /**
-     * @param Game $game Add games to array.
-     * @return $this
+     * @param Game $game
      */
     public function addGame(Game $game)
     {
@@ -84,25 +77,21 @@ class Franchise extends Related
             $this->games->add($game);
             $game->setFranchise($this);
         }
-
-        return $this;
     }
 
     /**
-     * @param Game $game Remove games from array.
+     * @param Game $game
      * @return $this
      */
     public function removeGame(Game $game)
     {
         $this->games->removeElement($game);
-
-        return $this;
     }
 
     /**
      * @return array
      */
-    public function getGames()
+    public function getGames() : array
     {
         return $this->games->toArray();
     }
@@ -110,7 +99,7 @@ class Franchise extends Related
     /**
      * @return string
      */
-    public function getType()
+    public function getType() : string
     {
         return 'franchise';
     }
