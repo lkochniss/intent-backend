@@ -52,7 +52,7 @@ class Category extends AbstractMetaModel
      */
     public function getPriority() : int
     {
-        return $this->priority;
+        return $this->integerTransform($this->priority);
     }
 
     /**

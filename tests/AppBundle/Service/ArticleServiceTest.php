@@ -15,20 +15,16 @@ class ArticleServiceTest extends WebTestCase
     /**
      * @group service
      * @group article
-     * @return null
      */
     public function testExport()
     {
         $status = $this->getContainer()->get('app.article.service')->exportEntities();
         $this->assertTrue($status);
-
-        return null;
     }
 
     /**
      * @group service
      * @group article
-     * @return null
      */
     public function testImport()
     {

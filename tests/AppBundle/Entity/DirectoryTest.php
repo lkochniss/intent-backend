@@ -15,7 +15,6 @@ class DirectoryTest extends \PHPUnit_Framework_TestCase
     /**
      * @group entity
      * @group image
-     * @return null
      */
     public function testEntity()
     {
@@ -36,7 +35,5 @@ class DirectoryTest extends \PHPUnit_Framework_TestCase
 
         $directory->resetFullPath();
         $this->assertEquals($directory->getFullPath(), 'upload/' . $path);
-
-        return null;
     }
 }

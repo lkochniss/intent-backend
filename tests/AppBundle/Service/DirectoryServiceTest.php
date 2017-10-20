@@ -15,26 +15,20 @@ class DirectoryServiceTest extends WebTestCase
     /**
      * @group service
      * @group image
-     * @return null
      */
     public function testExport()
     {
         $status = $this->getContainer()->get('app.directory.service')->exportEntities();
         $this->assertTrue($status);
-
-        return null;
     }
 
     /**
      * @group service
      * @group image
-     * @return null
      */
     public function testImport()
     {
         $status = $this->getContainer()->get('app.directory.service')->importEntities();
         $this->assertTrue($status);
-
-        return null;
     }
 }

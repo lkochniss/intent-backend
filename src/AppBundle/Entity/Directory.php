@@ -71,7 +71,7 @@ class Directory extends AbstractModel
      */
     public function getName() : string
     {
-        return $this->name;
+        return $this->stringTransform($this->name);
     }
 
     /**
@@ -98,9 +98,9 @@ class Directory extends AbstractModel
     {
         if ($this->isRootNode()) {
             $this->fullPath = $this->path;
+        }else {
+            $this->fullPath = $this->parentDirectory->getFullPath() . '/' . $this->path;
         }
-
-        $this->fullPath = $this->parentDirectory->getFullPath() . '/' . $this->path;
     }
 
     /**
@@ -122,7 +122,7 @@ class Directory extends AbstractModel
     /**
      * @return Directory
      */
-    public function getParentDirectory() : Directory
+    public function getParentDirectory() : ?Directory
     {
         return $this->parentDirectory;
     }

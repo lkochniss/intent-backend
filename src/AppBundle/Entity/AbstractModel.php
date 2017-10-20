@@ -92,4 +92,13 @@ abstract class AbstractModel
     {
         return $value ?: new \DateTime();
     }
+
+    /**
+     * @param $value
+     * @return int
+     */
+    protected function integerTransform($value) : int
+    {
+        return $value ?: 0;
+    }
 }
