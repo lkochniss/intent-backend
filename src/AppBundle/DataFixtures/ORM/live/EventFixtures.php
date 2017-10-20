@@ -21,8 +21,7 @@ class EventFixtures extends AbstractFixture implements OrderedFixtureInterface, 
     private $container;
 
     /**
-     * @param ObjectManager $manager Manager to save event.
-     * @return null
+     * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager)
     {
@@ -49,12 +48,10 @@ class EventFixtures extends AbstractFixture implements OrderedFixtureInterface, 
             );
             $this->setReference('event-' . $event->getSlug(), $event);
         }
-
-        return null;
     }
 
     /**
-     * @param ContainerInterface|null $containerInterface ContainerInterface.
+     * @param ContainerInterface|null $containerInterface
      * @return EventFixtures
      */
     public function setContainer(ContainerInterface $containerInterface = null) : EventFixtures

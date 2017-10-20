@@ -21,8 +21,7 @@ class TagFixtures extends AbstractFixture implements OrderedFixtureInterface, Co
     private $container;
 
     /**
-     * @param ObjectManager $manager Manager to save category.
-     * @return null
+     * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager)
     {
@@ -38,12 +37,10 @@ class TagFixtures extends AbstractFixture implements OrderedFixtureInterface, Co
             );
             $this->setReference('tag-' . $tag->getSlug(), $tag);
         }
-
-        return null;
     }
 
     /**
-     * @param ContainerInterface|null $containerInterface ContainerInterface.
+     * @param ContainerInterface|null $containerInterface
      * @return TagFixtures
      */
     public function setContainer(ContainerInterface $containerInterface = null) : TagFixtures

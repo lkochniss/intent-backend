@@ -21,7 +21,7 @@ class ImageFixtures extends AbstractFixture implements OrderedFixtureInterface, 
     private $container;
 
     /**
-     * @param ObjectManager $manager Manager to save image.
+     * @param ObjectManager $manager
      * @return null
      */
     public function load(ObjectManager $manager)
@@ -45,12 +45,10 @@ class ImageFixtures extends AbstractFixture implements OrderedFixtureInterface, 
             $this->addReference('image-' . $image->getFullPath(), $image);
         }
         $manager->flush();
-
-        return null;
     }
 
     /**
-     * @param ContainerInterface|null $containerInterface ContainerInterface.
+     * @param ContainerInterface|null $containerInterface
      * @return ImageFixtures
      */
     public function setContainer(ContainerInterface $containerInterface = null) : ImageFixtures

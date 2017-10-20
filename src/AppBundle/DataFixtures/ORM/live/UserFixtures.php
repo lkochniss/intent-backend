@@ -21,8 +21,7 @@ class UserFixtures extends AbstractFixture implements OrderedFixtureInterface, C
     private $container;
 
     /**
-     * @param ObjectManager $manager Object manager to get repository.
-     * @return null
+     * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager)
     {
@@ -45,12 +44,10 @@ class UserFixtures extends AbstractFixture implements OrderedFixtureInterface, C
 
             $this->addReference('user-' . $user->getUsername(), $user);
         }
-
-        return null;
     }
 
     /**
-     * @param ContainerInterface|null $containerInterface Set the ContainerInterface.
+     * @param ContainerInterface|null $containerInterface
      * @return UserFixtures
      */
     public function setContainer(ContainerInterface $containerInterface = null) : UserFixtures

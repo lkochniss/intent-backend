@@ -21,8 +21,7 @@ class CategoryFixtures extends AbstractFixture implements OrderedFixtureInterfac
     private $container;
 
     /**
-     * @param ObjectManager $manager Manager to save category.
-     * @return null
+     * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager)
     {
@@ -39,12 +38,10 @@ class CategoryFixtures extends AbstractFixture implements OrderedFixtureInterfac
             );
             $this->setReference('category-' . $category->getSlug(), $category);
         }
-
-        return null;
     }
 
     /**
-     * @param ContainerInterface|null $containerInterface ContainerInterface.
+     * @param ContainerInterface|null $containerInterface
      * @return CategoryFixtures
      */
     public function setContainer(ContainerInterface $containerInterface = null) : CategoryFixtures

@@ -21,8 +21,7 @@ class PublisherFixtures extends AbstractFixture implements OrderedFixtureInterfa
     private $container;
 
     /**
-     * @param ObjectManager $manager Manager to save publisher.
-     * @return null
+     * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager)
     {
@@ -49,12 +48,10 @@ class PublisherFixtures extends AbstractFixture implements OrderedFixtureInterfa
 
             $this->addReference('publisher-' . $publisher->getSlug(), $publisher);
         }
-
-        return null;
     }
 
     /**
-     * @param ContainerInterface|null $containerInterface ContainerInterface.
+     * @param ContainerInterface|null $containerInterface
      * @return PublisherFixtures
      */
     public function setContainer(ContainerInterface $containerInterface = null) : PublisherFixtures

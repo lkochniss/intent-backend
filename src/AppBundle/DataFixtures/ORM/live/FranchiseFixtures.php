@@ -22,7 +22,6 @@ class FranchiseFixtures extends AbstractFixture implements OrderedFixtureInterfa
 
     /**
      * @param ObjectManager $manager Manager to save franchise.
-     * @return null
      */
     public function load(ObjectManager $manager)
     {
@@ -58,12 +57,10 @@ class FranchiseFixtures extends AbstractFixture implements OrderedFixtureInterfa
 
             $this->addReference('franchise-' . $franchise->getSlug(), $franchise);
         }
-
-        return null;
     }
 
     /**
-     * @param ContainerInterface|null $containerInterface ContainerInterface.
+     * @param ContainerInterface|null $containerInterface
      * @return FranchiseFixtures
      */
     public function setContainer(ContainerInterface $containerInterface = null) : FranchiseFixtures

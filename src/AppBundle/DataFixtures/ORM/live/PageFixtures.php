@@ -22,8 +22,7 @@ class PageFixtures extends AbstractFixture implements OrderedFixtureInterface, C
     private $container;
 
     /**
-     * @param ObjectManager $manager Manager to save article.
-     * @return null
+     * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager)
     {
@@ -44,27 +43,21 @@ class PageFixtures extends AbstractFixture implements OrderedFixtureInterface, C
         $dataDirectory = __DIR__ . '/../../data/pages';
         $directory = opendir($dataDirectory);
 
-        $count = 0;
-
         while (false !== $file = readdir($directory)) {
             if ('.' === substr($file, 0, 1)) {
                 continue;
             }
 
             if ($file != 'imported') {
-                $count++;
-                $this->saveWordpressPage($manager, $dataDirectory . DIRECTORY_SEPARATOR . $file, $count);
+                $this->saveWordpressPage($manager, $dataDirectory . DIRECTORY_SEPARATOR . $file);
             }
         }
         $manager->flush();
-
-        return null;
     }
 
     /**
-     * @param ObjectManager $manager Manager to save pages.
-     * @param string        $path    Path to xml.
-     * @return null
+     * @param ObjectManager $manager
+     * @param string        $path
      */
     public function saveWordpressPage(ObjectManager $manager, $path)
     {
@@ -85,12 +78,10 @@ class PageFixtures extends AbstractFixture implements OrderedFixtureInterface, C
 
         $file = new File($path);
         $file->move(__DIR__ . '/../data/pages/imported');
-
-        return null;
     }
 
     /**
-     * @param ContainerInterface|null $containerInterface ContainerInterface.
+     * @param ContainerInterface|null $containerInterface
      * @return PageFixtures
      */
     public function setContainer(ContainerInterface $containerInterface = null) : PageFixtures

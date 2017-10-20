@@ -21,8 +21,7 @@ class StudioFixtures extends AbstractFixture implements OrderedFixtureInterface,
     private $container;
 
     /**
-     * @param ObjectManager $manager Manager to save studio.
-     * @return null
+     * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager)
     {
@@ -49,12 +48,10 @@ class StudioFixtures extends AbstractFixture implements OrderedFixtureInterface,
 
             $this->setReference('studio-' . $studio->getSlug(), $studio);
         }
-
-        return null;
     }
 
     /**
-     * @param ContainerInterface|null $containerInterface ContainerInterface.
+     * @param ContainerInterface|null $containerInterface
      * @return StudioFixtures
      */
     public function setContainer(ContainerInterface $containerInterface = null) : StudioFixtures

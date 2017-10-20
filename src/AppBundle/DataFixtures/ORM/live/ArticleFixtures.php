@@ -24,7 +24,6 @@ class ArticleFixtures extends AbstractFixture implements OrderedFixtureInterface
 
     /**
      * @param ObjectManager $manager
-     * @return null
      */
     public function load(ObjectManager $manager)
     {
@@ -79,8 +78,6 @@ class ArticleFixtures extends AbstractFixture implements OrderedFixtureInterface
             }
         }
         $manager->flush();
-
-        return null;
     }
 
 

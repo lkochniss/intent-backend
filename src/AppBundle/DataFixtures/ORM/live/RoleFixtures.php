@@ -21,8 +21,7 @@ class RoleFixtures extends AbstractFixture implements OrderedFixtureInterface, C
     private $container;
 
     /**
-     * @param ObjectManager $manager Manager to save role.
-     * @return null
+     * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager)
     {
@@ -39,12 +38,10 @@ class RoleFixtures extends AbstractFixture implements OrderedFixtureInterface, C
 
             $this->addReference('role-' . $role->getName(), $role);
         }
-
-        return null;
     }
 
     /**
-     * @param ContainerInterface|null $containerInterface ContainerInterface.
+     * @param ContainerInterface|null $containerInterface
      * @return RoleFixtures
      */
     public function setContainer(ContainerInterface $containerInterface = null) : RoleFixtures

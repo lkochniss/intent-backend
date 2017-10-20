@@ -21,8 +21,7 @@ class DirectoryFixtures extends AbstractFixture implements OrderedFixtureInterfa
     private $container;
 
     /**
-     * @param ObjectManager $manager Manager to save directory.
-     * @return null
+     * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager)
     {
@@ -42,8 +41,6 @@ class DirectoryFixtures extends AbstractFixture implements OrderedFixtureInterfa
             );
             $this->setReference('directory-' . $directory, $directory);
         }
-
-        return null;
     }
 
     /**

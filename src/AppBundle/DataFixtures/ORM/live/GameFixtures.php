@@ -21,8 +21,7 @@ class GameFixtures extends AbstractFixture implements OrderedFixtureInterface, C
     private $container;
 
     /**
-     * @param ObjectManager $manager Manager to save game.
-     * @return null
+     * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager)
     {
@@ -58,12 +57,10 @@ class GameFixtures extends AbstractFixture implements OrderedFixtureInterface, C
 
             $this->addReference('game-' . $game->getSlug(), $game);
         }
-
-        return null;
     }
 
     /**
-     * @param ContainerInterface|null $containerInterface ContainerInterface.
+     * @param ContainerInterface|null $containerInterface
      * @return GameFixtures
      */
     public function setContainer(ContainerInterface $containerInterface = null) : GameFixtures

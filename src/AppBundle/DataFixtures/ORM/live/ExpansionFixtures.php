@@ -21,8 +21,7 @@ class ExpansionFixtures extends AbstractFixture implements OrderedFixtureInterfa
     private $container;
 
     /**
-     * @param ObjectManager $manager Manager to save expansion.
-     * @return null;
+     * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager)
     {
@@ -54,8 +53,6 @@ class ExpansionFixtures extends AbstractFixture implements OrderedFixtureInterfa
 
             $this->addReference('dlc/expansion-' . $expansion->getSlug(), $expansion);
         }
-
-        return null;
     }
 
     /**

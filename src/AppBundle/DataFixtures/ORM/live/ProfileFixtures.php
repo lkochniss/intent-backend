@@ -21,8 +21,7 @@ class ProfileFixtures extends AbstractFixture implements OrderedFixtureInterface
     private $container;
 
     /**
-     * @param ObjectManager $manager Manager to save profile.
-     * @return boolean
+     * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager)
     {
@@ -42,12 +41,10 @@ class ProfileFixtures extends AbstractFixture implements OrderedFixtureInterface
             );
             $this->addReference('profile-' . $profile->getName(), $profile);
         }
-
-        return true;
     }
 
     /**
-     * @param ContainerInterface|null $containerInterface ContainerInterface.
+     * @param ContainerInterface|null $containerInterface
      * @return ProfileFixtures
      */
     public function setContainer(ContainerInterface $containerInterface = null) : ProfileFixtures
